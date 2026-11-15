@@ -30,6 +30,11 @@ export const LeadershipPage: React.FC<LeadershipPageProps> = ({ onNavigate }) =>
   const handleInviteSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!inviteOrg.trim() || !inviteContact.trim()) return;
+    const subject = encodeURIComponent(`Ministry invitation — ${inviteOrg.trim()}`);
+    const body = encodeURIComponent(
+      `Organization: ${inviteOrg.trim()}\nCoordinator contact: ${inviteContact.trim()}\nProgram type: ${inviteType}\nLocation: ${inviteLocation.trim() || 'Not provided'}\n\nAdditional details:\n${inviteNotes.trim() || 'No additional details.'}`
+    );
+    window.location.href = `mailto:${MISSION_INFO.emails[0]}?subject=${subject}&body=${body}`;
     setInviteSubmitted(true);
     setInviteOrg('');
     setInviteContact('');
@@ -242,7 +247,7 @@ export const LeadershipPage: React.FC<LeadershipPageProps> = ({ onNavigate }) =>
             <div className="bg-[#faf8f4] border border-stone-200 rounded-xl p-8 text-center space-y-4">
               <CheckCircle2 className="w-10 h-10 text-forest-900 mx-auto" />
               <h3 className="font-serif text-2xl font-semibold text-forest-950">
-                Invitation Request Logged
+                Invitation Email Prepared
               </h3>
               <p className="text-sm text-stone-600 max-w-md mx-auto leading-relaxed">
                 Thank you for inviting {FOUNDER_PROFILE.name}. For urgent scheduling, please also
