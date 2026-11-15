@@ -1,7 +1,6 @@
 import React from 'react';
 import { MISSION_INFO, PageId } from '../data/missionData';
 import { MissionMark } from './MissionMark';
-import { Facebook, Instagram, Youtube } from 'lucide-react';
 
 interface FooterProps {
   onNavigate: (page: PageId) => void;
@@ -77,12 +76,9 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
 
           <div className="space-y-3 text-sm">
             <h3 className="font-sans text-xs font-semibold uppercase tracking-widest text-harvest-400 mb-4">Follow the Mission</h3>
-            <div className="flex items-center gap-3">
-              <span aria-label="Facebook" title="Facebook" className="rounded-full border border-forest-700 p-2.5 text-stone-200"><Facebook className="h-4 w-4" /></span>
-              <span aria-label="Instagram" title="Instagram" className="rounded-full border border-forest-700 p-2.5 text-stone-200"><Instagram className="h-4 w-4" /></span>
-              <span aria-label="YouTube" title="YouTube" className="rounded-full border border-forest-700 p-2.5 text-stone-200"><Youtube className="h-4 w-4" /></span>
-            </div>
-            <p className="text-xs text-stone-400 leading-relaxed">Official channel links can be connected when the ministry shares its profile URLs.</p>
+            <p className="text-xs text-stone-400 leading-relaxed">
+              Official social links are not connected yet. Please use the contact details on this page to reach us.
+            </p>
             <button type="button" onClick={() => onNavigate('admin')} className="pt-2 text-xs text-stone-500 hover:text-harvest-400">Staff sign in</button>
           </div>
 

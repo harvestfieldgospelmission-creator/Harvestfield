@@ -72,7 +72,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
           <button
             type="button"
             onClick={() => handleNav('partner')}
-            className={`px-4 py-2.5 text-xs sm:text-sm font-semibold rounded-lg transition-colors duration-150 whitespace-nowrap shrink-0 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-forest-800 ${
+            className={`hidden md:inline-flex px-4 py-2.5 text-xs sm:text-sm font-semibold rounded-lg transition-colors duration-150 whitespace-nowrap shrink-0 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-forest-800 ${
               currentPage === 'partner'
                 ? 'bg-harvest-600 text-white'
                 : 'bg-forest-900 hover:bg-forest-800 text-white'
@@ -118,15 +118,6 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
               </button>
             );
           })}
-          <div className="pt-2 border-t border-stone-200">
-            <button
-              type="button"
-              onClick={() => handleNav('partner')}
-              className="w-full text-center px-4 py-3 rounded-lg text-base font-semibold bg-harvest-600 hover:bg-harvest-500 text-white transition-colors cursor-pointer"
-            >
-              Donate &amp; Partner
-            </button>
-          </div>
         </nav>
       )}
     </header>

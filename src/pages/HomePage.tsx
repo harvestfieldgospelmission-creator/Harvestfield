@@ -100,7 +100,7 @@ export const HomePage: React.FC<HomePageProps> = ({
     <div>
       {/* Cinematic mission welcome — uses the ministry's own field photographs */}
       <section
-        className="relative isolate min-h-[520px] sm:min-h-[590px] lg:min-h-[650px] overflow-hidden bg-forest-950"
+        className="relative isolate min-h-[440px] sm:min-h-[590px] lg:min-h-[650px] overflow-hidden bg-forest-950"
         style={{
           backgroundImage: `linear-gradient(90deg, rgba(5, 24, 15, 0.94) 0%, rgba(5, 24, 15, 0.78) 48%, rgba(5, 24, 15, 0.24) 100%), linear-gradient(0deg, rgba(5, 24, 15, 0.42), transparent 55%), url("${activeSpot.image}")`,
           backgroundPosition: 'center',
@@ -108,8 +108,8 @@ export const HomePage: React.FC<HomePageProps> = ({
         }}
         aria-label={`Harvestfield mission field: ${activeSpot.location}`}
       >
-        <div className="mx-auto flex min-h-[520px] sm:min-h-[590px] lg:min-h-[650px] max-w-7xl items-center px-5 py-16 sm:px-8 lg:px-10">
-          <div className="max-w-3xl space-y-7 text-white">
+        <div className="mx-auto flex min-h-[440px] sm:min-h-[590px] lg:min-h-[650px] max-w-7xl items-center px-5 py-12 sm:px-8 sm:py-16 lg:px-10">
+          <div className="max-w-3xl space-y-5 sm:space-y-7 text-white">
             <p className="inline-flex items-center gap-3 text-[11px] sm:text-xs font-semibold uppercase tracking-[0.24em] text-harvest-400">
               <span className="h-px w-9 bg-harvest-400" />
               A Gospel Mission to the Nations
@@ -117,23 +117,26 @@ export const HomePage: React.FC<HomePageProps> = ({
             <h1 className="max-w-3xl font-serif text-4xl font-semibold leading-[1.08] tracking-tight sm:text-5xl lg:text-7xl">
               Taking the Gospel to the nations. Bringing hope to every generation.
             </h1>
-            <p className="max-w-2xl text-base leading-relaxed text-stone-200 sm:text-lg lg:text-xl">
+            <p className="hidden max-w-2xl text-base leading-relaxed text-stone-200 sm:block sm:text-lg lg:text-xl">
               From rural communities to cross-border mission fields, Harvest Field Gospel Mission Int’l equips believers to share Christ, serve people and strengthen local communities.
             </p>
-            <div className="flex flex-col gap-3 pt-2 sm:flex-row sm:flex-wrap">
+            <div className="flex flex-row gap-2 pt-2 sm:flex-wrap sm:gap-3">
               <button
                 type="button"
                 onClick={() => onNavigate('mission')}
-                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-harvest-500 px-6 py-3 text-sm font-semibold text-forest-950 shadow-lg shadow-black/15 transition-colors hover:bg-harvest-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                className="inline-flex min-h-12 min-w-0 flex-1 items-center justify-center gap-1.5 rounded-lg bg-harvest-500 px-3 py-3 text-xs font-semibold text-forest-950 shadow-lg shadow-black/15 transition-colors hover:bg-harvest-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white sm:flex-none sm:gap-2 sm:px-6 sm:text-sm"
               >
-                Discover Our Mission <ArrowRight className="h-4 w-4" />
+                <span className="sm:hidden">Explore</span>
+                <span className="hidden sm:inline">Discover Our Mission</span>
+                <ArrowRight className="h-4 w-4 shrink-0" />
               </button>
               <button
                 type="button"
                 onClick={() => onNavigate('partner')}
-                className="inline-flex min-h-12 items-center justify-center rounded-lg border border-white/55 bg-white/10 px-6 py-3 text-sm font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white/20"
+                className="inline-flex min-h-12 min-w-0 flex-1 items-center justify-center rounded-lg border border-white/55 bg-white/10 px-3 py-3 text-xs font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white/20 sm:flex-none sm:px-6 sm:text-sm"
               >
-                Pray, Give &amp; Partner
+                <span className="sm:hidden">Partner</span>
+                <span className="hidden sm:inline">Pray, Give &amp; Partner</span>
               </button>
             </div>
             <div className="flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-white/20 pt-5 text-xs font-medium text-stone-200 sm:text-sm">
@@ -155,9 +158,9 @@ export const HomePage: React.FC<HomePageProps> = ({
                 Omoku, Rivers State, Nigeria <span aria-hidden="true">·</span> Rural &amp; Foreign Missions
               </p>
 
-              <h1 className="font-serif text-3xl sm:text-4xl lg:text-[3.1rem] font-semibold tracking-tight text-forest-950 leading-[1.08]">
-                A people prepared to carry the Gospel beyond borders.
-              </h1>
+              <h2 className="font-serif text-3xl sm:text-4xl lg:text-[3.1rem] font-semibold tracking-tight text-forest-950 leading-[1.08]">
+                Our work, from Omoku to the mission fields.
+              </h2>
 
               <p className="text-base sm:text-lg text-stone-700 leading-relaxed max-w-2xl">
                 Harvest Field Gospel Mission Int&apos;l is a fellowship equipped for rural and foreign

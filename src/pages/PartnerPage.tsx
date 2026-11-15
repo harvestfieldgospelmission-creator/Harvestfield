@@ -218,6 +218,9 @@ export const PartnerPage: React.FC = () => {
               </button>
             ))}
           </div>
+          <p className="text-xs text-stone-500 leading-relaxed">
+            This page prepares bank-transfer details but does not process payments. Monthly support is arranged through repeat transfers; no automatic payment is scheduled.
+          </p>
 
           {/* Preset Amounts */}
           <div className="space-y-2.5">
