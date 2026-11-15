@@ -9,7 +9,7 @@ interface FooterProps {
 export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
   return (
     <footer className="bg-forest-950 text-stone-200 border-t border-forest-800 mt-24">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-forest-800/80">
           {/* Column 1: Mission Identity */}
           <div className="space-y-4">
@@ -22,7 +22,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                 <p className="text-xs text-stone-400">Gospel Mission Int&apos;l</p>
               </div>
             </div>
-            <p className="text-sm text-stone-300 leading-relaxed">
+            <p className="text-sm text-stone-300 leading-relaxed max-w-sm">
               A fellowship of kingdom-minded believers equipped for rural and foreign missions across
               Nigeria, Northern Cameroon, Tchad Republic, and Côte d&apos;Ivoire.
             </p>
@@ -106,7 +106,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
 
         <div className="pt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs text-stone-400">
           <p>
-            © {new Date().getFullYear()} {MISSION_INFO.name} · Omoku, Rivers State, Nigeria.
+            © {new Date().getFullYear()} {MISSION_INFO.name} · Omoku, Rivers State, Nigeria. All rights reserved.
           </p>
           <p className="text-stone-400">
             President / Founder: Evang. David Abrebor

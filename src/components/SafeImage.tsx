@@ -42,6 +42,7 @@ export const SafeImage: React.FC<SafeImageProps> = ({
       style={{ objectPosition }}
       className={className}
       loading="lazy"
+      decoding="async"
     />
   );
 };

@@ -90,8 +90,8 @@ export const MissionPage: React.FC<MissionPageProps> = ({ onNavigate }) => {
           <p className="text-xs font-semibold uppercase tracking-widest text-harvest-600">
             About the Mission
           </p>
-          <h1 className="font-serif text-4xl sm:text-5xl font-semibold text-forest-950 leading-[1.1]">
-            A fellowship of kingdom-minded believers equipped for rural and foreign missions.
+          <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-semibold text-forest-950 leading-[1.08] tracking-tight">
+            Equipping believers. Reaching communities. Carrying the Gospel across borders.
           </h1>
           <div className="space-y-4 text-base text-stone-700 leading-relaxed max-w-2xl">
             {MISSION_INFO.callToPartner.map((paragraph, index) => (

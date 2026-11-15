@@ -85,6 +85,11 @@ export const HomePage: React.FC<HomePageProps> = ({
   const handlePrayerSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!prayerName.trim() || !prayerMessage.trim()) return;
+    const subject = encodeURIComponent(`Harvestfield ${prayerType}`);
+    const body = encodeURIComponent(
+      `Name: ${prayerName.trim()}\nContact: ${prayerContact.trim() || 'Not provided'}\nRequest type: ${prayerType}\n\nMessage:\n${prayerMessage.trim()}`
+    );
+    window.location.href = `mailto:${MISSION_INFO.emails[0]}?subject=${subject}&body=${body}`;
     setPrayerSent(true);
     setPrayerName('');
     setPrayerContact('');
@@ -93,6 +98,53 @@ export const HomePage: React.FC<HomePageProps> = ({
 
   return (
     <div>
+      {/* Cinematic mission welcome — uses the ministry's own field photographs */}
+      <section
+        className="relative isolate min-h-[520px] sm:min-h-[590px] lg:min-h-[650px] overflow-hidden bg-forest-950"
+        style={{
+          backgroundImage: `linear-gradient(90deg, rgba(5, 24, 15, 0.94) 0%, rgba(5, 24, 15, 0.78) 48%, rgba(5, 24, 15, 0.24) 100%), linear-gradient(0deg, rgba(5, 24, 15, 0.42), transparent 55%), url("${activeSpot.image}")`,
+          backgroundPosition: 'center',
+          backgroundSize: 'cover',
+        }}
+        aria-label={`Harvestfield mission field: ${activeSpot.location}`}
+      >
+        <div className="mx-auto flex min-h-[520px] sm:min-h-[590px] lg:min-h-[650px] max-w-7xl items-center px-5 py-16 sm:px-8 lg:px-10">
+          <div className="max-w-3xl space-y-7 text-white">
+            <p className="inline-flex items-center gap-3 text-[11px] sm:text-xs font-semibold uppercase tracking-[0.24em] text-harvest-400">
+              <span className="h-px w-9 bg-harvest-400" />
+              A Gospel Mission to the Nations
+            </p>
+            <h1 className="max-w-3xl font-serif text-4xl font-semibold leading-[1.08] tracking-tight sm:text-5xl lg:text-7xl">
+              Taking the Gospel to the nations. Bringing hope to every generation.
+            </h1>
+            <p className="max-w-2xl text-base leading-relaxed text-stone-200 sm:text-lg lg:text-xl">
+              From rural communities to cross-border mission fields, Harvest Field Gospel Mission Int’l equips believers to share Christ, serve people and strengthen local communities.
+            </p>
+            <div className="flex flex-col gap-3 pt-2 sm:flex-row sm:flex-wrap">
+              <button
+                type="button"
+                onClick={() => onNavigate('mission')}
+                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-harvest-500 px-6 py-3 text-sm font-semibold text-forest-950 shadow-lg shadow-black/15 transition-colors hover:bg-harvest-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+              >
+                Discover Our Mission <ArrowRight className="h-4 w-4" />
+              </button>
+              <button
+                type="button"
+                onClick={() => onNavigate('partner')}
+                className="inline-flex min-h-12 items-center justify-center rounded-lg border border-white/55 bg-white/10 px-6 py-3 text-sm font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white/20"
+              >
+                Pray, Give &amp; Partner
+              </button>
+            </div>
+            <div className="flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-white/20 pt-5 text-xs font-medium text-stone-200 sm:text-sm">
+              <span>{activeSpot.location}</span>
+              <span className="text-harvest-400" aria-hidden="true">•</span>
+              <span>Rural &amp; Foreign Missions</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* 1. Split Editorial Hero */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-12 lg:pt-14 lg:pb-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">
@@ -103,8 +155,8 @@ export const HomePage: React.FC<HomePageProps> = ({
                 Omoku, Rivers State, Nigeria <span aria-hidden="true">·</span> Rural &amp; Foreign Missions
               </p>
 
-              <h1 className="font-serif text-4xl sm:text-5xl lg:text-[3.5rem] font-semibold tracking-tight text-forest-950 leading-[1.08]">
-                Kingdom-minded believers, taking the nations for Christ.
+              <h1 className="font-serif text-3xl sm:text-4xl lg:text-[3.1rem] font-semibold tracking-tight text-forest-950 leading-[1.08]">
+                A people prepared to carry the Gospel beyond borders.
               </h1>
 
               <p className="text-base sm:text-lg text-stone-700 leading-relaxed max-w-2xl">
@@ -534,11 +586,10 @@ export const HomePage: React.FC<HomePageProps> = ({
               <div className="py-8 text-center space-y-4">
                 <CheckCircle2 className="w-10 h-10 text-forest-900 mx-auto" />
                 <h3 className="font-serif text-2xl font-semibold text-forest-950">
-                  Your note has been received.
+                  Your email request is ready.
                 </h3>
                 <p className="text-sm text-stone-600 max-w-md mx-auto leading-relaxed">
-                  Thank you for reaching out to Harvest Field Gospel Mission Int&apos;l. Our prayer
-                  and counseling team in Omoku will stand with you in prayer.
+                  Your email application should open with your request addressed to Harvest Field Gospel Mission Int&apos;l. Please send that email to complete your request. If it does not open, contact our office directly.
                 </p>
                 <button
                   type="button"

@@ -224,7 +224,7 @@ export const JournalPage: React.FC<JournalPageProps> = ({
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
           <div className="space-y-2 max-w-2xl">
             <p className="text-xs font-semibold uppercase tracking-widest text-harvest-600">
-              Editorial Dispatches &amp; Blog
+              Stories from the Mission Field
             </p>
             <h1 className="font-serif text-4xl sm:text-5xl font-semibold text-forest-950">
               Mission Journal

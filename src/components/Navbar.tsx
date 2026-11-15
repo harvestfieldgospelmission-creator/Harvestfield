@@ -25,8 +25,8 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
   };
 
   return (
-    <header className="sticky top-0 z-40 bg-[#faf8f4]/95 backdrop-blur-md border-b border-stone-200/90">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex md:grid md:grid-cols-[1fr_auto_1fr] items-center justify-between gap-4 md:gap-8">
+    <header className="sticky top-0 z-40 bg-[#faf8f4]/95 backdrop-blur-xl border-b border-stone-200/80 shadow-[0_8px_30px_rgba(10,34,22,0.045)]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-[4.5rem] flex md:grid md:grid-cols-[1fr_auto_1fr] items-center justify-between gap-4 md:gap-8">
         {/* Zone 1: Single-line Brand Wordmark */}
         <button
           type="button"
@@ -34,7 +34,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
           className="md:justify-self-start inline-flex items-center gap-2.5 font-serif text-lg sm:text-xl font-semibold tracking-tight text-forest-950 whitespace-nowrap shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-800 rounded-sm cursor-pointer"
         >
           <MissionMark className="w-7 h-7 text-forest-900 shrink-0" />
-          <span>Harvest Field</span>
+          <span className="flex flex-col items-start leading-none"><span>Harvest Field</span><span className="mt-1 font-sans text-[9px] sm:text-[10px] font-semibold uppercase tracking-[0.19em] text-harvest-600">Gospel Mission Int’l</span></span>
         </button>
 
         {/* Zone 2: Centered 5 single-line text navigation links */}
@@ -87,6 +87,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
             className="md:hidden inline-flex items-center justify-center w-11 h-11 rounded-lg text-stone-800 hover:bg-stone-200/60 transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-800"
             aria-label={mobileOpen ? 'Close navigation menu' : 'Open navigation menu'}
             aria-expanded={mobileOpen}
+            aria-controls="hf-mobile-navigation"
           >
             {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
@@ -96,6 +97,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
       {/* Mobile Navigation Drawer */}
       {mobileOpen && (
         <nav
+          id="hf-mobile-navigation"
           aria-label="Mobile navigation"
           className="md:hidden border-t border-stone-200 bg-[#faf8f4] px-4 py-4 space-y-1.5"
         >
