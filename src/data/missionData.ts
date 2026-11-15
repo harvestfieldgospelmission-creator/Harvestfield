@@ -1,4 +1,4 @@
-export type PageId = 'home' | 'mission' | 'leadership' | 'gallery' | 'journal' | 'partner';
+export type PageId = 'home' | 'mission' | 'leadership' | 'gallery' | 'journal' | 'partner' | 'admin';
 
 export interface MandateItem {
   id: string;
@@ -83,7 +83,7 @@ export const MISSION_INFO = {
 export const FOUNDER_PROFILE = {
   name: 'Evang. David Abrebor',
   role: "President & Founder (CEO), Harvest Field Gospel Mission Int'l",
-  portrait: '/assets/field/founder-linde-massa.jpg',
+  portrait: '/assets/field/founder-david-abrebor.jpg',
   conferenceVisual: '/assets/field/cote-divoire-conference.jpg',
   summary:
     'Called to ignite a passion for unreached rural communities and cross-border gospel missions, Evang. David Abrebor leads Harvest Field Gospel Mission Int’l from its headquarters in Omoku, Rivers State across West and Central Africa.',
