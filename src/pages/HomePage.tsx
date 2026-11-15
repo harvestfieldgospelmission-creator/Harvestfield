@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { ArrowRight, CheckCircle2, ChevronRight, Expand } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { ArrowRight, CheckCircle2, ChevronRight, Expand, Pause, Play } from 'lucide-react';
 import {
   FOUNDER_PROFILE,
   GALLERY_PHOTOS,
@@ -58,6 +58,12 @@ export const HomePage: React.FC<HomePageProps> = ({
   onOpenPhoto,
 }) => {
   const [heroIndex, setHeroIndex] = useState(0);
+  const [activeSpotIndex, setActiveSpotIndex] = useState(0);
+  const [heroPaused, setHeroPaused] = useState(false);
+  const [heroHovered, setHeroHovered] = useState(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(
+    () => window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  );
   const [activeCategory, setActiveCategory] = useState<string>('All');
   const [expandedMandate, setExpandedMandate] = useState<string>(MANDATES[0].id);
 
@@ -70,7 +76,28 @@ export const HomePage: React.FC<HomePageProps> = ({
   >(null);
   const [prayerSent, setPrayerSent] = useState(false);
 
-  const activeSpot = HERO_SPOTS[heroIndex];
+  useEffect(() => {
+    const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const updateMotionPreference = (event: MediaQueryListEvent) => {
+      setPrefersReducedMotion(event.matches);
+    };
+
+    motionPreference.addEventListener('change', updateMotionPreference);
+    return () => motionPreference.removeEventListener('change', updateMotionPreference);
+  }, []);
+
+  useEffect(() => {
+    if (heroPaused || heroHovered || prefersReducedMotion) return;
+
+    const intervalId = window.setInterval(() => {
+      setHeroIndex((index) => (index + 1) % HERO_SPOTS.length);
+    }, 6500);
+
+    return () => window.clearInterval(intervalId);
+  }, [heroHovered, heroIndex, heroPaused, prefersReducedMotion]);
+
+  const heroSpot = HERO_SPOTS[heroIndex];
+  const activeSpot = HERO_SPOTS[activeSpotIndex];
 
   const categories = ['All', 'Evangelism', 'Youth & Schools', 'Training', 'Global Missions'];
   const filteredMandates =
@@ -100,15 +127,29 @@ export const HomePage: React.FC<HomePageProps> = ({
     <div>
       {/* Cinematic mission welcome — uses the ministry's own field photographs */}
       <section
-        className="relative isolate min-h-[440px] sm:min-h-[590px] lg:min-h-[650px] overflow-hidden bg-forest-950"
-        style={{
-          backgroundImage: `linear-gradient(90deg, rgba(5, 24, 15, 0.94) 0%, rgba(5, 24, 15, 0.78) 48%, rgba(5, 24, 15, 0.24) 100%), linear-gradient(0deg, rgba(5, 24, 15, 0.42), transparent 55%), url("${activeSpot.image}")`,
-          backgroundPosition: 'center',
-          backgroundSize: 'cover',
-        }}
-        aria-label={`Harvestfield mission field: ${activeSpot.location}`}
+        className="relative isolate min-h-[440px] overflow-hidden bg-forest-950 sm:min-h-[590px] lg:min-h-[650px]"
+        onMouseEnter={() => setHeroHovered(true)}
+        onMouseLeave={() => setHeroHovered(false)}
+        role="region"
+        aria-roledescription="carousel"
+        aria-label="Harvest Field Gospel Mission photographs"
       >
-        <div className="mx-auto flex min-h-[440px] sm:min-h-[590px] lg:min-h-[650px] max-w-7xl items-center px-5 py-12 sm:px-8 sm:py-16 lg:px-10">
+        <div className="absolute inset-0" aria-hidden="true">
+          {HERO_SPOTS.map((spot, index) => (
+            <img
+              key={spot.id}
+              src={spot.image}
+              alt=""
+              fetchPriority={index === 0 ? 'high' : 'auto'}
+              className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ${
+                index === heroIndex ? 'opacity-100' : 'opacity-0'
+              }`}
+            />
+          ))}
+          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,24,15,0.94)_0%,rgba(5,24,15,0.78)_48%,rgba(5,24,15,0.24)_100%),linear-gradient(0deg,rgba(5,24,15,0.42),transparent_55%)]" />
+        </div>
+
+        <div className="relative z-10 mx-auto flex min-h-[440px] max-w-7xl items-center px-5 py-12 sm:min-h-[590px] sm:px-8 sm:py-16 lg:min-h-[650px] lg:px-10">
           <div className="max-w-3xl space-y-5 sm:space-y-7 text-white">
             <p className="inline-flex items-center gap-3 text-[11px] sm:text-xs font-semibold uppercase tracking-[0.24em] text-harvest-400">
               <span className="h-px w-9 bg-harvest-400" />
@@ -140,9 +181,47 @@ export const HomePage: React.FC<HomePageProps> = ({
               </button>
             </div>
             <div className="flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-white/20 pt-5 text-xs font-medium text-stone-200 sm:text-sm">
-              <span>{activeSpot.location}</span>
+              <span>{heroSpot.location}</span>
               <span className="text-harvest-400" aria-hidden="true">•</span>
               <span>Rural &amp; Foreign Missions</span>
+            </div>
+
+            <div className="flex max-w-sm items-center justify-between pt-1">
+              <div className="flex items-center gap-2" role="group" aria-label="Choose hero image">
+                {HERO_SPOTS.map((spot, index) => (
+                  <button
+                    key={spot.id}
+                    type="button"
+                    onClick={() => setHeroIndex(index)}
+                    aria-label={`Show ${spot.label} image`}
+                    aria-pressed={heroIndex === index}
+                    className="inline-flex h-8 items-center justify-center rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                  >
+                    <span
+                      className={`h-2 rounded-full transition-all ${
+                        heroIndex === index ? 'w-7 bg-harvest-400' : 'w-2 bg-white/70'
+                      }`}
+                    />
+                  </button>
+                ))}
+              </div>
+              {!prefersReducedMotion && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (heroPaused) setHeroHovered(false);
+                    setHeroPaused(!heroPaused);
+                  }}
+                  aria-label={heroPaused ? 'Resume slideshow' : 'Pause slideshow'}
+                  className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/40 bg-black/20 text-white transition-colors hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                >
+                  {heroPaused ? (
+                    <Play className="h-4 w-4" aria-hidden="true" />
+                  ) : (
+                    <Pause className="h-4 w-4" aria-hidden="true" />
+                  )}
+                </button>
+              )}
             </div>
           </div>
         </div>
@@ -205,9 +284,9 @@ export const HomePage: React.FC<HomePageProps> = ({
                   <button
                     key={spot.id}
                     type="button"
-                    onClick={() => setHeroIndex(idx)}
+                    onClick={() => setActiveSpotIndex(idx)}
                     className={`px-3.5 py-2 text-xs font-medium rounded-lg transition-colors duration-150 whitespace-nowrap cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-800 ${
-                      heroIndex === idx
+                      activeSpotIndex === idx
                         ? 'bg-forest-900 text-white'
                         : 'bg-stone-200/60 text-stone-700 hover:bg-stone-200'
                     }`}
@@ -248,36 +327,6 @@ export const HomePage: React.FC<HomePageProps> = ({
           </div>
         </div>
 
-        {/* 2. Operational Utility Ribbon (Full-width 4-column strip below hero split) */}
-        <div className="mt-10 bg-white border border-stone-200 rounded-xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-stone-200">
-          <div className="p-5">
-            <p className="text-xs font-medium text-stone-500 mb-1">Head Office</p>
-            <p className="text-sm font-semibold text-stone-900 leading-snug">
-              No. 17 Rev. Dr. Okoroma St, Omoku, Rivers State
-            </p>
-          </div>
-          <div className="p-5">
-            <p className="text-xs font-medium text-stone-500 mb-1">Office Hours</p>
-            <p className="text-sm font-semibold text-stone-900 tabular-nums">
-              Mon – Fri · 9:00 AM – 3:00 PM
-            </p>
-          </div>
-          <div className="p-5">
-            <p className="text-xs font-medium text-stone-500 mb-1">Nations Reached</p>
-            <p className="text-sm font-semibold text-stone-900">
-              Nigeria · Cameroon · Tchad · Côte d&apos;Ivoire
-            </p>
-          </div>
-          <div className="p-5">
-            <p className="text-xs font-medium text-stone-500 mb-1">Counseling &amp; Enquiries</p>
-            <a
-              href="tel:+2348132886893"
-              className="text-sm font-semibold text-forest-900 hover:underline tabular-nums"
-            >
-              +234 813 288 6893
-            </a>
-          </div>
-        </div>
       </section>
 
       {/* 3. What We Do — Core Mandates Showcase */}

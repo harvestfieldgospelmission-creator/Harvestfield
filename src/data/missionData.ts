@@ -1,4 +1,12 @@
-export type PageId = 'home' | 'mission' | 'leadership' | 'gallery' | 'journal' | 'partner' | 'admin';
+export type PageId =
+  | 'home'
+  | 'mission'
+  | 'leadership'
+  | 'gallery'
+  | 'journal'
+  | 'partner'
+  | 'contact'
+  | 'admin';
 
 export interface MandateItem {
   id: string;
@@ -58,10 +66,11 @@ export const MISSION_INFO = {
   name: "Harvest Field Gospel Mission Int'l",
   shortName: 'Harvest Field',
   tagline: 'Kingdom-minded believers, taking the nations for Christ.',
-  headOffice: 'No. 17 Rev. Dr. Okoroma Street, by Frankrid Hotel Road, Omoku, Rivers State, Nigeria',
+  headOffice: 'No. 17 Rev. Dr. Okoroma St, Omoku, Rivers State',
   fellowshipVenue:
     'All Power Liberation Church Hall, behind Osere Dengo Petrol Station, Ikiri Road, Omoku, Rivers State',
-  officeHours: 'Monday – Friday · 9:00 AM – 3:00 PM',
+  officeHours: 'Mon – Fri · 9:00 AM – 3:00 PM',
+  nationsReached: ['Nigeria', 'Cameroon', 'Tchad', "Côte d'Ivoire"],
   phones: ['+234 813 288 6893', '+234 805 179 4743', '+234 906 148 1462'],
   emails: ['davidabrebor001@gmail.com', 'davidabrebor4christ@gmail.com'],
   facebook: [
@@ -73,22 +82,41 @@ export const MISSION_INFO = {
     body: 'He is willing to accept you just as you are. Accept Jesus today; confess your sins to Him, and follow Him.',
     closing: 'Pray now — the harvest begins in a surrendered heart.',
   },
-  callToPartner: [
-    'Have you discovered God’s heart desire yet? Know that if you are called by Him, His heart desire must become your heart desire. His longing must become your longing, and His will must become your will.',
-    'Do you have a passion for Mission? Do you want to live seeing God’s kingdom advance under your watch? Then partner and join forces with The Harvest Field Gospel Mission Int’l, Omoku — a fellowship of kingdom-minded believers being equipped for rural and foreign missions.',
-    'Do you have a call into Mission? Do you want to fulfill your Mission mandate for the nations, either by going, prayers, or sending your regular support? Contact us for more details.',
+};
+
+export const MISSION_ABOUT = {
+  introduction:
+    'Harvest Field Gospel Mission International, Omoku, is a Christian interdenominational ministry committed to fulfilling the Great Commission by reaching the lost with the gospel of salvation through the Lord Jesus Christ.',
+  equipping:
+    'We also equip believers with knowledge and practical skills for effective soul-winning. Our goal is to awaken believers to their role in standing for the Gospel in their workplaces, neighbourhoods, and communities, and to help them practically engage people with the Gospel so that more may come to Christ.',
+  outreachMethods: [
+    'Practical one-on-one evangelism',
+    'School outreach programmes',
+    'Conferences',
+    'Community evangelism',
+    'Church evangelism awareness programmes',
+    'Counselling',
+    'Prayer and deliverance ministry',
   ],
+  communityObjectives: [
+    'Educational development and rehabilitation of young people in rural communities.',
+    'Girl-child education advocacy.',
+    'Poverty eradication in rural communities.',
+    'Agricultural and vocational skills development for young people.',
+  ],
+  registration:
+    'Headquartered in Omoku, Rivers State, Nigeria, Harvest Field Gospel Mission International is registered with the Corporate Affairs Commission of Nigeria.',
 };
 
 export const FOUNDER_PROFILE = {
   name: 'Evang. David Abrebor',
   role: "President & Founder (CEO), Harvest Field Gospel Mission Int'l",
-  portrait: '/assets/field/founder-linde-massa.jpg',
-  conferenceVisual: '/assets/field/cote-divoire-conference.jpg',
+  portrait: '/assets/field/founder-portrait.jpg',
+  ministryPhoto: '/assets/field/founder-speaking.jpg',
   summary:
     'Called to ignite a passion for unreached rural communities and cross-border gospel missions, Evang. David Abrebor leads Harvest Field Gospel Mission Int’l from its headquarters in Omoku, Rivers State across West and Central Africa.',
   biography: [
-    'Evang. David Abrebor serves as the President and Founder of Harvest Field Gospel Mission Int’l, headquartered at No. 17 Rev. Dr. Okoroma Street in Omoku, Rivers State, Nigeria. Driven by an unwavering conviction that God’s heart desire must become the believer’s heart desire, his ministry bridges local discipleship in the Niger Delta with frontier evangelism across neighbouring nations.',
+    'Evang. David Abrebor serves as the President and Founder of Harvest Field Gospel Mission Int’l, headquartered in Omoku, Rivers State, Nigeria. Driven by an unwavering conviction that God’s heart desire must become the believer’s heart desire, his ministry bridges local discipleship in the Niger Delta with frontier evangelism across neighbouring nations.',
     'Under his leadership, Harvest Field has grown into a disciplined fellowship of kingdom-minded believers trained specifically for rural and foreign missions. Rather than limiting ministry to comfortable city pulpits, Evang. Abrebor personally leads field teams into remote settlements—from Linde-Massa and Maroua in Northern Cameroon to outreach stations in the Republic of Tchad and francophone revival conferences such as Les Porteurs de Gloire in Côte d’Ivoire.',
     'Closer to home, his passion for the next generation shapes intensive school outreaches, student and youth conferences, labourers retreats, and structured training through the Harvest Field Academy (HFA)—ensuring every believer who feels the call to the nations is equipped in Scripture, character, and practical evangelism.',
   ],
@@ -208,6 +236,16 @@ export const MANDATES: MandateItem[] = [
 ];
 
 export const GALLERY_PHOTOS: GalleryPhoto[] = [
+  {
+    id: 'g17',
+    src: '/assets/field/student-conference.jpg',
+    title: 'Harvest Field Student Conference',
+    region: 'Nigeria & Schools',
+    location: 'Harvest Field Student Conference',
+    program: 'Student & Youth Outreach',
+    caption: 'Students raise their hands in prayer during a Harvest Field student conference.',
+    aspect: 'wide',
+  },
   {
     id: 'g1',
     src: '/assets/field/founder-linde-massa.jpg',
@@ -363,7 +401,7 @@ export const GALLERY_PHOTOS: GalleryPhoto[] = [
     src: '/assets/aistudio/IMG-20261115-WA0004_fbda2947.jpg',
     title: 'President & Founder Official Ministry Card',
     region: 'Official Flyers',
-    location: 'No. 17 Rev. Dr. Okoroma Street, Omoku',
+    location: 'Omoku Head Office',
     program: 'Executive Office',
     caption: 'Official directory card for Evang. David Abrebor (President/Founder), listing ministry tracks, Harvest Field Academy, and partnership channels.',
     aspect: 'portrait',
@@ -495,7 +533,7 @@ export const JOURNAL_POSTS: JournalPost[] = [
     ],
     marginNote: {
       heading: 'Counseling Line',
-      detail: 'Mon–Fri, 9:00 AM – 3:00 PM · +234 813 288 6893 · +234 906 148 1462',
+      detail: 'Weekdays, 9:00 AM – 3:00 PM · Contact the mission office for details.',
     },
   },
 ];

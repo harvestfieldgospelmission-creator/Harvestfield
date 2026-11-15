@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { ArrowRight, Expand, X } from 'lucide-react';
-import { MANDATES, MISSION_INFO, PageId } from '../data/missionData';
+import { MANDATES, MISSION_ABOUT, PageId } from '../data/missionData';
 import { SafeImage } from '../components/SafeImage';
 
 interface MissionPageProps {
@@ -83,80 +83,84 @@ export const MissionPage: React.FC<MissionPageProps> = ({ onNavigate }) => {
   const track = PARTICIPATION_TRACKS.find((t) => t.id === activeTrack) || PARTICIPATION_TRACKS[0];
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16 space-y-20">
-      {/* Page Header */}
-      <section className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-        <div className="lg:col-span-7 space-y-6">
-          <p className="text-xs font-semibold uppercase tracking-widest text-harvest-600">
-            About the Mission
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12 lg:py-16 space-y-16 lg:space-y-20">
+      <section className="space-y-8">
+        <div className="max-w-4xl space-y-5">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-harvest-600">
+            About Us
           </p>
           <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-semibold text-forest-950 leading-[1.08] tracking-tight">
-            Equipping believers. Reaching communities. Carrying the Gospel across borders.
+            Reaching the lost. Equipping believers. Serving communities.
           </h1>
-          <div className="space-y-4 text-base text-stone-700 leading-relaxed max-w-2xl">
-            {MISSION_INFO.callToPartner.map((paragraph, index) => (
-              <p key={index} className={index === 0 ? 'editorial-dropcap' : ''}>
-                {paragraph}
-              </p>
-            ))}
-          </div>
-          <div className="pt-2 flex flex-wrap gap-4">
-            <button
-              type="button"
-              onClick={() => onNavigate('partner')}
-              className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold text-white bg-forest-900 hover:bg-forest-800 rounded-lg transition-colors cursor-pointer"
-            >
-              <span>Donate &amp; Partner With Us</span>
-              <ArrowRight className="w-4 h-4" />
-            </button>
-            <button
-              type="button"
-              onClick={() => onNavigate('gallery')}
-              className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold text-forest-950 bg-limestone hover:bg-stone-200/80 border border-stone-300/70 rounded-lg transition-colors cursor-pointer"
-            >
-              <span>View Field Photographs</span>
-            </button>
+          <div className="space-y-4 text-base sm:text-lg text-stone-700 leading-relaxed">
+            <p>{MISSION_ABOUT.introduction}</p>
+            <p>{MISSION_ABOUT.equipping}</p>
           </div>
         </div>
 
-        {/* Venue & Headquarters Summary Panel */}
-        <aside className="lg:col-span-5 bg-white border border-stone-200 rounded-2xl p-6 sm:p-8 space-y-6">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-widest text-harvest-600 mb-2">
-              Headquarters &amp; Fellowship Venue
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          <article className="lg:col-span-7 rounded-2xl border border-stone-200 bg-white p-6 sm:p-8">
+            <p className="text-xs font-semibold uppercase tracking-widest text-harvest-600">
+              Our Gospel Outreach
             </p>
-            <h2 className="font-serif text-2xl font-semibold text-forest-950">
-              Rooted in Omoku, Sent to the Nations
+            <h2 className="mt-2 font-serif text-2xl sm:text-3xl font-semibold text-forest-950">
+              Practical ways we serve
             </h2>
-          </div>
+            <ol className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {MISSION_ABOUT.outreachMethods.map((method, index) => (
+                <li
+                  key={method}
+                  className="flex items-start gap-3 rounded-xl bg-[#faf8f4] p-4 text-sm font-medium leading-relaxed text-stone-800"
+                >
+                  <span className="font-mono text-xs font-semibold text-harvest-600 tabular-nums">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                  <span>{method}</span>
+                </li>
+              ))}
+            </ol>
+          </article>
 
-          <dl className="divide-y divide-stone-200 text-sm">
-            <div className="py-4">
-              <dt className="text-xs font-medium text-stone-500 mb-1">Head Office</dt>
-              <dd className="text-stone-900 font-medium leading-relaxed">
-                {MISSION_INFO.headOffice}
-              </dd>
-            </div>
-            <div className="py-4">
-              <dt className="text-xs font-medium text-stone-500 mb-1">Fellowship &amp; Outreach Venue</dt>
-              <dd className="text-stone-900 font-medium leading-relaxed">
-                {MISSION_INFO.fellowshipVenue}
-              </dd>
-            </div>
-            <div className="py-4">
-              <dt className="text-xs font-medium text-stone-500 mb-1">Office &amp; Counseling Hours</dt>
-              <dd className="text-stone-900 font-medium tabular-nums">
-                {MISSION_INFO.officeHours}
-              </dd>
-            </div>
-            <div className="py-4">
-              <dt className="text-xs font-medium text-stone-500 mb-1">Active Foreign Fields</dt>
-              <dd className="text-stone-900 font-medium">
-                Linde-Massa &amp; Maroua (Northern Cameroon) · Tchad Republic · Côte d&apos;Ivoire
-              </dd>
-            </div>
-          </dl>
-        </aside>
+          <div className="lg:col-span-5 space-y-6">
+            <article className="rounded-2xl border border-stone-200 bg-limestone/60 p-6 sm:p-8">
+              <p className="text-xs font-semibold uppercase tracking-widest text-harvest-600">
+                Beyond Evangelism
+              </p>
+              <h2 className="mt-2 font-serif text-2xl font-semibold text-forest-950">
+                Community objectives
+              </h2>
+              <ul className="mt-5 space-y-4">
+                {MISSION_ABOUT.communityObjectives.map((objective, index) => (
+                  <li key={objective} className="flex items-start gap-3 text-sm leading-relaxed text-stone-700">
+                    <span className="font-mono text-xs font-semibold text-harvest-600 tabular-nums">
+                      0{index + 1}
+                    </span>
+                    <span>{objective}</span>
+                  </li>
+                ))}
+              </ul>
+            </article>
+
+            <aside className="rounded-2xl bg-forest-950 p-6 text-white sm:p-8">
+              <p className="text-xs font-semibold uppercase tracking-widest text-harvest-400">
+                Our Home &amp; Registration
+              </p>
+              <h2 className="mt-2 font-serif text-2xl font-semibold">
+                Rooted in Omoku, Rivers State
+              </h2>
+              <p className="mt-3 text-sm leading-relaxed text-stone-200">
+                {MISSION_ABOUT.registration}
+              </p>
+              <button
+                type="button"
+                onClick={() => onNavigate('contact')}
+                className="mt-6 inline-flex min-h-11 items-center gap-2 rounded-lg bg-harvest-400 px-4 py-2.5 text-sm font-semibold text-forest-950 transition-colors hover:bg-harvest-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+              >
+                Contact the Mission <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </button>
+            </aside>
+          </div>
+        </div>
       </section>
 
       {/* Fulfill Your Mandate: Going / Praying / Supporting */}

@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Check, CheckCircle2, Copy, Mail, MapPin, Phone } from 'lucide-react';
-import { BANK_ACCOUNTS, MISSION_INFO } from '../data/missionData';
+import { Check, CheckCircle2, Copy } from 'lucide-react';
+import { BANK_ACCOUNTS, MISSION_INFO, PageId } from '../data/missionData';
 import { BankAccountsGrid } from '../components/BankAccountsGrid';
+
+interface PartnerPageProps {
+  onNavigate: (page: PageId) => void;
+}
 
 interface SubmittedRecord {
   id: string;
@@ -39,7 +43,7 @@ const MISSION_FUNDS = [
   },
 ];
 
-export const PartnerPage: React.FC = () => {
+export const PartnerPage: React.FC<PartnerPageProps> = ({ onNavigate }) => {
   // Interactive Giving Builder State
   const [currency, setCurrency] = useState<'NGN' | 'USD'>('NGN');
   const [frequency, setFrequency] = useState<'One-Time Gift' | 'Monthly Support'>('One-Time Gift');
@@ -346,9 +350,15 @@ export const PartnerPage: React.FC = () => {
                 {pledgeRef}
               </p>
               <p className="text-xs text-stone-300 leading-relaxed">
-                This reference is for your own transfer note only. It does not confirm that a payment was made or received. After making a transfer, notify the mission office at{' '}
-                <span className="text-white font-medium">+234 813 288 6893</span>.
+                This reference is for your own transfer note only. It does not confirm that a payment was made or received. After making a transfer, notify the mission office using the details on our Contact page.
               </p>
+              <button
+                type="button"
+                onClick={() => onNavigate('contact')}
+                className="text-xs font-semibold text-harvest-400 hover:text-white transition-colors"
+              >
+                Contact the mission office
+              </button>
             </div>
           ) : (
             <form onSubmit={handleConfirmGivingIntent} className="space-y-3">
@@ -413,9 +423,15 @@ export const PartnerPage: React.FC = () => {
                 Thank you for reaching out.
               </h3>
               <p className="text-sm text-stone-600 max-w-md mx-auto leading-relaxed">
-                Your email draft is ready to send to the mission office. Please press Send in your email app to complete your request. For immediate ministry follow-up during office hours
-                (Mon–Fri, 9:00 AM – 3:00 PM), call +234 813 288 6893.
+                Your email draft is ready to send to the mission office. Please press Send in your email app to complete your request. For immediate follow-up, use the contact details on our Contact page.
               </p>
+              <button
+                type="button"
+                onClick={() => onNavigate('contact')}
+                className="px-4 py-2 text-xs font-semibold text-forest-900 hover:text-harvest-600 cursor-pointer"
+              >
+                Contact the Mission Office
+              </button>
               <button
                 type="button"
                 onClick={() => setSubmittedSuccess(false)}
@@ -552,69 +568,23 @@ export const PartnerPage: React.FC = () => {
           )}
         </div>
 
-        {/* Physical Office & Direct Contact Card */}
+        {/* Contact information lives on the dedicated Contact page. */}
         <aside className="lg:col-span-5 space-y-6">
           <div className="bg-limestone/70 border border-stone-200 rounded-2xl p-6 sm:p-8 space-y-5">
             <h2 className="font-serif text-2xl font-semibold text-forest-950">
-              Visit or Reach the Mission Office
+              Need help with your gift?
             </h2>
-
-            <div className="space-y-4 text-sm text-stone-700">
-              <div className="flex items-start gap-3">
-                <MapPin className="w-4 h-4 text-forest-900 mt-1 shrink-0" />
-                <div>
-                  <p className="font-semibold text-stone-900">Head Office</p>
-                  <p className="leading-relaxed">{MISSION_INFO.headOffice}</p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-3">
-                <MapPin className="w-4 h-4 text-forest-900 mt-1 shrink-0" />
-                <div>
-                  <p className="font-semibold text-stone-900">Fellowship Venue</p>
-                  <p className="leading-relaxed">{MISSION_INFO.fellowshipVenue}</p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-3">
-                <Phone className="w-4 h-4 text-forest-900 mt-1 shrink-0" />
-                <div className="space-y-1 tabular-nums">
-                  <p className="font-semibold text-stone-900">Direct Lines</p>
-                  {MISSION_INFO.phones.map((phone) => (
-                    <a
-                      key={phone}
-                      href={`tel:${phone.replace(/\s+/g, '')}`}
-                      className="block hover:text-forest-900 hover:underline"
-                    >
-                      {phone}
-                    </a>
-                  ))}
-                </div>
-              </div>
-
-              <div className="flex items-start gap-3">
-                <Mail className="w-4 h-4 text-forest-900 mt-1 shrink-0" />
-                <div className="space-y-1">
-                  <p className="font-semibold text-stone-900">Emails</p>
-                  {MISSION_INFO.emails.map((email) => (
-                    <a
-                      key={email}
-                      href={`mailto:${email}`}
-                      className="block hover:text-forest-900 hover:underline break-all"
-                    >
-                      {email}
-                    </a>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            <div className="pt-4 border-t border-stone-300/70">
-              <p className="text-xs font-medium text-stone-500">Office &amp; Counseling Hours</p>
-              <p className="text-sm font-semibold text-forest-950 mt-0.5 tabular-nums">
-                {MISSION_INFO.officeHours}
-              </p>
-            </div>
+            <p className="text-sm leading-relaxed text-stone-700">
+              For transfer questions, prayer requests, or counselling, contact the mission office
+              through our Contact page.
+            </p>
+            <button
+              type="button"
+              onClick={() => onNavigate('contact')}
+              className="inline-flex min-h-11 items-center rounded-lg bg-forest-900 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-forest-800"
+            >
+              View Contact Details
+            </button>
           </div>
         </aside>
       </section>

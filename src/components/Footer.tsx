@@ -10,7 +10,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
   return (
     <footer className="bg-forest-950 text-stone-200 border-t border-forest-800 mt-14">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-7 lg:py-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 pb-6 border-b border-forest-800/80">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 pb-6 border-b border-forest-800/80">
           {/* Column 1: Mission Identity */}
           <div className="space-y-2">
             <div className="flex items-center gap-3">
@@ -36,10 +36,11 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             <ul className="space-y-2 text-sm">
               {[
                 { id: 'home' as PageId, label: 'Home & What We Do' },
-                { id: 'mission' as PageId, label: 'About the Mission' },
+                { id: 'mission' as PageId, label: 'About Us' },
                 { id: 'leadership' as PageId, label: 'President & Founder' },
                 { id: 'gallery' as PageId, label: 'Field Galleries' },
                 { id: 'journal' as PageId, label: 'Blog & Articles' },
+                { id: 'contact' as PageId, label: 'Contact Us' },
                 { id: 'partner' as PageId, label: 'Partner, Give & Pray' },
               ].map((link) => (
                 <li key={link.id}>
@@ -55,23 +56,21 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             </ul>
           </div>
 
-          {/* Column 3: Head Office & Hours */}
+          {/* Column 3: Contact */}
           <div className="space-y-3 text-sm">
             <h3 className="font-sans text-xs font-semibold uppercase tracking-widest text-harvest-400 mb-4">
-              Headquarters &amp; Venue
+              Contact the Mission
             </h3>
-            <div>
-              <p className="text-white font-medium">Head Office</p>
-              <p className="text-stone-300 leading-relaxed">{MISSION_INFO.headOffice}</p>
-            </div>
-            <div>
-              <p className="text-white font-medium">Fellowship Hall</p>
-              <p className="text-stone-300 leading-relaxed">{MISSION_INFO.fellowshipVenue}</p>
-            </div>
-            <div>
-              <p className="text-white font-medium">Office Hours</p>
-              <p className="text-stone-300 tabular-nums">{MISSION_INFO.officeHours}</p>
-            </div>
+            <p className="text-stone-300 leading-relaxed">
+              Office details, hours, and enquiry lines are available on our Contact page.
+            </p>
+            <button
+              type="button"
+              onClick={() => onNavigate('contact')}
+              className="pt-1 text-sm font-medium text-white hover:text-harvest-400 transition-colors"
+            >
+              Contact Us
+            </button>
           </div>
 
           <div className="space-y-3 text-sm">
@@ -82,34 +81,6 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             <button type="button" onClick={() => onNavigate('admin')} className="pt-2 text-xs text-stone-500 hover:text-harvest-400">Staff sign in</button>
           </div>
 
-          {/* Column 4: Direct Contact */}
-          <div className="space-y-3 text-sm">
-            <h3 className="font-sans text-xs font-semibold uppercase tracking-widest text-harvest-400 mb-4">
-              Direct Contact
-            </h3>
-            <div className="space-y-1 tabular-nums">
-              {MISSION_INFO.phones.map((phone) => (
-                <a
-                  key={phone}
-                  href={`tel:${phone.replace(/\s+/g, '')}`}
-                  className="block text-stone-300 hover:text-white transition-colors"
-                >
-                  {phone}
-                </a>
-              ))}
-            </div>
-            <div className="space-y-1 pt-2">
-              {MISSION_INFO.emails.map((email) => (
-                <a
-                  key={email}
-                  href={`mailto:${email}`}
-                  className="block text-stone-300 hover:text-white transition-colors break-all"
-                >
-                  {email}
-                </a>
-              ))}
-            </div>
-          </div>
         </div>
 
         <div className="pt-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs text-stone-400">
