@@ -1,0 +1,6 @@
+{
+  "name": "Harvest Field Gospel Mission Int'l",
+  "description": "Official web platform for Harvest Field Gospel Mission Int'l, Omoku, led by Evang. David Abrebor. Explore mission mandates, field galleries across West and Central Africa, editorial dispatches, leadership, and partnership.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
