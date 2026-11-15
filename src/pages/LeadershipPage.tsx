@@ -250,8 +250,7 @@ export const LeadershipPage: React.FC<LeadershipPageProps> = ({ onNavigate }) =>
                 Invitation Email Prepared
               </h3>
               <p className="text-sm text-stone-600 max-w-md mx-auto leading-relaxed">
-                Thank you for inviting {FOUNDER_PROFILE.name}. For urgent scheduling, please also
-                reach the Omoku office directly at +234 813 288 6893.
+                Your invitation email draft is ready. Please send it from your email app to complete the request. For urgent scheduling, contact the Omoku office at +234 813 288 6893.
               </p>
               <button
                 type="button"
