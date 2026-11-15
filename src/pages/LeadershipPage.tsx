@@ -51,7 +51,7 @@ export const LeadershipPage: React.FC<LeadershipPageProps> = ({ onNavigate }) =>
             <SafeImage
               src={FOUNDER_PROFILE.portrait}
               alt="Evang. David Abrebor, President and Founder of Harvest Field Gospel Mission Int'l"
-              className="w-full h-full object-contain group-hover:scale-[1.02] transition-transform duration-500 ease-out"
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
               fallbackTitle="Evang. David Abrebor"
             />
           </div>
