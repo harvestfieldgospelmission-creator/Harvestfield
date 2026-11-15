@@ -1,6 +1,7 @@
 import React from 'react';
 import { MISSION_INFO, PageId } from '../data/missionData';
 import { MissionMark } from './MissionMark';
+import { Facebook, Instagram, Youtube } from 'lucide-react';
 
 interface FooterProps {
   onNavigate: (page: PageId) => void;
@@ -9,10 +10,10 @@ interface FooterProps {
 export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
   return (
     <footer className="bg-forest-950 text-stone-200 border-t border-forest-800 mt-14">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-9 lg:py-11">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-7 pb-7 border-b border-forest-800/80">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-7 lg:py-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 pb-6 border-b border-forest-800/80">
           {/* Column 1: Mission Identity */}
-          <div className="space-y-3">
+          <div className="space-y-2">
             <div className="flex items-center gap-3">
               <MissionMark className="w-9 h-9 text-harvest-400 shrink-0" />
               <div>
@@ -39,7 +40,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                 { id: 'mission' as PageId, label: 'About the Mission' },
                 { id: 'leadership' as PageId, label: 'President & Founder' },
                 { id: 'gallery' as PageId, label: 'Field Galleries' },
-                { id: 'journal' as PageId, label: 'Mission Journal' },
+                { id: 'journal' as PageId, label: 'Blog & Articles' },
                 { id: 'partner' as PageId, label: 'Partner, Give & Pray' },
               ].map((link) => (
                 <li key={link.id}>
@@ -72,6 +73,17 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               <p className="text-white font-medium">Office Hours</p>
               <p className="text-stone-300 tabular-nums">{MISSION_INFO.officeHours}</p>
             </div>
+          </div>
+
+          <div className="space-y-3 text-sm">
+            <h3 className="font-sans text-xs font-semibold uppercase tracking-widest text-harvest-400 mb-4">Follow the Mission</h3>
+            <div className="flex items-center gap-3">
+              <a href="https://www.facebook.com/" target="_blank" rel="noreferrer" aria-label="Facebook" title="Facebook" className="rounded-full border border-forest-700 p-2.5 text-stone-200 hover:bg-forest-800"><Facebook className="h-4 w-4" /></a>
+              <a href="https://www.instagram.com/" target="_blank" rel="noreferrer" aria-label="Instagram" title="Instagram" className="rounded-full border border-forest-700 p-2.5 text-stone-200 hover:bg-forest-800"><Instagram className="h-4 w-4" /></a>
+              <a href="https://www.youtube.com/" target="_blank" rel="noreferrer" aria-label="YouTube" title="YouTube" className="rounded-full border border-forest-700 p-2.5 text-stone-200 hover:bg-forest-800"><Youtube className="h-4 w-4" /></a>
+            </div>
+            <p className="text-xs text-stone-400 leading-relaxed">Official channel links can be connected when the ministry shares its profile URLs.</p>
+            <button type="button" onClick={() => onNavigate('admin')} className="pt-2 text-xs text-stone-500 hover:text-harvest-400">Staff sign in</button>
           </div>
 
           {/* Column 4: Direct Contact */}
