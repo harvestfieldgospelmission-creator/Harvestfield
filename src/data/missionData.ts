@@ -1,4 +1,4 @@
-export type PageId = 'home' | 'mission' | 'leadership' | 'gallery' | 'journal' | 'partner';
+export type PageId = 'home' | 'mission' | 'leadership' | 'gallery' | 'journal' | 'partner' | 'admin';
 
 export interface MandateItem {
   id: string;

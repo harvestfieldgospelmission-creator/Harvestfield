@@ -13,8 +13,9 @@ import { LeadershipPage } from './pages/LeadershipPage';
 import { GalleryPage } from './pages/GalleryPage';
 import { JournalPage } from './pages/JournalPage';
 import { PartnerPage } from './pages/PartnerPage';
+import { AdminPage } from './pages/AdminPage';
 
-const VALID_PAGES: PageId[] = ['home', 'mission', 'leadership', 'gallery', 'journal', 'partner'];
+const VALID_PAGES: PageId[] = ['home', 'mission', 'leadership', 'gallery', 'journal', 'partner', 'admin'];
 
 function parseHash(): { page: PageId; subId: string | null } {
   const raw = window.location.hash.replace(/^#\/?/, '');
@@ -98,6 +99,7 @@ export default function App() {
           />
         )}
         {currentPage === 'partner' && <PartnerPage />}
+        {currentPage === 'admin' && <AdminPage />}
       </main>
 
       <Footer onNavigate={(page) => handleNavigate(page)} />

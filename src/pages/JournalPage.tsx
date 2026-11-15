@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { ArrowLeft, ArrowRight, Bookmark, Search } from 'lucide-react';
 import { JOURNAL_POSTS, JournalPost } from '../data/missionData';
 import { SafeImage } from '../components/SafeImage';
+import { supabase } from '../lib/supabase';
 
 interface JournalPageProps {
   selectedSlug: string | null;
@@ -33,8 +34,33 @@ export const JournalPage: React.FC<JournalPageProps> = ({
   });
   const [scrollProgress, setScrollProgress] = useState(0);
 
+  const [publishedPosts, setPublishedPosts] = useState<JournalPost[]>([]);
+  useEffect(() => {
+    if (!supabase) return;
+    let alive = true;
+    supabase.from('blog_posts').select('*').eq('status', 'published').order('published_at', { ascending: false })
+      .then(({ data, error }) => {
+        if (!alive || error || !data) return;
+        const mapped: JournalPost[] = data.map((post: any) => ({
+          id: post.id, slug: post.slug,
+          category: (['Field Reports', 'Youth & Schools', 'Discipleship', 'Devotional'].includes(post.category) ? post.category : 'Field Reports') as JournalPost['category'],
+          title: post.title, subtitle: post.excerpt || '',
+          author: 'Harvest Field Editorial Team', authorRole: "Harvest Field Gospel Mission Int'l",
+          date: post.published_at ? new Date(post.published_at).toLocaleDateString() : '',
+          readTime: `${Math.max(1, Math.ceil((post.content || '').split(/\\s+/).length / 220))} min read`,
+          region: 'Harvest Field Mission', coverImage: post.cover_image || '/assets/field/discipleship-training.jpg',
+          coverCaption: post.title, excerpt: post.excerpt || '',
+          body: (post.content || '').split(/\\n\\s*\\n/).filter(Boolean),
+          marginNote: { heading: 'From the Mission', detail: "Stories and teaching from Harvest Field Gospel Mission Int'l." },
+        }));
+        setPublishedPosts(mapped);
+      });
+    return () => { alive = false; };
+  }, []);
+  const posts = [...publishedPosts, ...JOURNAL_POSTS];
+
   const activeArticle = selectedSlug
-    ? JOURNAL_POSTS.find((p) => p.slug === selectedSlug) || null
+    ? posts.find((p) => p.slug === selectedSlug) || null
     : null;
 
   useEffect(() => {
@@ -73,7 +99,7 @@ export const JournalPage: React.FC<JournalPageProps> = ({
   // Article Reading Mode
   if (activeArticle) {
     const isSaved = savedIds.includes(activeArticle.id);
-    const relatedPosts = JOURNAL_POSTS.filter((p) => p.id !== activeArticle.id).slice(0, 2);
+    const relatedPosts = posts.filter((p) => p.id !== activeArticle.id).slice(0, 2);
 
     return (
       <div>
@@ -93,7 +119,7 @@ export const JournalPage: React.FC<JournalPageProps> = ({
               className="inline-flex items-center gap-2 text-sm font-semibold text-forest-900 hover:text-harvest-600 transition-colors cursor-pointer"
             >
               <ArrowLeft className="w-4 h-4" />
-              <span>Back to Mission Journal</span>
+              <span>Back to Harvest Field Blog</span>
             </button>
 
             <button
@@ -166,7 +192,7 @@ export const JournalPage: React.FC<JournalPageProps> = ({
 
               <div className="bg-white border border-stone-200 rounded-xl p-5 space-y-4">
                 <p className="text-xs font-semibold uppercase tracking-widest text-stone-500">
-                  More Field Dispatches
+                  More More Articles
                 </p>
                 <div className="space-y-4 divide-y divide-stone-100">
                   {relatedPosts.map((rel) => (
@@ -197,7 +223,7 @@ export const JournalPage: React.FC<JournalPageProps> = ({
   }
 
   // Filter logic for Journal Front Page
-  const filteredPosts = JOURNAL_POSTS.filter((post) => {
+  const filteredPosts = posts.filter((post) => {
     const matchesCategory =
       activeCategory === 'All'
         ? true
@@ -227,7 +253,7 @@ export const JournalPage: React.FC<JournalPageProps> = ({
               Stories from the Mission Field
             </p>
             <h1 className="font-serif text-4xl sm:text-5xl font-semibold text-forest-950">
-              Mission Journal
+              Harvest Field Blog
             </h1>
             <p className="text-sm sm:text-base text-stone-600 leading-relaxed">
               Field reports from Northern Cameroon, Tchad Republic, and Côte d&apos;Ivoire alongside
@@ -241,8 +267,8 @@ export const JournalPage: React.FC<JournalPageProps> = ({
               type="search"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search dispatches or fields..."
-              aria-label="Search mission journal dispatches"
+              placeholder="Search articles or fields..."
+              aria-label="Search blog articles"
               className="w-full pl-10 pr-4 py-2.5 text-sm bg-white border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-forest-800"
             />
           </div>
@@ -251,7 +277,7 @@ export const JournalPage: React.FC<JournalPageProps> = ({
         <div
           className="flex flex-wrap items-center gap-1.5 p-1 bg-stone-200/75 rounded-lg w-fit"
           role="tablist"
-          aria-label="Filter journal dispatches"
+          aria-label="Filter blog articles"
         >
           {CATEGORIES.map((cat) => (
             <button
@@ -281,7 +307,7 @@ export const JournalPage: React.FC<JournalPageProps> = ({
           <p className="text-sm text-stone-600 max-w-md mx-auto">
             {activeCategory === 'Saved'
               ? 'You have not saved any dispatches yet. Open any article to bookmark it for later reading.'
-              : 'Try clearing your search filter or switching to All Dispatches.'}
+              : 'Try clearing your search filter or switching to All Articles.'}
           </p>
           <button
             type="button"

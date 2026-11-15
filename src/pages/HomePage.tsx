@@ -66,8 +66,8 @@ export const HomePage: React.FC<HomePageProps> = ({
   const [prayerContact, setPrayerContact] = useState('');
   const [prayerMessage, setPrayerMessage] = useState('');
   const [prayerType, setPrayerType] = useState<
-    'Salvation Decision' | 'Prayer Request' | 'Mission Inquiry'
-  >('Salvation Decision');
+    'Salvation Decision' | 'Prayer Request' | 'Mission Inquiry' | null
+  >(null);
   const [prayerSent, setPrayerSent] = useState(false);
 
   const activeSpot = HERO_SPOTS[heroIndex];
@@ -84,7 +84,7 @@ export const HomePage: React.FC<HomePageProps> = ({
 
   const handlePrayerSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!prayerName.trim() || !prayerMessage.trim()) return;
+    if (!prayerType || !prayerName.trim() || !prayerMessage.trim()) return;
     const subject = encodeURIComponent(`Harvestfield ${prayerType}`);
     const body = encodeURIComponent(
       `Name: ${prayerName.trim()}\nContact: ${prayerContact.trim() || 'Not provided'}\nRequest type: ${prayerType}\n\nMessage:\n${prayerMessage.trim()}`
@@ -453,10 +453,10 @@ export const HomePage: React.FC<HomePageProps> = ({
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
             <div className="space-y-2">
               <p className="text-xs font-semibold uppercase tracking-widest text-harvest-600">
-                Mission Journal
+                From the Blog
               </p>
               <h2 className="font-serif text-3xl sm:text-4xl font-semibold text-forest-950">
-                Dispatches, testimonies &amp; teaching.
+                Stories, testimonies &amp; teaching from the mission field.
               </h2>
             </div>
             <button
@@ -464,7 +464,7 @@ export const HomePage: React.FC<HomePageProps> = ({
               onClick={() => onNavigate('journal')}
               className="inline-flex items-center gap-2 text-sm font-semibold text-forest-900 hover:text-harvest-600 transition-colors whitespace-nowrap self-start sm:self-auto cursor-pointer"
             >
-              <span>Read All Dispatches</span>
+              <span>Explore All Articles</span>
               <ArrowRight className="w-4 h-4" />
             </button>
           </div>
@@ -607,7 +607,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                       <button
                         key={type}
                         type="button"
-                        onClick={() => setPrayerType(type)}
+                        onClick={() => setPrayerType((current) => current === type ? null : type)}
                         className={`px-3 py-2 text-xs font-medium rounded-md transition-colors cursor-pointer ${
                           prayerType === type
                             ? 'bg-forest-900 text-white'
@@ -620,65 +620,31 @@ export const HomePage: React.FC<HomePageProps> = ({
                   )}
                 </div>
 
-                <div>
-                  <label
-                    htmlFor="home-prayer-name"
-                    className="block text-xs font-semibold text-stone-700 mb-1.5"
-                  >
-                    Full Name
-                  </label>
-                  <input
-                    id="home-prayer-name"
-                    type="text"
-                    required
-                    value={prayerName}
-                    onChange={(e) => setPrayerName(e.target.value)}
-                    placeholder="Enter your name"
-                    className="w-full px-3.5 py-2.5 text-sm bg-white border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-forest-800"
-                  />
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="home-prayer-contact"
-                    className="block text-xs font-semibold text-stone-700 mb-1.5"
-                  >
-                    Phone or Email (Optional)
-                  </label>
-                  <input
-                    id="home-prayer-contact"
-                    type="text"
-                    value={prayerContact}
-                    onChange={(e) => setPrayerContact(e.target.value)}
-                    placeholder="+234 ... or email@example.com"
-                    className="w-full px-3.5 py-2.5 text-sm bg-white border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-forest-800"
-                  />
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="home-prayer-msg"
-                    className="block text-xs font-semibold text-stone-700 mb-1.5"
-                  >
-                    Prayer Request or Decision Note
-                  </label>
-                  <textarea
-                    id="home-prayer-msg"
-                    rows={3}
-                    required
-                    value={prayerMessage}
-                    onChange={(e) => setPrayerMessage(e.target.value)}
-                    placeholder="Share how we can pray with you or how you would like to connect..."
-                    className="w-full px-3.5 py-2.5 text-sm bg-white border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-forest-800"
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  className="w-full py-3 px-4 text-sm font-semibold text-white bg-forest-900 hover:bg-forest-800 rounded-lg transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-forest-800"
+                <div
+                  className={`grid transition-all duration-500 ease-in-out ${prayerType ? 'grid-rows-[1fr] opacity-100 mt-2' : 'grid-rows-[0fr] opacity-0 mt-0 pointer-events-none'}`}
+                  aria-hidden={!prayerType}
                 >
-                  Submit Prayer &amp; Response
-                </button>
+                  <div className="overflow-hidden space-y-4">
+                    {prayerType && (
+                      <>
+                        <p className="text-xs font-semibold text-forest-900">{prayerType === 'Salvation Decision' ? 'We would be honoured to walk with you as you begin following Jesus.' : prayerType === 'Prayer Request' ? 'Share what is on your heart. Our team will be glad to pray with you.' : 'Tell us how you would like to connect with the mission.'}</p>
+                        <div>
+                          <label htmlFor="home-prayer-name" className="block text-xs font-semibold text-stone-700 mb-1.5">Full Name</label>
+                          <input id="home-prayer-name" type="text" required value={prayerName} onChange={(e) => setPrayerName(e.target.value)} placeholder="Enter your name" className="w-full px-3.5 py-2.5 text-sm bg-white border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-forest-800" />
+                        </div>
+                        <div>
+                          <label htmlFor="home-prayer-contact" className="block text-xs font-semibold text-stone-700 mb-1.5">Phone or Email (Optional)</label>
+                          <input id="home-prayer-contact" type="text" value={prayerContact} onChange={(e) => setPrayerContact(e.target.value)} placeholder="+234 ... or email@example.com" className="w-full px-3.5 py-2.5 text-sm bg-white border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-forest-800" />
+                        </div>
+                        <div>
+                          <label htmlFor="home-prayer-msg" className="block text-xs font-semibold text-stone-700 mb-1.5">{prayerType === 'Mission Inquiry' ? 'How would you like to get involved?' : prayerType === 'Salvation Decision' ? 'Your Note or Prayer' : 'Your Prayer Request'}</label>
+                          <textarea id="home-prayer-msg" rows={3} required value={prayerMessage} onChange={(e) => setPrayerMessage(e.target.value)} placeholder={prayerType === 'Mission Inquiry' ? 'Ask about going, praying, giving, or serving with a mission team...' : 'Share how we can pray with you or how you would like to connect...'} className="w-full px-3.5 py-2.5 text-sm bg-white border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-forest-800" />
+                        </div>
+                        <button type="submit" className="w-full py-3 px-4 text-sm font-semibold text-white bg-forest-900 hover:bg-forest-800 rounded-lg transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-forest-800">Submit {prayerType}</button>
+                      </>
+                    )}
+                  </div>
+                </div>
               </form>
             )}
           </div>
