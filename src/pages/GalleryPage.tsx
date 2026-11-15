@@ -77,7 +77,7 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({
       <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-8 border-b border-stone-200">
         <div className="space-y-2 max-w-2xl">
           <p className="text-xs font-semibold uppercase tracking-widest text-harvest-600">
-            Field Photography &amp; Archives
+            The Work, Through Our Eyes
           </p>
           <h1 className="font-serif text-4xl sm:text-5xl font-semibold text-forest-950">
             Mission Galleries
