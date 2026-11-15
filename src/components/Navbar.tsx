@@ -13,7 +13,7 @@ const NAV_ITEMS: { id: PageId; label: string }[] = [
   { id: 'mission', label: 'Mission' },
   { id: 'leadership', label: 'Leadership' },
   { id: 'gallery', label: 'Gallery' },
-  { id: 'journal', label: 'Journal' },
+  { id: 'journal', label: 'Blog' },
 ];
 
 export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
