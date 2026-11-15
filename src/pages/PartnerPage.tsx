@@ -132,21 +132,11 @@ export const PartnerPage: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!name.trim() || !phoneOrEmail.trim()) return;
-    const entry: SubmittedRecord = {
-      id: `${Date.now()}`,
-      reference: `HF-${String(Date.now()).slice(-4)}`,
-      type: requestType,
-      name: name.trim(),
-      createdAt: new Date().toLocaleDateString('en-GB', {
-        day: 'numeric',
-        month: 'short',
-        year: 'numeric',
-      }),
-      message:
-        message.trim() ||
-        'Requested partnership follow-up from Harvest Field Gospel Mission Int’l.',
-    };
-    setHistory((prev) => [entry, ...prev].slice(0, 6));
+    const subject = encodeURIComponent(`Harvestfield ${requestType} — ${name.trim()}`);
+    const body = encodeURIComponent(
+      `Name: ${name.trim()}\nContact: ${phoneOrEmail.trim()}\nCity / Country: ${city.trim() || 'Not provided'}\nRequest: ${requestType}\n\nMessage:\n${message.trim() || 'No additional message.'}`
+    );
+    window.location.href = `mailto:${MISSION_INFO.emails[0]}?subject=${subject}&body=${body}`;
     setSubmittedSuccess(true);
     setName('');
     setPhoneOrEmail('');
@@ -157,7 +147,7 @@ export const PartnerPage: React.FC = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16 space-y-16">
       {/* Header */}
-      <section className="max-w-3xl space-y-4">
+      <section className="hf-page-intro max-w-3xl space-y-4">
         <p className="text-xs font-semibold uppercase tracking-widest text-harvest-600">
           Donate, Partner &amp; Connect
         </p>
@@ -165,7 +155,7 @@ export const PartnerPage: React.FC = () => {
           Stand with the harvest through going, prayer, or regular support.
         </h1>
         <p className="text-base text-stone-700 leading-relaxed">
-          Every gift and partnership commitment directly strengthens rural and foreign missions
+          Your prayers, service and financial support help strengthen rural and foreign missions
           across Omoku, Northern Cameroon, Tchad Republic, Côte d&apos;Ivoire, and Harvest Field
           Academy.
         </p>
@@ -347,13 +337,13 @@ export const PartnerPage: React.FC = () => {
             <div className="bg-forest-900 border border-harvest-500/60 rounded-xl p-4 space-y-2">
               <div className="flex items-center gap-2 text-harvest-400 text-xs font-semibold">
                 <CheckCircle2 className="w-4 h-4" />
-                <span>Partner Giving Reference Ready</span>
+                <span>Transfer Reference Prepared — Not a Payment Receipt</span>
               </div>
               <p className="font-mono text-base font-semibold text-white tabular-nums">
                 {pledgeRef}
               </p>
               <p className="text-xs text-stone-300 leading-relaxed">
-                Include this reference in your bank transfer narration if desired, or notify us at{' '}
+                This reference is for your own transfer note only. It does not confirm that a payment was made or received. After making a transfer, notify the mission office at{' '}
                 <span className="text-white font-medium">+234 813 288 6893</span>.
               </p>
             </div>
@@ -379,7 +369,7 @@ export const PartnerPage: React.FC = () => {
                 type="submit"
                 className="w-full py-3 px-4 text-sm font-semibold text-forest-950 bg-harvest-400 hover:bg-harvest-500 rounded-lg transition-colors cursor-pointer"
               >
-                Generate Giving Reference &amp; Log Gift
+                Prepare Bank Transfer Reference
               </button>
             </form>
           )}
@@ -420,7 +410,7 @@ export const PartnerPage: React.FC = () => {
                 Thank you for reaching out.
               </h3>
               <p className="text-sm text-stone-600 max-w-md mx-auto leading-relaxed">
-                Your note has been recorded. For immediate ministry follow-up during office hours
+                Your email draft is ready to send to the mission office. Please press Send in your email app to complete your request. For immediate ministry follow-up during office hours
                 (Mon–Fri, 9:00 AM – 3:00 PM), call +234 813 288 6893.
               </p>
               <button
@@ -524,7 +514,7 @@ export const PartnerPage: React.FC = () => {
             <div className="pt-6 border-t border-stone-200 space-y-3">
               <div className="flex items-center justify-between">
                 <p className="text-xs font-semibold uppercase tracking-widest text-stone-500">
-                  Your Recent Giving &amp; Partnership Log
+                  This Browser’s Recent Giving &amp; Partnership Log
                 </p>
                 <button
                   type="button"
