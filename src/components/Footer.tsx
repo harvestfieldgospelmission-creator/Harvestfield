@@ -8,11 +8,11 @@ interface FooterProps {
 
 export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
   return (
-    <footer className="bg-forest-950 text-stone-200 border-t border-forest-800 mt-24">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-forest-800/80">
+    <footer className="bg-forest-950 text-stone-200 border-t border-forest-800 mt-14">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-9 lg:py-11">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-7 pb-7 border-b border-forest-800/80">
           {/* Column 1: Mission Identity */}
-          <div className="space-y-4">
+          <div className="space-y-3">
             <div className="flex items-center gap-3">
               <MissionMark className="w-9 h-9 text-harvest-400 shrink-0" />
               <div>
@@ -33,7 +33,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             <h3 className="font-sans text-xs font-semibold uppercase tracking-widest text-harvest-400 mb-4">
               Explore Mission
             </h3>
-            <ul className="space-y-2.5 text-sm">
+            <ul className="space-y-2 text-sm">
               {[
                 { id: 'home' as PageId, label: 'Home & What We Do' },
                 { id: 'mission' as PageId, label: 'About the Mission' },
@@ -104,7 +104,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           </div>
         </div>
 
-        <div className="pt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs text-stone-400">
+        <div className="pt-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs text-stone-400">
           <p>
             © {new Date().getFullYear()} {MISSION_INFO.name} · Omoku, Rivers State, Nigeria. All rights reserved.
           </p>
