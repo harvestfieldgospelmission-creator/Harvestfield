@@ -47,11 +47,11 @@ export const LeadershipPage: React.FC<LeadershipPageProps> = ({ onNavigate }) =>
       {/* Executive Portrait & Identity Split */}
       <section className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-stretch">
         <div className="lg:col-span-5 flex flex-col">
-          <div className="group flex-1 min-h-[380px] bg-stone-200 rounded-2xl overflow-hidden border border-stone-200">
+          <div className="group h-[360px] sm:h-[420px] max-h-[420px] bg-stone-200 rounded-2xl overflow-hidden border border-stone-200">
             <SafeImage
               src={FOUNDER_PROFILE.portrait}
               alt="Evang. David Abrebor, President and Founder of Harvest Field Gospel Mission Int'l"
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+              className="w-full h-full object-contain group-hover:scale-[1.02] transition-transform duration-500 ease-out"
               fallbackTitle="Evang. David Abrebor"
             />
           </div>
