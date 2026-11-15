@@ -56,6 +56,61 @@
   color: #113422;
 }
 
+/* Harvestfield premium editorial design refinements */
+::selection {
+  background: #d9a441;
+  color: #102d20;
+}
+
+:focus-visible {
+  outline: 2px solid #b87e18;
+  outline-offset: 3px;
+}
+
+img {
+  max-width: 100%;
+}
+
+@layer components {
+  .hf-page-intro {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .hf-page-intro::after {
+    content: "";
+    display: block;
+    width: 4rem;
+    height: 2px;
+    margin-top: 1.25rem;
+    background: linear-gradient(90deg, #b87e18, #e7c77f);
+  }
+
+  .hf-image-frame {
+    overflow: hidden;
+    border-radius: 1.25rem;
+    background: #e7e2d8;
+  }
+
+  .hf-image-frame img {
+    transition: transform 700ms cubic-bezier(.2,.7,.2,1);
+  }
+
+  .hf-image-frame:hover img {
+    transform: scale(1.035);
+  }
+}
+
+@media (max-width: 640px) {
+  h1 {
+    letter-spacing: -0.035em;
+  }
+
+  button, a {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
