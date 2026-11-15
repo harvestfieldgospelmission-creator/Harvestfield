@@ -278,7 +278,7 @@ export const HomePage: React.FC<HomePageProps> = ({
       </section>
 
       {/* 3. What We Do — Core Mandates Showcase */}
-      <section className="py-16 lg:py-20 border-t border-stone-200/80 bg-limestone/45">
+      <section className="py-12 lg:py-14 border-t border-stone-200/80 bg-limestone/45">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-10">
             <div className="space-y-2 max-w-2xl">
@@ -315,7 +315,7 @@ export const HomePage: React.FC<HomePageProps> = ({
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {filteredMandates.map((item) => {
               const isExpanded = expandedMandate === item.id;
               return (
@@ -327,7 +327,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                     <button
                       type="button"
                       onClick={() => setExpandedMandate(isExpanded ? '' : item.id)}
-                      className="block w-full aspect-[16/10] bg-stone-200 overflow-hidden cursor-pointer focus-visible:outline-none"
+                      className="block w-full aspect-[16/9] bg-stone-200 overflow-hidden cursor-pointer focus-visible:outline-none"
                       aria-label={`Toggle details for ${item.title}`}
                     >
                       <SafeImage
@@ -337,7 +337,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                         fallbackTitle={item.title}
                       />
                     </button>
-                    <div className="p-6 space-y-3">
+                    <div className="p-4 space-y-2.5">
                       <div className="flex items-center gap-2 text-xs text-stone-500">
                         <span className="font-mono font-semibold text-harvest-600 tabular-nums">
                           {item.index}
@@ -345,7 +345,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                         <span aria-hidden="true">·</span>
                         <span>{item.category}</span>
                       </div>
-                      <h3 className="font-serif text-xl font-semibold text-forest-950 leading-snug">
+                      <h3 className="font-serif text-lg font-semibold text-forest-950 leading-snug">
                         {item.title}
                       </h3>
                       <p className="text-sm text-stone-600 leading-relaxed">
@@ -372,7 +372,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                       )}
                     </div>
                   </div>
-                  <div className="px-6 pb-5">
+                  <div className="px-4 pb-4">
                     <button
                       type="button"
                       onClick={() => setExpandedMandate(isExpanded ? '' : item.id)}
@@ -394,7 +394,7 @@ export const HomePage: React.FC<HomePageProps> = ({
       </section>
 
       {/* 4. Field Galleries Preview */}
-      <section className="py-16 lg:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-12 lg:py-14 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
           <div className="space-y-2">
             <p className="text-xs font-semibold uppercase tracking-widest text-harvest-600">
@@ -448,7 +448,7 @@ export const HomePage: React.FC<HomePageProps> = ({
       </section>
 
       {/* 5. Mission Journal / Editorial Dispatches Preview */}
-      <section className="py-16 lg:py-20 border-t border-stone-200/80 bg-white">
+      <section className="py-12 lg:py-14 border-t border-stone-200/80 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
             <div className="space-y-2">
@@ -557,7 +557,7 @@ export const HomePage: React.FC<HomePageProps> = ({
       </section>
 
       {/* 6. Gospel Invitation & Interactive Prayer Card */}
-      <section className="py-16 lg:py-20 bg-forest-950 text-white">
+      <section className="py-12 lg:py-14 bg-forest-950 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
           <div className="lg:col-span-6 space-y-5">
             <p className="text-xs font-semibold uppercase tracking-widest text-harvest-400">
@@ -686,7 +686,7 @@ export const HomePage: React.FC<HomePageProps> = ({
       </section>
 
       {/* 7. Stewardship & Giving Channels */}
-      <section className="py-16 lg:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-12 lg:py-14 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-10">
           <div className="max-w-2xl space-y-2">
             <p className="text-xs font-semibold uppercase tracking-widest text-harvest-600">
