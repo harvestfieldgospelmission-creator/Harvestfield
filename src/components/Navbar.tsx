@@ -25,8 +25,8 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
   };
 
   return (
-    <header className="sticky top-0 z-40 bg-[#faf8f4]/95 backdrop-blur-xl border-b border-stone-200/80 shadow-[0_8px_30px_rgba(10,34,22,0.045)]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-[4.5rem] flex md:grid md:grid-cols-[1fr_auto_1fr] items-center justify-between gap-4 md:gap-8">
+    <header className="sticky top-0 z-50 bg-[#faf8f4]/95 backdrop-blur-xl border-b border-stone-200/80 shadow-[0_8px_30px_rgba(10,34,22,0.045)]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-[4.1rem] flex md:grid md:grid-cols-[1fr_auto_1fr] items-center justify-between gap-4 md:gap-8">
         {/* Zone 1: Single-line Brand Wordmark */}
         <button
           type="button"
