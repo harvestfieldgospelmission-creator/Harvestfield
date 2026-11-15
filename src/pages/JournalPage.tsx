@@ -93,7 +93,7 @@ export const JournalPage: React.FC<JournalPageProps> = ({
               className="inline-flex items-center gap-2 text-sm font-semibold text-forest-900 hover:text-harvest-600 transition-colors cursor-pointer"
             >
               <ArrowLeft className="w-4 h-4" />
-              <span>Back to Mission Journal</span>
+              <span>Back to Harvest Field Blog</span>
             </button>
 
             <button
@@ -166,7 +166,7 @@ export const JournalPage: React.FC<JournalPageProps> = ({
 
               <div className="bg-white border border-stone-200 rounded-xl p-5 space-y-4">
                 <p className="text-xs font-semibold uppercase tracking-widest text-stone-500">
-                  More Field Dispatches
+                  More More Articles
                 </p>
                 <div className="space-y-4 divide-y divide-stone-100">
                   {relatedPosts.map((rel) => (
@@ -241,8 +241,8 @@ export const JournalPage: React.FC<JournalPageProps> = ({
               type="search"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search dispatches or fields..."
-              aria-label="Search mission journal dispatches"
+              placeholder="Search articles or fields..."
+              aria-label="Search blog articles"
               className="w-full pl-10 pr-4 py-2.5 text-sm bg-white border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-forest-800"
             />
           </div>
@@ -251,7 +251,7 @@ export const JournalPage: React.FC<JournalPageProps> = ({
         <div
           className="flex flex-wrap items-center gap-1.5 p-1 bg-stone-200/75 rounded-lg w-fit"
           role="tablist"
-          aria-label="Filter journal dispatches"
+          aria-label="Filter blog articles"
         >
           {CATEGORIES.map((cat) => (
             <button
@@ -281,7 +281,7 @@ export const JournalPage: React.FC<JournalPageProps> = ({
           <p className="text-sm text-stone-600 max-w-md mx-auto">
             {activeCategory === 'Saved'
               ? 'You have not saved any dispatches yet. Open any article to bookmark it for later reading.'
-              : 'Try clearing your search filter or switching to All Dispatches.'}
+              : 'Try clearing your search filter or switching to All Articles.'}
           </p>
           <button
             type="button"
