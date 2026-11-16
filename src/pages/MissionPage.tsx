@@ -257,10 +257,10 @@ export const MissionPage: React.FC<MissionPageProps> = ({ onNavigate }) => {
               <div className="px-6 pb-5">
                 <button
                   type="button"
-                  onClick={() => onNavigate('partner')}
+                  onClick={() => onNavigate(item.id === 'harvest-field-academy' ? 'academy' : 'partner')}
                   className="inline-flex items-center gap-1.5 text-xs font-semibold text-forest-900 hover:text-harvest-600 transition-colors cursor-pointer"
                 >
-                  <span>Sponsor This Track</span>
+                  <span>{item.id === 'harvest-field-academy' ? 'Explore the Academy' : 'Sponsor This Track'}</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </button>
               </div>
