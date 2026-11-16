@@ -126,13 +126,13 @@ export const MISSION_ABOUT = {
 
 export const FOUNDER_PROFILE = {
   name: 'Evang. David Abrebor',
-  role: "President & Founder (CEO), Harvest Field Gospel Mission Int'l",
+  role: "Founder, Harvest Field Gospel Mission Int'l",
   portrait: '/assets/field/founder-portrait.jpg',
   ministryPhoto: '/assets/field/founder-speaking.jpg',
   summary:
     'Evang. David Abrebor is the President and Founder of Harvest Field Gospel Mission International, headquartered in Omoku, Rivers State, Nigeria. The ministry is committed to fulfilling the Great Commission, equipping believers for effective soul-winning and serving communities.',
   biography: [
-    'Evang. David Abrebor serves as the President and Founder of Harvest Field Gospel Mission International, an interdenominational Christian ministry based in Omoku, Rivers State, Nigeria.',
+    'Evang. David Abrebor is the founder of Harvest Field Gospel Mission International, an interdenominational Christian ministry based in Omoku, Rivers State, Nigeria.',
     'The ministry focuses on proclaiming the Gospel of salvation through the Lord Jesus Christ and equipping believers with biblical knowledge and practical understanding for effective soul-winning. It encourages Christians to take an active role in sharing the Gospel in their workplaces, neighbourhoods and communities.',
     'Its outreach activities include one-on-one evangelism, school outreach programmes, conferences, community evangelism, church evangelism awareness programmes, counselling, and prayer and deliverance ministration. Community development objectives include educational support, girl-child education advocacy, poverty reduction, and agricultural and vocational skills development for young people in rural communities.',
   ],
@@ -450,9 +450,9 @@ export const JOURNAL_POSTS: JournalPost[] = [
     slug: 'linde-massa-maroua-northern-cameroon-dispatch',
     category: 'Field Reports',
     title: 'Footsteps in Linde-Massa and Maroua: Advancing the Gospel in Northern Cameroon',
-    subtitle: 'How kingdom-minded believers from Omoku carried hope across borders into rural settlements',
+    subtitle: 'A look at the ministry’s stated mission fields in Northern Cameroon',
     author: 'Evang. David Abrebor',
-    authorRole: 'President & Founder',
+    authorRole: 'Founder',
     date: 'October 2026',
     readTime: '5 min read',
     region: 'Northern Cameroon',
@@ -460,16 +460,16 @@ export const JOURNAL_POSTS: JournalPost[] = [
     coverImage: '/assets/field/founder-linde-massa.jpg',
     coverCaption: 'Fig. 1 — Evang. David Abrebor during rural missionary outreach in Linde-Massa, Northern Cameroon.',
     excerpt:
-      'When God places a burden for unreached rural settlements upon your heart, geography stops being a barrier. A firsthand dispatch from our ongoing field work in Linde-Massa and Maroua.',
+      'An introduction to the ministry’s outreach presence and field photographs from Linde-Massa and Maroua in Northern Cameroon.',
     body: [
-      'Every foreign expedition begins long before a suitcase is packed or a border is crossed. It begins in the quiet place of prayer when God’s longing becomes your longing, and His will becomes your will. Over successive seasons of ministry, Harvest Field Gospel Mission Int’l has stepped out from our base in Omoku, Rivers State into the rural communities of Northern Cameroon, including Linde-Massa and Maroua.',
-      'In villages where mud-brick homes and thatched roofs line dusty footpaths, the hunger for authentic gospel hope is unmistakable. Families gather eagerly—not for spectacle, but to hear the timeless truth that Christ receives every person just as they are. Through open-air crusades, household visits, and patient personal prayer, many heard the message of salvation with clarity for the very first time.',
-      'Our approach in Northern Cameroon has always prioritized lasting spiritual fruit over fleeting visits. Alongside evangelistic outreach, we invest in strengthening local believers and encouraging emerging workers so that each community continues growing in the Scriptures long after the team travels onward.',
-      'Whether you feel called to go into rural fields yourself, to uphold our cross-border teams in daily intercession, or to send regular financial support, you share directly in every soul reached across Linde-Massa and Maroua.',
+      'Harvest Field Gospel Mission International is based in Omoku, Rivers State, Nigeria. The ministry’s field materials also identify Linde-Massa and Maroua in Northern Cameroon among its mission locations.',
+      'The ministry describes its work as sharing the Gospel, encouraging believers and serving communities. Photographs in the field gallery provide a visual record of some of the ministry activities and gatherings.',
+      'The ministry’s stated approach includes evangelism and equipping believers for practical soul-winning. Specific programme schedules and local outcomes are not stated here.',
+      'Those interested in learning more about the ministry’s work or ways to get involved can contact the mission directly.',
     ],
     marginNote: {
       heading: 'Field Coordinates',
-      detail: 'Linde-Massa & Maroua sit in Cameroon’s Far North region—focal points of Harvest Field’s rural foreign mission corridor alongside Tchad Republic.',
+      detail: 'Linde-Massa and Maroua, Northern Cameroon, are among the locations identified in the ministry’s field materials.',
     },
   },
   {
@@ -494,7 +494,7 @@ export const JOURNAL_POSTS: JournalPost[] = [
     ],
     marginNote: {
       heading: 'Program Track',
-      detail: 'Includes Intensive School Outreaches, Youths/Students Conferences, and weekly Christian Counseling.',
+      detail: 'The ministry’s stated activities include school outreach programmes, youth conferences and counselling.',
     },
   },
   {
@@ -519,7 +519,7 @@ export const JOURNAL_POSTS: JournalPost[] = [
     ],
     marginNote: {
       heading: 'Regional Reach',
-      detail: 'Active ministry partnerships spanning Nigeria, Northern Cameroon, Tchad Republic, and Côte d’Ivoire.',
+      detail: 'The ministry identifies Nigeria, Cameroon, Tchad and Côte d’Ivoire in its mission materials.',
     },
   },
   {
@@ -527,7 +527,7 @@ export const JOURNAL_POSTS: JournalPost[] = [
     slug: 'equipping-kingdom-labourers-harvest-field-academy',
     category: 'Discipleship',
     title: 'Going, Praying, or Supporting: Equipping Labourers at Harvest Field Academy',
-    subtitle: 'How Training, Discipleship, and Labourers Retreats prepare believers for lasting ministry impact',
+    subtitle: 'An introduction to the ministry’s believer-equipping work',
     author: 'Harvest Field Academy Faculty',
     authorRole: 'Training & Discipleship',
     date: 'July 2026',
@@ -536,15 +536,15 @@ export const JOURNAL_POSTS: JournalPost[] = [
     coverImage: '/assets/field/discipleship-training.jpg',
     coverCaption: 'Fig. 4 — Classroom discipleship and missionary training at Harvest Field Gospel Mission Int’l.',
     excerpt:
-      'Passion without preparation burns out quickly. Inside Harvest Field Academy (HFA) and our Labourers Retreats in Omoku.',
+      'Learn about Harvest Field Academy and the ministry’s commitment to equipping believers for effective soul-winning.',
     body: [
       'The harvest is plentiful, yet Jesus specifically instructed His disciples to pray for labourers—workers who understand both the message of the cross and the discipline required to carry it faithfully.',
-      'Through Harvest Field Academy (HFA), Training and Discipleship classes, and seasonal Labourers Retreats held in Omoku, believers are grounded in Scripture, prayer endurance, Christian counseling principles, and cross-cultural outreach readiness.',
-      'Not everyone boards a bus to Cameroon or Tchad on the same day, yet every kingdom-minded believer has a vital assignment: Going as a missionary, Praying faithfully on the intercessory watch, or Sending regular support so the work never stalls.',
+      'Harvest Field Academy is part of the ministry’s commitment to equipping believers with knowledge for effective soul-winning. The ministry also conducts conferences and discipleship activities.',
+      'The ministry welcomes enquiries from people interested in learning more about its training activities and mission work.',
     ],
     marginNote: {
       heading: 'Fellowship Venue',
-      detail: 'All Power Liberation Church Hall, behind Osere Dengo Petrol Station, Ikiri Road, Omoku.',
+      detail: 'For current information about Harvest Field Academy activities and meeting arrangements, please contact the mission.',
     },
   },
   {
@@ -565,11 +565,11 @@ export const JOURNAL_POSTS: JournalPost[] = [
     body: [
       'In the midst of daily responsibilities, quiet regrets, or unanswered questions about life’s direction, it is easy to assume that God waits for you to fix yourself before approaching Him. Yet the gospel announces the exact opposite.',
       'Jesus Christ is willing to accept you just as you are today. You do not need to wait for a special calendar date or walk through a church door alone first. Wherever you are reading these words, you can confess your sins honestly to Him, ask Him to wash your heart clean, and choose to follow Him as Lord and Saviour.',
-      'If you have prayed that prayer today—or if you would like someone to pray with you and counsel you from the Scriptures—our team at Harvest Field Gospel Mission Int’l is ready to walk beside you. Call our office lines or visit us in Omoku Monday through Friday.',
+      'If you have prayed that prayer today—or would like someone to pray with you and discuss the Scriptures—you can contact Harvest Field Gospel Mission International through the contact details on this website.',
     ],
     marginNote: {
       heading: 'Counseling Line',
-      detail: 'Weekdays, 9:00 AM – 3:00 PM · Contact the mission office for details.',
+      detail: 'Please contact the mission to enquire about counselling and prayer support.',
     },
   },
 ];
