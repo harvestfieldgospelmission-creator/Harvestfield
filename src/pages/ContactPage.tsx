@@ -34,7 +34,7 @@ export const ContactPage: React.FC = () => (
           <p className="text-xs font-semibold uppercase tracking-widest text-harvest-600">Send a message</p>
           <h2 className="mt-2 font-serif text-2xl font-semibold text-forest-950 sm:text-3xl">How can we help?</h2>
           <p className="mt-2 text-sm leading-relaxed text-stone-600">Complete this form and your message will be submitted securely through our website.</p>
-          <form name="contact-enquiry" method="POST" action="/thank-you.html" data-netlify="true" netlify-honeypot="bot-field" className="mt-7 space-y-5">
+          <form name="contact-enquiry" method="POST" action="/thank-you" data-netlify="true" netlify-honeypot="bot-field" className="mt-7 space-y-5">
             <input type="hidden" name="form-name" value="contact-enquiry" />
             <p className="hidden"><label>Do not fill this out: <input name="bot-field" /></label></p>
             <div className="grid gap-5 sm:grid-cols-2">

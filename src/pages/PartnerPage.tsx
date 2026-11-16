@@ -150,7 +150,7 @@ export const PartnerPage: React.FC<PartnerPageProps> = ({ onNavigate }) => {
             <h2 className="font-serif text-2xl font-semibold text-forest-950 sm:text-3xl">Questions before you partner?</h2>
             <p className="text-sm leading-relaxed text-stone-600">Tell us whether you would like to serve, pray, support an area of work or ask a question. A form submission is not a financial transaction or a confirmed volunteer placement.</p>
           </div>
-          <form name="mission-partnership" method="POST" action="/thank-you.html" data-netlify="true" netlify-honeypot="bot-field" className="space-y-5 rounded-2xl border border-stone-200 bg-white p-6 sm:p-8 lg:col-span-7">
+          <form name="mission-partnership" method="POST" action="/thank-you" data-netlify="true" netlify-honeypot="bot-field" className="space-y-5 rounded-2xl border border-stone-200 bg-white p-6 sm:p-8 lg:col-span-7">
             <input type="hidden" name="form-name" value="mission-partnership" />
             <p className="hidden"><label>Do not fill this out: <input name="bot-field" /></label></p>
             <div className="grid gap-5 sm:grid-cols-2">
