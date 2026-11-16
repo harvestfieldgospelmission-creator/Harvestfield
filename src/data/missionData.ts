@@ -192,9 +192,9 @@ export const MANDATES: MandateItem[] = [
     category: 'Training',
     summary: 'Walking alongside believers through biblical guidance, spiritual growth, and life challenges.',
     description:
-      'True mission work does not stop at conversion. Through weekday office counseling in Omoku and structured discipleship classes, we strengthen families, new converts, and emerging workers.',
+      'True mission work does not stop at conversion. Through counselling, prayer and discipleship activities, the ministry seeks to support believers and individuals facing life challenges.',
     highlights: [
-      'Confidential biblical counseling (Mon–Fri, 9:00 AM – 3:00 PM)',
+      'Christian counselling and prayer support',
       'Foundational discipleship and Scripture study tracks',
       'Pastoral care for missionaries and field families',
     ],
@@ -210,7 +210,7 @@ export const MANDATES: MandateItem[] = [
     description:
       'We gather intercessors, pastors, and kingdom-minded believers for Labourers Retreats and mobilisation summits—equipping labourers for rural and foreign harvest fields.',
     highlights: [
-      'Annual and seasonal Labourers Retreats',
+      'Conferences and believer mobilisation gatherings',
       'Intercessory prayer networks for unreached nations',
       'Church partnership mobilization for foreign fields',
     ],
@@ -242,9 +242,9 @@ export const MANDATES: MandateItem[] = [
     description:
       'Harvest Field Academy equips believers for cross-cultural ministry—preparing sent-out teams who serve in Northern Cameroon (Linde-Massa & Maroua), the Republic of Tchad, and Côte d’Ivoire.',
     highlights: [
-      'Harvest Field Academy (HFA) missionary curriculum',
-      'Cross-border expeditions to Cameroon, Tchad & Côte d’Ivoire',
-      'Bilingual and francophone outreach collaboration',
+      'Training and equipping through Harvest Field Academy (HFA)',
+      'Mission outreach in Cameroon, Tchad and Côte d’Ivoire',
+      'Sharing the Gospel across language and cultural contexts',
     ],
     image: '/assets/field/tchad-republic-mission.jpg',
     imageAlt: 'Foreign mission congregation in Tchad Republic',
