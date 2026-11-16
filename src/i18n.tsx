@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import i18next from 'i18next';
 import { initReactI18next } from 'react-i18next';
+import { missionPageTranslations } from './data/missionPageTranslations';
 
 export type Language = 'en' | 'fr' | 'es';
 
@@ -1050,8 +1051,8 @@ const semanticResources = {
 i18next.use(initReactI18next).init({
   resources: {
     en: { translation: semanticResources.en },
-    fr: { translation: { ...translations.fr, ...semanticResources.fr } },
-    es: { translation: { ...translations.es, ...semanticResources.es } },
+    fr: { translation: { ...translations.fr, ...missionPageTranslations.fr, ...semanticResources.fr } },
+    es: { translation: { ...translations.es, ...missionPageTranslations.es, ...semanticResources.es } },
   },
   lng: 'en',
   fallbackLng: 'en',
