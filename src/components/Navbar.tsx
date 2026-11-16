@@ -245,7 +245,12 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
           </div>
 
           <div className="shrink-0 border-t border-stone-200 bg-[#faf8f4] px-4 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-3">
-            {languageSelector('block sm:hidden')}
+            {pageLink(
+              'partner',
+              t('nav.support'),
+              `inline-flex min-h-11 w-full items-center justify-center rounded-lg bg-forest-900 px-3 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-forest-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-harvest-500 ${currentPage === 'partner' ? 'bg-harvest-600' : ''}`,
+            )}
+            <div className="mt-3">{languageSelector('block sm:hidden')}</div>
           </div>
         </nav>
       </header>
