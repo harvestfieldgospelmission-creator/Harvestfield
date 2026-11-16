@@ -75,7 +75,7 @@ export const MISSION_INFO = {
   officeHours: 'Mon – Fri · 9:00 AM – 3:00 PM',
   nationsReached: ['Nigeria', 'Cameroon', 'Tchad', "Côte d'Ivoire"],
   phones: ['+234 813 288 6893'],
-  emails: ['davidabrebor001@gmail.com', 'davidabrebor4christ@gmail.com'],
+  emails: ['info@harvestfieldgospelmission.org'],
   facebook: [
     { label: 'Abrebor David', handle: 'Personal Ministry Page' },
     { label: "Harvest Field Gospel Missions Int'l", handle: 'Official Mission Page' },
