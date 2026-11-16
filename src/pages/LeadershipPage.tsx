@@ -1,6 +1,6 @@
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
-import { FOUNDER_PROFILE, MISSION_INFO, PageId } from '../data/missionData';
+import { FOUNDER_PROFILE, PageId } from '../data/missionData';
 import { SafeImage } from '../components/SafeImage';
 import { LocalizedContent } from '../i18n';
 
@@ -189,7 +189,7 @@ export const LeadershipPage: React.FC<LeadershipPageProps> = ({ onNavigate }) =>
                   type="text"
                   required
                   placeholder="+234 ... or email"
-                  className="w-full px-3.5 py-2.5 text-sm bg-[#faf8f4] border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-forest-800"
+                  className="w-full min-h-11 px-3.5 py-3 text-base sm:text-sm bg-[#faf8f4] border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-forest-800"
                 />
               </div>
 
@@ -245,7 +245,6 @@ export const LeadershipPage: React.FC<LeadershipPageProps> = ({ onNavigate }) =>
                 </button>
               </div>
             </form>
-          </form>
         </div>
       </section>
     </div>
