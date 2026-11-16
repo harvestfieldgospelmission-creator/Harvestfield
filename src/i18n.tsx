@@ -886,7 +886,6 @@ i18next.use(initReactI18next).init({
   fallbackLng: 'en',
   interpolation: { escapeValue: false },
   returnEmptyString: false,
-  initImmediate: false,
 });
 
 
