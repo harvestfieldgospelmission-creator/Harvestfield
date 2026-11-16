@@ -74,7 +74,7 @@ export const MISSION_INFO = {
     'All Power Liberation Church Hall, behind Osere Dengo Petrol Station, Ikiri Road, Omoku, Rivers State',
   officeHours: 'Mon – Fri · 9:00 AM – 3:00 PM',
   nationsReached: ['Nigeria', 'Cameroon', 'Tchad', "Côte d'Ivoire"],
-  phones: ['+234 813 288 6893', '+234 805 179 4743', '+234 906 148 1462'],
+  phones: ['+234 813 288 6893'],
   emails: ['davidabrebor001@gmail.com', 'davidabrebor4christ@gmail.com'],
   facebook: [
     { label: 'Abrebor David', handle: 'Personal Ministry Page' },
