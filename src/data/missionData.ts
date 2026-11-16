@@ -1,6 +1,7 @@
 export type PageId =
   | 'home'
   | 'mission'
+  | 'impact'
   | 'leadership'
   | 'gallery'
   | 'journal'
