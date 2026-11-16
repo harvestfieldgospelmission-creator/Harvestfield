@@ -43,16 +43,37 @@ const FUND_OPTIONS = [
 export const PartnerPage: React.FC<PartnerPageProps> = ({ onNavigate }) => {
   const [currency, setCurrency] = useState<'NGN' | 'USD'>('NGN');
   const [frequency, setFrequency] = useState<'One-time' | 'Regular support'>('One-time');
-  const [amount, setAmount] = useState('25000');
+  const [amount, setAmount] = useState('');
   const [fund, setFund] = useState(FUND_OPTIONS[0]);
   const [copied, setCopied] = useState(false);
   const [copyFailed, setCopyFailed] = useState(false);
+  const [wireDetailsCopied, setWireDetailsCopied] = useState(false);
 
   const account = currency === 'USD' ? BANK_ACCOUNTS[0] : BANK_ACCOUNTS[1];
   const numericAmount = Number(amount.replace(/[^0-9.]/g, '')) || 0;
   const displayAmount = currency === 'NGN'
     ? `₦${numericAmount.toLocaleString('en-NG')}`
     : `$${numericAmount.toLocaleString('en-US')}`;
+
+  const usdTransferDetails = [
+    'Beneficiary: Harvest Field Gospel Missions Omoku',
+    'Account number: 5076357917',
+    'Bank: Zenith Bank',
+    'Bank address: Plot 84/87, Ajose Adeogun Street, Victoria Island, Lagos, Nigeria',
+    'Branch: Omoku branch',
+    'Branch sort code: 057210115',
+    'SWIFT/BIC: ZEIBNGLA',
+    'Beneficiary address: No. 17 Rev. Dr. Okoroma Street, by Frankried Hotel Road, Omoku, ONELGA, Rivers State, Nigeria',
+  ].join('\\n');
+
+  const copyUsdTransferDetails = async () => {
+    try {
+      await navigator.clipboard.writeText(usdTransferDetails);
+      setWireDetailsCopied(true);
+    } catch {
+      setWireDetailsCopied(false);
+    }
+  };
 
   const copyAccount = async () => {
     try {
@@ -85,7 +106,7 @@ export const PartnerPage: React.FC<PartnerPageProps> = ({ onNavigate }) => {
                 <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-full bg-forest-50 text-forest-900"><Icon className="h-5 w-5" aria-hidden="true" /></div>
                 <h3 className="font-serif text-xl font-semibold text-forest-950">{title}</h3>
                 <p className="mt-3 flex-1 text-sm leading-relaxed text-stone-600">{description}</p>
-                <button type="button" onClick={() => onNavigate(page)} className="mt-6 inline-flex min-h-11 items-center justify-center self-start rounded-lg border border-forest-900 px-4 py-2.5 text-sm font-semibold text-forest-900 transition-colors hover:bg-forest-50">{action}</button>
+                <button type="button" onClick={() => page === 'partner' ? document.getElementById('giving-details')?.scrollIntoView({ behavior: 'smooth', block: 'center' }) : onNavigate(page)} className="mt-6 inline-flex min-h-11 items-center justify-center self-start rounded-lg border border-forest-900 px-4 py-2.5 text-sm font-semibold text-forest-900 transition-colors hover:bg-forest-50">{action}</button>
               </article>
             ))}
           </div>
@@ -107,17 +128,17 @@ export const PartnerPage: React.FC<PartnerPageProps> = ({ onNavigate }) => {
             <h3 className="mt-2 font-serif text-2xl font-semibold">Prepare your transfer details</h3>
             <p className="mt-2 text-sm leading-relaxed text-stone-300">This is an information guide only. The website does not collect payments, verify transfers, issue receipts or schedule recurring payments.</p>
             <div className="mt-6 flex flex-wrap gap-2" aria-label="Currency">
-              <button type="button" aria-pressed={currency === 'NGN'} onClick={() => { setCurrency('NGN'); setAmount('25000'); setCopied(false); setCopyFailed(false); }} className={`min-h-10 rounded-lg px-4 text-sm font-semibold ${currency === 'NGN' ? 'bg-white text-forest-950' : 'border border-forest-700 text-white'}`}>Naira (NGN)</button>
-              <button type="button" aria-pressed={currency === 'USD'} onClick={() => { setCurrency('USD'); setAmount('100'); setCopied(false); setCopyFailed(false); }} className={`min-h-10 rounded-lg px-4 text-sm font-semibold ${currency === 'USD' ? 'bg-white text-forest-950' : 'border border-forest-700 text-white'}`}>US Dollar (USD)</button>
+              <button type="button" aria-pressed={currency === 'NGN'} onClick={() => { setCurrency('NGN'); setAmount(''); setCopied(false); setCopyFailed(false); }} className={`min-h-10 rounded-lg px-4 text-sm font-semibold ${currency === 'NGN' ? 'bg-white text-forest-950' : 'border border-forest-700 text-white'}`}>Naira (NGN)</button>
+              <button type="button" aria-pressed={currency === 'USD'} onClick={() => { setCurrency('USD'); setAmount(''); setCopied(false); setCopyFailed(false); }} className={`min-h-10 rounded-lg px-4 text-sm font-semibold ${currency === 'USD' ? 'bg-white text-forest-950' : 'border border-forest-700 text-white'}`}>US Dollar (USD)</button>
             </div>
             <div className="mt-5 grid gap-4 sm:grid-cols-2">
-              <div><label htmlFor="gift-amount" className="mb-1.5 block text-xs font-semibold text-stone-200">Amount (optional guide)</label><input id="gift-amount" type="number" min="1" step="any" inputMode="decimal" value={amount} onChange={event => setAmount(event.target.value)} className="w-full rounded-lg border border-forest-700 bg-forest-900 px-3.5 py-3 text-sm text-white" /></div>
+              <div><label htmlFor="gift-amount" className="mb-1.5 block text-xs font-semibold text-stone-200">Your donation amount (optional)</label><input id="gift-amount" type="number" min="1" step="any" inputMode="decimal" placeholder={currency === 'NGN' ? 'Enter amount in naira' : 'Enter amount in US dollars'} value={amount} onChange={event => setAmount(event.target.value)} className="w-full rounded-lg border border-forest-700 bg-forest-900 px-3.5 py-3 text-sm text-white" /></div>
               <div><label htmlFor="gift-frequency" className="mb-1.5 block text-xs font-semibold text-stone-200">Giving intention</label><select id="gift-frequency" value={frequency} onChange={event => setFrequency(event.target.value as 'One-time' | 'Regular support')} className="w-full rounded-lg border border-forest-700 bg-forest-900 px-3.5 py-3 text-sm text-white"><option>One-time</option><option>Regular support</option></select></div>
             </div>
             <div className="mt-4"><label htmlFor="gift-focus" className="mb-1.5 block text-xs font-semibold text-stone-200">Area you would like to discuss</label><select id="gift-focus" value={fund} onChange={event => setFund(event.target.value)} className="w-full rounded-lg border border-forest-700 bg-forest-900 px-3.5 py-3 text-sm text-white">{FUND_OPTIONS.map(option => <option key={option}>{option}</option>)}</select></div>
-            <div className="mt-6 rounded-xl border border-forest-700 bg-forest-900 p-4">
-              <p className="text-xs font-semibold uppercase tracking-wider text-harvest-400">Your guide</p>
-              <p className="mt-2 font-serif text-2xl font-semibold tabular-nums">{displayAmount} <span className="font-sans text-sm font-normal text-stone-300">· {frequency}</span></p>
+            <div id="giving-details" className="mt-6 scroll-mt-24 rounded-xl border border-forest-700 bg-forest-900 p-4">
+              <p className="text-xs font-semibold uppercase tracking-wider text-harvest-400">Bank transfer details</p>
+              <p className="mt-2 font-serif text-2xl font-semibold tabular-nums">{numericAmount > 0 ? displayAmount : 'Enter your preferred amount above'} <span className="font-sans text-sm font-normal text-stone-300">· {frequency}</span></p>
               <p className="mt-1 text-sm text-stone-300">Intended focus: {fund}</p>
               <div className="mt-5 border-t border-forest-700 pt-4">
                 <p className="text-xs text-stone-300">{account.type}</p>
@@ -129,6 +150,25 @@ export const PartnerPage: React.FC<PartnerPageProps> = ({ onNavigate }) => {
                 </div>
                 {copied && <p role="status" className="mt-2 text-xs text-harvest-400">Account number copied.</p>}
                 {copyFailed && <p role="status" className="mt-2 text-xs text-amber-200">Copy is unavailable in this browser. You can select the account number above.</p>}
+                {currency === 'USD' && (
+                  <div className="mt-5 space-y-3 border-t border-forest-700 pt-4">
+                    <h4 className="font-semibold text-white">International bank transfer information</h4>
+                    <dl className="space-y-3 text-sm">
+                      <div><dt className="text-xs text-stone-300">Bank address</dt><dd className="mt-0.5 text-white">Plot 84/87, Ajose Adeogun Street, Victoria Island, Lagos, Nigeria</dd></div>
+                      <div className="grid gap-3 sm:grid-cols-2">
+                        <div><dt className="text-xs text-stone-300">Branch</dt><dd className="mt-0.5 text-white">Omoku branch</dd></div>
+                        <div><dt className="text-xs text-stone-300">Branch sort code</dt><dd className="mt-0.5 font-mono text-white">057210115</dd></div>
+                      </div>
+                      <div><dt className="text-xs text-stone-300">SWIFT / BIC code</dt><dd className="mt-0.5 font-mono font-semibold text-white">ZEIBNGLA</dd></div>
+                      <div><dt className="text-xs text-stone-300">Beneficiary’s physical address</dt><dd className="mt-0.5 text-white">No. 17 Rev. Dr. Okoroma Street, by Frankried Hotel Road, Omoku, ONELGA, Rivers State, Nigeria</dd></div>
+                    </dl>
+                    <button type="button" onClick={copyUsdTransferDetails} className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-lg bg-white px-4 py-2.5 text-sm font-semibold text-forest-950 hover:bg-stone-100">
+                      <Copy className="h-4 w-4" aria-hidden="true" />
+                      Copy all international transfer details
+                    </button>
+                    {wireDetailsCopied && <p role="status" className="text-xs text-harvest-400">All international transfer details copied.</p>}
+                  </div>
+                )}
               </div>
             </div>
             <p className="mt-4 text-xs leading-relaxed text-stone-300">Please verify the account name and details with the mission through its official contact channels before transferring. Regular support means you arrange repeat transfers yourself; no automatic debit is set up.</p>
