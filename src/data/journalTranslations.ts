@@ -168,5 +168,5 @@ const journalCopy: Record<'fr' | 'es', Record<string, JournalCopy>> = {
 export function localizeJournalPost(post: JournalPost, language: Language): JournalPost {
   if (language === 'en') return post;
   const copy = journalCopy[language][post.id];
-  return copy ? { ...post, ...copy } : post;
+  return copy ? { ...post, ...copy, category: post.category } : post;
 }
