@@ -1,9 +1,11 @@
 import React from 'react';
 import { ArrowUpRight, BookOpen, ImagePlus, ShieldCheck } from 'lucide-react';
+import { LocalizedContent } from '../i18n';
 
 const studioUrl = import.meta.env.VITE_SANITY_STUDIO_URL as string | undefined;
 
 export const AdminPage: React.FC = () => (
+  <LocalizedContent>
   <main className="min-h-[70vh] bg-[#f7f7f2] px-5 py-16">
     <section className="mx-auto max-w-3xl rounded-2xl border border-stone-200 bg-white p-7 shadow-sm sm:p-10">
       <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-forest-950 text-harvest-400"><BookOpen /></div>
@@ -31,4 +33,5 @@ export const AdminPage: React.FC = () => (
       </div>
     </section>
   </main>
+  </LocalizedContent>
 );
