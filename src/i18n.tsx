@@ -562,12 +562,14 @@ const translations: Record<Exclude<Language, 'en'>, Record<string, string>> = {
     'Prepare Email': 'Preparar correo',
     'Your email app must be set up to send the message. You can also call the office directly.':
       'Tu aplicación de correo debe estar configurada para enviar el mensaje. También puedes llamar directamente a la oficina.',
+    'Tell us a little about yourself, where you are based, and what inspires you to serve with the mission.':
       'Cuéntanos un poco sobre ti, dónde vives y qué te inspira a servir con la misión.',
     'Your full name': 'Tu nombre completo',
     'you@example.com': 'tu@ejemplo.com',
     'e.g., Rivers State': 'p. ej., estado de Rivers',
     'e.g., ONELGA': 'p. ej., ONELGA',
     Other: 'Otro',
+    'Share what inspires you and how you hope to serve...':
       'Cuéntanos qué te inspira y cómo esperas servir…',
     'Please complete all required fields before continuing.':
       'Completa todos los campos obligatorios antes de continuar.',
