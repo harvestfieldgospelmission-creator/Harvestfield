@@ -65,7 +65,7 @@ export async function fetchPublishedPosts(language: Language = 'en'): Promise<Jo
       slug: post.slug?.current || post._id,
       category,
       title: translation?.title || post.title,
-      subtitle: post.excerpt || '',
+      subtitle: translation?.excerpt || post.excerpt || '',
       author: post.author || 'Harvest Field Editorial Team',
       authorRole: translation?.authorRole || post.authorRole || "Harvest Field Gospel Mission Int'l",
       date: post.publishedAt ? new Date(post.publishedAt).toLocaleDateString() : '',
