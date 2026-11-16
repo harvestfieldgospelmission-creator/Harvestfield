@@ -239,6 +239,7 @@ const translations: Record<Exclude<Language, 'en'>, Record<string, string>> = {
     'Leadership · Harvest Field Gospel Mission': 'Direction · Harvest Field Gospel Mission',
     'Leadership Team · Sample Profiles': 'Équipe de direction · Profils de démonstration',
     'Meet the Mission Leaders': 'Rencontrez les responsables de la mission',
+    'Prayer Director': 'Responsable de la prière',
     'These are clearly marked placeholders. Replace them with verified names, roles, and photographs before presenting them as ministry leaders.':
       'Ces éléments sont clairement indiqués comme exemples. Remplacez-les par des noms, fonctions et photos vérifiés avant de les présenter comme responsables du ministère.',
     'Sample profile': 'Profil de démonstration',
@@ -863,6 +864,7 @@ const translations: Record<Exclude<Language, 'en'>, Record<string, string>> = {
     'Leadership · Harvest Field Gospel Mission': 'Liderazgo · Harvest Field Gospel Mission',
     'Leadership Team · Sample Profiles': 'Equipo directivo · Perfiles de muestra',
     'Meet the Mission Leaders': 'Conoce a los líderes de la misión',
+    'Prayer Director': 'Director de oración',
     'These are clearly marked placeholders. Replace them with verified names, roles, and photographs before presenting them as ministry leaders.':
       'Estos son marcadores de posición claramente identificados. Sustitúyelos por nombres, cargos y fotos verificados antes de presentarlos como líderes del ministerio.',
     'Sample profile': 'Perfil de muestra',

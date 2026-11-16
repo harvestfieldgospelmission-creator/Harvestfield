@@ -16,10 +16,10 @@ const LEADERSHIP_TEAM = [
     alt: 'Pastor Wobo Praise, Mission Director',
   },
   {
-    name: 'Pst Jonathan Omonogun & Anita Jonathan',
-    role: null,
-    image: '/assets/field/jonathan-omonogun-anita-jonathan.jpeg',
-    alt: 'Pastor Jonathan Omonogun and Anita Jonathan',
+    name: 'Pst Jonathan Omonogun',
+    role: 'Prayer Director',
+    image: '/assets/field/jonathan-omonogun-prayer-director.jpeg',
+    alt: 'Pastor Jonathan Omonogun, Prayer Director',
   },
   {
     name: 'Susan David',
