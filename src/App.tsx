@@ -60,7 +60,7 @@ const PAGE_METADATA: Record<PageId, { title: string; description: string }> = {
   leadership: {
     title: "Leadership | Harvest Field Gospel Mission Int'l",
     description:
-      'Meet the founder and leadership team of Harvest Field Gospel Mission.',
+      'Learn about the founder of Harvest Field Gospel Mission and the ministry’s leadership.',
   },
   gallery: {
     title: "Mission Gallery | Harvest Field Gospel Mission Int'l",
