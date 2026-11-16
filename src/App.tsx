@@ -21,6 +21,7 @@ import { PartnerPage } from './pages/PartnerPage';
 import { ContactPage } from './pages/ContactPage';
 import { AdminPage } from './pages/AdminPage';
 import { JoinUsPage } from './pages/JoinUsPage';
+import { ThankYouPage } from './pages/ThankYouPage';
 import { LanguageProvider } from './i18n';
 
 const VALID_PAGES: PageId[] = [
@@ -120,10 +121,12 @@ export default function App() {
     initial.page === 'gallery' ? initial.subId : null
   );
   const [showBackToTop, setShowBackToTop] = useState(false);
+  const [isThankYouPage, setIsThankYouPage] = useState(window.location.pathname === '/thank-you');
 
   useEffect(() => {
     const syncRoute = () => {
       const next = parseLocation();
+      setIsThankYouPage(window.location.pathname === '/thank-you');
       setCurrentPage(next.page);
       setSelectedArticleSlug(next.page === 'journal' ? next.subId : null);
       setSelectedPhotoId(next.page === 'gallery' ? next.subId : null);
@@ -142,6 +145,20 @@ export default function App() {
   }, []);
 
   useEffect(() => {
+    if (isThankYouPage) {
+      document.title = "Thank You | Harvest Field Gospel Mission Int'l";
+      const description = document.querySelector<HTMLMetaElement>('meta[name="description"]');
+      if (description) description.content = 'Thank you for contacting Harvest Field Gospel Mission.';
+      let robots = document.querySelector<HTMLMetaElement>('meta[name="robots"]');
+      if (!robots) {
+        robots = document.createElement('meta');
+        robots.name = 'robots';
+        document.head.appendChild(robots);
+      }
+      robots.content = 'noindex, nofollow';
+      return;
+    }
+
     const metadata = PAGE_METADATA[currentPage];
     const article = selectedArticleSlug
       ? JOURNAL_POSTS.find((post) => post.slug === selectedArticleSlug)
@@ -170,7 +187,7 @@ export default function App() {
       document.head.appendChild(robots);
     }
     robots.content = currentPage === 'admin' ? 'noindex, nofollow' : 'index, follow';
-  }, [currentPage, selectedArticleSlug, selectedPhotoId]);
+  }, [currentPage, selectedArticleSlug, selectedPhotoId, isThankYouPage]);
 
   useEffect(() => {
     const updateBackToTopVisibility = () => setShowBackToTop(window.scrollY > 400);
@@ -211,6 +228,7 @@ export default function App() {
   }, [currentPage, selectedArticleSlug, selectedPhotoId]);
 
   const handleNavigate = (page: PageId, subId: string | null = null) => {
+    setIsThankYouPage(false);
     setCurrentPage(page);
     setSelectedArticleSlug(page === 'journal' ? subId : null);
     setSelectedPhotoId(page === 'gallery' ? subId : null);
@@ -240,6 +258,7 @@ export default function App() {
         <div aria-hidden="true" className="h-[4.1rem] shrink-0" />
 
         <main className="flex-1">
+        {isThankYouPage ? <ThankYouPage /> : <>
         {currentPage === 'home' && (
           <HomePage
             onNavigate={(page) => handleNavigate(page)}
@@ -270,6 +289,7 @@ export default function App() {
         {currentPage === 'join' && <JoinUsPage />}
         {currentPage === 'prayer' && <PrayerPage />}
         {currentPage === 'admin' && <AdminPage />}
+        </>}
         </main>
 
         <Footer onNavigate={(page) => handleNavigate(page)} />
