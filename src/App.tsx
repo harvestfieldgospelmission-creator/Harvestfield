@@ -11,6 +11,7 @@ import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { HomePage } from './pages/HomePage';
 import { MissionPage } from './pages/MissionPage';
+import { ImpactPage } from './pages/ImpactPage';
 import { LeadershipPage } from './pages/LeadershipPage';
 import { GalleryPage } from './pages/GalleryPage';
 import { JournalPage } from './pages/JournalPage';
@@ -23,6 +24,7 @@ import { LanguageProvider } from './i18n';
 const VALID_PAGES: PageId[] = [
   'home',
   'mission',
+  'impact',
   'leadership',
   'gallery',
   'journal',
@@ -42,6 +44,10 @@ const PAGE_METADATA: Record<PageId, { title: string; description: string }> = {
     title: "Our Mission | Harvest Field Gospel Mission Int'l",
     description:
       'Learn about Harvest Field Gospel Mission, its outreach, discipleship, and community work.',
+  },
+  impact: {
+    title: "Impact & Stories | Harvest Field Gospel Mission Int'l",
+    description: 'Explore field photographs and journal stories from Harvest Field Gospel Mission outreach, discipleship and cross-border mission work.',
   },
   leadership: {
     title: "Leadership | Harvest Field Gospel Mission Int'l",
@@ -230,6 +236,7 @@ export default function App() {
           />
         )}
         {currentPage === 'mission' && <MissionPage onNavigate={(page) => handleNavigate(page)} />}
+        {currentPage === 'impact' && <ImpactPage onNavigate={(page) => handleNavigate(page)} onSelectArticle={(slug) => handleNavigate('journal', slug)} onOpenPhoto={handleOpenGalleryPhoto} />}
         {currentPage === 'leadership' && <LeadershipPage onNavigate={(page) => handleNavigate(page)} />}
         {currentPage === 'gallery' && (
           <GalleryPage
