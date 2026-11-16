@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { ArrowLeft, ArrowRight, Bookmark, Search, Share2 } from 'lucide-react';
 import { JOURNAL_POSTS, JournalPost, SITE_ORIGIN } from '../data/missionData';
 import { SafeImage } from '../components/SafeImage';
-import { supabase } from '../lib/supabase';
+import { fetchPublishedPosts } from '../lib/sanity';
 import { LocalizedContent } from '../i18n';
 import { getPagePath } from '../routing';
 
@@ -36,31 +36,22 @@ export const JournalPage: React.FC<JournalPageProps> = ({
   });
   const [scrollProgress, setScrollProgress] = useState(0);
   const [shareNotice, setShareNotice] = useState('');
+  const [postsError, setPostsError] = useState(false);
 
   const [publishedPosts, setPublishedPosts] = useState<JournalPost[]>([]);
   useEffect(() => {
-    if (!supabase) return;
     let alive = true;
-    supabase.from('blog_posts').select('*').eq('status', 'published').order('published_at', { ascending: false })
-      .then(({ data, error }) => {
-        if (!alive || error || !data) return;
-        const mapped: JournalPost[] = data.map((post: any) => ({
-          id: post.id, slug: post.slug,
-          category: (['Field Reports', 'Youth & Schools', 'Discipleship', 'Devotional'].includes(post.category) ? post.category : 'Field Reports') as JournalPost['category'],
-          title: post.title, subtitle: post.excerpt || '',
-          author: 'Harvest Field Editorial Team', authorRole: "Harvest Field Gospel Mission Int'l",
-          date: post.published_at ? new Date(post.published_at).toLocaleDateString() : '',
-          readTime: `${Math.max(1, Math.ceil((post.content || '').split(/\\s+/).length / 220))} min read`,
-          region: 'Harvest Field Mission', coverImage: post.cover_image || '/assets/field/discipleship-training.jpg',
-          coverCaption: post.title, excerpt: post.excerpt || '',
-          body: (post.content || '').split(/\\n\\s*\\n/).filter(Boolean),
-          marginNote: { heading: 'From the Mission', detail: "Stories and teaching from Harvest Field Gospel Mission Int'l." },
-        }));
-        setPublishedPosts(mapped);
+    fetchPublishedPosts()
+      .then((items) => { if (alive) setPublishedPosts(items); })
+      .catch((error: unknown) => {
+        console.error('Unable to load published blog articles:', error);
+        if (alive) setPostsError(true);
       });
     return () => { alive = false; };
   }, []);
-  const posts = [...publishedPosts, ...JOURNAL_POSTS];
+  // Use the editorial starter stories only until the first CMS article is published.
+  // Once Sanity has content, the blog is driven entirely by the pastor's published articles.
+  const posts = publishedPosts.length > 0 ? publishedPosts : JOURNAL_POSTS;
 
   const activeArticle = selectedSlug
     ? posts.find((p) => p.slug === selectedSlug) || null
@@ -136,6 +127,7 @@ export const JournalPage: React.FC<JournalPageProps> = ({
   // Article Reading Mode
   if (activeArticle) {
     const isSaved = savedIds.includes(activeArticle.id);
+    const activeArticleUrl = new URL(getPagePath('journal', activeArticle.slug), SITE_ORIGIN).toString();
     const relatedPosts = posts.filter((p) => p.id !== activeArticle.id).slice(0, 2);
 
     return (
@@ -172,6 +164,18 @@ export const JournalPage: React.FC<JournalPageProps> = ({
               <Bookmark className="w-3.5 h-3.5" />
               <span>{isSaved ? 'Saved to Reading List' : 'Save Dispatch'}</span>
             </button>
+            <a
+              href={`https://wa.me/?text=${encodeURIComponent(`${activeArticle.title} ${activeArticleUrl}`)}`}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-semibold border border-stone-200 bg-white text-stone-700 transition-colors hover:bg-stone-100"
+            >WhatsApp</a>
+            <a
+              href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(activeArticleUrl)}`}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-semibold border border-stone-200 bg-white text-stone-700 transition-colors hover:bg-stone-100"
+            >Facebook</a>
             <button
               type="button"
               onClick={() => void shareArticle(activeArticle)}
@@ -224,10 +228,43 @@ export const JournalPage: React.FC<JournalPageProps> = ({
           {/* Asymmetric 70/30 Editorial Reading Layout */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start pt-4">
             <div className="lg:col-span-8 max-w-2xl space-y-5 text-base sm:text-[17px] text-stone-800 leading-[1.78]">
-              {activeArticle.body.map((para, index) => (
-                <p key={index} className={index === 0 ? 'editorial-dropcap' : ''}>
-                  {para}
-                </p>
+              {activeArticle.bodyBlocks?.length ? activeArticle.bodyBlocks.map((block, index) => {
+                if (block._type === 'image' && block.asset?.url) {
+                  return (
+                    <figure key={block._key || index} className="my-8">
+                      <img src={block.asset.url} alt={block.alt || activeArticle.title} loading="lazy" className="w-full rounded-xl object-cover" />
+                      {block.caption && <figcaption className="mt-2 text-xs italic text-stone-500">{block.caption}</figcaption>}
+                    </figure>
+                  );
+                }
+                if (block._type === 'block') {
+                  const content = (block.children || []).map((child, childIndex) => {
+                    let node: React.ReactNode = child.text || '';
+                    (child.marks || []).forEach((mark) => {
+                      if (mark === 'strong') node = <strong>{node}</strong>;
+                      else if (mark === 'em') node = <em>{node}</em>;
+                      else if (mark === 'underline') node = <u>{node}</u>;
+                      else if (mark === 'code') node = <code className="rounded bg-stone-100 px-1 py-0.5 text-[.9em]">{node}</code>;
+                      else {
+                        const definition = (block.markDefs || []).find((item) => item._key === mark);
+                        if (definition?._type === 'link' && definition.href) {
+                          node = <a href={definition.href} target="_blank" rel="noreferrer" className="font-medium text-harvest-700 underline underline-offset-4 hover:text-forest-900">{node}</a>;
+                        }
+                      }
+                    });
+                    return <React.Fragment key={childIndex}>{node}</React.Fragment>;
+                  });
+                  if (!(block.children || []).some((child) => child.text)) return null;
+                  if (block.style === 'h2' || block.style === 'h3') {
+                    return block.style === 'h2'
+                      ? <h2 key={block._key || index} className="font-serif text-2xl font-semibold text-forest-950 mt-8">{content}</h2>
+                      : <h3 key={block._key || index} className="font-serif text-xl font-semibold text-forest-950 mt-6">{content}</h3>;
+                  }
+                  return <p key={block._key || index} className={index === 0 ? 'editorial-dropcap' : ''}>{content}</p>;
+                }
+                return null;
+              }) : activeArticle.body.map((para, index) => (
+                <p key={index} className={index === 0 ? 'editorial-dropcap' : ''}>{para}</p>
               ))}
             </div>
 
@@ -287,30 +324,32 @@ export const JournalPage: React.FC<JournalPageProps> = ({
       !q ||
       post.title.toLowerCase().includes(q) ||
       post.excerpt.toLowerCase().includes(q) ||
-      post.region.toLowerCase().includes(q);
+      post.region.toLowerCase().includes(q) ||
+      post.author.toLowerCase().includes(q) ||
+      post.category.toLowerCase().includes(q);
     return matchesCategory && matchesQuery;
   });
 
-  const leadPost = filteredPosts[0];
-  const secondaryPosts = filteredPosts.slice(1, 3);
-  const archivePosts = filteredPosts.slice(3);
+  const leadPost = filteredPosts.find((post) => post.featured) || filteredPosts[0];
+  const remainingPosts = filteredPosts.filter((post) => post.id !== leadPost?.id);
+  const secondaryPosts = remainingPosts.slice(0, 2);
+  const archivePosts = remainingPosts.slice(2);
 
   return (
     <LocalizedContent>
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16 space-y-12">
-      {/* Header + Search + Category Bar */}
+      {/* Editorial masthead, search and category navigation */}
       <div className="space-y-6 pb-8 border-b border-stone-200">
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
           <div className="space-y-2 max-w-2xl">
-            <p className="text-xs font-semibold uppercase tracking-widest text-harvest-600">
-              Stories from the Mission Field
+            <p className="text-[11px] font-bold uppercase tracking-[.22em] text-harvest-700">
+              Stories from the Mission Field · Faith in Action
             </p>
-            <h1 className="font-serif text-4xl sm:text-5xl font-semibold text-forest-950">
-              Harvest Field Blog
+            <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-forest-950">
+              Stories that <span className="text-harvest-700">carry hope.</span>
             </h1>
             <p className="text-sm sm:text-base text-stone-600 leading-relaxed">
-              Field reports from Northern Cameroon, Tchad Republic, and Côte d&apos;Ivoire alongside
-              youth outreach stories, discipleship notes, and devotional calls.
+              Read firsthand mission stories, field reports, youth outreach, discipleship reflections and devotionals from Harvest Field Gospel Mission across Africa.
             </p>
           </div>
 
@@ -328,7 +367,7 @@ export const JournalPage: React.FC<JournalPageProps> = ({
         </div>
 
         <div
-          className="flex flex-wrap items-center gap-1.5 p-1 bg-stone-200/75 rounded-lg w-fit"
+          className="flex max-w-full flex-nowrap items-center gap-1.5 overflow-x-auto p-1 bg-stone-100 rounded-xl w-fit"
           role="tablist"
           aria-label="Filter blog articles"
         >
@@ -339,7 +378,7 @@ export const JournalPage: React.FC<JournalPageProps> = ({
               role="tab"
               aria-selected={activeCategory === cat}
               onClick={() => setActiveCategory(cat)}
-              className={`px-3.5 py-2 text-xs font-medium rounded-md transition-colors whitespace-nowrap cursor-pointer ${
+              className={`px-4 py-2.5 text-xs font-semibold rounded-lg transition-colors whitespace-nowrap cursor-pointer ${
                 activeCategory === cat
                   ? 'bg-white text-forest-950 shadow-sm'
                   : 'text-stone-700 hover:text-stone-950'
@@ -350,6 +389,9 @@ export const JournalPage: React.FC<JournalPageProps> = ({
           ))}
         </div>
       </div>
+      {postsError && (
+        <p className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900" role="status">We could not refresh the latest blog articles just now. Please try again shortly.</p>
+      )}
       {shareNotice && (
         <p className="text-sm text-forest-800" role="status" aria-live="polite">
           {shareNotice}
@@ -360,7 +402,7 @@ export const JournalPage: React.FC<JournalPageProps> = ({
       {filteredPosts.length === 0 ? (
         <div className="bg-white border border-stone-200 rounded-2xl p-12 text-center space-y-4">
           <h2 className="font-serif text-2xl font-semibold text-forest-950">
-            No matching dispatches found
+            No stories found
           </h2>
           <p className="text-sm text-stone-600 max-w-md mx-auto">
             {activeCategory === 'Saved'
@@ -397,6 +439,8 @@ export const JournalPage: React.FC<JournalPageProps> = ({
               </a>
               <div className="lg:col-span-6 p-6 sm:p-10 flex flex-col justify-between space-y-6">
                 <div className="space-y-4">
+                  <div className="space-y-3">
+                  {leadPost.featured && <span className="inline-flex rounded-full bg-harvest-50 px-3 py-1 text-[10px] font-bold uppercase tracking-[.18em] text-harvest-800">Featured story</span>}
                   <div className="flex flex-wrap items-center gap-2 text-xs text-stone-500">
                     <span className="font-semibold text-harvest-600">{leadPost.category}</span>
                     <span aria-hidden="true">·</span>
@@ -418,7 +462,8 @@ export const JournalPage: React.FC<JournalPageProps> = ({
                   <p className="text-sm sm:text-base text-stone-600 leading-relaxed">
                     {leadPost.excerpt}
                   </p>
-                </div>
+                  <p className="text-xs font-medium text-stone-500">By {leadPost.author}</p>
+                  </div>
 
                 <div className="flex items-center justify-between pt-4 border-t border-stone-100">
                   <div className="flex flex-wrap items-center gap-4">
@@ -427,7 +472,7 @@ export const JournalPage: React.FC<JournalPageProps> = ({
                       onClick={(event) => handleArticleLink(event, leadPost.slug)}
                       className="inline-flex items-center gap-2 text-sm font-semibold text-forest-900 hover:text-harvest-600 transition-colors cursor-pointer"
                     >
-                      <span>Read Full Dispatch</span>
+                      <span>Read the story</span>
                       <ArrowRight className="w-4 h-4" />
                     </a>
                     <button
@@ -534,53 +579,45 @@ export const JournalPage: React.FC<JournalPageProps> = ({
             </div>
           )}
 
-          {/* Tier 3: Compact Archive Rows */}
+          {/* Tier 3: More stories — consistent image-led article cards */}
           {archivePosts.length > 0 && (
-            <div className="bg-white border border-stone-200 rounded-xl divide-y divide-stone-200">
-              {archivePosts.map((post) => (
-                <div
-                  key={post.id}
-                  className="p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
-                >
-                  <div className="space-y-1.5 max-w-2xl">
-                    <p className="text-xs text-stone-500">
-                      <span className="font-semibold text-harvest-600">{post.category}</span>{' '}
-                      <span aria-hidden="true">·</span> {post.region}{' '}
-                      <span aria-hidden="true">·</span> {post.date}{' '}
-                      <span aria-hidden="true">·</span> {post.readTime}
-                    </p>
-                    <h3 className="font-serif text-xl font-semibold text-forest-950">
-                      <a
-                        href={getPagePath('journal', post.slug)}
-                        onClick={(event) => handleArticleLink(event, post.slug)}
-                        className="text-left hover:text-forest-800 transition-colors cursor-pointer"
-                      >
-                        {post.title}
-                      </a>
-                    </h3>
-                    <p className="text-sm text-stone-600 leading-relaxed">{post.excerpt}</p>
-                  </div>
-                  <div className="flex flex-wrap items-center gap-3 self-start sm:self-center">
-                    <a
-                      href={getPagePath('journal', post.slug)}
-                      onClick={(event) => handleArticleLink(event, post.slug)}
-                      className="inline-flex items-center gap-1.5 px-4 py-2.5 text-xs font-semibold text-forest-950 bg-limestone hover:bg-stone-200/80 rounded-lg whitespace-nowrap shrink-0 cursor-pointer"
-                    >
-                      <span>Read Article</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
-                    </a>
-                    <button
-                      type="button"
-                      onClick={() => void shareArticle(post)}
-                      className="inline-flex items-center gap-1.5 px-3 py-2.5 text-xs font-semibold text-stone-700 hover:text-forest-900 cursor-pointer"
-                    >
-                      <Share2 className="w-4 h-4" aria-hidden="true" />
-                      <span>Share</span>
-                    </button>
-                  </div>
+            <section className="space-y-6">
+              <div className="flex items-end justify-between gap-4 border-b border-stone-200 pb-3">
+                <div>
+                  <p className="text-[11px] font-bold uppercase tracking-[.2em] text-harvest-600">Continue exploring</p>
+                  <h2 className="mt-1 font-serif text-2xl sm:text-3xl font-semibold text-forest-950">More from the field</h2>
                 </div>
-              ))}
-            </div>
+                <span className="text-xs text-stone-500">{archivePosts.length} {archivePosts.length === 1 ? 'story' : 'stories'}</span>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
+                {archivePosts.map((post) => (
+                  <article key={post.id} className="group flex h-full flex-col overflow-hidden rounded-2xl border border-stone-200 bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+                    <a href={getPagePath('journal', post.slug)} onClick={(event) => handleArticleLink(event, post.slug)} className="block aspect-[16/10] overflow-hidden bg-stone-200" aria-label={`Read ${post.title}`}>
+                      <SafeImage src={post.coverImage} alt={post.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                    </a>
+                    <div className="flex flex-1 flex-col p-5">
+                      <div className="flex flex-wrap items-center gap-2 text-[11px] text-stone-500">
+                        <span className="font-bold uppercase tracking-wide text-harvest-700">{post.category}</span>
+                        <span aria-hidden="true">•</span><span>{post.date}</span>
+                        <span aria-hidden="true">•</span><span>{post.readTime}</span>
+                      </div>
+                      <h3 className="mt-3 font-serif text-xl font-semibold leading-snug text-forest-950">
+                        <a href={getPagePath('journal', post.slug)} onClick={(event) => handleArticleLink(event, post.slug)} className="transition-colors hover:text-harvest-700">{post.title}</a>
+                      </h3>
+                      <p className="mt-3 line-clamp-3 flex-1 text-sm leading-relaxed text-stone-600">{post.excerpt}</p>
+                      <div className="mt-5 flex items-center justify-between border-t border-stone-100 pt-4">
+                        <a href={getPagePath('journal', post.slug)} onClick={(event) => handleArticleLink(event, post.slug)} className="inline-flex items-center gap-2 text-sm font-semibold text-forest-900 hover:text-harvest-700">
+                          Read story <ArrowRight className="h-4 w-4" />
+                        </a>
+                        <button type="button" onClick={() => void shareArticle(post)} className="inline-flex items-center gap-1.5 rounded-full px-3 py-2 text-xs font-semibold text-stone-600 transition-colors hover:bg-stone-100 hover:text-forest-950" aria-label={`Share ${post.title}`}>
+                          <Share2 className="h-4 w-4" /> Share
+                        </button>
+                      </div>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </section>
           )}
         </div>
       )}
