@@ -4,6 +4,7 @@
  */
 
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { ArrowUp } from 'lucide-react';
 import { JOURNAL_POSTS, PageId, SITE_ORIGIN } from './data/missionData';
 import { getPagePath } from './routing';
@@ -98,6 +99,22 @@ const PAGE_METADATA: Record<PageId, { title: string; description: string }> = {
   },
 };
 
+
+const PAGE_METADATA_KEYS: Record<PageId, { title: string; description: string }> = {
+  home: { title: 'metadata.home.title', description: 'metadata.home.description' },
+  mission: { title: 'metadata.mission.title', description: 'metadata.mission.description' },
+  academy: { title: 'metadata.academy.title', description: 'metadata.academy.description' },
+  impact: { title: 'metadata.impact.title', description: 'metadata.impact.description' },
+  leadership: { title: 'metadata.leadership.title', description: 'metadata.leadership.description' },
+  gallery: { title: 'metadata.gallery.title', description: 'metadata.gallery.description' },
+  journal: { title: 'metadata.journal.title', description: 'metadata.journal.description' },
+  partner: { title: 'metadata.partner.title', description: 'metadata.partner.description' },
+  contact: { title: 'metadata.contact.title', description: 'metadata.contact.description' },
+  join: { title: 'metadata.join.title', description: 'metadata.join.description' },
+  prayer: { title: 'metadata.prayer.title', description: 'metadata.prayer.description' },
+  admin: { title: 'metadata.admin.title', description: 'metadata.admin.description' },
+};
+
 function parseRoute(raw: string): { page: PageId; subId: string | null } {
   const cleaned = raw.replace(/^#\/?/, '').replace(/^\/+|\/+$/g, '');
   if (!cleaned) return { page: 'home', subId: null };
@@ -112,6 +129,7 @@ function parseLocation(): { page: PageId; subId: string | null } {
 }
 
 export default function App() {
+  const { t } = useTranslation();
   const initial = parseLocation();
   const [currentPage, setCurrentPage] = useState<PageId>(initial.page);
   const [selectedArticleSlug, setSelectedArticleSlug] = useState<string | null>(
@@ -146,9 +164,9 @@ export default function App() {
 
   useEffect(() => {
     if (isThankYouPage) {
-      document.title = "Thank You | Harvest Field Gospel Mission Int'l";
+      document.title = t('metadata.thankYou.title');
       const description = document.querySelector<HTMLMetaElement>('meta[name="description"]');
-      if (description) description.content = 'Thank you for contacting Harvest Field Gospel Mission.';
+      if (description) description.content = t('metadata.thankYou.description');
       let robots = document.querySelector<HTMLMetaElement>('meta[name="robots"]');
       if (!robots) {
         robots = document.createElement('meta');
@@ -165,10 +183,10 @@ export default function App() {
       : null;
     document.title = article
       ? `${article.title} | Harvest Field Journal`
-      : metadata.title;
+      : t(PAGE_METADATA_KEYS[currentPage].title, { defaultValue: metadata.title });
 
     const description = document.querySelector<HTMLMetaElement>('meta[name="description"]');
-    if (description) description.content = article?.excerpt || metadata.description;
+    if (description) description.content = article?.excerpt || t(PAGE_METADATA_KEYS[currentPage].description, { defaultValue: metadata.description });
 
     let canonical = document.querySelector<HTMLLinkElement>('link[rel="canonical"]');
     if (!canonical) {
@@ -187,7 +205,7 @@ export default function App() {
       document.head.appendChild(robots);
     }
     robots.content = currentPage === 'admin' ? 'noindex, nofollow' : 'index, follow';
-  }, [currentPage, selectedArticleSlug, selectedPhotoId, isThankYouPage]);
+  }, [currentPage, selectedArticleSlug, selectedPhotoId, isThankYouPage, t]);
 
   useEffect(() => {
     const updateBackToTopVisibility = () => setShowBackToTop(window.scrollY > 400);
