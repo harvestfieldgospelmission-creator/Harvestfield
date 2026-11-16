@@ -23,7 +23,8 @@ import { ContactPage } from './pages/ContactPage';
 import { AdminPage } from './pages/AdminPage';
 import { JoinUsPage } from './pages/JoinUsPage';
 import { ThankYouPage } from './pages/ThankYouPage';
-import { LanguageProvider } from './i18n';
+import { LanguageProvider, type Language } from './i18n';
+import { localizeJournalPost } from './data/journalTranslations';
 
 const VALID_PAGES: PageId[] = [
   'home',
@@ -129,7 +130,7 @@ function parseLocation(): { page: PageId; subId: string | null } {
 }
 
 export default function App() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const initial = parseLocation();
   const [currentPage, setCurrentPage] = useState<PageId>(initial.page);
   const [selectedArticleSlug, setSelectedArticleSlug] = useState<string | null>(
@@ -181,12 +182,15 @@ export default function App() {
     const article = selectedArticleSlug
       ? JOURNAL_POSTS.find((post) => post.slug === selectedArticleSlug)
       : null;
-    document.title = article
-      ? `${article.title} | Harvest Field Journal`
+    const localizedArticle = article
+      ? localizeJournalPost(article, i18n.language as Language)
+      : null;
+    document.title = localizedArticle
+      ? `${localizedArticle.title} | Harvest Field Journal`
       : t(PAGE_METADATA_KEYS[currentPage].title, { defaultValue: metadata.title });
 
     const description = document.querySelector<HTMLMetaElement>('meta[name="description"]');
-    if (description) description.content = article?.excerpt || t(PAGE_METADATA_KEYS[currentPage].description, { defaultValue: metadata.description });
+    if (description) description.content = localizedArticle?.excerpt || t(PAGE_METADATA_KEYS[currentPage].description, { defaultValue: metadata.description });
 
     let canonical = document.querySelector<HTMLLinkElement>('link[rel="canonical"]');
     if (!canonical) {
