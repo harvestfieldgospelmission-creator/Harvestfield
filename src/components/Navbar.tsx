@@ -103,6 +103,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
                 key={item.id}
                 href={getPagePath(item.id)}
                 aria-current={isActive ? "page" : undefined}
+                aria-current={isActive ? "page" : undefined}
                 onClick={(event) => {
                   if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
                   event.preventDefault();
