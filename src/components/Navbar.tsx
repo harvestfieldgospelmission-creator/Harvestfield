@@ -13,6 +13,8 @@ interface NavbarProps {
 const NAV_ITEMS: { id: PageId; label: string }[] = [
   { id: 'home', label: 'Home' },
   { id: 'mission', label: 'About Us' },
+  { id: 'academy', label: 'Academy' },
+  { id: 'impact', label: 'Impact & Stories' },
   { id: 'leadership', label: 'Leadership' },
   { id: 'gallery', label: 'Gallery' },
   { id: 'journal', label: 'Blog' },
