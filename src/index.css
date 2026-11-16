@@ -142,7 +142,11 @@
     width: 100%;
   }
 
-  p, li, a, button, label, h1, h2, h3 {
+  p, li {
+    overflow-wrap: break-word;
+  }
+
+  a {
     overflow-wrap: anywhere;
   }
 
