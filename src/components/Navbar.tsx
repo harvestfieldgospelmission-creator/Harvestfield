@@ -99,7 +99,8 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
               <a
                 key={item.id}
                 href={getPagePath(item.id)}
-                onClick={(event) => {
+                aria-current={isActive ? 'page' : undefined}
+                onClick={(event) => {}
                   if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
                   event.preventDefault();
                   handleNav(item.id);
@@ -174,7 +175,8 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
               <a
                 key={item.id}
                 href={getPagePath(item.id)}
-                onClick={(event) => {
+                aria-current={isActive ? 'page' : undefined}
+                onClick={(event) => {}
                   if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
                   event.preventDefault();
                   handleNav(item.id);
@@ -189,6 +191,17 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
               </a>
             );
           })}
+          <a
+            href={getPagePath('partner')}
+            onClick={(event) => {
+              if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+              event.preventDefault();
+              handleNav('partner');
+            }}
+            className="mt-2 flex min-h-12 w-full items-center justify-center rounded-lg bg-forest-900 px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-forest-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-harvest-500 focus-visible:ring-offset-2"
+          >
+            Support the Mission
+          </a>
           <div className="px-4 pt-3">{languageSelector('block sm:hidden')}</div>
       </nav>
     </header>
