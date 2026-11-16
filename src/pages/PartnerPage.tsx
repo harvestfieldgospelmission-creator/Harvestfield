@@ -43,7 +43,7 @@ const FUND_OPTIONS = [
 export const PartnerPage: React.FC<PartnerPageProps> = ({ onNavigate }) => {
   const [currency, setCurrency] = useState<'NGN' | 'USD'>('NGN');
   const [frequency, setFrequency] = useState<'One-time' | 'Regular support'>('One-time');
-  const [amount, setAmount] = useState('25000');
+  const [amount, setAmount] = useState('');
   const [fund, setFund] = useState(FUND_OPTIONS[0]);
   const [copied, setCopied] = useState(false);
   const [copyFailed, setCopyFailed] = useState(false);
@@ -128,17 +128,17 @@ export const PartnerPage: React.FC<PartnerPageProps> = ({ onNavigate }) => {
             <h3 className="mt-2 font-serif text-2xl font-semibold">Prepare your transfer details</h3>
             <p className="mt-2 text-sm leading-relaxed text-stone-300">This is an information guide only. The website does not collect payments, verify transfers, issue receipts or schedule recurring payments.</p>
             <div className="mt-6 flex flex-wrap gap-2" aria-label="Currency">
-              <button type="button" aria-pressed={currency === 'NGN'} onClick={() => { setCurrency('NGN'); setAmount('25000'); setCopied(false); setCopyFailed(false); }} className={`min-h-10 rounded-lg px-4 text-sm font-semibold ${currency === 'NGN' ? 'bg-white text-forest-950' : 'border border-forest-700 text-white'}`}>Naira (NGN)</button>
-              <button type="button" aria-pressed={currency === 'USD'} onClick={() => { setCurrency('USD'); setAmount('100'); setCopied(false); setCopyFailed(false); }} className={`min-h-10 rounded-lg px-4 text-sm font-semibold ${currency === 'USD' ? 'bg-white text-forest-950' : 'border border-forest-700 text-white'}`}>US Dollar (USD)</button>
+              <button type="button" aria-pressed={currency === 'NGN'} onClick={() => { setCurrency('NGN'); setAmount(''); setCopied(false); setCopyFailed(false); }} className={`min-h-10 rounded-lg px-4 text-sm font-semibold ${currency === 'NGN' ? 'bg-white text-forest-950' : 'border border-forest-700 text-white'}`}>Naira (NGN)</button>
+              <button type="button" aria-pressed={currency === 'USD'} onClick={() => { setCurrency('USD'); setAmount(''); setCopied(false); setCopyFailed(false); }} className={`min-h-10 rounded-lg px-4 text-sm font-semibold ${currency === 'USD' ? 'bg-white text-forest-950' : 'border border-forest-700 text-white'}`}>US Dollar (USD)</button>
             </div>
             <div className="mt-5 grid gap-4 sm:grid-cols-2">
-              <div><label htmlFor="gift-amount" className="mb-1.5 block text-xs font-semibold text-stone-200">Amount (optional guide)</label><input id="gift-amount" type="number" min="1" step="any" inputMode="decimal" value={amount} onChange={event => setAmount(event.target.value)} className="w-full rounded-lg border border-forest-700 bg-forest-900 px-3.5 py-3 text-sm text-white" /></div>
+              <div><label htmlFor="gift-amount" className="mb-1.5 block text-xs font-semibold text-stone-200">Your donation amount (optional)</label><input id="gift-amount" type="number" min="1" step="any" inputMode="decimal" placeholder={currency === 'NGN' ? 'Enter amount in naira' : 'Enter amount in US dollars'} value={amount} onChange={event => setAmount(event.target.value)} className="w-full rounded-lg border border-forest-700 bg-forest-900 px-3.5 py-3 text-sm text-white" /></div>
               <div><label htmlFor="gift-frequency" className="mb-1.5 block text-xs font-semibold text-stone-200">Giving intention</label><select id="gift-frequency" value={frequency} onChange={event => setFrequency(event.target.value as 'One-time' | 'Regular support')} className="w-full rounded-lg border border-forest-700 bg-forest-900 px-3.5 py-3 text-sm text-white"><option>One-time</option><option>Regular support</option></select></div>
             </div>
             <div className="mt-4"><label htmlFor="gift-focus" className="mb-1.5 block text-xs font-semibold text-stone-200">Area you would like to discuss</label><select id="gift-focus" value={fund} onChange={event => setFund(event.target.value)} className="w-full rounded-lg border border-forest-700 bg-forest-900 px-3.5 py-3 text-sm text-white">{FUND_OPTIONS.map(option => <option key={option}>{option}</option>)}</select></div>
             <div id="giving-details" className="mt-6 scroll-mt-24 rounded-xl border border-forest-700 bg-forest-900 p-4">
               <p className="text-xs font-semibold uppercase tracking-wider text-harvest-400">Bank transfer details</p>
-              <p className="mt-2 font-serif text-2xl font-semibold tabular-nums">{displayAmount} <span className="font-sans text-sm font-normal text-stone-300">· {frequency}</span></p>
+              <p className="mt-2 font-serif text-2xl font-semibold tabular-nums">{numericAmount > 0 ? displayAmount : 'Enter your preferred amount above'} <span className="font-sans text-sm font-normal text-stone-300">· {frequency}</span></p>
               <p className="mt-1 text-sm text-stone-300">Intended focus: {fund}</p>
               <div className="mt-5 border-t border-forest-700 pt-4">
                 <p className="text-xs text-stone-300">{account.type}</p>
