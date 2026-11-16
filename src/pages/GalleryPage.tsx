@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { ChevronLeft, ChevronRight, Expand, X } from 'lucide-react';
 import { GALLERY_PHOTOS, GalleryPhoto } from '../data/missionData';
 import { SafeImage } from '../components/SafeImage';
-import { LocalizedContent } from '../i18n';
+import { LocalizedContent, useLanguage } from '../i18n';
+import { localizeGalleryPhoto } from '../data/galleryTranslations';
 
 interface GalleryPageProps {
   initialPhotoId?: string | null;
@@ -22,6 +23,8 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({
   initialPhotoId = null,
   onClearInitialPhoto,
 }) => {
+  const { language } = useLanguage();
+  const localizedPhotos = GALLERY_PHOTOS.map((photo) => localizeGalleryPhoto(photo, language));
   const [selectedRegion, setSelectedRegion] = useState<'All' | GalleryPhoto['region']>('All');
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(() => {
     if (!initialPhotoId) return null;
@@ -40,8 +43,8 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({
 
   const filteredPhotos =
     selectedRegion === 'All'
-      ? GALLERY_PHOTOS
-      : GALLERY_PHOTOS.filter((p) => p.region === selectedRegion);
+      ? localizedPhotos
+      : localizedPhotos.filter((p) => p.region === selectedRegion);
 
   useEffect(() => {
     if (lightboxIndex === null) return;
