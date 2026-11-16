@@ -46,8 +46,7 @@ export const JournalPage: React.FC<JournalPageProps> = ({
       .catch((error: unknown) => {
         console.error('Unable to load published blog articles:', error);
         if (alive) setPostsError(true);
-      })
-;
+      });
     return () => { alive = false; };
   }, []);
   // Use the editorial starter stories only until the first CMS article is published.
@@ -473,7 +472,7 @@ export const JournalPage: React.FC<JournalPageProps> = ({
                       onClick={(event) => handleArticleLink(event, leadPost.slug)}
                       className="inline-flex items-center gap-2 text-sm font-semibold text-forest-900 hover:text-harvest-600 transition-colors cursor-pointer"
                     >
-                      <span>Read Full Dispatch</span>
+                      <span>Read the story</span>
                       <ArrowRight className="w-4 h-4" />
                     </a>
                     <button
