@@ -13,7 +13,7 @@ This is the private editorial workspace for the Harvest Field Gospel Mission web
 
 From this folder run `npm install`, then `npx sanity deploy`. Choose a unique Studio hostname when prompted. In Sanity project settings, invite the pastor/editor using their own email and grant an appropriate editor role. Do not share a personal login.
 
-Set the resulting Studio URL as `VITE_SANITY_STUDIO_URL` in the Netlify site environment variables and redeploy the website. The public site does not need a Sanity write token or any secret API key.
+Set the resulting Studio URL as `VITE_SANITY_STUDIO_URL` in the Netlify site environment variables and redeploy the website. In Sanity project API settings, add `https://harvestfieldgospelmission.netlify.app` (and the ministry's final custom domain when ready) to CORS origins with credentials disabled so the browser can read published content. The public site does not need a Sanity write token or any secret API key.
 
 ## Content publishing
 
