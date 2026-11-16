@@ -11,7 +11,7 @@ export default defineType({
       name: 'category',
       title: 'Category',
       type: 'string',
-      options: {list: ['Field Reports', 'Youth & Schools', 'Discipleship', 'Devotional', 'Mission News']},
+      options: {list: ['Field Reports', 'Youth & Schools', 'Discipleship', 'Devotional']},
       initialValue: 'Field Reports',
       validation: (rule) => rule.required(),
     }),
