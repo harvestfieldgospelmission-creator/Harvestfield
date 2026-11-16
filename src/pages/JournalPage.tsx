@@ -3,7 +3,8 @@ import { ArrowLeft, ArrowRight, Bookmark, Search, Share2 } from 'lucide-react';
 import { JOURNAL_POSTS, JournalPost, SITE_ORIGIN } from '../data/missionData';
 import { SafeImage } from '../components/SafeImage';
 import { fetchPublishedPosts } from '../lib/sanity';
-import { LocalizedContent } from '../i18n';
+import { LocalizedContent, useLanguage } from '../i18n';
+import { localizeJournalPost } from '../data/journalTranslations';
 import { getPagePath } from '../routing';
 
 interface JournalPageProps {
@@ -24,6 +25,7 @@ export const JournalPage: React.FC<JournalPageProps> = ({
   selectedSlug,
   onSelectArticle,
 }) => {
+  const { language } = useLanguage();
   const [activeCategory, setActiveCategory] = useState<'All' | JournalPost['category'] | 'Saved'>('All');
   const [searchQuery, setSearchQuery] = useState('');
   const [savedIds, setSavedIds] = useState<string[]>(() => {
@@ -51,7 +53,9 @@ export const JournalPage: React.FC<JournalPageProps> = ({
   }, []);
   // Use the editorial starter stories only until the first CMS article is published.
   // Once Sanity has content, the blog is driven entirely by the pastor's published articles.
-  const posts = publishedPosts.length > 0 ? publishedPosts : JOURNAL_POSTS;
+  const posts = publishedPosts.length > 0
+    ? publishedPosts
+    : JOURNAL_POSTS.map((post) => localizeJournalPost(post, language));
 
   const activeArticle = selectedSlug
     ? posts.find((p) => p.slug === selectedSlug) || null
