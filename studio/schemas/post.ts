@@ -48,7 +48,7 @@ export default defineType({
       ],
       validation: (rule) => rule.required().min(1),
     }),
-    defineField({name: 'publishedAt', title: 'Publish date and time', type: 'datetime'}),
+    defineField({name: 'publishedAt', title: 'Publish date and time', type: 'datetime', validation: (rule) => rule.required()}),
   ],
   orderings: [
     {title: 'Publish date, newest first', name: 'publishedAtDesc', by: [{field: 'publishedAt', direction: 'desc'}]},
