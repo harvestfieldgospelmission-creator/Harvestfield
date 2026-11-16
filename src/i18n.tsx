@@ -292,7 +292,6 @@ const translations: Record<Exclude<Language, 'en'>, Record<string, string>> = {
     'Tap “Copy” on any account number to copy directly to your clipboard.':
       'Appuyez sur « Copier » à côté d’un numéro de compte pour le copier.',
     'Mission Team, Counseling & Prayer Desk': 'Équipe missionnaire, accompagnement et prière',
-    'Thank you for reaching out.': 'Merci de nous avoir contactés.',
     'Your email draft is ready to send to the mission office. Please press Send in your email app to complete your request. For immediate follow-up, use the contact details on our Contact page.':
       'Votre courriel destiné au bureau de la mission est prêt. Appuyez sur Envoyer dans votre messagerie pour terminer votre demande. Pour une réponse rapide, utilisez les coordonnées de notre page Contact.',
     'Submit Another Note': 'Envoyer un autre message',
