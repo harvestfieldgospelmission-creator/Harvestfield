@@ -245,11 +245,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
           </div>
 
           <div className="shrink-0 border-t border-stone-200 bg-[#faf8f4] px-4 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-3">
-            <div className="grid grid-cols-2 gap-2">
-              {pageLink('join', t('footer.join'), 'inline-flex min-h-11 items-center justify-center rounded-lg border border-forest-800 px-3 py-2.5 text-sm font-semibold text-forest-900 transition-colors hover:bg-forest-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-800')}
-              {pageLink('partner', t('nav.supportShort'), 'inline-flex min-h-11 items-center justify-center rounded-lg bg-forest-900 px-3 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-forest-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-harvest-500')}
-            </div>
-            <div className="mt-3">{languageSelector('block sm:hidden')}</div>
+            {languageSelector('block sm:hidden')}
           </div>
         </nav>
       </header>
