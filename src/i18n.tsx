@@ -7,6 +7,11 @@ export type Language = 'en' | 'fr' | 'es';
 
 const translations: Record<Exclude<Language, 'en'>, Record<string, string>> = {
   fr: {
+    'Meet Our Team': 'Rencontrez notre équipe',
+    'Mission Leadership Team': 'Équipe dirigeante de la mission',
+    'Authentic field documentation from school outreaches, rural crusades, discipleship classes, and foreign missions across Cameroon, Tchad Republic, and Côte d\'Ivoire.': 'Des témoignages photographiques authentiques des actions dans les écoles, des campagnes d’évangélisation rurales, des cours de discipulat et des missions à l’étranger au Cameroun, en République du Tchad et en Côte d’Ivoire.',
+    Other: 'Autre',
+
     'Harvest Field Publishing': 'Éditions Harvest Field',
     'Blog editor': 'Éditeur du blog',
     'The secure publishing workspace is hosted separately by Sanity. Sign in with your own invited editor account to write articles, upload photographs, save drafts and publish stories to the ministry website.': 'L’espace sécurisé de publication est hébergé séparément par Sanity. Connectez-vous avec votre propre compte éditeur invité pour rédiger des articles, téléverser des photos, enregistrer des brouillons et publier des récits sur le site du ministère.',
@@ -643,6 +648,11 @@ const translations: Record<Exclude<Language, 'en'>, Record<string, string>> = {
     "Rural evangelism, school outreaches, and crusade mobilization.": "Évangélisation rurale, actions dans les écoles et mobilisation pour les campagnes.",
   },
   es: {
+    'Meet Our Team': 'Conoce a nuestro equipo',
+    'Mission Leadership Team': 'Equipo directivo de la misión',
+    'Authentic field documentation from school outreaches, rural crusades, discipleship classes, and foreign missions across Cameroon, Tchad Republic, and Côte d\'Ivoire.': 'Documentación auténtica del trabajo en el campo: actividades escolares, campañas de evangelización rural, clases de discipulado y misiones internacionales en Camerún, la República del Chad y Costa de Marfil.',
+    Other: 'Otro',
+
     'Harvest Field Publishing': 'Publicaciones Harvest Field',
     'Blog editor': 'Editor del blog',
     'The secure publishing workspace is hosted separately by Sanity. Sign in with your own invited editor account to write articles, upload photographs, save drafts and publish stories to the ministry website.': 'El espacio seguro de publicación está alojado por separado en Sanity. Inicia sesión con tu propia cuenta de editor invitado para redactar artículos, subir fotografías, guardar borradores y publicar historias en el sitio web del ministerio.',
