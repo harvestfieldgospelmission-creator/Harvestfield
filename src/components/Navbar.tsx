@@ -15,6 +15,7 @@ const NAV_ITEMS: { id: PageId; label: string }[] = [
   { id: 'mission', label: 'About Us' },
   { id: 'academy', label: 'Academy' },
   { id: 'impact', label: 'Impact & Stories' },
+  { id: 'prayer', label: 'Prayer' },
   { id: 'leadership', label: 'Leadership' },
   { id: 'gallery', label: 'Gallery' },
   { id: 'journal', label: 'Blog' },
