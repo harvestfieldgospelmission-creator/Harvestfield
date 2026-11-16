@@ -1390,7 +1390,7 @@ const semanticResources = {
     'Share Article': 'Partager l’article', 'Article shared.': 'Article partagé.',
     'Article link copied to clipboard.': 'Lien de l’article copié.',
     'Unable to share the article. Copy its URL from the address bar.': 'Impossible de partager l’article. Copiez son adresse depuis la barre du navigateur.',
-    'Related Articles': 'Articles associés', 'By': 'Par'
+    'Related Articles': 'Articles associés', 'By': 'Par',
     'Stories from the Mission Field · Faith in Action': 'Récits du terrain missionnaire · La foi en action',
     'Stories that': 'Des histoires qui', 'carry hope.': 'portent l’espérance.',
     'Read firsthand mission stories, field reports, youth outreach, discipleship reflections and devotionals from Harvest Field Gospel Mission across Africa.': 'Lisez des récits de mission vécus sur le terrain, des rapports de mission, des actions auprès des jeunes, des réflexions sur le discipulat et des méditations de Harvest Field Gospel Mission à travers l’Afrique.'
