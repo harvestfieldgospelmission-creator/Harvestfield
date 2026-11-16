@@ -45,6 +45,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                 { id: 'journal' as PageId, label: 'Blog & Articles' },
                 { id: 'contact' as PageId, label: 'Contact Us' },
                 { id: 'join' as PageId, label: 'Join Us' },
+                { id: 'prayer' as PageId, label: 'Prayer Request' },
                 { id: 'partner' as PageId, label: 'Partner, Give & Pray' },
               ].map((link) => (
                 <li key={link.id}>
