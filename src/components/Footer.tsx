@@ -11,7 +11,7 @@ interface FooterProps {
 export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
   return (
     <LocalizedContent>
-    <footer className="bg-forest-950 text-stone-200 border-t border-forest-800 mt-14">
+    <footer aria-label="Site footer" className="bg-forest-950 text-stone-200 border-t border-forest-800 mt-14">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-7 lg:py-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 pb-6 border-b border-forest-800/80">
           {/* Column 1: Mission Identity */}
@@ -36,7 +36,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             <h3 className="font-sans text-xs font-semibold uppercase tracking-widest text-harvest-400 mb-4">
               Explore Mission
             </h3>
-            <ul className="space-y-2 text-sm">
+            <ul aria-label="Explore the ministry" className="space-y-2 text-sm">
               {[
                 { id: 'home' as PageId, label: 'Home & What We Do' },
                 { id: 'mission' as PageId, label: 'About Us' },
@@ -46,6 +46,8 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                 { id: 'leadership' as PageId, label: 'President & Founder' },
                 { id: 'gallery' as PageId, label: 'Field Galleries' },
                 { id: 'journal' as PageId, label: 'Blog & Articles' },
+                { id: 'join' as PageId, label: 'Join Us' },
+                { id: 'partner' as PageId, label: 'Support & Partnership' },
                 { id: 'contact' as PageId, label: 'Contact Us' },
                 { id: 'join' as PageId, label: 'Join Us' },
                 { id: 'partner' as PageId, label: 'Partner, Give & Pray' },
@@ -58,7 +60,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                       event.preventDefault();
                       onNavigate(link.id);
                     }}
-                    className="text-stone-300 hover:text-white transition-colors cursor-pointer text-left"
+                    className="inline-flex min-h-8 items-center text-stone-300 hover:text-white transition-colors cursor-pointer text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-harvest-400 focus-visible:ring-offset-2 focus-visible:ring-offset-forest-950 rounded-sm"
                   >
                     {link.label}
                   </a>
