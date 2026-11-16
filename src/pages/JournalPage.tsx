@@ -36,7 +36,6 @@ export const JournalPage: React.FC<JournalPageProps> = ({
   });
   const [scrollProgress, setScrollProgress] = useState(0);
   const [shareNotice, setShareNotice] = useState('');
-  const [isLoadingPosts, setIsLoadingPosts] = useState(true);
   const [postsError, setPostsError] = useState(false);
 
   const [publishedPosts, setPublishedPosts] = useState<JournalPost[]>([]);
@@ -48,7 +47,7 @@ export const JournalPage: React.FC<JournalPageProps> = ({
         console.error('Unable to load published blog articles:', error);
         if (alive) setPostsError(true);
       })
-      .finally(() => { if (alive) setIsLoadingPosts(false); });
+;
     return () => { alive = false; };
   }, []);
   // Use the editorial starter stories only until the first CMS article is published.
@@ -326,13 +325,16 @@ export const JournalPage: React.FC<JournalPageProps> = ({
       !q ||
       post.title.toLowerCase().includes(q) ||
       post.excerpt.toLowerCase().includes(q) ||
-      post.region.toLowerCase().includes(q);
+      post.region.toLowerCase().includes(q) ||
+      post.author.toLowerCase().includes(q) ||
+      post.category.toLowerCase().includes(q);
     return matchesCategory && matchesQuery;
   });
 
-  const leadPost = filteredPosts[0];
-  const secondaryPosts = filteredPosts.slice(1, 3);
-  const archivePosts = filteredPosts.slice(3);
+  const leadPost = filteredPosts.find((post) => post.featured) || filteredPosts[0];
+  const remainingPosts = filteredPosts.filter((post) => post.id !== leadPost?.id);
+  const secondaryPosts = remainingPosts.slice(0, 2);
+  const archivePosts = remainingPosts.slice(2);
 
   return (
     <LocalizedContent>
@@ -391,9 +393,6 @@ export const JournalPage: React.FC<JournalPageProps> = ({
       {postsError && (
         <p className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900" role="status">We could not refresh the latest blog articles just now. Please try again shortly.</p>
       )}
-      {isLoadingPosts && (
-        <div className="rounded-xl border border-stone-200 bg-white px-5 py-4 text-sm text-stone-500" role="status">Loading the latest stories…</div>
-      )}
       {shareNotice && (
         <p className="text-sm text-forest-800" role="status" aria-live="polite">
           {shareNotice}
@@ -404,7 +403,7 @@ export const JournalPage: React.FC<JournalPageProps> = ({
       {filteredPosts.length === 0 ? (
         <div className="bg-white border border-stone-200 rounded-2xl p-12 text-center space-y-4">
           <h2 className="font-serif text-2xl font-semibold text-forest-950">
-            No matching dispatches found
+            No stories found
           </h2>
           <p className="text-sm text-stone-600 max-w-md mx-auto">
             {activeCategory === 'Saved'
@@ -441,6 +440,8 @@ export const JournalPage: React.FC<JournalPageProps> = ({
               </a>
               <div className="lg:col-span-6 p-6 sm:p-10 flex flex-col justify-between space-y-6">
                 <div className="space-y-4">
+                  <div className="space-y-3">
+                  {leadPost.featured && <span className="inline-flex rounded-full bg-harvest-50 px-3 py-1 text-[10px] font-bold uppercase tracking-[.18em] text-harvest-800">Featured story</span>}
                   <div className="flex flex-wrap items-center gap-2 text-xs text-stone-500">
                     <span className="font-semibold text-harvest-600">{leadPost.category}</span>
                     <span aria-hidden="true">·</span>
@@ -462,7 +463,8 @@ export const JournalPage: React.FC<JournalPageProps> = ({
                   <p className="text-sm sm:text-base text-stone-600 leading-relaxed">
                     {leadPost.excerpt}
                   </p>
-                </div>
+                  <p className="text-xs font-medium text-stone-500">By {leadPost.author}</p>
+                  </div>
 
                 <div className="flex items-center justify-between pt-4 border-t border-stone-100">
                   <div className="flex flex-wrap items-center gap-4">
