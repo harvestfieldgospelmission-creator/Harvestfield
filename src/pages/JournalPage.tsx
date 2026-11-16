@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { ArrowLeft, ArrowRight, Bookmark, Search, Share2 } from 'lucide-react';
 import { JOURNAL_POSTS, JournalPost, SITE_ORIGIN } from '../data/missionData';
 import { SafeImage } from '../components/SafeImage';
-import { supabase } from '../lib/supabase';
+import { fetchPublishedPosts } from '../lib/sanity';
 import { LocalizedContent } from '../i18n';
 import { getPagePath } from '../routing';
 
@@ -39,24 +39,11 @@ export const JournalPage: React.FC<JournalPageProps> = ({
 
   const [publishedPosts, setPublishedPosts] = useState<JournalPost[]>([]);
   useEffect(() => {
-    if (!supabase) return;
     let alive = true;
-    supabase.from('blog_posts').select('*').eq('status', 'published').order('published_at', { ascending: false })
-      .then(({ data, error }) => {
-        if (!alive || error || !data) return;
-        const mapped: JournalPost[] = data.map((post: any) => ({
-          id: post.id, slug: post.slug,
-          category: (['Field Reports', 'Youth & Schools', 'Discipleship', 'Devotional'].includes(post.category) ? post.category : 'Field Reports') as JournalPost['category'],
-          title: post.title, subtitle: post.excerpt || '',
-          author: 'Harvest Field Editorial Team', authorRole: "Harvest Field Gospel Mission Int'l",
-          date: post.published_at ? new Date(post.published_at).toLocaleDateString() : '',
-          readTime: `${Math.max(1, Math.ceil((post.content || '').split(/\\s+/).length / 220))} min read`,
-          region: 'Harvest Field Mission', coverImage: post.cover_image || '/assets/field/discipleship-training.jpg',
-          coverCaption: post.title, excerpt: post.excerpt || '',
-          body: (post.content || '').split(/\\n\\s*\\n/).filter(Boolean),
-          marginNote: { heading: 'From the Mission', detail: "Stories and teaching from Harvest Field Gospel Mission Int'l." },
-        }));
-        setPublishedPosts(mapped);
+    fetchPublishedPosts()
+      .then((items) => { if (alive) setPublishedPosts(items); })
+      .catch((error: unknown) => {
+        console.error('Unable to load published blog articles:', error);
       });
     return () => { alive = false; };
   }, []);
@@ -224,10 +211,28 @@ export const JournalPage: React.FC<JournalPageProps> = ({
           {/* Asymmetric 70/30 Editorial Reading Layout */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start pt-4">
             <div className="lg:col-span-8 max-w-2xl space-y-5 text-base sm:text-[17px] text-stone-800 leading-[1.78]">
-              {activeArticle.body.map((para, index) => (
-                <p key={index} className={index === 0 ? 'editorial-dropcap' : ''}>
-                  {para}
-                </p>
+              {activeArticle.bodyBlocks?.length ? activeArticle.bodyBlocks.map((block, index) => {
+                if (block._type === 'image' && block.asset?.url) {
+                  return (
+                    <figure key={block._key || index} className="my-8">
+                      <img src={block.asset.url} alt={block.alt || activeArticle.title} loading="lazy" className="w-full rounded-xl object-cover" />
+                      {block.caption && <figcaption className="mt-2 text-xs italic text-stone-500">{block.caption}</figcaption>}
+                    </figure>
+                  );
+                }
+                if (block._type === 'block') {
+                  const content = (block.children || []).map((child) => child.text || '').join('');
+                  if (!content) return null;
+                  if (block.style === 'h2' || block.style === 'h3') {
+                    return block.style === 'h2'
+                      ? <h2 key={block._key || index} className="font-serif text-2xl font-semibold text-forest-950 mt-8">{content}</h2>
+                      : <h3 key={block._key || index} className="font-serif text-xl font-semibold text-forest-950 mt-6">{content}</h3>;
+                  }
+                  return <p key={block._key || index} className={index === 0 ? 'editorial-dropcap' : ''}>{content}</p>;
+                }
+                return null;
+              }) : activeArticle.body.map((para, index) => (
+                <p key={index} className={index === 0 ? 'editorial-dropcap' : ''}>{para}</p>
               ))}
             </div>
 
