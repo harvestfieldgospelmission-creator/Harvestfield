@@ -873,13 +873,62 @@ const translations: Record<Exclude<Language, 'en'>, Record<string, string>> = {
   },
 };
 
+
+const semanticResources = {
+  en: {
+    'nav.groups.about': 'About', 'nav.groups.work': 'Our Work', 'nav.groups.stories': 'Stories', 'nav.groups.connect': 'Connect',
+    'nav.home': 'Home', 'nav.about': 'About the Mission', 'nav.leadership': 'Founder & Leadership',
+    'nav.academy': 'Harvest Field Academy', 'nav.impact': 'Impact & Stories', 'nav.gallery': 'Field Gallery',
+    'nav.journal': 'Journal & Articles', 'nav.prayer': 'Prayer Request', 'nav.join': 'Join the Mission',
+    'nav.contact': 'Contact Us', 'nav.support': 'Support the Mission', 'nav.explore': 'Explore the Mission',
+    'nav.exploreHint': 'Find a page or get involved', 'nav.close': 'Close navigation', 'nav.open': 'Open navigation menu',
+    'nav.selectLanguage': 'Select language', 'nav.supportShort': 'Support Mission',
+    'footer.label': 'Site footer', 'footer.description': 'A fellowship of kingdom-minded believers equipped for rural and foreign missions across Nigeria, Northern Cameroon, Tchad Republic, and Côte d’Ivoire.',
+    'footer.quickLinks': 'Quick Links', 'footer.about': 'About Us', 'footer.academy': 'Academy',
+    'footer.impact': 'Impact & Stories', 'footer.prayer': 'Prayer Request', 'footer.leadership': 'Leadership',
+    'footer.gallery': 'Gallery', 'footer.journal': 'Blog', 'footer.join': 'Join Us', 'footer.partner': 'Partner',
+    'footer.contactFollow': 'Contact & Follow', 'footer.contact': 'Contact Us', 'footer.whatsapp': 'Message Harvest Field on WhatsApp',
+    'footer.whatsappTitle': 'Message us on WhatsApp', 'footer.staff': 'Staff sign in'
+  },
+  fr: {
+    'nav.groups.about': 'À propos', 'nav.groups.work': 'Nos activités', 'nav.groups.stories': 'Actualités', 'nav.groups.connect': 'Nous contacter',
+    'nav.home': 'Accueil', 'nav.about': 'À propos de la mission', 'nav.leadership': 'Fondateur et direction',
+    'nav.academy': 'Harvest Field Academy', 'nav.impact': 'Impact et témoignages', 'nav.gallery': 'Galerie de terrain',
+    'nav.journal': 'Journal et articles', 'nav.prayer': 'Demande de prière', 'nav.join': 'Rejoindre la mission',
+    'nav.contact': 'Nous contacter', 'nav.support': 'Soutenir la mission', 'nav.explore': 'Découvrir la mission',
+    'nav.exploreHint': 'Choisissez une page ou engagez-vous', 'nav.close': 'Fermer la navigation', 'nav.open': 'Ouvrir le menu de navigation',
+    'nav.selectLanguage': 'Choisir la langue', 'nav.supportShort': 'Soutenir la mission',
+    'footer.label': 'Pied de page du site', 'footer.description': 'Une communauté de croyants animés par le Royaume et préparés pour les missions rurales et internationales au Nigeria, dans le nord du Cameroun, en République du Tchad et en Côte d’Ivoire.',
+    'footer.quickLinks': 'Liens rapides', 'footer.about': 'À propos', 'footer.academy': 'Académie',
+    'footer.impact': 'Impact et témoignages', 'footer.prayer': 'Demande de prière', 'footer.leadership': 'Direction',
+    'footer.gallery': 'Galerie', 'footer.journal': 'Blog', 'footer.join': 'Nous rejoindre', 'footer.partner': 'Partenariat',
+    'footer.contactFollow': 'Contact et réseaux', 'footer.contact': 'Nous contacter', 'footer.whatsapp': 'Écrire à Harvest Field sur WhatsApp',
+    'footer.whatsappTitle': 'Nous écrire sur WhatsApp', 'footer.staff': 'Connexion du personnel'
+  },
+  es: {
+    'nav.groups.about': 'Acerca de', 'nav.groups.work': 'Nuestra labor', 'nav.groups.stories': 'Historias', 'nav.groups.connect': 'Conectar',
+    'nav.home': 'Inicio', 'nav.about': 'Acerca de la misión', 'nav.leadership': 'Fundador y liderazgo',
+    'nav.academy': 'Harvest Field Academy', 'nav.impact': 'Impacto e historias', 'nav.gallery': 'Galería misionera',
+    'nav.journal': 'Diario y artículos', 'nav.prayer': 'Petición de oración', 'nav.join': 'Únete a la misión',
+    'nav.contact': 'Contáctanos', 'nav.support': 'Apoya la misión', 'nav.explore': 'Explora la misión',
+    'nav.exploreHint': 'Encuentra una página o participa', 'nav.close': 'Cerrar navegación', 'nav.open': 'Abrir menú de navegación',
+    'nav.selectLanguage': 'Seleccionar idioma', 'nav.supportShort': 'Apoyar la misión',
+    'footer.label': 'Pie de página del sitio', 'footer.description': 'Una comunidad de creyentes comprometidos con el Reino y preparados para misiones rurales e internacionales en Nigeria, el norte de Camerún, la República del Chad y Costa de Marfil.',
+    'footer.quickLinks': 'Enlaces rápidos', 'footer.about': 'Sobre nosotros', 'footer.academy': 'Academia',
+    'footer.impact': 'Impacto e historias', 'footer.prayer': 'Petición de oración', 'footer.leadership': 'Liderazgo',
+    'footer.gallery': 'Galería', 'footer.journal': 'Blog', 'footer.join': 'Únete', 'footer.partner': 'Colaborar',
+    'footer.contactFollow': 'Contacto y redes', 'footer.contact': 'Contáctanos', 'footer.whatsapp': 'Escribir a Harvest Field por WhatsApp',
+    'footer.whatsappTitle': 'Escríbenos por WhatsApp', 'footer.staff': 'Acceso del personal'
+  }
+} as const;
+
 // i18next is the single translation engine. Existing reviewed translations are
 // retained while page-by-page semantic-key migration is completed.
 i18next.use(initReactI18next).init({
   resources: {
-    en: { translation: {} },
-    fr: { translation: translations.fr },
-    es: { translation: translations.es },
+    en: { translation: semanticResources.en },
+    fr: { translation: { ...translations.fr, ...semanticResources.fr } },
+    es: { translation: { ...translations.es, ...semanticResources.es } },
   },
   lng: 'en',
   fallbackLng: 'en',
