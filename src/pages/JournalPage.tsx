@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { ArrowLeft, ArrowRight, Bookmark, Search, Share2 } from 'lucide-react';
 import { JOURNAL_POSTS, JournalPost, SITE_ORIGIN } from '../data/missionData';
 import { SafeImage } from '../components/SafeImage';
@@ -26,6 +27,7 @@ export const JournalPage: React.FC<JournalPageProps> = ({
   onSelectArticle,
 }) => {
   const { language } = useLanguage();
+  const { t } = useTranslation();
   const [activeCategory, setActiveCategory] = useState<'All' | JournalPost['category'] | 'Saved'>('All');
   const [searchQuery, setSearchQuery] = useState('');
   const [savedIds, setSavedIds] = useState<string[]>(() => {
@@ -433,7 +435,7 @@ export const JournalPage: React.FC<JournalPageProps> = ({
                 href={getPagePath('journal', leadPost.slug)}
                 onClick={(event) => handleArticleLink(event, leadPost.slug)}
                 className="block lg:col-span-6 aspect-[16/10] lg:aspect-auto min-h-[280px] bg-stone-200 overflow-hidden cursor-pointer"
-                aria-label={`Read ${leadPost.title}`}
+                aria-label={t('Read {{title}}', { title: leadPost.title })}
               >
                 <SafeImage
                   src={leadPost.coverImage}
@@ -519,7 +521,7 @@ export const JournalPage: React.FC<JournalPageProps> = ({
                       href={getPagePath('journal', post.slug)}
                       onClick={(event) => handleArticleLink(event, post.slug)}
                       className="block w-full aspect-[16/9] bg-stone-200 overflow-hidden cursor-pointer"
-                      aria-label={`Read ${post.title}`}
+                      aria-label={t('Read {{title}}', { title: post.title })}
                     >
                       <SafeImage
                         src={post.coverImage}
@@ -614,7 +616,7 @@ export const JournalPage: React.FC<JournalPageProps> = ({
                         <a href={getPagePath('journal', post.slug)} onClick={(event) => handleArticleLink(event, post.slug)} className="inline-flex items-center gap-2 text-sm font-semibold text-forest-900 hover:text-harvest-700">
                           Read story <ArrowRight className="h-4 w-4" />
                         </a>
-                        <button type="button" onClick={() => void shareArticle(post)} className="inline-flex items-center gap-1.5 rounded-full px-3 py-2 text-xs font-semibold text-stone-600 transition-colors hover:bg-stone-100 hover:text-forest-950" aria-label={`Share ${post.title}`}>
+                        <button type="button" onClick={() => void shareArticle(post)} className="inline-flex items-center gap-1.5 rounded-full px-3 py-2 text-xs font-semibold text-stone-600 transition-colors hover:bg-stone-100 hover:text-forest-950" aria-label={t('Share {{title}}', { title: post.title })}>
                           <Share2 className="h-4 w-4" /> Share
                         </button>
                       </div>
