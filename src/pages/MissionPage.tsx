@@ -103,11 +103,11 @@ export const MissionPage: React.FC<MissionPageProps> = ({ onNavigate }) => {
           <figure className="lg:col-span-5 overflow-hidden rounded-2xl border border-stone-200 bg-stone-100 shadow-lg shadow-forest-950/10">
             <SafeImage
               src="/assets/field/founder-linde-massa.jpg"
-              alt="Harvest Field Gospel Mission outreach in Linde-Massa, Northern Cameroon"
+              alt="Harvest Field ministry members gather in Nigeria for a team meeting"
               className="aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/5] w-full object-cover"
             />
             <figcaption className="px-4 py-3 text-xs leading-relaxed text-stone-600">
-              Mission outreach in Linde-Massa, Northern Cameroon.
+              Harvest Field ministry team meeting in Nigeria.
             </figcaption>
           </figure>
         </div>
@@ -244,28 +244,28 @@ export const MissionPage: React.FC<MissionPageProps> = ({ onNavigate }) => {
               place: 'Omoku, Rivers State',
               focus: 'Local evangelism, school and youth outreach, counselling, and discipleship.',
               image: '/assets/field/school-prayer-outreach.jpg',
-              alt: 'Students taking part in a school prayer outreach in Nigeria',
+              alt: 'Students gather in prayer with a ministry leader during a school assembly',
             },
             {
               country: 'Cameroon',
               place: 'Linde-Massa and Maroua',
               focus: 'Rural and cross-border gospel outreach in Northern Cameroon.',
               image: '/assets/field/maroua-cameroon.jpg',
-              alt: 'Harvest Field mission outreach in Maroua, Northern Cameroon',
+              alt: 'Harvest Field team prepares for mission travel connected with Maroua, Cameroon',
             },
             {
               country: 'Tchad',
               place: 'Republic of Tchad',
               focus: 'Foreign mission outreach, worship, and fellowship.',
               image: '/assets/field/tchad-republic-mission.jpg',
-              alt: 'Congregational worship during a mission gathering in Tchad',
+              alt: 'Harvest Field mission team prepares for cross-border outreach travel',
             },
             {
               country: "Côte d’Ivoire",
               place: "Côte d’Ivoire",
               focus: 'Francophone mission and revival conference ministry.',
               image: '/assets/field/cote-divoire-conference.jpg',
-              alt: 'Mission conference in Côte d’Ivoire',
+              alt: 'Harvest Field mission team members gather beside an aircraft before cross-border outreach',
             },
           ].map((field) => (
             <article key={field.country} className="group flex min-w-0 flex-col overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-sm transition-shadow duration-200 hover:shadow-lg">

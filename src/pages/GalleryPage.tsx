@@ -137,6 +137,8 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({
                     ? 'aspect-[3/4]'
                     : photo.aspect === 'wide'
                     ? 'aspect-[16/9]'
+                    : photo.aspect === 'portrait'
+                    ? 'aspect-[3/4]'
                     : 'aspect-[4/3]'
                 }`}
               >
