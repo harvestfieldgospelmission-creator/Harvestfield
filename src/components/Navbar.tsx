@@ -144,7 +144,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
               const isOpen = openDropdown === group.label;
               return (
                 <div
-                  key={t(group.label)}
+                  key={group.label}
                   className="relative"
                   onMouseEnter={() => setOpenDropdown(group.label)}
                   onMouseLeave={() => setOpenDropdown(null)}
@@ -167,7 +167,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
                   >
                     {group.items.map((item) => pageLink(
                       item.id,
-                      item.label,
+                      t(item.label),
                       `${DESKTOP_LINK_CLASS} ${currentPage === item.id ? 'bg-forest-50 font-semibold text-forest-900' : ''}`,
                     ))}
                   </div>
@@ -233,7 +233,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
             {pageLink('home', t('nav.home'), `${MOBILE_LINK_CLASS} mb-2 ${currentPage === 'home' ? 'bg-forest-900 text-white hover:bg-forest-800 hover:text-white' : ''}`)}
             {NAV_GROUPS.map((group) => (
               <section key={group.label} className="border-t border-stone-200 py-3">
-                <h2 className="px-3 pb-1.5 text-[11px] font-bold uppercase tracking-[0.16em] text-harvest-600">{group.label}</h2>
+                <h2 className="px-3 pb-1.5 text-[11px] font-bold uppercase tracking-[0.16em] text-harvest-600">{t(group.label)}</h2>
                 <div className="space-y-0.5">
                   {group.items.map((item) => pageLink(
                     item.id,
