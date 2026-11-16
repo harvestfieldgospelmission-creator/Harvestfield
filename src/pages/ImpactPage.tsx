@@ -82,7 +82,7 @@ export const ImpactPage: React.FC<ImpactPageProps> = ({
                     <SafeImage src={post.coverImage} alt={post.title} className="aspect-[16/10] w-full object-cover transition-transform duration-500 hover:scale-[1.03]" />
                   </button>
                   <div className="space-y-3 p-5">
-                    <p className="text-xs font-semibold text-harvest-600">{post.category} <span className="px-1 text-stone-400" aria-hidden="true">·</span> {post.date}</p>
+                    <p className="text-xs font-semibold text-harvest-600">{post.category} <span className="px-1 text-stone-400" aria-hidden="true">·</span> {post.region} <span className="px-1 text-stone-400" aria-hidden="true">·</span> {post.date}</p>
                     <h3 className="font-serif text-xl font-semibold leading-snug text-forest-950">{post.title}</h3>
                     <p className="text-sm leading-relaxed text-stone-600">{post.excerpt}</p>
                     <button type="button" onClick={() => onSelectArticle(post.slug)} className="inline-flex min-h-10 items-center gap-2 text-sm font-semibold text-forest-900 hover:text-harvest-700">
@@ -111,9 +111,10 @@ export const ImpactPage: React.FC<ImpactPageProps> = ({
                   <div className="overflow-hidden bg-stone-200">
                     <SafeImage src={photo.src} alt={photo.title} className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-105" />
                   </div>
-                  <div className="p-3 sm:p-4">
-                    <p className="text-[11px] font-medium text-harvest-700">{photo.location}</p>
-                    <h3 className="mt-1 font-serif text-base font-semibold leading-snug text-forest-950 sm:text-lg">{photo.title}</h3>
+                  <div className="space-y-1 p-3 sm:p-4">
+                    <p className="text-[11px] font-medium text-harvest-700">{photo.location} <span className="px-1 text-stone-400" aria-hidden="true">·</span> {photo.program}</p>
+                    <h3 className="font-serif text-base font-semibold leading-snug text-forest-950 sm:text-lg">{photo.title}</h3>
+                    <p className="text-xs leading-relaxed text-stone-600">{photo.caption}</p>
                   </div>
                 </button>
               ))}
