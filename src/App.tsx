@@ -13,6 +13,7 @@ import { HomePage } from './pages/HomePage';
 import { MissionPage } from './pages/MissionPage';
 import { AcademyPage } from './pages/AcademyPage';
 import { ImpactPage } from './pages/ImpactPage';
+import { PrayerPage } from './pages/PrayerPage';
 import { LeadershipPage } from './pages/LeadershipPage';
 import { GalleryPage } from './pages/GalleryPage';
 import { JournalPage } from './pages/JournalPage';
@@ -33,6 +34,7 @@ const VALID_PAGES: PageId[] = [
   'partner',
   'contact',
   'join',
+  'prayer',
   'admin',
 ];
 
@@ -84,6 +86,10 @@ const PAGE_METADATA: Record<PageId, { title: string; description: string }> = {
     title: "Join Us | Harvest Field Gospel Mission Int'l",
     description:
       'Apply to serve with Harvest Field Gospel Mission and tell us what inspires you to join.',
+  },
+  prayer: {
+    title: "Prayer Request | Harvest Field Gospel Mission Int'l",
+    description: 'Share a prayer request with the Harvest Field Gospel Mission team.',
   },
   admin: {
     title: "Staff Sign In | Harvest Field Gospel Mission Int'l",
@@ -262,6 +268,7 @@ export default function App() {
         )}
         {currentPage === 'contact' && <ContactPage />}
         {currentPage === 'join' && <JoinUsPage />}
+        {currentPage === 'prayer' && <PrayerPage />}
         {currentPage === 'admin' && <AdminPage />}
         </main>
 
