@@ -26,10 +26,12 @@
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    text-size-adjust: 100%;
   }
 
   body {
     margin: 0;
+    min-width: 320px;
     background-color: #faf8f4;
     color: #1c1917;
     overflow-x: hidden;
@@ -38,6 +40,26 @@
   h1, h2, h3, .font-display {
     font-family: var(--font-serif);
     text-wrap: balance;
+  }
+
+  img, picture, video, canvas, svg {
+    max-width: 100%;
+  }
+
+  img, video {
+    height: auto;
+  }
+
+  button, input, textarea, select {
+    font: inherit;
+  }
+
+  input, textarea, select {
+    max-width: 100%;
+  }
+
+  a, button {
+    touch-action: manipulation;
   }
 }
 
@@ -69,7 +91,7 @@
   translate: 0 0;
 }
 
-/* Harvestfield premium editorial design refinements */
+/* Harvest Field's shared editorial design language */
 ::selection {
   background: #d9a441;
   color: #102d20;
@@ -78,10 +100,6 @@
 :focus-visible {
   outline: 2px solid #b87e18;
   outline-offset: 3px;
-}
-
-img {
-  max-width: 100%;
 }
 
 @layer components {
@@ -114,6 +132,37 @@ img {
   }
 }
 
+/* Responsive safeguards shared by every page */
+@layer base {
+  #root, main, main > * {
+    min-width: 0;
+  }
+
+  main {
+    width: 100%;
+  }
+
+  p, li {
+    overflow-wrap: break-word;
+  }
+
+  a {
+    overflow-wrap: anywhere;
+  }
+
+  :where(input, textarea, select) {
+    min-width: 0;
+  }
+
+  textarea {
+    resize: vertical;
+  }
+
+  table {
+    max-width: 100%;
+  }
+}
+
 @media (max-width: 640px) {
   h1 {
     letter-spacing: -0.035em;
@@ -121,6 +170,33 @@ img {
 
   button, a {
     -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Keep long editorial headings readable without forcing page overflow. */
+  main h1 {
+    font-size: clamp(2rem, 9vw, 3.25rem);
+    line-height: 1.08;
+  }
+
+  main h2 {
+    line-height: 1.15;
+  }
+
+  /* Forms remain comfortable to use on narrow touch screens. */
+  main input:not([type="checkbox"]):not([type="radio"]),
+  main select,
+  main textarea {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 360px) {
+  main .max-w-7xl,
+  main .max-w-6xl,
+  main .max-w-5xl {
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 }
 
