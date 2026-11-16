@@ -43,14 +43,14 @@ export const JournalPage: React.FC<JournalPageProps> = ({
   const [publishedPosts, setPublishedPosts] = useState<JournalPost[]>([]);
   useEffect(() => {
     let alive = true;
-    fetchPublishedPosts()
+    fetchPublishedPosts(language)
       .then((items) => { if (alive) setPublishedPosts(items); })
       .catch((error: unknown) => {
         console.error('Unable to load published blog articles:', error);
         if (alive) setPostsError(true);
       });
     return () => { alive = false; };
-  }, []);
+  }, [language]);
   // Use the editorial starter stories only until the first CMS article is published.
   // Once Sanity has content, the blog is driven entirely by the pastor's published articles.
   const posts = publishedPosts.length > 0
