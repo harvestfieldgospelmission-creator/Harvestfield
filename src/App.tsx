@@ -11,6 +11,8 @@ import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { HomePage } from './pages/HomePage';
 import { MissionPage } from './pages/MissionPage';
+import { AcademyPage } from './pages/AcademyPage';
+import { ImpactPage } from './pages/ImpactPage';
 import { LeadershipPage } from './pages/LeadershipPage';
 import { GalleryPage } from './pages/GalleryPage';
 import { JournalPage } from './pages/JournalPage';
@@ -23,6 +25,8 @@ import { LanguageProvider } from './i18n';
 const VALID_PAGES: PageId[] = [
   'home',
   'mission',
+  'academy',
+  'impact',
   'leadership',
   'gallery',
   'journal',
@@ -42,6 +46,14 @@ const PAGE_METADATA: Record<PageId, { title: string; description: string }> = {
     title: "Our Mission | Harvest Field Gospel Mission Int'l",
     description:
       'Learn about Harvest Field Gospel Mission, its outreach, discipleship, and community work.',
+  },
+  academy: {
+    title: "Harvest Field Academy | Harvest Field Gospel Mission Int'l",
+    description: 'Discover Harvest Field Academy and the mission’s vision for equipping believers for discipleship, evangelism and cross-cultural ministry.',
+  },
+  impact: {
+    title: "Impact & Stories | Harvest Field Gospel Mission Int'l",
+    description: 'Explore field photographs and journal stories from Harvest Field Gospel Mission outreach, discipleship and cross-border mission work.',
   },
   leadership: {
     title: "Leadership | Harvest Field Gospel Mission Int'l",
@@ -230,6 +242,8 @@ export default function App() {
           />
         )}
         {currentPage === 'mission' && <MissionPage onNavigate={(page) => handleNavigate(page)} />}
+        {currentPage === 'academy' && <AcademyPage onNavigate={(page) => handleNavigate(page)} />}
+        {currentPage === 'impact' && <ImpactPage onNavigate={(page) => handleNavigate(page)} onSelectArticle={(slug) => handleNavigate('journal', slug)} onOpenPhoto={handleOpenGalleryPhoto} />}
         {currentPage === 'leadership' && <LeadershipPage onNavigate={(page) => handleNavigate(page)} />}
         {currentPage === 'gallery' && (
           <GalleryPage
