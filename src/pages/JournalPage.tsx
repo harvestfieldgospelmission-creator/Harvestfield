@@ -129,6 +129,7 @@ export const JournalPage: React.FC<JournalPageProps> = ({
   // Article Reading Mode
   if (activeArticle) {
     const isSaved = savedIds.includes(activeArticle.id);
+    const activeArticleUrl = new URL(getPagePath('journal', activeArticle.slug), SITE_ORIGIN).toString();
     const relatedPosts = posts.filter((p) => p.id !== activeArticle.id).slice(0, 2);
 
     return (
@@ -165,6 +166,18 @@ export const JournalPage: React.FC<JournalPageProps> = ({
               <Bookmark className="w-3.5 h-3.5" />
               <span>{isSaved ? 'Saved to Reading List' : 'Save Dispatch'}</span>
             </button>
+            <a
+              href={`https://wa.me/?text=${encodeURIComponent(`${activeArticle.title} ${activeArticleUrl}`)}`}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-semibold border border-stone-200 bg-white text-stone-700 transition-colors hover:bg-stone-100"
+            >WhatsApp</a>
+            <a
+              href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(activeArticleUrl)}`}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-semibold border border-stone-200 bg-white text-stone-700 transition-colors hover:bg-stone-100"
+            >Facebook</a>
             <button
               type="button"
               onClick={() => void shareArticle(activeArticle)}
@@ -227,8 +240,23 @@ export const JournalPage: React.FC<JournalPageProps> = ({
                   );
                 }
                 if (block._type === 'block') {
-                  const content = (block.children || []).map((child) => child.text || '').join('');
-                  if (!content) return null;
+                  const content = (block.children || []).map((child, childIndex) => {
+                    let node: React.ReactNode = child.text || '';
+                    (child.marks || []).forEach((mark) => {
+                      if (mark === 'strong') node = <strong>{node}</strong>;
+                      else if (mark === 'em') node = <em>{node}</em>;
+                      else if (mark === 'underline') node = <u>{node}</u>;
+                      else if (mark === 'code') node = <code className="rounded bg-stone-100 px-1 py-0.5 text-[.9em]">{node}</code>;
+                      else {
+                        const definition = (block.markDefs || []).find((item) => item._key === mark);
+                        if (definition?._type === 'link' && definition.href) {
+                          node = <a href={definition.href} target="_blank" rel="noreferrer" className="font-medium text-harvest-700 underline underline-offset-4 hover:text-forest-900">{node}</a>;
+                        }
+                      }
+                    });
+                    return <React.Fragment key={childIndex}>{node}</React.Fragment>;
+                  });
+                  if (!(block.children || []).some((child) => child.text)) return null;
                   if (block.style === 'h2' || block.style === 'h3') {
                     return block.style === 'h2'
                       ? <h2 key={block._key || index} className="font-serif text-2xl font-semibold text-forest-950 mt-8">{content}</h2>
@@ -589,7 +617,7 @@ export const JournalPage: React.FC<JournalPageProps> = ({
                 ))}
               </div>
             </section>
-          }
+          )}
         </div>
       )}
     </div>
