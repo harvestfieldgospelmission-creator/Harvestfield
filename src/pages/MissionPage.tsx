@@ -14,11 +14,11 @@ const PARTICIPATION_TRACKS = [
     tab: '01. Going',
     title: 'Step Into Rural & Foreign Fields',
     description:
-      'Join short-term outreach expeditions or long-term missionary deployments to unreached communities across Rivers State, Northern Cameroon (Linde-Massa & Maroua), Tchad Republic, and Côte d’Ivoire.',
+      'Explore opportunities to take part in evangelism and mission outreach in Nigeria, Northern Cameroon (Linde-Massa and Maroua), Tchad, and Côte d’Ivoire.',
     points: [
-      'Pre-deployment equipping through Harvest Field Academy (HFA)',
+      'Learn about believer training through Harvest Field Academy (HFA)',
       'Cross-cultural evangelism, school ministry, and rural crusades',
-      'Mentorship under seasoned field evangelists and leaders',
+      'Serve alongside others committed to sharing the Gospel.',
     ],
   },
   {
@@ -28,7 +28,7 @@ const PARTICIPATION_TRACKS = [
     description:
       'Every open door in Linde-Massa, Maroua, Tchad, and our secondary schools is preceded by faithful prayer. Stand on the watch with our intercessory network.',
     points: [
-      'Weekly intercession focus for rural and foreign field teams',
+      'Pray for the ministry’s evangelism, discipleship and community development work.',
       'Prayer backing for revival meetings and evangelistic conferences',
       'Spiritual covering for new converts and Harvest Field Academy trainees',
     ],
@@ -38,11 +38,11 @@ const PARTICIPATION_TRACKS = [
     tab: '03. Regular Support',
     title: 'Send Regular Kingdom Support',
     description:
-      'Consistent monthly or seasonal giving fuels transport, Bibles, crusade logistics, student outreach materials, and missionary welfare across West and Central Africa.',
+      'Financial gifts can support the ministry’s evangelism, believer training and community development objectives.',
     points: [
-      'Transparent stewardship through official mission bank accounts',
+      'Use the published ministry bank details and confirm them with the mission before making a transfer.',
       'Direct support for rural and foreign mission expeditions',
-      'Regular field dispatches and testimonies sent to partners',
+      'Follow ministry updates and stories as they are shared.',
     ],
   },
 ];
