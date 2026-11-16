@@ -12,6 +12,7 @@ interface GalleryPageProps {
 
 const REGIONS: ('All' | GalleryPhoto['region'])[] = [
   'All',
+  'Kenya',
   'Cameroon',
   'Tchad Republic',
   "Côte d'Ivoire",

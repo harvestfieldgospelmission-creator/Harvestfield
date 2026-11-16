@@ -30,7 +30,7 @@ export interface GalleryPhoto {
   id: string;
   src: string;
   title: string;
-  region: 'Cameroon' | 'Tchad Republic' | "Côte d'Ivoire" | 'Nigeria & Schools' | 'Official Flyers';
+  region: 'Kenya' | 'Cameroon' | 'Tchad Republic' | "Côte d'Ivoire" | 'Nigeria & Schools' | 'Official Flyers';
   location: string;
   program: string;
   caption: string;
@@ -454,13 +454,23 @@ export const GALLERY_PHOTOS: GalleryPhoto[] = [
   },
   {
     id: 'g25',
-    src: '/assets/field/cameroon-community-gathering.jpeg',
-    title: 'Community Gathering in Cameroon',
-    region: 'Cameroon',
-    location: 'Cameroon',
+    src: '/assets/field/kenya-community-gathering.jpeg',
+    title: 'Community Gathering in Kenya',
+    region: 'Kenya',
+    location: 'Kenya',
     program: 'Community Fellowship',
-    caption: 'Community members and mission participants gather outdoors in Cameroon.',
+    caption: 'Community members gather outdoors for a fellowship in Kenya.',
     aspect: 'landscape',
+  },
+  {
+    id: 'g27',
+    src: '/assets/field/kenya-mission-team.jpeg',
+    title: 'Harvest Field Team in Kenya',
+    region: 'Kenya',
+    location: 'Kenya',
+    program: 'Mission Visit',
+    caption: 'Mission team members gather in Kenya during an outdoor visit.',
+    aspect: 'portrait',
   },
   {
     id: 'g26',
@@ -470,6 +480,26 @@ export const GALLERY_PHOTOS: GalleryPhoto[] = [
     location: 'Cameroon',
     program: 'Mission Fellowship',
     caption: 'Ministry participants gather indoors during a fellowship in Cameroon.',
+    aspect: 'landscape',
+  },
+  {
+    id: 'g28',
+    src: '/assets/field/cameroon-rural-community.jpeg',
+    title: 'Rural Community Gathering in Cameroon',
+    region: 'Cameroon',
+    location: 'Cameroon',
+    program: 'Rural Community Fellowship',
+    caption: 'Community members gather beneath a tree during a mission visit in Cameroon.',
+    aspect: 'landscape',
+  },
+  {
+    id: 'g29',
+    src: '/assets/field/cameroon-village-gathering.jpeg',
+    title: 'Village Fellowship in Cameroon',
+    region: 'Cameroon',
+    location: 'Cameroon',
+    program: 'Rural Community Fellowship',
+    caption: 'Village residents and mission participants gather outdoors in Cameroon.',
     aspect: 'landscape',
   },
   {
