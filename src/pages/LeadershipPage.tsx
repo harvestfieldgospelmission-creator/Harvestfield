@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { ArrowRight, CheckCircle2 } from 'lucide-react';
+import React from 'react';
+import { ArrowRight } from 'lucide-react';
 import { FOUNDER_PROFILE, MISSION_INFO, PageId } from '../data/missionData';
 import { SafeImage } from '../components/SafeImage';
 import { LocalizedContent } from '../i18n';
@@ -9,28 +9,6 @@ interface LeadershipPageProps {
 }
 
 export const LeadershipPage: React.FC<LeadershipPageProps> = ({ onNavigate }) => {
-  const [inviteOrg, setInviteOrg] = useState('');
-  const [inviteContact, setInviteContact] = useState('');
-  const [inviteType, setInviteType] = useState('Missions / Evangelistic Conference');
-  const [inviteLocation, setInviteLocation] = useState('');
-  const [inviteNotes, setInviteNotes] = useState('');
-  const [inviteSubmitted, setInviteSubmitted] = useState(false);
-
-  const handleInviteSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!inviteOrg.trim() || !inviteContact.trim()) return;
-    const subject = encodeURIComponent(`Ministry invitation — ${inviteOrg.trim()}`);
-    const body = encodeURIComponent(
-      `Organization: ${inviteOrg.trim()}\nCoordinator contact: ${inviteContact.trim()}\nProgram type: ${inviteType}\nLocation: ${inviteLocation.trim() || 'Not provided'}\n\nAdditional details:\n${inviteNotes.trim() || 'No additional details.'}`
-    );
-    window.location.href = `mailto:${MISSION_INFO.emails[0]}?subject=${subject}&body=${body}`;
-    setInviteSubmitted(true);
-    setInviteOrg('');
-    setInviteContact('');
-    setInviteLocation('');
-    setInviteNotes('');
-  };
-
   return (
     <LocalizedContent>
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12 lg:py-16 space-y-16 lg:space-y-20">
@@ -175,44 +153,29 @@ export const LeadershipPage: React.FC<LeadershipPageProps> = ({ onNavigate }) =>
         </div>
 
         <div className="lg:col-span-7">
-          {inviteSubmitted ? (
-            <div className="bg-[#faf8f4] border border-stone-200 rounded-xl p-8 text-center space-y-4">
-              <CheckCircle2 className="w-10 h-10 text-forest-900 mx-auto" />
-              <h3 className="font-serif text-2xl font-semibold text-forest-950">
-                Invitation Email Prepared
-              </h3>
-              <p className="text-sm text-stone-600 max-w-md mx-auto leading-relaxed">
-                Your invitation email draft is ready. Please send it from your email app to complete the request. For urgent scheduling, use the contact details on our Contact page.
+          <form
+              name="ministry-invitation"
+              method="POST"
+              action="/thank-you.html"
+              data-netlify="true"
+              data-netlify-honeypot="bot-field"
+              className="grid grid-cols-1 sm:grid-cols-2 gap-4"
+            >
+              <input type="hidden" name="form-name" value="ministry-invitation" />
+              <p className="hidden">
+                <label>Do not fill this out: <input name="bot-field" /></label>
               </p>
-              <button
-                type="button"
-                onClick={() => onNavigate('contact')}
-                className="px-4 py-2 text-xs font-semibold text-forest-900 hover:text-harvest-600 cursor-pointer"
-              >
-                Contact the Mission Office
-              </button>
-              <button
-                type="button"
-                onClick={() => setInviteSubmitted(false)}
-                className="px-4 py-2 text-xs font-semibold text-white bg-forest-900 hover:bg-forest-800 rounded-lg cursor-pointer"
-              >
-                Submit Another Invitation
-              </button>
-            </div>
-          ) : (
-            <form onSubmit={handleInviteSubmit} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label htmlFor="inv-org" className="block text-xs font-semibold text-stone-700 mb-1.5">
                   Church, School, or Organization
                 </label>
                 <input
                   id="inv-org"
+                  name="organization"
                   type="text"
                   required
-                  value={inviteOrg}
-                  onChange={(e) => setInviteOrg(e.target.value)}
                   placeholder="e.g., Scripture Union / Local Assembly"
-                  className="w-full px-3.5 py-2.5 text-sm bg-[#faf8f4] border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-forest-800"
+                  className="w-full min-h-11 px-3.5 py-3 text-base sm:text-sm bg-[#faf8f4] border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-forest-800"
                 />
               </div>
 
@@ -222,10 +185,9 @@ export const LeadershipPage: React.FC<LeadershipPageProps> = ({ onNavigate }) =>
                 </label>
                 <input
                   id="inv-contact"
+                  name="coordinator-contact"
                   type="text"
                   required
-                  value={inviteContact}
-                  onChange={(e) => setInviteContact(e.target.value)}
                   placeholder="+234 ... or email"
                   className="w-full px-3.5 py-2.5 text-sm bg-[#faf8f4] border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-forest-800"
                 />
@@ -237,8 +199,7 @@ export const LeadershipPage: React.FC<LeadershipPageProps> = ({ onNavigate }) =>
                 </label>
                 <select
                   id="inv-type"
-                  value={inviteType}
-                  onChange={(e) => setInviteType(e.target.value)}
+                  name="program-type"
                   className="w-full px-3.5 py-2.5 text-sm bg-[#faf8f4] border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-forest-800"
                 >
                   <option>Missions / Evangelistic Conference</option>
@@ -255,9 +216,8 @@ export const LeadershipPage: React.FC<LeadershipPageProps> = ({ onNavigate }) =>
                 </label>
                 <input
                   id="inv-loc"
+                  name="proposed-location-and-dates"
                   type="text"
-                  value={inviteLocation}
-                  onChange={(e) => setInviteLocation(e.target.value)}
                   placeholder="City, State / Nation &amp; Month"
                   className="w-full px-3.5 py-2.5 text-sm bg-[#faf8f4] border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-forest-800"
                 />
@@ -269,9 +229,8 @@ export const LeadershipPage: React.FC<LeadershipPageProps> = ({ onNavigate }) =>
                 </label>
                 <textarea
                   id="inv-notes"
+                  name="program-details"
                   rows={3}
-                  value={inviteNotes}
-                  onChange={(e) => setInviteNotes(e.target.value)}
                   placeholder="Share theme, expected audience, or special ministry focus..."
                   className="w-full px-3.5 py-2.5 text-sm bg-[#faf8f4] border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-forest-800"
                 />
@@ -280,13 +239,13 @@ export const LeadershipPage: React.FC<LeadershipPageProps> = ({ onNavigate }) =>
               <div className="sm:col-span-2">
                 <button
                   type="submit"
-                  className="px-6 py-3 text-sm font-semibold text-white bg-forest-900 hover:bg-forest-800 rounded-lg transition-colors cursor-pointer"
+                  className="w-full sm:w-auto min-h-11 px-6 py-3 text-sm font-semibold text-white bg-forest-900 hover:bg-forest-800 rounded-lg transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-800 focus-visible:ring-offset-2"
                 >
                   Send Ministry Invitation
                 </button>
               </div>
             </form>
-          )}
+          </form>
         </div>
       </section>
     </div>
