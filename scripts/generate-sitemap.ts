@@ -6,6 +6,9 @@ import { getPagePath } from '../src/routing';
 const publicPages = [
   'home',
   'mission',
+  'academy',
+  'impact',
+  'prayer',
   'leadership',
   'gallery',
   'journal',
