@@ -419,7 +419,7 @@ export const GALLERY_PHOTOS: GalleryPhoto[] = [
     region: 'Official Flyers',
     location: 'Omoku Head Office',
     program: 'Mission Publication',
-    caption: 'Official Harvest Field Gospel Mission Int’l print bulletin detailing core outreach areas, office hours, salvation call, and Zenith domiciliary account.',
+    caption: 'A Harvest Field Gospel Mission International publication outlining the ministry’s outreach focus and contact information.',
     aspect: 'portrait',
   },
   {
@@ -435,11 +435,11 @@ export const GALLERY_PHOTOS: GalleryPhoto[] = [
   {
     id: 'g16',
     src: '/assets/aistudio/IMG-20261115-WA0004_fbda2947.jpg',
-    title: 'President & Founder Official Ministry Card',
+    title: 'Founder Ministry Information Card',
     region: 'Official Flyers',
     location: 'Omoku Head Office',
     program: 'Executive Office',
-    caption: 'Official directory card for Evang. David Abrebor (President/Founder), listing ministry tracks, Harvest Field Academy, and partnership channels.',
+    caption: 'Ministry information card featuring founder Evang. David Abrebor and details about the ministry’s work.',
     aspect: 'portrait',
   },
 ];
@@ -488,9 +488,9 @@ export const JOURNAL_POSTS: JournalPost[] = [
     excerpt:
       'Students today navigate intense academic, social, and spiritual pressures. Our Youth and Student Outreach teams bring biblical counsel and living faith directly onto school grounds.',
     body: [
-      'Across Omoku and surrounding communities in Rivers State, secondary schools and student fellowships represent one of the most decisive harvest fields of our generation. Young people are forming the convictions, friendships, and habits that will steer their adult lives.',
-      'During our Intensive School Outreaches, Harvest Field teams engage students through assemblies, interactive mentoring, and dedicated Christian counseling. Rather than speaking down to young people, our evangelists listen closely—praying with individual students facing family hardship, academic anxiety, or spiritual confusion.',
-      'Beyond single-day school visits, our Youths and Students Conferences create a sustained fellowship environment where teenagers and university students discover how to walk with Christ boldly among their peers and step into discipleship through Harvest Field Academy.',
+      'Harvest Field Gospel Mission International includes school and youth outreach among its ministry activities. The ministry is based in Omoku, Rivers State, Nigeria.',
+      'The ministry’s stated approach includes school outreach programmes and practical engagement with people through the Gospel. Its work also includes counselling and prayer ministry.',
+      'The ministry also identifies conferences and believer equipping as part of its work. For current programme details, please contact the mission.',
     ],
     marginNote: {
       heading: 'Program Track',
@@ -504,7 +504,7 @@ export const JOURNAL_POSTS: JournalPost[] = [
     title: 'Les Porteurs de Gloire: Partnering Across Francophone West & Central Africa',
     subtitle: 'Reflections from Tchad Republic missions and prayer-and-impartation gatherings in Côte d’Ivoire',
     author: 'Evang. David Abrebor',
-    authorRole: 'President & Founder',
+    authorRole: 'Founder',
     date: 'August 2026',
     readTime: '5 min read',
     region: "Côte d'Ivoire & Tchad Republic",
@@ -513,9 +513,9 @@ export const JOURNAL_POSTS: JournalPost[] = [
     excerpt:
       'Language and national lines never limit the Great Commission. A look at how Harvest Field builds prayer, teaching, and impartation bridges into Tchad Republic and Côte d’Ivoire.',
     body: [
-      'From Anglophone Nigeria into Francophone Côte d’Ivoire and the Republic of Tchad, the call to take the nations for Christ requires humility, cultural sensitivity, and genuine partnership with local servants of God.',
-      'During the Les Porteurs de Gloire gatherings in Côte d’Ivoire—centered on Prière, Enseignement, and Impartation—ministers and believers gathered to seek fresh renewal for mission work. In Tchad Republic, vibrant congregations lifted praises and opened their doors to teaching and revival ministry.',
-      'These cross-border friendships remind us that Harvest Field Gospel Mission Int’l is part of a vast, interconnected body of believers committed to seeing God’s kingdom advance across every tongue and nation.',
+      'Harvest Field Gospel Mission International identifies Nigeria, Cameroon, Tchad and Côte d’Ivoire in its mission materials. Its work is centred on sharing the Gospel and equipping believers.',
+      'The ministry’s field photographs and publications include a Côte d’Ivoire conference titled Les Porteurs de Gloire, as well as mission and worship gatherings in Tchad. These materials reflect the ministry’s stated interest in evangelism, prayer and teaching.',
+      'The ministry welcomes enquiries from churches and individuals who wish to learn more about its mission work and opportunities to participate.',
     ],
     marginNote: {
       heading: 'Regional Reach',
@@ -528,8 +528,8 @@ export const JOURNAL_POSTS: JournalPost[] = [
     category: 'Discipleship',
     title: 'Going, Praying, or Supporting: Equipping Labourers at Harvest Field Academy',
     subtitle: 'An introduction to the ministry’s believer-equipping work',
-    author: 'Harvest Field Academy Faculty',
-    authorRole: 'Training & Discipleship',
+    author: 'Harvest Field Gospel Mission International',
+    authorRole: 'Ministry',
     date: 'July 2026',
     readTime: '4 min read',
     region: 'Omoku Headquarters',
