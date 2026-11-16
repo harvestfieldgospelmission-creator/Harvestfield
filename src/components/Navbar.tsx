@@ -144,7 +144,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
               const isOpen = openDropdown === group.label;
               return (
                 <div
-                  key={group.label}
+                  key={t(group.label)}
                   className="relative"
                   onMouseEnter={() => setOpenDropdown(group.label)}
                   onMouseLeave={() => setOpenDropdown(null)}
