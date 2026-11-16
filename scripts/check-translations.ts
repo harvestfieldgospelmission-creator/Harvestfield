@@ -3,7 +3,7 @@ import { translationResources } from '../src/i18n';
 const languages = ['fr', 'es'] as const;
 const englishEntries = Object.entries(translationResources.en);
 const missing: string[] = [];
-const placeholderPattern = /{{\\s*([\\w.-]+)\\s*}}/g;
+const placeholderPattern = /{{\s*([\w.-]+)\s*}}/g;
 
 function placeholders(value: string): string[] {
   return [...value.matchAll(placeholderPattern)].map((match) => match[1]).sort();
