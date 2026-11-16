@@ -17,6 +17,7 @@ const NAV_ITEMS: { id: PageId; label: string }[] = [
   { id: 'gallery', label: 'Gallery' },
   { id: 'journal', label: 'Blog' },
   { id: 'contact', label: 'Contact' },
+  { id: 'prayer', label: 'Prayer' },
 ];
 
 export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
