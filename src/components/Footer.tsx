@@ -73,7 +73,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               Contact the Mission
             </h3>
             <p className="text-stone-300 leading-relaxed">
-              Office details, hours, and enquiry lines are available on our Contact page.
+              Find our confirmed contact details and enquiry information on the Contact page.
             </p>
             <button
               type="button"
