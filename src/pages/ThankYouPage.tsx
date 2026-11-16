@@ -1,6 +1,9 @@
 import React from 'react';
+import { LocalizedContent } from '../i18n';
 
 export const ThankYouPage: React.FC = () => (
+  <LocalizedContent>
+
   <main className="relative isolate flex min-h-[72vh] items-center justify-center overflow-hidden bg-stone-50 px-4 py-16 sm:px-6 lg:px-8">
     <div className="pointer-events-none absolute inset-0 -z-10" aria-hidden="true">
       <div className="absolute -left-24 top-10 h-72 w-72 rounded-full bg-forest-100/60 blur-3xl" />
@@ -44,4 +47,5 @@ export const ThankYouPage: React.FC = () => (
       </p>
     </section>
   </main>
+  </LocalizedContent>
 );
