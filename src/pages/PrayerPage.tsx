@@ -13,7 +13,7 @@ export const PrayerPage: React.FC = () => (
       </header>
       <section className="rounded-2xl border border-stone-200 bg-white p-5 shadow-sm sm:p-8">
         <div className="mb-6 flex items-center gap-3 rounded-xl bg-forest-50 p-4 text-forest-950"><HeartHandshake className="h-6 w-6 shrink-0 text-harvest-600" /><p className="text-sm leading-relaxed">For urgent pastoral support, you can also call the mission office: {MISSION_INFO.phones[0]}.</p></div>
-        <form name="prayer-request" method="POST" action="/thank-you.html" data-netlify="true" netlify-honeypot="bot-field" className="space-y-5">
+        <form name="prayer-request" method="POST" action="/thank-you" data-netlify="true" netlify-honeypot="bot-field" className="space-y-5">
           <input type="hidden" name="form-name" value="prayer-request" />
           <p className="hidden"><label>Do not fill this out: <input name="bot-field" /></label></p>
           <div className="grid gap-5 sm:grid-cols-2">
