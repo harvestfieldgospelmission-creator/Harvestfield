@@ -40,6 +40,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               {[
                 { id: 'home' as PageId, label: 'Home & What We Do' },
                 { id: 'mission' as PageId, label: 'About Us' },
+                { id: 'impact' as PageId, label: 'Impact & Stories' },
                 { id: 'leadership' as PageId, label: 'President & Founder' },
                 { id: 'gallery' as PageId, label: 'Field Galleries' },
                 { id: 'journal' as PageId, label: 'Blog & Articles' },
