@@ -10,7 +10,9 @@ import {
 } from '../data/missionData';
 import { SafeImage } from '../components/SafeImage';
 import { BankAccountsGrid } from '../components/BankAccountsGrid';
-import { LocalizedContent } from '../i18n';
+import { LocalizedContent, useLanguage } from '../i18n';
+import { localizeGalleryPhoto } from '../data/galleryTranslations';
+import { localizeJournalPost } from '../data/journalTranslations';
 import { getPagePath } from '../routing';
 
 interface HomePageProps {
@@ -98,7 +100,10 @@ export const HomePage: React.FC<HomePageProps> = ({
     return () => window.clearInterval(intervalId);
   }, [heroHovered, heroIndex, heroPaused, prefersReducedMotion]);
 
+  const { language } = useLanguage();
   const heroSpot = HERO_SPOTS[heroIndex];
+  const localizedJournalPosts = JOURNAL_POSTS.map((post) => localizeJournalPost(post, language));
+  const localizedGalleryPhotos = GALLERY_PHOTOS.map((photo) => localizeGalleryPhoto(photo, language));
 
   const categories = ['All', 'Evangelism', 'Youth & Schools', 'Training', 'Global Missions'];
   const filteredMandates =
@@ -106,9 +111,9 @@ export const HomePage: React.FC<HomePageProps> = ({
       ? MANDATES
       : MANDATES.filter((m) => m.category === activeCategory);
 
-  const featuredPost = JOURNAL_POSTS[0];
-  const secondaryPosts = JOURNAL_POSTS.slice(1, 3);
-  const previewGallery = GALLERY_PHOTOS.slice(0, 6);
+  const featuredPost = localizedJournalPosts[0];
+  const secondaryPosts = localizedJournalPosts.slice(1, 3);
+  const previewGallery = localizedGalleryPhotos.slice(0, 6);
 
   const handlePrayerSubmit = (e: React.FormEvent) => {
     e.preventDefault();
