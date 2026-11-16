@@ -102,6 +102,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
               <a
                 key={item.id}
                 href={getPagePath(item.id)}
+                aria-current={isActive ? "page" : undefined}
                 onClick={(event) => {
                   if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
                   event.preventDefault();
@@ -192,6 +193,30 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
               </a>
             );
           })}
+          <div className="grid grid-cols-2 gap-2 px-2 pt-3">
+            <a
+              href={getPagePath('join')}
+              onClick={(event) => {
+                if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+                event.preventDefault();
+                handleNav('join');
+              }}
+              className="inline-flex min-h-12 items-center justify-center rounded-lg border border-forest-800 px-3 py-3 text-sm font-semibold text-forest-900 transition-colors hover:bg-forest-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-800"
+            >
+              Join Us
+            </a>
+            <a
+              href={getPagePath('partner')}
+              onClick={(event) => {
+                if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+                event.preventDefault();
+                handleNav('partner');
+              }}
+              className="inline-flex min-h-12 items-center justify-center rounded-lg bg-forest-900 px-3 py-3 text-sm font-semibold text-white transition-colors hover:bg-forest-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-harvest-500"
+            >
+              Support the Mission
+            </a>
+          </div>
           <div className="px-4 pt-3">{languageSelector('block sm:hidden')}</div>
       </nav>
     </header>
