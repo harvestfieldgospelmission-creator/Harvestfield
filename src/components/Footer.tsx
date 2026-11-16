@@ -1,7 +1,6 @@
 import React from 'react';
 import { Mail, MapPin, MessageCircle, Phone } from 'lucide-react';
 import { MISSION_INFO, PageId } from '../data/missionData';
-import { MissionMark } from './MissionMark';
 import { LocalizedContent } from '../i18n';
 import { useTranslation } from 'react-i18next';
 import { getPagePath } from '../routing';
@@ -21,13 +20,11 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
         <div className="grid grid-cols-2 gap-x-6 gap-y-7 pb-6 border-b border-forest-800/80 lg:grid-cols-[1.2fr_0.8fr_1fr] lg:gap-12">
           <div className="col-span-2 space-y-3 lg:col-span-1">
             <div className="flex items-center gap-3">
-              <MissionMark className="w-9 h-9 text-harvest-400 shrink-0" />
-              <div>
-                <p className="font-serif text-lg font-semibold text-white leading-tight">
-                  Harvest Field
-                </p>
-                <p className="text-xs text-stone-400">Gospel Mission Int&apos;l</p>
-              </div>
+              <img
+                src="/assets/harvest-field-logo.png"
+                alt="Harvest Field Gospel Mission International"
+                className="h-20 w-auto max-w-full object-contain"
+              />
             </div>
             <p className="text-sm text-stone-300 leading-relaxed max-w-sm">
               A fellowship of kingdom-minded believers equipped for rural and foreign missions across

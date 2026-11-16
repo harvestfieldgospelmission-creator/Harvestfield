@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import { ChevronDown, Menu, X } from 'lucide-react';
 import { PageId } from '../data/missionData';
 import { getPagePath } from '../routing';
-import { MissionMark } from './MissionMark';
 import { useTranslation } from 'react-i18next';
 import { LocalizedContent, useLanguage } from '../i18n';
 
@@ -128,13 +127,13 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
           <button
             type="button"
             onClick={() => handleNav('home')}
-            className="inline-flex shrink-0 items-center gap-2.5 rounded-sm font-serif text-lg font-semibold tracking-tight text-forest-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-800 sm:text-xl lg:justify-self-start"
+            className="inline-flex shrink-0 items-center rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-800 lg:justify-self-start"
           >
-            <MissionMark className="h-7 w-7 shrink-0 text-forest-900" />
-            <span className="flex flex-col items-start leading-none">
-              <span>Harvest Field</span>
-              <span className="mt-1 font-sans text-[9px] font-semibold uppercase tracking-[0.19em] text-harvest-600 sm:text-[10px]">Gospel Mission Int’l</span>
-            </span>
+            <img
+              src="/assets/harvest-field-logo.png"
+              alt="Harvest Field Gospel Mission International"
+              className="h-[3.6rem] w-auto max-w-[40vw] object-contain sm:max-w-[11rem]"
+            />
           </button>
 
           <nav className="hidden items-center gap-1 lg:flex xl:gap-2" aria-label="Primary navigation">
