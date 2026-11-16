@@ -74,8 +74,8 @@ export const MISSION_INFO = {
     'All Power Liberation Church Hall, behind Osere Dengo Petrol Station, Ikiri Road, Omoku, Rivers State',
   officeHours: 'Mon – Fri · 9:00 AM – 3:00 PM',
   nationsReached: ['Nigeria', 'Cameroon', 'Tchad', "Côte d'Ivoire"],
-  phones: ['+234 813 288 6893', '+234 805 179 4743', '+234 906 148 1462'],
-  emails: ['davidabrebor001@gmail.com', 'davidabrebor4christ@gmail.com'],
+  phones: ['+234 813 288 6893'],
+  emails: ['info@harvestfieldgospelmission.org'],
   facebook: [
     { label: 'Abrebor David', handle: 'Personal Ministry Page' },
     { label: "Harvest Field Gospel Missions Int'l", handle: 'Official Mission Page' },
@@ -117,24 +117,24 @@ export const FOUNDER_PROFILE = {
   portrait: '/assets/field/founder-portrait.jpg',
   ministryPhoto: '/assets/field/founder-speaking.jpg',
   summary:
-    'Called to ignite a passion for unreached rural communities and cross-border gospel missions, Evang. David Abrebor leads Harvest Field Gospel Mission Int’l from its headquarters in Omoku, Rivers State across West and Central Africa.',
+    'Evang. David Abrebor is the President and Founder of Harvest Field Gospel Mission International, headquartered in Omoku, Rivers State, Nigeria. The ministry is committed to fulfilling the Great Commission, equipping believers for effective soul-winning and serving communities.',
   biography: [
-    'Evang. David Abrebor serves as the President and Founder of Harvest Field Gospel Mission Int’l, headquartered in Omoku, Rivers State, Nigeria. Driven by an unwavering conviction that God’s heart desire must become the believer’s heart desire, his ministry bridges local discipleship in the Niger Delta with frontier evangelism across neighbouring nations.',
-    'Under his leadership, Harvest Field has grown into a disciplined fellowship of kingdom-minded believers trained specifically for rural and foreign missions. Rather than limiting ministry to comfortable city pulpits, Evang. Abrebor personally leads field teams into remote settlements—from Linde-Massa and Maroua in Northern Cameroon to outreach stations in the Republic of Tchad and francophone revival conferences such as Les Porteurs de Gloire in Côte d’Ivoire.',
-    'Closer to home, his passion for the next generation shapes intensive school outreaches, student and youth conferences, labourers retreats, and structured training through the Harvest Field Academy (HFA)—ensuring every believer who feels the call to the nations is equipped in Scripture, character, and practical evangelism.',
+    'Evang. David Abrebor serves as the President and Founder of Harvest Field Gospel Mission International, an interdenominational Christian ministry based in Omoku, Rivers State, Nigeria.',
+    'The ministry focuses on proclaiming the Gospel of salvation through the Lord Jesus Christ and equipping believers with biblical knowledge and practical understanding for effective soul-winning. It encourages Christians to take an active role in sharing the Gospel in their workplaces, neighbourhoods and communities.',
+    'Its outreach activities include one-on-one evangelism, school outreach programmes, conferences, community evangelism, church evangelism awareness programmes, counselling, and prayer and deliverance ministration. Community development objectives include educational support, girl-child education advocacy, poverty reduction, and agricultural and vocational skills development for young people in rural communities.',
   ],
   pillars: [
     {
-      title: 'Frontier Cross-Border Missions',
-      detail: 'Direct field campaigns in Northern Cameroon (Linde-Massa, Maroua), Tchad Republic, and Côte d’Ivoire.',
+      title: 'Gospel Outreach',
+      detail: 'Practical one-on-one evangelism, school outreach programmes, conferences and community evangelism.',
     },
     {
-      title: 'Next-Generation Mobilisation',
-      detail: 'Intensive secondary school outreaches, campus conferences, and youth discipleship cohorts.',
+      title: 'Believer Equipping',
+      detail: 'Awakening and equipping Christians to share the Gospel in everyday settings.',
     },
     {
-      title: 'Labourers Equipping & HFA',
-      detail: 'Training missionaries and Christian workers through Harvest Field Academy and seasonal retreats.',
+      title: 'Community Development',
+      detail: 'Educational development, girl-child education advocacy, poverty reduction, and youth skills development.',
     },
   ],
 };

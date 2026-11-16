@@ -87,17 +87,29 @@ export const MissionPage: React.FC<MissionPageProps> = ({ onNavigate }) => {
     <LocalizedContent>
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12 lg:py-16 space-y-16 lg:space-y-20">
       <section className="space-y-8">
-        <div className="max-w-4xl space-y-5">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-harvest-600">
-            About Us
-          </p>
-          <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-semibold text-forest-950 leading-[1.08] tracking-tight">
-            Reaching the lost. Equipping believers. Serving communities.
-          </h1>
-          <div className="space-y-4 text-base sm:text-lg text-stone-700 leading-relaxed">
-            <p>{MISSION_ABOUT.introduction}</p>
-            <p>{MISSION_ABOUT.equipping}</p>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          <div className="lg:col-span-7 space-y-5">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-harvest-600">
+              About Us
+            </p>
+            <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-semibold text-forest-950 leading-[1.08] tracking-tight">
+              Reaching the lost. Equipping believers. Serving communities.
+            </h1>
+            <div className="space-y-4 text-base sm:text-lg text-stone-700 leading-relaxed">
+              <p>{MISSION_ABOUT.introduction}</p>
+              <p>{MISSION_ABOUT.equipping}</p>
+            </div>
           </div>
+          <figure className="lg:col-span-5 overflow-hidden rounded-2xl border border-stone-200 bg-stone-100 shadow-lg shadow-forest-950/10">
+            <SafeImage
+              src="/assets/field/founder-linde-massa.jpg"
+              alt="Harvest Field Gospel Mission outreach in Linde-Massa, Northern Cameroon"
+              className="aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/5] w-full object-cover"
+            />
+            <figcaption className="px-4 py-3 text-xs leading-relaxed text-stone-600">
+              Mission outreach in Linde-Massa, Northern Cameroon.
+            </figcaption>
+          </figure>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
@@ -163,6 +175,51 @@ export const MissionPage: React.FC<MissionPageProps> = ({ onNavigate }) => {
             </aside>
           </div>
         </div>
+      </section>
+
+      <section className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <article className="rounded-2xl bg-forest-950 p-6 sm:p-8 text-white">
+          <p className="text-xs font-semibold uppercase tracking-widest text-harvest-400">Our Vision</p>
+          <h2 className="mt-3 font-serif text-2xl sm:text-3xl font-semibold">Lives transformed. Believers equipped. Communities strengthened.</h2>
+          <p className="mt-4 text-sm sm:text-base leading-relaxed text-stone-200">
+            To see lives transformed by the Gospel of Jesus Christ, believers awakened and equipped for effective soul-winning, and communities strengthened through Christ-centred service and sustainable development.
+          </p>
+        </article>
+        <article className="rounded-2xl border border-stone-200 bg-white p-6 sm:p-8">
+          <p className="text-xs font-semibold uppercase tracking-widest text-harvest-600">Our Mission</p>
+          <h2 className="mt-3 font-serif text-2xl sm:text-3xl font-semibold text-forest-950">Fulfilling the Great Commission through the Gospel and practical service.</h2>
+          <p className="mt-4 text-sm leading-relaxed text-stone-700">
+            To fulfil the Great Commission by preaching the Gospel of Jesus Christ, equipping believers for practical evangelism, mobilising Christians to become active witnesses, and supporting the spiritual, educational and socio-economic development of underserved communities.
+          </p>
+        </article>
+      </section>
+
+      <section className="rounded-2xl border border-stone-200 bg-limestone/60 p-6 sm:p-8">
+        <div className="max-w-3xl">
+          <p className="text-xs font-semibold uppercase tracking-widest text-harvest-600">What Guides Us</p>
+          <h2 className="mt-2 font-serif text-2xl sm:text-3xl font-semibold text-forest-950">Our Core Commitments</h2>
+          <p className="mt-3 text-sm leading-relaxed text-stone-700">
+            These commitments shape how we share the Gospel, equip believers and serve communities.
+          </p>
+        </div>
+        <ul className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+          {[
+            ['Christ-centred living', 'Keeping Jesus Christ at the centre of our message, mission and service.'],
+            ['Biblical truth', 'Sharing the Gospel faithfully and equipping believers with sound biblical knowledge.'],
+            ['Evangelism and soul-winning', 'Encouraging every believer to take an active role in reaching people with the Gospel.'],
+            ['Discipleship and spiritual growth', 'Helping people grow in Christian faith and their responsibility as followers of Christ.'],
+            ['Compassion and service', 'Demonstrating Christian love through practical care and service to individuals and communities.'],
+            ['Youth empowerment', 'Valuing education, rehabilitation and practical skills as opportunities for young people.'],
+            ['Integrity and accountability', 'Conducting ministry activities responsibly, honestly and transparently.'],
+            ['Partnership and unity', 'Welcoming cooperation among Christians and churches in advancing the Gospel.'],
+          ].map(([title, detail], index) => (
+            <li key={title} className="rounded-xl bg-white p-4">
+              <span className="font-mono text-xs font-semibold text-harvest-600 tabular-nums">0{index + 1}</span>
+              <h3 className="mt-2 text-sm font-semibold text-forest-950">{title}</h3>
+              <p className="mt-2 text-xs leading-relaxed text-stone-600">{detail}</p>
+            </li>
+          ))}
+        </ul>
       </section>
 
       {/* Fulfill Your Mandate: Going / Praying / Supporting */}
