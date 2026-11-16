@@ -160,14 +160,14 @@ export const HomePage: React.FC<HomePageProps> = ({
             <h1 className="max-w-3xl font-serif text-4xl font-semibold leading-[1.08] tracking-tight sm:text-5xl lg:text-7xl">
               Taking the Gospel to the nations. Bringing hope to every generation.
             </h1>
-            <p className="hidden max-w-2xl text-base leading-relaxed text-stone-200 sm:block sm:text-lg lg:text-xl">
+            <p className="max-w-2xl text-sm leading-relaxed text-stone-200 sm:text-base lg:text-xl">
               From rural communities to cross-border mission fields, Harvest Field Gospel Mission Int’l equips believers to share Christ, serve people and strengthen local communities.
             </p>
-            <div className="flex flex-row gap-2 pt-2 sm:flex-wrap sm:gap-3">
+            <div className="flex w-full max-w-xl flex-col gap-2 pt-2 min-[420px]:flex-row min-[420px]:flex-wrap sm:gap-3">
               <button
                 type="button"
                 onClick={() => onNavigate('join')}
-                className="inline-flex min-h-12 min-w-0 flex-1 items-center justify-center gap-1.5 rounded-lg bg-harvest-500 px-3 py-3 text-xs font-semibold text-forest-950 shadow-lg shadow-black/15 transition-colors hover:bg-harvest-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white sm:flex-none sm:gap-2 sm:px-6 sm:text-sm"
+                className="inline-flex min-h-12 w-full min-w-0 items-center justify-center gap-2 rounded-lg bg-harvest-500 px-4 py-3 text-sm font-semibold text-forest-950 shadow-lg shadow-black/15 transition-colors hover:bg-harvest-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white min-[420px]:w-auto sm:px-6"
               >
                 <span>Join Us</span>
                 <ArrowRight className="h-4 w-4 shrink-0" />
@@ -175,7 +175,7 @@ export const HomePage: React.FC<HomePageProps> = ({
               <button
                 type="button"
                 onClick={() => onNavigate('mission')}
-                className="inline-flex min-h-12 min-w-0 flex-1 items-center justify-center rounded-lg border border-white/55 bg-white/10 px-3 py-3 text-xs font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white/20 sm:flex-none sm:px-6 sm:text-sm"
+                className="inline-flex min-h-12 w-full min-w-0 items-center justify-center rounded-lg border border-white/55 bg-white/10 px-4 py-3 text-sm font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white/20 min-[420px]:w-auto sm:px-6"
               >
                 <span className="sm:hidden">Explore</span>
                 <span className="hidden sm:inline">Discover Our Mission</span>
