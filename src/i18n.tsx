@@ -1428,13 +1428,21 @@ const semanticResources = {
   }
 } as const;
 
+// Export the complete runtime dictionaries so the translation audit checks the
+// exact resources supplied to i18next, including legacy and semantic entries.
+export const translationResources = {
+  en: semanticResources.en,
+  fr: { ...translations.fr, ...missionPageTranslations.fr, ...semanticResources.fr },
+  es: { ...translations.es, ...missionPageTranslations.es, ...semanticResources.es },
+} as const;
+
 // i18next is the single translation engine. Existing reviewed translations are
 // retained while page-by-page semantic-key migration is completed.
 i18next.use(initReactI18next).init({
   resources: {
-    en: { translation: semanticResources.en },
-    fr: { translation: { ...translations.fr, ...missionPageTranslations.fr, ...semanticResources.fr } },
-    es: { translation: { ...translations.es, ...missionPageTranslations.es, ...semanticResources.es } },
+    en: { translation: translationResources.en },
+    fr: { translation: translationResources.fr },
+    es: { translation: translationResources.es },
   },
   lng: 'en',
   fallbackLng: 'en',
