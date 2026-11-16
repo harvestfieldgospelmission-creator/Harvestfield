@@ -16,11 +16,35 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,600&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    <form name="contact-enquiry" data-netlify="true" hidden><input type="text" name="name" /><input type="text" name="reply_contact" /><input type="text" name="topic" /><textarea name="message"></textarea></form>
-    <form name="join-interest" data-netlify="true" hidden><input type="text" name="full_name" /><input type="text" name="phone" /><input type="email" name="email" /><input type="text" name="state" /><input type="text" name="local_government_area" /><input type="text" name="area_of_interest" /><textarea name="motivation"></textarea></form>
-    <form name="prayer-request" data-netlify="true" hidden><input type="text" name="name" /><input type="text" name="reply_contact" /><textarea name="prayer_request"></textarea><input type="text" name="permission_to_follow_up" /></form>
   </head>
   <body>
+    <form name="contact-enquiry" method="POST" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="contact-enquiry" />
+      <input name="bot-field" />
+      <input name="name" />
+      <input name="reply_contact" />
+      <input name="topic" />
+      <textarea name="message"></textarea>
+    </form>
+    <form name="join-interest" method="POST" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="join-interest" />
+      <input name="bot-field" />
+      <input name="full_name" />
+      <input name="phone" />
+      <input type="email" name="email" />
+      <input name="state" />
+      <input name="local_government_area" />
+      <input name="area_of_interest" />
+      <textarea name="motivation"></textarea>
+    </form>
+    <form name="prayer-request" method="POST" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="prayer-request" />
+      <input name="bot-field" />
+      <input name="name" />
+      <input name="reply_contact" />
+      <textarea name="prayer_request"></textarea>
+      <input name="permission_to_follow_up" />
+    </form>
 
     <form name="ministry-invitation" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
       <input type="hidden" name="form-name" value="ministry-invitation" />
