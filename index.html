@@ -18,6 +18,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,600&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
   </head>
   <body>
+
+    <form name="ministry-invitation" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="ministry-invitation" />
+      <input name="bot-field" />
+      <input name="organization" />
+      <input name="coordinator-contact" />
+      <select name="program-type"><option>Missions / Evangelistic Conference</option></select>
+      <input name="proposed-location-and-dates" />
+      <textarea name="program-details"></textarea>
+    </form>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
