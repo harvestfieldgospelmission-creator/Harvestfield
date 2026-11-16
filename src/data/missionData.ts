@@ -53,6 +53,16 @@ export interface JournalPost {
   coverCaption: string;
   excerpt: string;
   body: string[];
+  bodyBlocks?: Array<{
+    _type: 'block' | 'image';
+    _key?: string;
+    style?: string;
+    markDefs?: Array<{ _key: string; _type: string; href?: string }>;
+    children?: Array<{ _type: string; text?: string; marks?: string[] }>;
+    asset?: { url?: string };
+    alt?: string;
+    caption?: string;
+  }>;
   marginNote: {
     heading: string;
     detail: string;
