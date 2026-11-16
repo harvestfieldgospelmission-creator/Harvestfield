@@ -9,6 +9,7 @@ export type PageId =
   | 'partner'
   | 'contact'
   | 'join'
+  | 'prayer'
   | 'admin';
 
 export const SITE_ORIGIN = 'https://harvestfieldgospelmission.netlify.app';
