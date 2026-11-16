@@ -49,8 +49,6 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                 { id: 'join' as PageId, label: 'Join Us' },
                 { id: 'partner' as PageId, label: 'Support & Partnership' },
                 { id: 'contact' as PageId, label: 'Contact Us' },
-                { id: 'join' as PageId, label: 'Join Us' },
-                { id: 'partner' as PageId, label: 'Partner, Give & Pray' },
               ].map((link) => (
                 <li key={link.id}>
                   <a
@@ -91,7 +89,6 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             <p className="text-xs text-stone-400 leading-relaxed">
               Official social links are not connected yet. Please use the contact details on this page to reach us.
             </p>
-            <button type="button" onClick={() => onNavigate('admin')} className="pt-2 text-xs text-stone-500 hover:text-harvest-400">Staff sign in</button>
           </div>
 
         </div>
