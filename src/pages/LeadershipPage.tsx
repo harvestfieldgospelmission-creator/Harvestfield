@@ -8,6 +8,39 @@ interface LeadershipPageProps {
   onNavigate: (page: PageId) => void;
 }
 
+const LEADERSHIP_TEAM = [
+  {
+    name: 'Pst Wobo Praise',
+    role: 'Mission Director',
+    image: '/assets/field/pastor-wobo-praise.jpeg',
+    alt: 'Pastor Wobo Praise, Mission Director',
+  },
+  {
+    name: 'Pst Jonathan Omonogun & Anita Jonathan',
+    role: null,
+    image: '/assets/field/jonathan-omonogun-anita-jonathan.jpeg',
+    alt: 'Pastor Jonathan Omonogun and Anita Jonathan',
+  },
+  {
+    name: 'Susan David',
+    role: 'Vice President',
+    image: '/assets/field/susan-david-vice-president.jpeg',
+    alt: 'Susan David, Vice President',
+  },
+  {
+    name: 'Pst Innocent Ebeku Akpotu',
+    role: 'Mission Pastor',
+    image: '/assets/field/innocent-ebeku-akpotu.jpeg',
+    alt: 'Pastor Innocent Ebeku Akpotu, Mission Pastor',
+  },
+  {
+    name: 'Teacher Ernest Elems-Peter Olowu',
+    role: 'P.R.O.',
+    image: '/assets/field/ernest-elems-peter-olowu.jpeg',
+    alt: 'Teacher Ernest Elems-Peter Olowu, Public Relations Officer',
+  },
+];
+
 export const LeadershipPage: React.FC<LeadershipPageProps> = ({ onNavigate }) => {
   return (
     <LocalizedContent>
@@ -72,6 +105,45 @@ export const LeadershipPage: React.FC<LeadershipPageProps> = ({ onNavigate }) =>
               </button>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="team-heading" className="space-y-7 border-t border-stone-200 pt-10">
+        <div className="space-y-2">
+          <p className="text-xs font-semibold uppercase tracking-widest text-harvest-600">
+            Meet Our Team
+          </p>
+          <h2
+            id="team-heading"
+            className="font-serif text-3xl font-semibold text-forest-950 sm:text-4xl"
+          >
+            Mission Leadership Team
+          </h2>
+        </div>
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {LEADERSHIP_TEAM.map((leader) => (
+            <article
+              key={leader.name}
+              className="overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-sm"
+            >
+              <div className="aspect-[4/3] overflow-hidden bg-stone-200">
+                <SafeImage
+                  src={leader.image}
+                  alt={leader.alt}
+                  className="h-full w-full object-cover object-center"
+                  fallbackTitle={leader.name}
+                />
+              </div>
+              <div className="space-y-1 p-5">
+                <h3 className="font-serif text-xl font-semibold text-forest-950">
+                  {leader.name}
+                </h3>
+                {leader.role && (
+                  <p className="text-sm font-medium text-harvest-700">{leader.role}</p>
+                )}
+              </div>
+            </article>
+          ))}
         </div>
       </section>
 
