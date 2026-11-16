@@ -1326,7 +1326,10 @@ const semanticResources = {
     'footer.impact': 'Impact et témoignages', 'footer.prayer': 'Demande de prière', 'footer.leadership': 'Direction',
     'footer.gallery': 'Galerie', 'footer.journal': 'Blog', 'footer.join': 'Nous rejoindre', 'footer.partner': 'Partenariat',
     'footer.contactFollow': 'Contact et réseaux', 'footer.contact': 'Nous contacter', 'footer.whatsapp': 'Écrire à Harvest Field sur WhatsApp',
-    'footer.whatsappTitle': 'Nous écrire sur WhatsApp', 'footer.staff': 'Connexion du personnel'
+    'footer.whatsappTitle': 'Nous écrire sur WhatsApp', 'footer.staff': 'Connexion du personnel',
+    'Stories from the Mission Field · Faith in Action': 'Récits du terrain missionnaire · La foi en action',
+    'Stories that': 'Des histoires qui', 'carry hope.': 'portent l’espérance.',
+    'Read firsthand mission stories, field reports, youth outreach, discipleship reflections and devotionals from Harvest Field Gospel Mission across Africa.': 'Lisez des récits de mission vécus sur le terrain, des rapports de mission, des actions auprès des jeunes, des réflexions sur le discipulat et des méditations de Harvest Field Gospel Mission à travers l’Afrique.'
   },
   es: {
     "metadata.home.title": "Harvest Field Gospel Mission — Llevando las naciones a Cristo",
@@ -1367,7 +1370,10 @@ const semanticResources = {
     'footer.impact': 'Impacto e historias', 'footer.prayer': 'Petición de oración', 'footer.leadership': 'Liderazgo',
     'footer.gallery': 'Galería', 'footer.journal': 'Blog', 'footer.join': 'Únete', 'footer.partner': 'Colaborar',
     'footer.contactFollow': 'Contacto y redes', 'footer.contact': 'Contáctanos', 'footer.whatsapp': 'Escribir a Harvest Field por WhatsApp',
-    'footer.whatsappTitle': 'Escríbenos por WhatsApp', 'footer.staff': 'Acceso del personal'
+    'footer.whatsappTitle': 'Escríbenos por WhatsApp', 'footer.staff': 'Acceso del personal',
+    'Stories from the Mission Field · Faith in Action': 'Historias del campo misionero · Fe en acción',
+    'Stories that': 'Historias que', 'carry hope.': 'llevan esperanza.',
+    'Read firsthand mission stories, field reports, youth outreach, discipleship reflections and devotionals from Harvest Field Gospel Mission across Africa.': 'Lee historias misioneras de primera mano, informes de campo, actividades con jóvenes, reflexiones sobre el discipulado y devocionales de Harvest Field Gospel Mission en toda África.'
   }
 } as const;
 
