@@ -3,6 +3,7 @@ import { Mail, MapPin, MessageCircle, Phone } from 'lucide-react';
 import { MISSION_INFO, PageId } from '../data/missionData';
 import { MissionMark } from './MissionMark';
 import { LocalizedContent } from '../i18n';
+import { useTranslation } from 'react-i18next';
 import { getPagePath } from '../routing';
 
 interface FooterProps {
@@ -11,10 +12,11 @@ interface FooterProps {
 
 export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
   const whatsappNumber = MISSION_INFO.phones[0].replace(/\D/g, '');
+  const { t } = useTranslation();
 
   return (
     <LocalizedContent>
-    <footer aria-label="Site footer" className="bg-forest-950 text-stone-200 border-t border-forest-800 mt-14">
+    <footer aria-label={t('footer.label')} className="bg-forest-950 text-stone-200 border-t border-forest-800 mt-14">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-7">
         <div className="grid grid-cols-2 gap-x-6 gap-y-7 pb-6 border-b border-forest-800/80 lg:grid-cols-[1.2fr_0.8fr_1fr] lg:gap-12">
           <div className="col-span-2 space-y-3 lg:col-span-1">
@@ -39,7 +41,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
 
           <div>
             <h3 className="font-sans text-xs font-semibold uppercase tracking-widest text-harvest-400 mb-4">
-              Quick Links
+              {t('footer.quickLinks')}
             </h3>
             <ul aria-label="Explore the ministry" className="grid grid-cols-2 gap-x-3 gap-y-2 text-sm">
               {[
@@ -63,7 +65,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                     }}
                     className="inline-flex min-h-8 items-center text-stone-300 hover:text-white transition-colors cursor-pointer text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-harvest-400 focus-visible:ring-offset-2 focus-visible:ring-offset-forest-950 rounded-sm"
                   >
-                    {link.label}
+                    {t(`footer.${link.id === 'mission' ? 'about' : link.id === 'impact' ? 'impact' : link.id === 'prayer' ? 'prayer' : link.id === 'leadership' ? 'leadership' : link.id === 'gallery' ? 'gallery' : link.id === 'journal' ? 'journal' : link.id === 'join' ? 'join' : link.id === 'partner' ? 'partner' : 'academy'}`)}
                   </a>
                 </li>
               ))}
@@ -72,7 +74,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
 
           <div className="space-y-4 text-sm">
             <h3 className="font-sans text-xs font-semibold uppercase tracking-widest text-harvest-400 mb-4">
-              Contact &amp; Follow
+              {t('footer.contactFollow')}
             </h3>
             <a
               href={`tel:${MISSION_INFO.phones[0].replace(/\s+/g, '')}`}
@@ -98,14 +100,14 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                 }}
                 className="inline-flex min-h-10 items-center rounded-lg bg-harvest-500 px-4 text-sm font-semibold text-forest-950 transition-colors hover:bg-harvest-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-harvest-400"
               >
-                Contact Us
+                {t('footer.contact')}
               </a>
               <a
                 href={`https://wa.me/${whatsappNumber}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Message Harvest Field on WhatsApp"
-                title="Message us on WhatsApp"
+                aria-label={t('footer.whatsapp')}
+                title={t('footer.whatsappTitle')}
                 className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-forest-700 text-stone-100 transition-colors hover:border-harvest-400 hover:text-harvest-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-harvest-400"
               >
                 <MessageCircle className="h-5 w-5" aria-hidden="true" />
@@ -115,7 +117,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                 onClick={() => onNavigate('admin')}
                 className="text-xs text-stone-400 transition-colors hover:text-harvest-400"
               >
-                Staff sign in
+                {t('footer.staff')}
               </button>
             </div>
           </div>

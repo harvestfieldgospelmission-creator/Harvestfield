@@ -2,7 +2,9 @@ import React from 'react';
 import { ArrowRight, BookOpen, Camera, HeartHandshake } from 'lucide-react';
 import { GALLERY_PHOTOS, JOURNAL_POSTS, PageId } from '../data/missionData';
 import { SafeImage } from '../components/SafeImage';
-import { LocalizedContent } from '../i18n';
+import { LocalizedContent, useLanguage } from '../i18n';
+import { localizeJournalPost } from '../data/journalTranslations';
+import { localizeGalleryPhoto } from '../data/galleryTranslations';
 import { getPagePath } from '../routing';
 
 interface ImpactPageProps {
@@ -16,9 +18,13 @@ export const ImpactPage: React.FC<ImpactPageProps> = ({
   onSelectArticle,
   onOpenPhoto,
 }) => {
-  const featuredPost = JOURNAL_POSTS[0];
-  const otherPosts = JOURNAL_POSTS.slice(1, 4);
-  const featuredPhotos = GALLERY_PHOTOS.filter((photo) => photo.region !== 'Official Flyers').slice(0, 6);
+  const { language } = useLanguage();
+  const featuredPost = localizeJournalPost(JOURNAL_POSTS[0], language);
+  const otherPosts = JOURNAL_POSTS.slice(1, 4).map((post) => localizeJournalPost(post, language));
+  const featuredPhotos = GALLERY_PHOTOS
+    .filter((photo) => photo.region !== 'Official Flyers')
+    .slice(0, 6)
+    .map((photo) => localizeGalleryPhoto(photo, language));
 
   return (
     <LocalizedContent>

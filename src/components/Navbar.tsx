@@ -3,6 +3,7 @@ import { ChevronDown, Menu, X } from 'lucide-react';
 import { PageId } from '../data/missionData';
 import { getPagePath } from '../routing';
 import { MissionMark } from './MissionMark';
+import { useTranslation } from 'react-i18next';
 import { LocalizedContent, useLanguage } from '../i18n';
 
 interface NavbarProps {
@@ -12,32 +13,32 @@ interface NavbarProps {
 
 const NAV_GROUPS: { label: string; items: { id: PageId; label: string }[] }[] = [
   {
-    label: 'About',
+    label: 'nav.groups.about',
     items: [
-      { id: 'mission', label: 'About the Mission' },
-      { id: 'leadership', label: 'Founder & Leadership' },
+      { id: 'mission', label: 'nav.about' },
+      { id: 'leadership', label: 'nav.leadership' },
     ],
   },
   {
-    label: 'Our Work',
+    label: 'nav.groups.work',
     items: [
-      { id: 'academy', label: 'Harvest Field Academy' },
-      { id: 'impact', label: 'Impact & Stories' },
+      { id: 'academy', label: 'nav.academy' },
+      { id: 'impact', label: 'nav.impact' },
     ],
   },
   {
-    label: 'Stories',
+    label: 'nav.groups.stories',
     items: [
-      { id: 'gallery', label: 'Field Gallery' },
-      { id: 'journal', label: 'Journal & Articles' },
+      { id: 'gallery', label: 'nav.gallery' },
+      { id: 'journal', label: 'nav.journal' },
     ],
   },
   {
-    label: 'Connect',
+    label: 'nav.groups.connect',
     items: [
-      { id: 'prayer', label: 'Prayer Request' },
-      { id: 'join', label: 'Join the Mission' },
-      { id: 'contact', label: 'Contact Us' },
+      { id: 'prayer', label: 'nav.prayer' },
+      { id: 'join', label: 'nav.join' },
+      { id: 'contact', label: 'nav.contact' },
     ],
   },
 ];
@@ -51,6 +52,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const { language, setLanguage } = useLanguage();
+  const { t } = useTranslation();
   const mobileMenuRef = useRef<HTMLElement>(null);
   const menuToggleRef = useRef<HTMLButtonElement>(null);
 
@@ -80,14 +82,14 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
 
   const languageSelector = (className: string) => (
     <label className={className}>
-      <span className="sr-only">Select language</span>
+      <span className="sr-only">{t('nav.selectLanguage')}</span>
       <select
         value={language}
         onChange={(event) => {
           const value = event.currentTarget.value;
           if (value === 'en' || value === 'fr' || value === 'es') setLanguage(value);
         }}
-        aria-label="Select language"
+        aria-label={t('nav.selectLanguage')}
         className="h-10 w-full rounded-lg border border-stone-300 bg-white px-2.5 text-xs font-semibold text-forest-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-800"
       >
         <option value="en">English</option>
@@ -136,7 +138,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
           </button>
 
           <nav className="hidden items-center gap-1 lg:flex xl:gap-2" aria-label="Primary navigation">
-            {pageLink('home', 'Home', `relative rounded-lg px-3 py-2 text-sm font-semibold transition-colors hover:text-forest-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-800 ${currentPage === 'home' ? 'text-forest-950' : 'text-stone-600'}`)}
+            {pageLink('home', t('nav.home'), `relative rounded-lg px-3 py-2 text-sm font-semibold transition-colors hover:text-forest-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-800 ${currentPage === 'home' ? 'text-forest-950' : 'text-stone-600'}`)}
             {NAV_GROUPS.map((group) => {
               const isGroupActive = group.items.some((item) => item.id === currentPage);
               const isOpen = openDropdown === group.label;
@@ -157,7 +159,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
                     onClick={() => setOpenDropdown(isOpen ? null : group.label)}
                     className={`inline-flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-semibold transition-colors hover:bg-stone-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-800 ${isGroupActive ? 'text-forest-950' : 'text-stone-600'}`}
                   >
-                    {group.label}
+                    {t(group.label)}
                     <ChevronDown className={`h-3.5 w-3.5 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
                   </button>
                   <div
@@ -165,7 +167,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
                   >
                     {group.items.map((item) => pageLink(
                       item.id,
-                      item.label,
+                      t(item.label),
                       `${DESKTOP_LINK_CLASS} ${currentPage === item.id ? 'bg-forest-50 font-semibold text-forest-900' : ''}`,
                     ))}
                   </div>
@@ -178,7 +180,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
             {languageSelector('hidden sm:block')}
             {pageLink(
               'partner',
-              'Support the Mission',
+              t('nav.support'),
               `hidden rounded-lg px-3 py-2.5 text-xs font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-forest-800 xl:inline-flex ${currentPage === 'partner' ? 'bg-harvest-600 text-white' : 'bg-forest-900 text-white hover:bg-forest-800'}`,
             )}
             <button
@@ -186,7 +188,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
               ref={menuToggleRef}
               onClick={() => setMobileOpen((previous) => !previous)}
               className="inline-flex h-11 w-11 items-center justify-center rounded-lg text-stone-800 transition-colors hover:bg-stone-200/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-800 lg:hidden"
-              aria-label={mobileOpen ? 'Close navigation menu' : 'Open navigation menu'}
+              aria-label={mobileOpen ? t('nav.close') : t('nav.open')}
               aria-expanded={mobileOpen}
               aria-controls="hf-mobile-navigation"
             >
@@ -198,7 +200,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
         {mobileOpen && (
           <button
             type="button"
-            aria-label="Close navigation menu"
+            aria-label={t('nav.close')}
             onClick={() => setMobileOpen(false)}
             className="fixed inset-x-0 bottom-0 top-[4.1rem] bg-forest-950/35 lg:hidden"
           />
@@ -214,28 +216,28 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
         >
           <div className="flex items-center justify-between border-b border-stone-200 px-5 py-4">
             <div>
-              <p className="font-serif text-lg font-semibold text-forest-950">Explore the Mission</p>
-              <p className="mt-0.5 text-xs text-stone-500">Find a page or get involved</p>
+              <p className="font-serif text-lg font-semibold text-forest-950">{t('nav.explore')}</p>
+              <p className="mt-0.5 text-xs text-stone-500">{t('nav.exploreHint')}</p>
             </div>
             <button
               type="button"
               onClick={() => setMobileOpen(false)}
               className="inline-flex h-10 w-10 items-center justify-center rounded-lg text-stone-600 hover:bg-stone-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-800"
-              aria-label="Close navigation"
+              aria-label={t('nav.close')}
             >
               <X className="h-5 w-5" />
             </button>
           </div>
 
           <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 py-3">
-            {pageLink('home', 'Home', `${MOBILE_LINK_CLASS} mb-2 ${currentPage === 'home' ? 'bg-forest-900 text-white hover:bg-forest-800 hover:text-white' : ''}`)}
+            {pageLink('home', t('nav.home'), `${MOBILE_LINK_CLASS} mb-2 ${currentPage === 'home' ? 'bg-forest-900 text-white hover:bg-forest-800 hover:text-white' : ''}`)}
             {NAV_GROUPS.map((group) => (
               <section key={group.label} className="border-t border-stone-200 py-3">
-                <h2 className="px-3 pb-1.5 text-[11px] font-bold uppercase tracking-[0.16em] text-harvest-600">{group.label}</h2>
+                <h2 className="px-3 pb-1.5 text-[11px] font-bold uppercase tracking-[0.16em] text-harvest-600">{t(group.label)}</h2>
                 <div className="space-y-0.5">
                   {group.items.map((item) => pageLink(
                     item.id,
-                    item.label,
+                    t(item.label),
                     `${MOBILE_LINK_CLASS} ${currentPage === item.id ? 'bg-forest-900 text-white hover:bg-forest-800 hover:text-white' : ''}`,
                   ))}
                 </div>
@@ -245,8 +247,8 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
 
           <div className="shrink-0 border-t border-stone-200 bg-[#faf8f4] px-4 pb-[max(1rem,env(safe-area-inset-bottom))] pt-3">
             <div className="grid grid-cols-2 gap-2">
-              {pageLink('join', 'Join Us', 'inline-flex min-h-11 items-center justify-center rounded-lg border border-forest-800 px-3 py-2.5 text-sm font-semibold text-forest-900 transition-colors hover:bg-forest-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-800')}
-              {pageLink('partner', 'Support Mission', 'inline-flex min-h-11 items-center justify-center rounded-lg bg-forest-900 px-3 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-forest-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-harvest-500')}
+              {pageLink('join', t('footer.join'), 'inline-flex min-h-11 items-center justify-center rounded-lg border border-forest-800 px-3 py-2.5 text-sm font-semibold text-forest-900 transition-colors hover:bg-forest-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-800')}
+              {pageLink('partner', t('nav.supportShort'), 'inline-flex min-h-11 items-center justify-center rounded-lg bg-forest-900 px-3 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-forest-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-harvest-500')}
             </div>
             <div className="mt-3">{languageSelector('block sm:hidden')}</div>
           </div>
