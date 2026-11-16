@@ -54,6 +54,7 @@ export interface JournalPost {
     _type: 'block' | 'image';
     _key?: string;
     style?: string;
+    markDefs?: Array<{ _key: string; _type: string; href?: string }>;
     children?: Array<{ _type: string; text?: string; marks?: string[] }>;
     asset?: { url?: string };
     alt?: string;
