@@ -12,9 +12,9 @@ const SUPPORT_PATHS = [
   {
     title: 'Pray with the mission',
     description: 'Stand with the work through prayer for gospel outreach, discipleship, local communities and mission workers.',
-    action: 'Share a prayer request',
+    action: 'Send a prayer request',
     icon: Heart,
-    page: 'contact' as PageId,
+    page: 'prayer' as PageId,
   },
   {
     title: 'Serve in the field',
