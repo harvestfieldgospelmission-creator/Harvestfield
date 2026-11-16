@@ -234,7 +234,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
               <section key={group.label} className="border-t border-stone-200 py-2.5">
                 <h2 className="px-3 pb-1 text-[10px] font-bold uppercase tracking-[0.14em] text-harvest-600">{t(group.label)}</h2>
                 <div className="space-y-0.5">
-                  {group.items.map((item) => pageLink(
+                  {group.items.filter((item) => item.id !== 'join' && item.id !== 'partner').map((item) => pageLink(
                     item.id,
                     t(item.label),
                     `${MOBILE_LINK_CLASS} ${currentPage === item.id ? 'bg-forest-900 text-white hover:bg-forest-800 hover:text-white' : ''}`,
