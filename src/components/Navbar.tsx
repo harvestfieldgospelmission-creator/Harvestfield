@@ -159,7 +159,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
                     onClick={() => setOpenDropdown(isOpen ? null : group.label)}
                     className={`inline-flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-semibold transition-colors hover:bg-stone-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-800 ${isGroupActive ? 'text-forest-950' : 'text-stone-600'}`}
                   >
-                    {group.label}
+                    {t(group.label)}
                     <ChevronDown className={`h-3.5 w-3.5 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
                   </button>
                   <div
@@ -237,7 +237,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
                 <div className="space-y-0.5">
                   {group.items.map((item) => pageLink(
                     item.id,
-                    item.label,
+                    t(item.label),
                     `${MOBILE_LINK_CLASS} ${currentPage === item.id ? 'bg-forest-900 text-white hover:bg-forest-800 hover:text-white' : ''}`,
                   ))}
                 </div>
