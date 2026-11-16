@@ -185,7 +185,6 @@ const translations: Record<Exclude<Language, 'en'>, Record<string, string>> = {
     'you@example.com': 'vous@exemple.com',
     'e.g., Rivers State': 'par ex. État de Rivers',
     'e.g., ONELGA': 'par ex. ONELGA',
-    Other: 'Autre',
     'Share what inspires you and how you hope to serve...':
       'Expliquez ce qui vous inspire et comment vous souhaitez servir…',
     'Please complete all required fields before continuing.':
@@ -616,9 +615,6 @@ const translations: Record<Exclude<Language, 'en'>, Record<string, string>> = {
     "Tell us what you would like to discuss...": "Indiquez-nous le sujet dont vous souhaitez discuter...",
     "Send partnership enquiry": "Envoyer une demande de partenariat",
     "Please do not include bank passwords, card details or other highly sensitive information.": "Veuillez ne pas inclure de mots de passe bancaires, de coordonnées de carte ou d’autres informations hautement sensibles.",
-    "Recommended": "Recommandé",
-    "Copied": "Copié",
-    "Copy": "Copier",
     "Domiciliary Account (USD / International)": "Compte domicilié (USD / international)",
     "Naira Current Account": "Compte courant en nairas",
     "Designated for international mission partners and foreign currency support.": "Destiné aux partenaires missionnaires internationaux et au soutien en devises étrangères.",
@@ -803,7 +799,6 @@ const translations: Record<Exclude<Language, 'en'>, Record<string, string>> = {
     'you@example.com': 'tu@ejemplo.com',
     'e.g., Rivers State': 'p. ej., estado de Rivers',
     'e.g., ONELGA': 'p. ej., ONELGA',
-    Other: 'Otro',
     'Share what inspires you and how you hope to serve...':
       'Cuéntanos qué te inspira y cómo esperas servir…',
     'Please complete all required fields before continuing.':
@@ -1236,9 +1231,6 @@ const translations: Record<Exclude<Language, 'en'>, Record<string, string>> = {
     "Tell us what you would like to discuss...": "Cuéntanos qué te gustaría conversar...",
     "Send partnership enquiry": "Enviar consulta de colaboración",
     "Please do not include bank passwords, card details or other highly sensitive information.": "No incluyas contraseñas bancarias, datos de tarjetas ni otra información altamente confidencial.",
-    "Recommended": "Recomendado",
-    "Copied": "Copiado",
-    "Copy": "Copiar",
     "Domiciliary Account (USD / International)": "Cuenta domiciliaria (USD / internacional)",
     "Naira Current Account": "Cuenta corriente en nairas",
     "Designated for international mission partners and foreign currency support.": "Destinada a colaboradores misioneros internacionales y apoyo en moneda extranjera.",
