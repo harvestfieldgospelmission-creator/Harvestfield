@@ -170,11 +170,11 @@ export const HomePage: React.FC<HomePageProps> = ({
             <p className="max-w-2xl text-sm leading-relaxed text-stone-200 sm:text-base lg:text-xl">
               From rural communities to cross-border mission fields, Harvest Field Gospel Mission Int’l equips believers to share Christ, serve people and strengthen local communities.
             </p>
-            <div className="flex w-full max-w-xl flex-col gap-2 pt-2 min-[420px]:flex-row min-[420px]:flex-wrap sm:gap-3">
+            <div className="flex w-full max-w-xl flex-col gap-2 pt-2 min-[420px]:flex-row min-[420px]:flex-nowrap sm:gap-3">
               <button
                 type="button"
                 onClick={() => onNavigate('join')}
-                className="inline-flex min-h-12 w-full min-w-0 items-center justify-center gap-2 rounded-lg bg-harvest-500 px-4 py-3 text-sm font-semibold text-forest-950 shadow-lg shadow-black/15 transition-colors hover:bg-harvest-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white min-[420px]:w-auto sm:px-6"
+                className="inline-flex min-h-12 w-full min-w-0 items-center justify-center gap-2 rounded-lg bg-harvest-500 px-4 py-3 text-sm font-semibold text-forest-950 shadow-lg shadow-black/15 transition-colors hover:bg-harvest-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white min-[420px]:w-auto min-[420px]:flex-1 sm:px-6"
               >
                 <span>Join Us</span>
                 <ArrowRight className="h-4 w-4 shrink-0" />
@@ -182,7 +182,7 @@ export const HomePage: React.FC<HomePageProps> = ({
               <button
                 type="button"
                 onClick={() => onNavigate('mission')}
-                className="inline-flex min-h-12 w-full min-w-0 items-center justify-center rounded-lg border border-white/55 bg-white/10 px-4 py-3 text-sm font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white/20 min-[420px]:w-auto sm:px-6"
+                className="inline-flex min-h-12 w-full min-w-0 items-center justify-center rounded-lg border border-white/55 bg-white/10 px-4 py-3 text-sm font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white/20 min-[420px]:w-auto min-[420px]:flex-1 sm:px-6"
               >
                 <span className="sm:hidden">Explore</span>
                 <span className="hidden sm:inline">Discover Our Mission</span>
