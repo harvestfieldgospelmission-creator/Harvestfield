@@ -1,4 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
+import i18next from 'i18next';
+import { initReactI18next } from 'react-i18next';
 
 export type Language = 'en' | 'fr' | 'es';
 
@@ -861,6 +863,22 @@ const translations: Record<Exclude<Language, 'en'>, Record<string, string>> = {
   },
 };
 
+// i18next is the single translation engine. Existing reviewed translations are
+// retained while page-by-page semantic-key migration is completed.
+i18next.use(initReactI18next).init({
+  resources: {
+    en: { translation: {} },
+    fr: { translation: translations.fr },
+    es: { translation: translations.es },
+  },
+  lng: 'en',
+  fallbackLng: 'en',
+  interpolation: { escapeValue: false },
+  returnEmptyString: false,
+  initImmediate: false,
+});
+
+
 interface LanguageContextValue {
   language: Language;
   setLanguage: (language: Language) => void;
@@ -883,7 +901,7 @@ const TRANSLATABLE_ATTRIBUTES = new Set([
 function translate(text: string, language: Language): string {
   if (language === 'en') return text;
   const trimmed = text.trim();
-  const translated = translations[language][trimmed];
+  const translated = i18next.t(trimmed, { lng: language, defaultValue: trimmed });
   if (!translated) return text;
   return `${text.slice(0, text.indexOf(trimmed))}${translated}${text.slice(text.indexOf(trimmed) + trimmed.length)}`;
 }
@@ -920,6 +938,7 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   });
 
   useEffect(() => {
+    void i18next.changeLanguage(language);
     document.documentElement.lang = language;
     try {
       window.localStorage.setItem('hf_language', language);
