@@ -1,5 +1,5 @@
 import React from 'react';
-import { Clock3, Mail, MapPin, Phone } from 'lucide-react';
+import { Mail, MapPin, Phone } from 'lucide-react';
 import { MISSION_INFO } from '../data/missionData';
 import { LocalizedContent } from '../i18n';
 
@@ -25,9 +25,8 @@ export const ContactPage: React.FC = () => (
           <section className="rounded-2xl border border-stone-200 bg-white p-6 sm:p-8">
             <h2 className="font-serif text-2xl font-semibold text-forest-950">Visit Us</h2>
             <div className="mt-5 space-y-5 text-sm">
-              <div className="flex items-start gap-3"><MapPin className="mt-0.5 h-4 w-4 shrink-0 text-forest-800" /><div><p className="font-semibold">Head Office</p><p className="mt-1 text-stone-600">{MISSION_INFO.headOffice}</p></div></div>
-              <div className="flex items-start gap-3"><MapPin className="mt-0.5 h-4 w-4 shrink-0 text-forest-800" /><div><p className="font-semibold">Fellowship Venue</p><p className="mt-1 text-stone-600">{MISSION_INFO.fellowshipVenue}</p></div></div>
-              <div className="flex items-start gap-3"><Clock3 className="mt-0.5 h-4 w-4 shrink-0 text-forest-800" /><div><p className="font-semibold">Office Hours</p><p className="mt-1 text-stone-600">{MISSION_INFO.officeHours}</p></div></div>
+              <div className="flex items-start gap-3"><MapPin className="mt-0.5 h-4 w-4 shrink-0 text-forest-800" /><div><p className="font-semibold">Head Office</p><p className="mt-1 text-stone-600">Omoku, Rivers State, Nigeria</p></div></div>
+              <p className="text-xs leading-relaxed text-stone-500">Please contact the mission team before visiting so we can confirm the appropriate meeting location and arrangements.</p>
             </div>
           </section>
         </aside>
