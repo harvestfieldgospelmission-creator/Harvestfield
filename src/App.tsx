@@ -5,7 +5,8 @@
 
 import { useEffect, useState } from 'react';
 import { ArrowUp } from 'lucide-react';
-import { PageId } from './data/missionData';
+import { JOURNAL_POSTS, PageId, SITE_ORIGIN } from './data/missionData';
+import { getPagePath } from './routing';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { HomePage } from './pages/HomePage';
@@ -16,20 +17,83 @@ import { JournalPage } from './pages/JournalPage';
 import { PartnerPage } from './pages/PartnerPage';
 import { ContactPage } from './pages/ContactPage';
 import { AdminPage } from './pages/AdminPage';
+import { JoinUsPage } from './pages/JoinUsPage';
+import { LanguageProvider } from './i18n';
 
-const VALID_PAGES: PageId[] = ['home', 'mission', 'leadership', 'gallery', 'journal', 'partner', 'contact', 'admin'];
+const VALID_PAGES: PageId[] = [
+  'home',
+  'mission',
+  'leadership',
+  'gallery',
+  'journal',
+  'partner',
+  'contact',
+  'join',
+  'admin',
+];
 
-function parseHash(): { page: PageId; subId: string | null } {
-  const raw = window.location.hash.replace(/^#\/?/, '');
-  if (!raw) return { page: 'home', subId: null };
-  const [pagePart, ...rest] = raw.split('/');
+const PAGE_METADATA: Record<PageId, { title: string; description: string }> = {
+  home: {
+    title: "Harvest Field Gospel Mission Int'l — Taking the Nations for Christ",
+    description:
+      'Harvest Field Gospel Mission Int’l equips believers for evangelism, discipleship, and rural and foreign missions.',
+  },
+  mission: {
+    title: "Our Mission | Harvest Field Gospel Mission Int'l",
+    description:
+      'Learn about Harvest Field Gospel Mission, its outreach, discipleship, and community work.',
+  },
+  leadership: {
+    title: "Leadership | Harvest Field Gospel Mission Int'l",
+    description:
+      'Meet the founder and leadership team of Harvest Field Gospel Mission.',
+  },
+  gallery: {
+    title: "Mission Gallery | Harvest Field Gospel Mission Int'l",
+    description:
+      'View photographs from Harvest Field school outreaches, rural evangelism, and foreign missions.',
+  },
+  journal: {
+    title: "Mission Journal | Harvest Field Gospel Mission Int'l",
+    description:
+      'Read field reports, youth outreach stories, discipleship notes, and ministry articles.',
+  },
+  partner: {
+    title: "Partner with Us | Harvest Field Gospel Mission Int'l",
+    description:
+      'Learn how to pray, give, and partner with Harvest Field Gospel Mission.',
+  },
+  contact: {
+    title: "Contact | Harvest Field Gospel Mission Int'l",
+    description:
+      'Contact Harvest Field Gospel Mission for prayer, counselling, outreach invitations, or enquiries.',
+  },
+  join: {
+    title: "Join Us | Harvest Field Gospel Mission Int'l",
+    description:
+      'Apply to serve with Harvest Field Gospel Mission and tell us what inspires you to join.',
+  },
+  admin: {
+    title: "Staff Sign In | Harvest Field Gospel Mission Int'l",
+    description: 'Staff sign-in for the Harvest Field Gospel Mission blog editor.',
+  },
+};
+
+function parseRoute(raw: string): { page: PageId; subId: string | null } {
+  const cleaned = raw.replace(/^#\/?/, '').replace(/^\/+|\/+$/g, '');
+  if (!cleaned) return { page: 'home', subId: null };
+  const [pagePart, ...rest] = cleaned.split('/');
   const page = VALID_PAGES.includes(pagePart as PageId) ? (pagePart as PageId) : 'home';
   const subId = rest.length > 0 && rest[0] ? rest.join('/') : null;
   return { page, subId };
 }
 
+function parseLocation(): { page: PageId; subId: string | null } {
+  return parseRoute(window.location.hash || window.location.pathname);
+}
+
 export default function App() {
-  const initial = parseHash();
+  const initial = parseLocation();
   const [currentPage, setCurrentPage] = useState<PageId>(initial.page);
   const [selectedArticleSlug, setSelectedArticleSlug] = useState<string | null>(
     initial.page === 'journal' ? initial.subId : null
@@ -40,15 +104,55 @@ export default function App() {
   const [showBackToTop, setShowBackToTop] = useState(false);
 
   useEffect(() => {
-    const handleHashChange = () => {
-      const next = parseHash();
+    const syncRoute = () => {
+      const next = parseLocation();
       setCurrentPage(next.page);
       setSelectedArticleSlug(next.page === 'journal' ? next.subId : null);
       setSelectedPhotoId(next.page === 'gallery' ? next.subId : null);
+      if (window.location.hash) {
+        window.history.replaceState(null, '', getPagePath(next.page, next.subId));
+      }
     };
-    window.addEventListener('hashchange', handleHashChange);
-    return () => window.removeEventListener('hashchange', handleHashChange);
+
+    syncRoute();
+    window.addEventListener('popstate', syncRoute);
+    window.addEventListener('hashchange', syncRoute);
+    return () => {
+      window.removeEventListener('popstate', syncRoute);
+      window.removeEventListener('hashchange', syncRoute);
+    };
   }, []);
+
+  useEffect(() => {
+    const metadata = PAGE_METADATA[currentPage];
+    const article = selectedArticleSlug
+      ? JOURNAL_POSTS.find((post) => post.slug === selectedArticleSlug)
+      : null;
+    document.title = article
+      ? `${article.title} | Harvest Field Journal`
+      : metadata.title;
+
+    const description = document.querySelector<HTMLMetaElement>('meta[name="description"]');
+    if (description) description.content = article?.excerpt || metadata.description;
+
+    let canonical = document.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+    if (!canonical) {
+      canonical = document.createElement('link');
+      canonical.rel = 'canonical';
+      document.head.appendChild(canonical);
+    }
+    const routeSubId =
+      currentPage === 'journal' ? selectedArticleSlug : currentPage === 'gallery' ? selectedPhotoId : null;
+    canonical.href = `${SITE_ORIGIN}${getPagePath(currentPage, routeSubId)}`;
+
+    let robots = document.querySelector<HTMLMetaElement>('meta[name="robots"]');
+    if (!robots) {
+      robots = document.createElement('meta');
+      robots.name = 'robots';
+      document.head.appendChild(robots);
+    }
+    robots.content = currentPage === 'admin' ? 'noindex, nofollow' : 'index, follow';
+  }, [currentPage, selectedArticleSlug, selectedPhotoId]);
 
   useEffect(() => {
     const updateBackToTopVisibility = () => setShowBackToTop(window.scrollY > 400);
@@ -92,33 +196,32 @@ export default function App() {
     setCurrentPage(page);
     setSelectedArticleSlug(page === 'journal' ? subId : null);
     setSelectedPhotoId(page === 'gallery' ? subId : null);
-
-    if (page === 'home') {
-      window.location.hash = '';
-    } else if (subId) {
-      window.location.hash = `${page}/${subId}`;
-    } else {
-      window.location.hash = page;
-    }
+    window.history.pushState(null, '', getPagePath(page, subId));
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleSelectArticle = (slug: string | null) => {
-    setSelectedArticleSlug(slug);
-    window.location.hash = slug ? `journal/${slug}` : 'journal';
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    handleNavigate('journal', slug);
   };
 
   const handleOpenGalleryPhoto = (photoId: string) => {
     handleNavigate('gallery', photoId);
   };
 
-  return (
-    <div className="min-h-screen flex flex-col bg-[#faf8f4] text-[#1c1917] overflow-x-hidden">
-      <Navbar currentPage={currentPage} onNavigate={(page) => handleNavigate(page)} />
-      <div aria-hidden="true" className="h-[4.1rem] shrink-0" />
+  const handleClearInitialPhoto = () => {
+    setSelectedPhotoId(null);
+    if (currentPage === 'gallery' && selectedPhotoId) {
+      window.history.replaceState(null, '', getPagePath('gallery'));
+    }
+  };
 
-      <main className="flex-1">
+  return (
+    <LanguageProvider>
+      <div className="min-h-screen flex flex-col bg-[#faf8f4] text-[#1c1917] overflow-x-hidden">
+        <Navbar currentPage={currentPage} onNavigate={(page) => handleNavigate(page)} />
+        <div aria-hidden="true" className="h-[4.1rem] shrink-0" />
+
+        <main className="flex-1">
         {currentPage === 'home' && (
           <HomePage
             onNavigate={(page) => handleNavigate(page)}
@@ -131,7 +234,7 @@ export default function App() {
         {currentPage === 'gallery' && (
           <GalleryPage
             initialPhotoId={selectedPhotoId}
-            onClearInitialPhoto={() => setSelectedPhotoId(null)}
+            onClearInitialPhoto={handleClearInitialPhoto}
           />
         )}
         {currentPage === 'journal' && (
@@ -144,21 +247,23 @@ export default function App() {
           <PartnerPage onNavigate={(page) => handleNavigate(page)} />
         )}
         {currentPage === 'contact' && <ContactPage />}
+        {currentPage === 'join' && <JoinUsPage />}
         {currentPage === 'admin' && <AdminPage />}
-      </main>
+        </main>
 
-      <Footer onNavigate={(page) => handleNavigate(page)} />
-      {showBackToTop && (
-        <button
-          type="button"
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="fixed bottom-5 right-4 z-40 inline-flex h-12 w-12 items-center justify-center rounded-full bg-forest-900 text-white shadow-lg transition-colors hover:bg-forest-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-harvest-400 focus-visible:ring-offset-2 sm:bottom-6 sm:right-6"
-          aria-label="Back to top"
-          title="Back to top"
-        >
-          <ArrowUp className="h-5 w-5" aria-hidden="true" />
-        </button>
-      )}
-    </div>
+        <Footer onNavigate={(page) => handleNavigate(page)} />
+        {showBackToTop && (
+          <button
+            type="button"
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className="fixed bottom-5 right-4 z-40 inline-flex h-12 w-12 items-center justify-center rounded-full bg-forest-900 text-white shadow-lg transition-colors hover:bg-forest-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-harvest-400 focus-visible:ring-offset-2 sm:bottom-6 sm:right-6"
+            aria-label="Back to top"
+            title="Back to top"
+          >
+            <ArrowUp className="h-5 w-5" aria-hidden="true" />
+          </button>
+        )}
+      </div>
+    </LanguageProvider>
   );
 }

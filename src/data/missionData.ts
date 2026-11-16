@@ -6,7 +6,10 @@ export type PageId =
   | 'journal'
   | 'partner'
   | 'contact'
+  | 'join'
   | 'admin';
+
+export const SITE_ORIGIN = 'https://harvestfieldgospelmission.netlify.app';
 
 export interface MandateItem {
   id: string;
@@ -150,8 +153,8 @@ export const MANDATES: MandateItem[] = [
       'Rural and urban gospel penetration initiatives',
       'Follow-up visits connecting new believers to local fellowships',
     ],
-    image: '/assets/field/linde-massa-village.jpg',
-    imageAlt: 'Rural evangelism outreach gathering in Linde-Massa, Cameroon',
+    image: '/assets/field/student-conference-preaching.jpg',
+    imageAlt: 'Preacher addressing students gathered for a Harvest Field conference',
   },
   {
     id: 'school-youth-outreaches',
@@ -166,8 +169,8 @@ export const MANDATES: MandateItem[] = [
       'Youths and Students Conferences across Rivers State',
       'Personal prayer and mentorship for students',
     ],
-    image: '/assets/field/school-prayer-outreach.jpg',
-    imageAlt: 'Evangelist praying with students during an intensive school outreach',
+    image: '/assets/field/student-conference.jpg',
+    imageAlt: 'Students raising their hands in prayer at a Harvest Field student conference',
   },
   {
     id: 'christian-counseling',
@@ -245,6 +248,26 @@ export const GALLERY_PHOTOS: GalleryPhoto[] = [
     program: 'Student & Youth Outreach',
     caption: 'Students raise their hands in prayer during a Harvest Field student conference.',
     aspect: 'wide',
+  },
+  {
+    id: 'g18',
+    src: '/assets/field/founder-speaking.jpg',
+    title: 'Evang. David Abrebor Preaching',
+    region: 'Nigeria & Schools',
+    location: 'Harvest Field Gospel Mission',
+    program: 'Preaching & Teaching',
+    caption: 'Evang. David Abrebor preaching at a ministry gathering.',
+    aspect: 'landscape',
+  },
+  {
+    id: 'g19',
+    src: '/assets/field/student-conference-preaching.jpg',
+    title: 'Harvest Field Student Conference',
+    region: 'Nigeria & Schools',
+    location: 'Harvest Field Student Conference',
+    program: 'Student & Youth Outreach',
+    caption: 'Preaching to students gathered for a Harvest Field conference.',
+    aspect: 'landscape',
   },
   {
     id: 'g1',

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Check, CheckCircle2, Copy } from 'lucide-react';
 import { BANK_ACCOUNTS, MISSION_INFO, PageId } from '../data/missionData';
 import { BankAccountsGrid } from '../components/BankAccountsGrid';
+import { LocalizedContent } from '../i18n';
 
 interface PartnerPageProps {
   onNavigate: (page: PageId) => void;
@@ -149,6 +150,7 @@ export const PartnerPage: React.FC<PartnerPageProps> = ({ onNavigate }) => {
   };
 
   return (
+    <LocalizedContent>
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16 space-y-16">
       {/* Header */}
       <section className="hf-page-intro max-w-3xl space-y-4">
@@ -589,5 +591,6 @@ export const PartnerPage: React.FC<PartnerPageProps> = ({ onNavigate }) => {
         </aside>
       </section>
     </div>
+    </LocalizedContent>
   );
 };

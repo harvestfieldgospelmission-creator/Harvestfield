@@ -2,6 +2,14 @@ import React, { useState } from 'react';
 import { ArrowRight, CheckCircle2 } from 'lucide-react';
 import { FOUNDER_PROFILE, MISSION_INFO, PageId } from '../data/missionData';
 import { SafeImage } from '../components/SafeImage';
+import { LocalizedContent } from '../i18n';
+
+const DEMO_LEADERS = [
+  { name: 'Sample Leader 1', role: 'Sample Leadership Role 1', image: '/assets/field/sample-leader-1.svg' },
+  { name: 'Sample Leader 2', role: 'Sample Leadership Role 2', image: '/assets/field/sample-leader-2.svg' },
+  { name: 'Sample Leader 3', role: 'Sample Leadership Role 3', image: '/assets/field/sample-leader-3.svg' },
+  { name: 'Sample Leader 4', role: 'Sample Leadership Role 4', image: '/assets/field/sample-leader-4.svg' },
+];
 
 interface LeadershipPageProps {
   onNavigate: (page: PageId) => void;
@@ -31,6 +39,7 @@ export const LeadershipPage: React.FC<LeadershipPageProps> = ({ onNavigate }) =>
   };
 
   return (
+    <LocalizedContent>
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12 lg:py-16 space-y-16 lg:space-y-20">
       <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
         <div className="lg:col-span-5">
@@ -92,6 +101,46 @@ export const LeadershipPage: React.FC<LeadershipPageProps> = ({ onNavigate }) =>
               </button>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section className="space-y-6 border-t border-stone-200 pt-10">
+        <div className="max-w-3xl space-y-3">
+          <p className="text-xs font-semibold uppercase tracking-widest text-harvest-600">
+            Leadership Team · Sample Profiles
+          </p>
+          <h2 className="font-serif text-3xl font-semibold text-forest-950 sm:text-4xl">
+            Meet the Mission Leaders
+          </h2>
+          <p className="text-sm leading-relaxed text-stone-600 sm:text-base">
+            These are clearly marked placeholders. Replace them with verified names, roles, and
+            photographs before presenting them as ministry leaders.
+          </p>
+        </div>
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-4">
+          {DEMO_LEADERS.map((leader) => (
+            <article
+              key={leader.name}
+              className="overflow-hidden rounded-xl border border-stone-200 bg-white"
+            >
+              <div className="relative aspect-[4/3] bg-stone-100">
+                <img
+                  src={leader.image}
+                  alt="Illustrated sample portrait placeholder"
+                  className="h-full w-full object-cover"
+                />
+                <span className="absolute left-3 top-3 rounded-full bg-white/95 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-forest-900">
+                  Sample profile
+                </span>
+              </div>
+              <div className="space-y-1 p-4">
+                <h3 className="font-serif text-lg font-semibold text-forest-950">
+                  {leader.name}
+                </h3>
+                <p className="text-sm text-stone-600">{leader.role}</p>
+              </div>
+            </article>
+          ))}
         </div>
       </section>
 
@@ -288,5 +337,6 @@ export const LeadershipPage: React.FC<LeadershipPageProps> = ({ onNavigate }) =>
         </div>
       </section>
     </div>
+    </LocalizedContent>
   );
 };

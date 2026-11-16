@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { ArrowRight, Expand, X } from 'lucide-react';
 import { MANDATES, MISSION_ABOUT, PageId } from '../data/missionData';
 import { SafeImage } from '../components/SafeImage';
+import { LocalizedContent } from '../i18n';
 
 interface MissionPageProps {
   onNavigate: (page: PageId) => void;
@@ -83,6 +84,7 @@ export const MissionPage: React.FC<MissionPageProps> = ({ onNavigate }) => {
   const track = PARTICIPATION_TRACKS.find((t) => t.id === activeTrack) || PARTICIPATION_TRACKS[0];
 
   return (
+    <LocalizedContent>
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12 lg:py-16 space-y-16 lg:space-y-20">
       <section className="space-y-8">
         <div className="max-w-4xl space-y-5">
@@ -353,5 +355,6 @@ export const MissionPage: React.FC<MissionPageProps> = ({ onNavigate }) => {
         </div>
       )}
     </div>
+    </LocalizedContent>
   );
 };

@@ -1,6 +1,8 @@
 import React from 'react';
 import { MISSION_INFO, PageId } from '../data/missionData';
 import { MissionMark } from './MissionMark';
+import { LocalizedContent } from '../i18n';
+import { getPagePath } from '../routing';
 
 interface FooterProps {
   onNavigate: (page: PageId) => void;
@@ -8,6 +10,7 @@ interface FooterProps {
 
 export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
   return (
+    <LocalizedContent>
     <footer className="bg-forest-950 text-stone-200 border-t border-forest-800 mt-14">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-7 lg:py-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 pb-6 border-b border-forest-800/80">
@@ -41,16 +44,21 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                 { id: 'gallery' as PageId, label: 'Field Galleries' },
                 { id: 'journal' as PageId, label: 'Blog & Articles' },
                 { id: 'contact' as PageId, label: 'Contact Us' },
+                { id: 'join' as PageId, label: 'Join Us' },
                 { id: 'partner' as PageId, label: 'Partner, Give & Pray' },
               ].map((link) => (
                 <li key={link.id}>
-                  <button
-                    type="button"
-                    onClick={() => onNavigate(link.id)}
+                  <a
+                    href={getPagePath(link.id)}
+                    onClick={(event) => {
+                      if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+                      event.preventDefault();
+                      onNavigate(link.id);
+                    }}
                     className="text-stone-300 hover:text-white transition-colors cursor-pointer text-left"
                   >
                     {link.label}
-                  </button>
+                  </a>
                 </li>
               ))}
             </ul>
@@ -93,5 +101,6 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
         </div>
       </div>
     </footer>
+    </LocalizedContent>
   );
 };

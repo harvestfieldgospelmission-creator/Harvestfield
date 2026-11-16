@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { ChevronLeft, ChevronRight, Expand, X } from 'lucide-react';
 import { GALLERY_PHOTOS, GalleryPhoto } from '../data/missionData';
 import { SafeImage } from '../components/SafeImage';
+import { LocalizedContent } from '../i18n';
 
 interface GalleryPageProps {
   initialPhotoId?: string | null;
@@ -72,6 +73,7 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({
   const activePhoto = lightboxIndex !== null ? filteredPhotos[lightboxIndex] : null;
 
   return (
+    <LocalizedContent>
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 lg:py-12 space-y-8">
       {/* Header & Filter Bar */}
       <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-6 border-b border-stone-200">
@@ -116,23 +118,20 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({
       </div>
 
       {/* Media-First Bento / Grid */}
-      <div className="grid grid-cols-2 gap-4 sm:grid-cols-2 sm:gap-6 md:grid-cols-3 xl:grid-cols-4">
+      <div className="grid grid-cols-2 gap-4 sm:gap-6 md:grid-cols-3 xl:grid-cols-5">
         {filteredPhotos.map((photo, idx) => {
-          const isWide = photo.aspect === 'wide' && idx === 2;
           return (
             <button
               key={photo.id}
               type="button"
               onClick={() => setLightboxIndex(idx)}
-              className={`gallery-card group text-left bg-white border border-stone-200 rounded-2xl overflow-hidden flex flex-col transition-shadow duration-200 hover:shadow-md cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-800 ${
-                isWide ? 'sm:col-span-2' : ''
-              }`}
+              className="gallery-card group flex flex-col overflow-hidden rounded-2xl border border-stone-200 bg-white text-left transition-shadow duration-200 hover:shadow-md cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-800"
             >
               <div
                 className={`relative w-full bg-stone-200 overflow-hidden ${
                   photo.region === 'Official Flyers'
                     ? 'aspect-[3/4]'
-                    : isWide
+                    : photo.aspect === 'wide'
                     ? 'aspect-[16/9]'
                     : 'aspect-[4/3]'
                 }`}
@@ -247,5 +246,6 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({
         </div>
       )}
     </div>
+    </LocalizedContent>
   );
 };

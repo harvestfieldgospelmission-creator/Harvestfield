@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Check, Copy } from 'lucide-react';
 import { BANK_ACCOUNTS } from '../data/missionData';
+import { LocalizedContent } from '../i18n';
 
 interface BankAccountsGridProps {
   highlightCurrency?: 'NGN' | 'USD' | null;
@@ -23,6 +24,7 @@ export const BankAccountsGrid: React.FC<BankAccountsGridProps> = ({
   };
 
   return (
+    <LocalizedContent>
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
       {BANK_ACCOUNTS.map((acct) => {
         const isCopied = copiedId === acct.id;
@@ -97,5 +99,6 @@ export const BankAccountsGrid: React.FC<BankAccountsGridProps> = ({
         );
       })}
     </div>
+    </LocalizedContent>
   );
 };

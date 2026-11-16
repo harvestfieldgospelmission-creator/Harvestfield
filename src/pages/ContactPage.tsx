@@ -1,6 +1,25 @@
 import React, { useState } from 'react';
-import { Clock3, Facebook, Globe, Mail, MapPin, Phone, Send } from 'lucide-react';
+import {
+  Clock3,
+  Facebook,
+  Globe,
+  Instagram,
+  Mail,
+  MapPin,
+  MessageCircle,
+  Phone,
+  Send,
+  Youtube,
+} from 'lucide-react';
 import { MISSION_INFO } from '../data/missionData';
+import { LocalizedContent } from '../i18n';
+
+const DEMO_SOCIAL_LINKS = [
+  { label: 'Facebook', href: 'https://www.facebook.com/', icon: Facebook },
+  { label: 'Instagram', href: 'https://www.instagram.com/', icon: Instagram },
+  { label: 'YouTube', href: 'https://www.youtube.com/', icon: Youtube },
+  { label: 'WhatsApp', href: 'https://www.whatsapp.com/', icon: MessageCircle },
+];
 
 const CONTACT_TOPICS = [
   'General enquiry',
@@ -27,6 +46,7 @@ export const ContactPage: React.FC = () => {
   };
 
   return (
+    <LocalizedContent>
     <div className="max-w-7xl mx-auto px-4 py-10 sm:px-6 sm:py-12 lg:px-8 lg:py-16 space-y-10 lg:space-y-12">
       <header className="max-w-3xl space-y-4">
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-harvest-600">
@@ -117,20 +137,28 @@ export const ContactPage: React.FC = () => {
 
           <section className="rounded-2xl border border-stone-200 bg-limestone/60 p-6 sm:p-8">
             <div className="flex items-center gap-2 text-forest-950">
-              <Facebook className="h-5 w-5 text-harvest-600" aria-hidden="true" />
-              <h2 className="font-serif text-xl font-semibold">Find us on Facebook</h2>
+              <Globe className="h-5 w-5 text-harvest-600" aria-hidden="true" />
+              <h2 className="font-serif text-xl font-semibold">Follow the Mission</h2>
             </div>
-            <ul className="mt-4 space-y-3">
-              {MISSION_INFO.facebook.map((page) => (
-                <li key={page.label} className="text-sm text-stone-800">
-                  <span className="font-semibold">{page.label}</span>
-                  <span className="ml-1 text-stone-500">· {page.handle}</span>
-                </li>
-              ))}
-            </ul>
-            <p className="mt-4 text-xs leading-relaxed text-stone-500">
-              Official profile links can be added when the ministry shares their URLs.
+            <p className="mt-3 text-xs leading-relaxed text-stone-500">
+              Demo links only. Replace these with the ministry’s official social accounts.
             </p>
+            <div className="mt-4 grid grid-cols-2 gap-3">
+              {DEMO_SOCIAL_LINKS.map(({ label, href, icon: Icon }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${label} demo link`}
+                  className="inline-flex min-h-11 items-center gap-2 rounded-lg border border-stone-200 bg-white px-3 text-sm font-medium text-forest-950 transition-colors hover:border-forest-800 hover:bg-forest-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-800"
+                >
+                  <Icon className="h-4 w-4 text-harvest-600" aria-hidden="true" />
+                  <span>{label}</span>
+                  <span className="ml-auto text-[10px] uppercase tracking-wide text-stone-400">Demo</span>
+                </a>
+              ))}
+            </div>
           </section>
         </aside>
 
@@ -252,5 +280,6 @@ export const ContactPage: React.FC = () => {
         </section>
       </div>
     </div>
+    </LocalizedContent>
   );
 };

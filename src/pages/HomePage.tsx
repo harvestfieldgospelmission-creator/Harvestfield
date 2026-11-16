@@ -10,6 +10,8 @@ import {
 } from '../data/missionData';
 import { SafeImage } from '../components/SafeImage';
 import { BankAccountsGrid } from '../components/BankAccountsGrid';
+import { LocalizedContent } from '../i18n';
+import { getPagePath } from '../routing';
 
 interface HomePageProps {
   onNavigate: (page: PageId) => void;
@@ -19,36 +21,28 @@ interface HomePageProps {
 
 const HERO_SPOTS = [
   {
-    id: 'cameroon',
-    photoId: 'g1',
-    label: 'Cameroon',
-    image: '/assets/field/founder-linde-massa.jpg',
-    location: 'Linde-Massa, Northern Cameroon',
-    caption: 'Evang. David Abrebor during rural foreign mission outreach.',
+    id: 'founder-preaching',
+    photoId: 'g18',
+    label: 'Founder Preaching',
+    image: '/assets/field/founder-speaking.jpg',
+    location: 'Harvest Field Gospel Mission',
+    caption: 'Evang. David Abrebor preaching at a ministry gathering.',
   },
   {
-    id: 'tchad',
-    photoId: 'g3',
-    label: 'Tchad Republic',
-    image: '/assets/field/tchad-republic-mission.jpg',
-    location: 'Tchad Republic Missions',
-    caption: 'Cross-border congregational praise and gospel impartation.',
+    id: 'student-conference',
+    photoId: 'g19',
+    label: 'Student Conference',
+    image: '/assets/field/student-conference-preaching.jpg',
+    location: 'Harvest Field Student Conference',
+    caption: 'Preaching to students gathered for a Harvest Field conference.',
   },
   {
-    id: 'cote-divoire',
-    photoId: 'g2',
-    label: "Côte d'Ivoire",
-    image: '/assets/field/cote-divoire-conference.jpg',
-    location: "Les Porteurs de Gloire · Côte d'Ivoire",
-    caption: 'Prayer, teaching, and mission impartation conferences.',
-  },
-  {
-    id: 'schools',
-    photoId: 'g4',
-    label: 'School Outreaches',
-    image: '/assets/field/school-prayer-outreach.jpg',
-    location: 'Omoku & Rivers State, Nigeria',
-    caption: 'Intensive school outreaches and personal prayer with students.',
+    id: 'students-praying',
+    photoId: 'g17',
+    label: 'Students in Prayer',
+    image: '/assets/field/student-conference.jpg',
+    location: 'Harvest Field Student Conference',
+    caption: 'Students raising their hands in prayer during a conference.',
   },
 ];
 
@@ -57,8 +51,16 @@ export const HomePage: React.FC<HomePageProps> = ({
   onSelectArticle,
   onOpenPhoto,
 }) => {
+  const handleArticleLink = (
+    event: React.MouseEvent<HTMLAnchorElement>,
+    slug: string
+  ) => {
+    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    event.preventDefault();
+    onSelectArticle(slug);
+  };
+
   const [heroIndex, setHeroIndex] = useState(0);
-  const [activeSpotIndex, setActiveSpotIndex] = useState(0);
   const [heroPaused, setHeroPaused] = useState(false);
   const [heroHovered, setHeroHovered] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(
@@ -97,7 +99,6 @@ export const HomePage: React.FC<HomePageProps> = ({
   }, [heroHovered, heroIndex, heroPaused, prefersReducedMotion]);
 
   const heroSpot = HERO_SPOTS[heroIndex];
-  const activeSpot = HERO_SPOTS[activeSpotIndex];
 
   const categories = ['All', 'Evangelism', 'Youth & Schools', 'Training', 'Global Missions'];
   const filteredMandates =
@@ -124,6 +125,7 @@ export const HomePage: React.FC<HomePageProps> = ({
   };
 
   return (
+    <LocalizedContent>
     <div>
       {/* Cinematic mission welcome — uses the ministry's own field photographs */}
       <section
@@ -146,7 +148,7 @@ export const HomePage: React.FC<HomePageProps> = ({
               }`}
             />
           ))}
-          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,24,15,0.94)_0%,rgba(5,24,15,0.78)_48%,rgba(5,24,15,0.24)_100%),linear-gradient(0deg,rgba(5,24,15,0.42),transparent_55%)]" />
+          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,24,15,0.82)_0%,rgba(5,24,15,0.56)_48%,rgba(5,24,15,0.08)_100%),linear-gradient(0deg,rgba(5,24,15,0.22),transparent_55%)]" />
         </div>
 
         <div className="relative z-10 mx-auto flex min-h-[440px] max-w-7xl items-center px-5 py-12 sm:min-h-[590px] sm:px-8 sm:py-16 lg:min-h-[650px] lg:px-10">
@@ -164,20 +166,19 @@ export const HomePage: React.FC<HomePageProps> = ({
             <div className="flex flex-row gap-2 pt-2 sm:flex-wrap sm:gap-3">
               <button
                 type="button"
-                onClick={() => onNavigate('mission')}
+                onClick={() => onNavigate('join')}
                 className="inline-flex min-h-12 min-w-0 flex-1 items-center justify-center gap-1.5 rounded-lg bg-harvest-500 px-3 py-3 text-xs font-semibold text-forest-950 shadow-lg shadow-black/15 transition-colors hover:bg-harvest-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white sm:flex-none sm:gap-2 sm:px-6 sm:text-sm"
               >
-                <span className="sm:hidden">Explore</span>
-                <span className="hidden sm:inline">Discover Our Mission</span>
+                <span>Join Us</span>
                 <ArrowRight className="h-4 w-4 shrink-0" />
               </button>
               <button
                 type="button"
-                onClick={() => onNavigate('partner')}
+                onClick={() => onNavigate('mission')}
                 className="inline-flex min-h-12 min-w-0 flex-1 items-center justify-center rounded-lg border border-white/55 bg-white/10 px-3 py-3 text-xs font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white/20 sm:flex-none sm:px-6 sm:text-sm"
               >
-                <span className="sm:hidden">Partner</span>
-                <span className="hidden sm:inline">Pray, Give &amp; Partner</span>
+                <span className="sm:hidden">Explore</span>
+                <span className="hidden sm:inline">Discover Our Mission</span>
               </button>
             </div>
             <div className="flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-white/20 pt-5 text-xs font-medium text-stone-200 sm:text-sm">
@@ -246,81 +247,32 @@ export const HomePage: React.FC<HomePageProps> = ({
                 evangelism, intensive school outreaches, Christian counseling, and Harvest Field
                 Academy—led by {FOUNDER_PROFILE.name}.
               </p>
-
-              <div className="flex flex-wrap items-center gap-3.5 pt-2">
-                <button
-                  type="button"
-                  onClick={() => onNavigate('partner')}
-                  className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold text-white bg-forest-900 hover:bg-forest-800 rounded-lg transition-colors duration-150 whitespace-nowrap cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-forest-800"
-                >
-                  <span>Donate &amp; Partner</span>
-                  <ArrowRight className="w-4 h-4" />
-                </button>
-                <button
-                  type="button"
-                  onClick={() => onNavigate('mission')}
-                  className="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold text-forest-950 bg-limestone hover:bg-stone-200/80 border border-stone-300/70 rounded-lg transition-colors duration-150 whitespace-nowrap cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-800"
-                >
-                  <span>Explore Our Mission</span>
-                </button>
-                <button
-                  type="button"
-                  onClick={() => onNavigate('leadership')}
-                  className="inline-flex items-center gap-1.5 px-2 py-3 text-sm font-semibold text-forest-900 hover:text-harvest-600 transition-colors whitespace-nowrap cursor-pointer"
-                >
-                  <span>Meet the Founder</span>
-                  <ChevronRight className="w-4 h-4" />
-                </button>
-              </div>
-            </div>
-
-            {/* Interactive Field Location Selector */}
-            <div className="pt-6 border-t border-stone-200">
-              <p className="text-xs font-medium text-stone-500 mb-3">
-                Active Mission Field Dispatches
-              </p>
-              <div className="flex flex-wrap items-center gap-2">
-                {HERO_SPOTS.map((spot, idx) => (
-                  <button
-                    key={spot.id}
-                    type="button"
-                    onClick={() => setActiveSpotIndex(idx)}
-                    className={`px-3.5 py-2 text-xs font-medium rounded-lg transition-colors duration-150 whitespace-nowrap cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-800 ${
-                      activeSpotIndex === idx
-                        ? 'bg-forest-900 text-white'
-                        : 'bg-stone-200/60 text-stone-700 hover:bg-stone-200'
-                    }`}
-                  >
-                    {spot.label}
-                  </button>
-                ))}
-              </div>
             </div>
           </div>
 
           {/* Right Framed Visual Showcase */}
-          <div className="lg:col-span-5 flex flex-col">
+          <div className="w-full lg:col-span-5 lg:mx-auto lg:max-w-[480px]">
             <button
               type="button"
-              onClick={() => onOpenPhoto(activeSpot.photoId)}
-              className="group relative flex-1 min-h-[340px] lg:min-h-full rounded-2xl overflow-hidden border border-stone-200 bg-stone-200 text-left cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-800"
-              aria-label={`Open ${activeSpot.location} photograph in gallery`}
+              onClick={() => onOpenPhoto(heroSpot.photoId)}
+              className="group relative block aspect-[4/3] min-h-[280px] w-full overflow-hidden rounded-2xl border border-stone-200 bg-stone-200 text-left cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-800 sm:min-h-[340px] lg:max-h-[480px] lg:min-h-0"
+              aria-label={`Open ${heroSpot.location} photograph in gallery`}
             >
               <SafeImage
-                src={activeSpot.image}
-                alt={activeSpot.caption}
+                src={heroSpot.image}
+                alt={heroSpot.caption}
                 className="w-full h-full lg:h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
-                fallbackTitle={activeSpot.location}
+                fallbackTitle={heroSpot.location}
               />
               <div className="absolute top-4 right-4 w-9 h-9 rounded-lg bg-black/50 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
                 <Expand className="w-4 h-4" />
               </div>
               <div className="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-t from-black/85 via-black/45 to-transparent text-white">
                 <p className="text-xs font-medium text-harvest-400 mb-1">
-                  {activeSpot.location}
+                  {heroSpot.location}
                 </p>
                 <p className="text-sm sm:text-base font-medium leading-snug text-stone-100">
-                  {activeSpot.caption}
+                  {heroSpot.caption}
                 </p>
               </div>
             </button>
@@ -367,7 +319,7 @@ export const HomePage: React.FC<HomePageProps> = ({
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="mx-auto grid max-w-6xl grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {filteredMandates.map((item) => {
               const isExpanded = expandedMandate === item.id;
               return (
@@ -466,7 +418,7 @@ export const HomePage: React.FC<HomePageProps> = ({
           </button>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="mx-auto grid max-w-6xl grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {previewGallery.map((photo) => (
             <button
               key={photo.id}
@@ -511,22 +463,26 @@ export const HomePage: React.FC<HomePageProps> = ({
                 Stories, testimonies &amp; teaching from the mission field.
               </h2>
             </div>
-            <button
-              type="button"
-              onClick={() => onNavigate('journal')}
+            <a
+              href={getPagePath('journal')}
+              onClick={(event) => {
+                if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+                event.preventDefault();
+                onNavigate('journal');
+              }}
               className="inline-flex items-center gap-2 text-sm font-semibold text-forest-900 hover:text-harvest-600 transition-colors whitespace-nowrap self-start sm:self-auto cursor-pointer"
             >
               <span>Explore All Articles</span>
               <ArrowRight className="w-4 h-4" />
-            </button>
+            </a>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             {/* Lead Story */}
             <article className="group lg:col-span-7 bg-[#faf8f4] border border-stone-200 rounded-xl overflow-hidden transition-shadow duration-200 hover:shadow-md">
-              <button
-                type="button"
-                onClick={() => onSelectArticle(featuredPost.slug)}
+              <a
+                href={getPagePath('journal', featuredPost.slug)}
+                onClick={(event) => handleArticleLink(event, featuredPost.slug)}
                 className="block w-full aspect-[16/9] bg-stone-200 overflow-hidden cursor-pointer"
                 aria-label={`Read ${featuredPost.title}`}
               >
@@ -535,7 +491,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                   alt={featuredPost.title}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
                 />
-              </button>
+              </a>
               <div className="p-6 sm:p-8 space-y-4">
                 <div className="flex flex-wrap items-center gap-2 text-xs text-stone-500">
                   <span>{featuredPost.category}</span>
@@ -545,25 +501,25 @@ export const HomePage: React.FC<HomePageProps> = ({
                   <span>{featuredPost.readTime}</span>
                 </div>
                 <h3 className="font-serif text-2xl sm:text-3xl font-semibold text-forest-950 leading-tight">
-                  <button
-                    type="button"
-                    onClick={() => onSelectArticle(featuredPost.slug)}
+                  <a
+                    href={getPagePath('journal', featuredPost.slug)}
+                    onClick={(event) => handleArticleLink(event, featuredPost.slug)}
                     className="text-left hover:text-forest-800 transition-colors cursor-pointer"
                   >
                     {featuredPost.title}
-                  </button>
+                  </a>
                 </h3>
                 <p className="text-sm sm:text-base text-stone-700 leading-relaxed">
                   {featuredPost.excerpt}
                 </p>
-                <button
-                  type="button"
-                  onClick={() => onSelectArticle(featuredPost.slug)}
+                <a
+                  href={getPagePath('journal', featuredPost.slug)}
+                  onClick={(event) => handleArticleLink(event, featuredPost.slug)}
                   className="inline-flex items-center gap-2 text-sm font-semibold text-forest-900 hover:text-harvest-600 transition-colors cursor-pointer"
                 >
                   <span>Read Full Dispatch</span>
                   <ArrowRight className="w-4 h-4" />
-                </button>
+                </a>
               </div>
             </article>
 
@@ -582,25 +538,25 @@ export const HomePage: React.FC<HomePageProps> = ({
                     <span>{post.readTime}</span>
                   </div>
                   <h3 className="font-serif text-xl font-semibold text-forest-950 leading-snug">
-                    <button
-                      type="button"
-                      onClick={() => onSelectArticle(post.slug)}
+                    <a
+                      href={getPagePath('journal', post.slug)}
+                      onClick={(event) => handleArticleLink(event, post.slug)}
                       className="text-left hover:text-forest-800 transition-colors cursor-pointer"
                     >
                       {post.title}
-                    </button>
+                    </a>
                   </h3>
                   <p className="text-sm text-stone-600 leading-relaxed line-clamp-3">
                     {post.excerpt}
                   </p>
-                  <button
-                    type="button"
-                    onClick={() => onSelectArticle(post.slug)}
+                  <a
+                    href={getPagePath('journal', post.slug)}
+                    onClick={(event) => handleArticleLink(event, post.slug)}
                     className="inline-flex items-center gap-1.5 text-xs font-semibold text-forest-900 hover:text-harvest-600 transition-colors cursor-pointer"
                   >
                     <span>Open Article</span>
                     <ArrowRight className="w-3.5 h-3.5" />
-                  </button>
+                  </a>
                 </article>
               ))}
             </div>
@@ -731,5 +687,6 @@ export const HomePage: React.FC<HomePageProps> = ({
         <BankAccountsGrid />
       </section>
     </div>
+    </LocalizedContent>
   );
 };
