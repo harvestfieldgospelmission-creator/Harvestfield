@@ -119,9 +119,11 @@ export default function App() {
     let hideTimer: number | undefined;
     let safetyTimer: number | undefined;
     let cancelled = false;
+    let revealed = false;
 
     const revealPage = () => {
-      if (cancelled) return;
+      if (cancelled || revealed) return;
+      revealed = true;
       loader.classList.add('hf-loader--hidden');
       hideTimer = window.setTimeout(() => loader.remove(), 300);
     };
