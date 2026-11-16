@@ -70,10 +70,10 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
       }
     };
 
-    document.addEventListener('pointerdown', handlePointerDown);
+    if (mobileOpen) document.addEventListener('pointerdown', handlePointerDown);
     document.addEventListener('keydown', handleKeyDown);
     return () => {
-      document.removeEventListener('pointerdown', handlePointerDown);
+      if (mobileOpen) document.removeEventListener('pointerdown', handlePointerDown);
       document.removeEventListener('keydown', handleKeyDown);
     };
   }, [mobileOpen, openDropdown]);
@@ -153,7 +153,6 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
                 >
                   <button
                     type="button"
-                    aria-haspopup="true"
                     aria-expanded={isOpen}
                     onClick={() => setOpenDropdown(isOpen ? null : group.label)}
                     className={`inline-flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-semibold transition-colors hover:bg-stone-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-800 ${isGroupActive ? 'text-forest-950' : 'text-stone-600'}`}
@@ -163,7 +162,6 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
                   </button>
                   <div
                     className={`absolute left-0 top-full z-50 mt-2 w-60 rounded-xl border border-stone-200 bg-white p-2 shadow-xl transition-all duration-150 ${isOpen ? 'visible translate-y-0 opacity-100' : 'invisible -translate-y-1 opacity-0'}`}
-                    role="menu"
                   >
                     {group.items.map((item) => pageLink(
                       item.id,
