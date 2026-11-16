@@ -11,7 +11,7 @@ export const JoinUsPage: React.FC = () => (
         <p className="max-w-2xl text-base leading-relaxed text-stone-700">Tell us a little about yourself, where you are based, and what inspires you to serve with the mission.</p>
       </header>
       <section className="rounded-2xl border border-stone-200 bg-white p-5 shadow-sm sm:p-8">
-        <form name="join-interest" method="POST" action="/thank-you.html" data-netlify="true" netlify-honeypot="bot-field" className="space-y-5">
+        <form name="join-interest" method="POST" action="/thank-you" data-netlify="true" netlify-honeypot="bot-field" className="space-y-5">
           <input type="hidden" name="form-name" value="join-interest" />
           <p className="hidden"><label>Do not fill this out: <input name="bot-field" /></label></p>
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
