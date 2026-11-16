@@ -43,10 +43,11 @@
         text-align: center;
       }
       .hf-loader-mark {
-        width: 76px;
-        height: 76px;
-        margin-bottom: 22px;
-        color: #f4ead5;
+        display: block;
+        width: min(280px, 78vw);
+        max-height: 120px;
+        height: auto;
+        object-fit: contain;
         animation: hf-mark-breathe 2.2s ease-in-out infinite;
       }
       .hf-loader-name {
@@ -110,18 +111,12 @@
   <body>
     <div id="hf-initial-loader" role="status" aria-live="polite" aria-label="Loading Harvest Field Gospel Mission International">
       <div class="hf-loader-content">
-        <svg class="hf-loader-mark" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <circle cx="30" cy="36" r="18" stroke="currentColor" stroke-width="2.2" />
-          <ellipse cx="30" cy="36" rx="9" ry="18" stroke="currentColor" stroke-width="1.8" />
-          <path d="M12 36H48" stroke="currentColor" stroke-width="1.8" />
-          <path d="M15 26H45" stroke="currentColor" stroke-width="1.6" />
-          <path d="M15 46H45" stroke="currentColor" stroke-width="1.6" />
-          <path d="M30 6V20M23 12H37" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" />
-          <path d="M36 27C41 21 48 16 53 11C51 19 48 25 43 29C48 27 52 24 55 20C54 27 49 33 41 36" stroke="#b87e18" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
-          <path d="M19 25C24 23 29 24 33 27C28 29 24 31 20 31" fill="currentColor" fill-opacity=".16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
-        </svg>
-        <p class="hf-loader-name">Harvest Field</p>
-        <p class="hf-loader-subtitle">Gospel Mission International</p>
+        <img
+          class="hf-loader-mark"
+          src="/assets/harvest-field-logo.png"
+          alt="Harvest Field Gospel Mission International"
+          fetchpriority="high"
+        />
         <div class="hf-loader-dots" aria-hidden="true"><span></span><span></span><span></span></div>
         <p class="hf-loader-message">Preparing your experience…</p>
         <p class="hf-loader-tagline">Reaching lives. Equipping believers. Serving communities.</p>
