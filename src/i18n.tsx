@@ -315,7 +315,7 @@ const translations: Record<Exclude<Language, 'en'>, Record<string, string>> = {
     'Toggle details for {{title}}': 'Afficher ou masquer les détails de {{title}}',
     '+234 ... or email@example.com': '+234 ... ou adresse e-mail',
     'Ask about going, praying, giving, or serving with a mission team...': 'Renseignez-vous sur la participation, la prière, les dons ou le service au sein d’une équipe missionnaire...',
-    'Share how we can pray with you or how you would like to connect...': 'Dites-nous comment nous pouvons prier avec vous ou comment vous souhaitez entrer en contact...'
+    'Share how we can pray with you or how you would like to connect...': 'Dites-nous comment nous pouvons prier avec vous ou comment vous souhaitez entrer en contact...',
     'Phone or Email (Optional)': 'Téléphone ou courriel (facultatif)',
     'How would you like to get involved?': 'Comment souhaitez-vous participer ?',
     'Your Note or Prayer': 'Votre message ou votre prière',
@@ -938,7 +938,7 @@ const translations: Record<Exclude<Language, 'en'>, Record<string, string>> = {
     'Toggle details for {{title}}': 'Mostrar u ocultar los detalles de {{title}}',
     '+234 ... or email@example.com': '+234 ... o correo electrónico',
     'Ask about going, praying, giving, or serving with a mission team...': 'Pregunta cómo ir, orar, donar o servir con un equipo misionero...',
-    'Share how we can pray with you or how you would like to connect...': 'Cuéntanos cómo podemos orar contigo o cómo te gustaría ponerte en contacto...'
+    'Share how we can pray with you or how you would like to connect...': 'Cuéntanos cómo podemos orar contigo o cómo te gustaría ponerte en contacto...',
     'Phone or Email (Optional)': 'Teléfono o correo electrónico (opcional)',
     'How would you like to get involved?': '¿Cómo te gustaría participar?',
     'Your Note or Prayer': 'Tu mensaje u oración',
