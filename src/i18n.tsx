@@ -1158,6 +1158,8 @@ i18next.use(initReactI18next).init({
   },
   lng: 'en',
   fallbackLng: 'en',
+  // Translation keys use literal dotted names (for example, nav.groups.about).
+  keySeparator: false,
   interpolation: { escapeValue: false },
   returnEmptyString: false,
 });
