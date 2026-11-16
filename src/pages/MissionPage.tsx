@@ -14,11 +14,11 @@ const PARTICIPATION_TRACKS = [
     tab: '01. Going',
     title: 'Step Into Rural & Foreign Fields',
     description:
-      'Join short-term outreach expeditions or long-term missionary deployments to unreached communities across Rivers State, Northern Cameroon (Linde-Massa & Maroua), Tchad Republic, and Côte d’Ivoire.',
+      'Explore opportunities to take part in evangelism and mission outreach in Nigeria, Northern Cameroon (Linde-Massa and Maroua), Tchad, and Côte d’Ivoire.',
     points: [
-      'Pre-deployment equipping through Harvest Field Academy (HFA)',
+      'Learn about believer training through Harvest Field Academy (HFA)',
       'Cross-cultural evangelism, school ministry, and rural crusades',
-      'Mentorship under seasoned field evangelists and leaders',
+      'Serve alongside others committed to sharing the Gospel.',
     ],
   },
   {
@@ -28,7 +28,7 @@ const PARTICIPATION_TRACKS = [
     description:
       'Every open door in Linde-Massa, Maroua, Tchad, and our secondary schools is preceded by faithful prayer. Stand on the watch with our intercessory network.',
     points: [
-      'Weekly intercession focus for rural and foreign field teams',
+      'Pray for the ministry’s evangelism, discipleship and community development work.',
       'Prayer backing for revival meetings and evangelistic conferences',
       'Spiritual covering for new converts and Harvest Field Academy trainees',
     ],
@@ -38,11 +38,11 @@ const PARTICIPATION_TRACKS = [
     tab: '03. Regular Support',
     title: 'Send Regular Kingdom Support',
     description:
-      'Consistent monthly or seasonal giving fuels transport, Bibles, crusade logistics, student outreach materials, and missionary welfare across West and Central Africa.',
+      'Financial gifts can support the ministry’s evangelism, believer training and community development objectives.',
     points: [
-      'Transparent stewardship through official mission bank accounts',
+      'Use the published ministry bank details and confirm them with the mission before making a transfer.',
       'Direct support for rural and foreign mission expeditions',
-      'Regular field dispatches and testimonies sent to partners',
+      'Follow ministry updates and stories as they are shared.',
     ],
   },
 ];
@@ -87,17 +87,29 @@ export const MissionPage: React.FC<MissionPageProps> = ({ onNavigate }) => {
     <LocalizedContent>
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12 lg:py-16 space-y-16 lg:space-y-20">
       <section className="space-y-8">
-        <div className="max-w-4xl space-y-5">
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-harvest-600">
-            About Us
-          </p>
-          <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-semibold text-forest-950 leading-[1.08] tracking-tight">
-            Reaching the lost. Equipping believers. Serving communities.
-          </h1>
-          <div className="space-y-4 text-base sm:text-lg text-stone-700 leading-relaxed">
-            <p>{MISSION_ABOUT.introduction}</p>
-            <p>{MISSION_ABOUT.equipping}</p>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          <div className="lg:col-span-7 space-y-5">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-harvest-600">
+              About Us
+            </p>
+            <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-semibold text-forest-950 leading-[1.08] tracking-tight">
+              Reaching the lost. Equipping believers. Serving communities.
+            </h1>
+            <div className="space-y-4 text-base sm:text-lg text-stone-700 leading-relaxed">
+              <p>{MISSION_ABOUT.introduction}</p>
+              <p>{MISSION_ABOUT.equipping}</p>
+            </div>
           </div>
+          <figure className="lg:col-span-5 overflow-hidden rounded-2xl border border-stone-200 bg-stone-100 shadow-lg shadow-forest-950/10">
+            <SafeImage
+              src="/assets/field/founder-linde-massa.jpg"
+              alt="Harvest Field Gospel Mission outreach in Linde-Massa, Northern Cameroon"
+              className="aspect-[4/3] sm:aspect-[16/10] lg:aspect-[4/5] w-full object-cover"
+            />
+            <figcaption className="px-4 py-3 text-xs leading-relaxed text-stone-600">
+              Mission outreach in Linde-Massa, Northern Cameroon.
+            </figcaption>
+          </figure>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
@@ -162,6 +174,124 @@ export const MissionPage: React.FC<MissionPageProps> = ({ onNavigate }) => {
               </button>
             </aside>
           </div>
+        </div>
+      </section>
+
+      <section className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <article className="rounded-2xl bg-forest-950 p-6 sm:p-8 text-white">
+          <p className="text-xs font-semibold uppercase tracking-widest text-harvest-400">Our Vision</p>
+          <h2 className="mt-3 font-serif text-2xl sm:text-3xl font-semibold">Lives transformed. Believers equipped. Communities strengthened.</h2>
+          <p className="mt-4 text-sm sm:text-base leading-relaxed text-stone-200">
+            To see lives transformed by the Gospel of Jesus Christ, believers awakened and equipped for effective soul-winning, and communities strengthened through Christ-centred service and sustainable development.
+          </p>
+        </article>
+        <article className="rounded-2xl border border-stone-200 bg-white p-6 sm:p-8">
+          <p className="text-xs font-semibold uppercase tracking-widest text-harvest-600">Our Mission</p>
+          <h2 className="mt-3 font-serif text-2xl sm:text-3xl font-semibold text-forest-950">Fulfilling the Great Commission through the Gospel and practical service.</h2>
+          <p className="mt-4 text-sm leading-relaxed text-stone-700">
+            To fulfil the Great Commission by preaching the Gospel of Jesus Christ, equipping believers for practical evangelism, mobilising Christians to become active witnesses, and supporting the spiritual, educational and socio-economic development of underserved communities.
+          </p>
+        </article>
+      </section>
+
+      <section className="rounded-2xl border border-stone-200 bg-limestone/60 p-6 sm:p-8">
+        <div className="max-w-3xl">
+          <p className="text-xs font-semibold uppercase tracking-widest text-harvest-600">What Guides Us</p>
+          <h2 className="mt-2 font-serif text-2xl sm:text-3xl font-semibold text-forest-950">Our Core Commitments</h2>
+          <p className="mt-3 text-sm leading-relaxed text-stone-700">
+            These commitments shape how we share the Gospel, equip believers and serve communities.
+          </p>
+        </div>
+        <ul className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+          {[
+            ['Christ-centred living', 'Keeping Jesus Christ at the centre of our message, mission and service.'],
+            ['Biblical truth', 'Sharing the Gospel faithfully and equipping believers with sound biblical knowledge.'],
+            ['Evangelism and soul-winning', 'Encouraging every believer to take an active role in reaching people with the Gospel.'],
+            ['Discipleship and spiritual growth', 'Helping people grow in Christian faith and their responsibility as followers of Christ.'],
+            ['Compassion and service', 'Demonstrating Christian love through practical care and service to individuals and communities.'],
+            ['Youth empowerment', 'Valuing education, rehabilitation and practical skills as opportunities for young people.'],
+            ['Integrity and accountability', 'Conducting ministry activities responsibly, honestly and transparently.'],
+            ['Partnership and unity', 'Welcoming cooperation among Christians and churches in advancing the Gospel.'],
+          ].map(([title, detail], index) => (
+            <li key={title} className="rounded-xl bg-white p-4">
+              <span className="font-mono text-xs font-semibold text-harvest-600 tabular-nums">0{index + 1}</span>
+              <h3 className="mt-2 text-sm font-semibold text-forest-950">{title}</h3>
+              <p className="mt-2 text-xs leading-relaxed text-stone-600">{detail}</p>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      {/* Mission fields by country */}
+      <section aria-labelledby="mission-fields-heading" className="space-y-8 border-t border-stone-200 pt-10">
+        <div className="max-w-3xl space-y-3">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-harvest-600">
+            Our Mission Fields
+          </p>
+          <h2 id="mission-fields-heading" className="font-serif text-3xl font-semibold text-forest-950 sm:text-4xl">
+            Serving communities across four nations
+          </h2>
+          <p className="text-base leading-relaxed text-stone-600">
+            Explore the countries represented in our current ministry materials and field photographs.
+            Each location is part of the wider work of evangelism, discipleship, and equipping believers.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-4">
+          {[
+            {
+              country: 'Nigeria',
+              place: 'Omoku, Rivers State',
+              focus: 'Local evangelism, school and youth outreach, counselling, and discipleship.',
+              image: '/assets/field/school-prayer-outreach.jpg',
+              alt: 'Students taking part in a school prayer outreach in Nigeria',
+            },
+            {
+              country: 'Cameroon',
+              place: 'Linde-Massa and Maroua',
+              focus: 'Rural and cross-border gospel outreach in Northern Cameroon.',
+              image: '/assets/field/maroua-cameroon.jpg',
+              alt: 'Harvest Field mission outreach in Maroua, Northern Cameroon',
+            },
+            {
+              country: 'Tchad',
+              place: 'Republic of Tchad',
+              focus: 'Foreign mission outreach, worship, and fellowship.',
+              image: '/assets/field/tchad-republic-mission.jpg',
+              alt: 'Congregational worship during a mission gathering in Tchad',
+            },
+            {
+              country: "Côte d’Ivoire",
+              place: "Côte d’Ivoire",
+              focus: 'Francophone mission and revival conference ministry.',
+              image: '/assets/field/cote-divoire-conference.jpg',
+              alt: 'Mission conference in Côte d’Ivoire',
+            },
+          ].map((field) => (
+            <article key={field.country} className="group flex min-w-0 flex-col overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-sm transition-shadow duration-200 hover:shadow-lg">
+              <div className="relative aspect-[5/4] overflow-hidden bg-stone-100">
+                <SafeImage
+                  src={field.image}
+                  alt={field.alt}
+                  className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.04]"
+                />
+              </div>
+              <div className="flex flex-1 flex-col gap-3 p-5">
+                <div>
+                  <h3 className="font-serif text-xl font-semibold text-forest-950">{field.country}</h3>
+                  <p className="mt-1 text-xs font-medium uppercase tracking-wide text-harvest-600">{field.place}</p>
+                </div>
+                <p className="flex-1 text-sm leading-relaxed text-stone-600">{field.focus}</p>
+                <button
+                  type="button"
+                  onClick={() => onNavigate('gallery')}
+                  className="inline-flex min-h-11 w-full items-center justify-between gap-2 rounded-lg border border-stone-200 px-4 py-2.5 text-sm font-semibold text-forest-900 transition-colors hover:border-forest-800 hover:bg-limestone focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-harvest-500"
+                >
+                  View field photographs <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                </button>
+              </div>
+            </article>
+          ))}
         </div>
       </section>
 

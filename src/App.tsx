@@ -11,6 +11,9 @@ import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { HomePage } from './pages/HomePage';
 import { MissionPage } from './pages/MissionPage';
+import { AcademyPage } from './pages/AcademyPage';
+import { ImpactPage } from './pages/ImpactPage';
+import { PrayerPage } from './pages/PrayerPage';
 import { LeadershipPage } from './pages/LeadershipPage';
 import { GalleryPage } from './pages/GalleryPage';
 import { JournalPage } from './pages/JournalPage';
@@ -23,12 +26,15 @@ import { LanguageProvider } from './i18n';
 const VALID_PAGES: PageId[] = [
   'home',
   'mission',
+  'academy',
+  'impact',
   'leadership',
   'gallery',
   'journal',
   'partner',
   'contact',
   'join',
+  'prayer',
   'admin',
 ];
 
@@ -43,10 +49,18 @@ const PAGE_METADATA: Record<PageId, { title: string; description: string }> = {
     description:
       'Learn about Harvest Field Gospel Mission, its outreach, discipleship, and community work.',
   },
+  academy: {
+    title: "Harvest Field Academy | Harvest Field Gospel Mission Int'l",
+    description: 'Discover Harvest Field Academy and the mission’s vision for equipping believers for discipleship, evangelism and cross-cultural ministry.',
+  },
+  impact: {
+    title: "Impact & Stories | Harvest Field Gospel Mission Int'l",
+    description: 'Explore field photographs and journal stories from Harvest Field Gospel Mission outreach, discipleship and cross-border mission work.',
+  },
   leadership: {
     title: "Leadership | Harvest Field Gospel Mission Int'l",
     description:
-      'Meet the founder and leadership team of Harvest Field Gospel Mission.',
+      'Learn about the founder of Harvest Field Gospel Mission and the ministry’s leadership.',
   },
   gallery: {
     title: "Mission Gallery | Harvest Field Gospel Mission Int'l",
@@ -72,6 +86,10 @@ const PAGE_METADATA: Record<PageId, { title: string; description: string }> = {
     title: "Join Us | Harvest Field Gospel Mission Int'l",
     description:
       'Apply to serve with Harvest Field Gospel Mission and tell us what inspires you to join.',
+  },
+  prayer: {
+    title: "Prayer Request | Harvest Field Gospel Mission Int'l",
+    description: 'Share a prayer request with the Harvest Field Gospel Mission team.',
   },
   admin: {
     title: "Staff Sign In | Harvest Field Gospel Mission Int'l",
@@ -230,6 +248,8 @@ export default function App() {
           />
         )}
         {currentPage === 'mission' && <MissionPage onNavigate={(page) => handleNavigate(page)} />}
+        {currentPage === 'academy' && <AcademyPage onNavigate={(page) => handleNavigate(page)} />}
+        {currentPage === 'impact' && <ImpactPage onNavigate={(page) => handleNavigate(page)} onSelectArticle={(slug) => handleNavigate('journal', slug)} onOpenPhoto={handleOpenGalleryPhoto} />}
         {currentPage === 'leadership' && <LeadershipPage onNavigate={(page) => handleNavigate(page)} />}
         {currentPage === 'gallery' && (
           <GalleryPage
@@ -248,6 +268,7 @@ export default function App() {
         )}
         {currentPage === 'contact' && <ContactPage />}
         {currentPage === 'join' && <JoinUsPage />}
+        {currentPage === 'prayer' && <PrayerPage />}
         {currentPage === 'admin' && <AdminPage />}
         </main>
 

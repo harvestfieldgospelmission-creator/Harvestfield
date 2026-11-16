@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { Check, CheckCircle2, Copy } from 'lucide-react';
-import { BANK_ACCOUNTS, MISSION_INFO, PageId } from '../data/missionData';
+import React, { useState } from 'react';
+import { BookOpen, Copy, Heart, HandHeart, MapPin, Users } from 'lucide-react';
+import { BANK_ACCOUNTS, PageId } from '../data/missionData';
 import { BankAccountsGrid } from '../components/BankAccountsGrid';
 import { LocalizedContent } from '../i18n';
 
@@ -8,589 +8,165 @@ interface PartnerPageProps {
   onNavigate: (page: PageId) => void;
 }
 
-interface SubmittedRecord {
-  id: string;
-  reference: string;
-  type: string;
-  name: string;
-  amountSummary?: string;
-  createdAt: string;
-  message: string;
-}
-
-const NGN_PRESETS = [5000, 10000, 25000, 50000, 100000];
-const USD_PRESETS = [25, 50, 100, 250, 500];
-
-const MISSION_FUNDS = [
+const SUPPORT_PATHS = [
   {
-    id: 'greatest-need',
-    label: 'Where Needed Most',
-    impact: 'Supports rural evangelism, missionary logistics, and urgent field outreach needs.',
+    title: 'Pray with the mission',
+    description: 'Stand with the work through prayer for gospel outreach, discipleship, local communities and mission workers.',
+    action: 'Send a prayer request',
+    icon: Heart,
+    page: 'prayer' as PageId,
   },
   {
-    id: 'foreign-missions',
-    label: 'Cameroon, Tchad & Côte d’Ivoire',
-    impact: 'Fuels cross-border field trips, gospel literature, and local pastor mobilization.',
+    title: 'Serve in the field',
+    description: 'Tell us about your interest in evangelism, youth and school outreach, discipleship or cross-cultural mission.',
+    action: 'Explore serving with us',
+    icon: Users,
+    page: 'join' as PageId,
   },
   {
-    id: 'schools-youth',
-    label: 'School & Youth Outreaches',
-    impact: 'Provides study materials, Bibles, and counseling support during intensive campus outreaches.',
-  },
-  {
-    id: 'academy',
-    label: 'Harvest Field Academy (HFA)',
-    impact: 'Equips kingdom labourers through discipleship training and seasonal labourers retreats.',
+    title: 'Give towards the work',
+    description: 'Use the published bank details below if you choose to support the mission. You can contact the team to discuss a particular area.',
+    action: 'View giving details',
+    icon: HandHeart,
+    page: 'partner' as PageId,
   },
 ];
 
+const FUND_OPTIONS = [
+  'Where the need is greatest',
+  'Nigeria outreach',
+  'Cameroon, Tchad or Côte d’Ivoire mission',
+  'School and youth outreach',
+  'Harvest Field Academy',
+];
+
 export const PartnerPage: React.FC<PartnerPageProps> = ({ onNavigate }) => {
-  // Interactive Giving Builder State
   const [currency, setCurrency] = useState<'NGN' | 'USD'>('NGN');
-  const [frequency, setFrequency] = useState<'One-Time Gift' | 'Monthly Support'>('One-Time Gift');
-  const [selectedFund, setSelectedFund] = useState<string>(MISSION_FUNDS[0].id);
-  const [amountInput, setAmountInput] = useState<string>('25000');
-  const [donorName, setDonorName] = useState('');
-  const [donorContact, setDonorContact] = useState('');
-  const [copiedQuickAcct, setCopiedQuickAcct] = useState(false);
-  const [pledgeRef, setPledgeRef] = useState<string | null>(null);
+  const [frequency, setFrequency] = useState<'One-time' | 'Regular support'>('One-time');
+  const [amount, setAmount] = useState('25000');
+  const [fund, setFund] = useState(FUND_OPTIONS[0]);
+  const [copied, setCopied] = useState(false);
+  const [copyFailed, setCopyFailed] = useState(false);
 
-  // Prayer / Counseling / Mission Team Inquiry Form
-  const [requestType, setRequestType] = useState<
-    'Go on Mission' | 'Prayer & Counseling' | 'Regular Support Partner'
-  >('Go on Mission');
-  const [name, setName] = useState('');
-  const [phoneOrEmail, setPhoneOrEmail] = useState('');
-  const [city, setCity] = useState('');
-  const [message, setMessage] = useState('');
-  const [submittedSuccess, setSubmittedSuccess] = useState(false);
+  const account = currency === 'USD' ? BANK_ACCOUNTS[0] : BANK_ACCOUNTS[1];
+  const numericAmount = Number(amount.replace(/[^0-9.]/g, '')) || 0;
+  const displayAmount = currency === 'NGN'
+    ? `₦${numericAmount.toLocaleString('en-NG')}`
+    : `$${numericAmount.toLocaleString('en-US')}`;
 
-  const [history, setHistory] = useState<SubmittedRecord[]>(() => {
+  const copyAccount = async () => {
     try {
-      const raw = localStorage.getItem('hf_partner_requests');
-      return raw ? JSON.parse(raw) : [];
+      await navigator.clipboard.writeText(account.accountNumber);
+      setCopied(true);
+      setCopyFailed(false);
     } catch {
-      return [];
+      setCopied(false);
+      setCopyFailed(true);
     }
-  });
-
-  useEffect(() => {
-    try {
-      localStorage.setItem('hf_partner_requests', JSON.stringify(history));
-    } catch {
-      // ignore storage errors
-    }
-  }, [history]);
-
-  const handleCurrencySwitch = (next: 'NGN' | 'USD') => {
-    setCurrency(next);
-    setAmountInput(next === 'NGN' ? '25000' : '100');
-    setPledgeRef(null);
-  };
-
-  const presets = currency === 'NGN' ? NGN_PRESETS : USD_PRESETS;
-  const recommendedAccount =
-    currency === 'USD' ? BANK_ACCOUNTS[0] : BANK_ACCOUNTS[1];
-  const activeFund =
-    MISSION_FUNDS.find((f) => f.id === selectedFund) || MISSION_FUNDS[0];
-
-  const numericAmount = Number(amountInput.replace(/[^0-9.]/g, '')) || 0;
-  const formattedAmount =
-    currency === 'NGN'
-      ? `₦${numericAmount.toLocaleString('en-NG')}`
-      : `$${numericAmount.toLocaleString('en-US')}`;
-
-  const handleCopyQuick = async () => {
-    try {
-      await navigator.clipboard.writeText(recommendedAccount.accountNumber);
-      setCopiedQuickAcct(true);
-      setTimeout(() => setCopiedQuickAcct(false), 2000);
-    } catch {
-      setCopiedQuickAcct(true);
-      setTimeout(() => setCopiedQuickAcct(false), 2000);
-    }
-  };
-
-  const handleConfirmGivingIntent = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (numericAmount <= 0) return;
-    const refCode = `HFGM-${new Date().getFullYear()}-${String(Date.now()).slice(-4)}`;
-    const entry: SubmittedRecord = {
-      id: `${Date.now()}`,
-      reference: refCode,
-      type: `${frequency} (${activeFund.label})`,
-      name: donorName.trim() || 'Mission Partner',
-      amountSummary: formattedAmount,
-      createdAt: new Date().toLocaleDateString('en-GB', {
-        day: 'numeric',
-        month: 'short',
-        year: 'numeric',
-      }),
-      message: `Transfer prepared via ${recommendedAccount.bank} (${recommendedAccount.accountNumber}).`,
-    };
-    setHistory((prev) => [entry, ...prev].slice(0, 6));
-    setPledgeRef(refCode);
-    setDonorName('');
-    setDonorContact('');
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!name.trim() || !phoneOrEmail.trim()) return;
-    const subject = encodeURIComponent(`Harvestfield ${requestType} — ${name.trim()}`);
-    const body = encodeURIComponent(
-      `Name: ${name.trim()}\nContact: ${phoneOrEmail.trim()}\nCity / Country: ${city.trim() || 'Not provided'}\nRequest: ${requestType}\n\nMessage:\n${message.trim() || 'No additional message.'}`
-    );
-    window.location.href = `mailto:${MISSION_INFO.emails[0]}?subject=${subject}&body=${body}`;
-    setSubmittedSuccess(true);
-    setName('');
-    setPhoneOrEmail('');
-    setCity('');
-    setMessage('');
   };
 
   return (
     <LocalizedContent>
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16 space-y-16">
-      {/* Header */}
-      <section className="hf-page-intro max-w-3xl space-y-4">
-        <p className="text-xs font-semibold uppercase tracking-widest text-harvest-600">
-          Donate, Partner &amp; Connect
-        </p>
-        <h1 className="font-serif text-4xl sm:text-5xl font-semibold text-forest-950 leading-tight">
-          Stand with the harvest through going, prayer, or regular support.
-        </h1>
-        <p className="text-base text-stone-700 leading-relaxed">
-          Your prayers, service and financial support help strengthen rural and foreign missions
-          across Omoku, Northern Cameroon, Tchad Republic, Côte d&apos;Ivoire, and Harvest Field
-          Academy.
-        </p>
-      </section>
+      <div className="mx-auto max-w-7xl space-y-14 px-4 py-10 sm:px-6 sm:py-14 lg:px-8 lg:py-16">
+        <header className="max-w-3xl space-y-4">
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-harvest-600">Stand with the mission</p>
+          <h1 className="font-serif text-4xl font-semibold leading-tight text-forest-950 sm:text-5xl">Be part of the work God is doing through the harvest.</h1>
+          <p className="text-base leading-relaxed text-stone-700 sm:text-lg">There is more than one way to stand with Harvest Field Gospel Mission. You can pray, serve alongside the team, or give towards the work. We want you to understand the mission and choose the way you can participate.</p>
+        </header>
 
-      {/* Interactive Giving & Impact Builder */}
-      <section className="bg-white border border-stone-200 rounded-2xl p-6 sm:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
-        <div className="lg:col-span-7 space-y-6">
-          <div className="flex flex-wrap items-center justify-between gap-4">
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-widest text-harvest-600">
-                Interactive Giving Desk
-              </p>
-              <h2 className="font-serif text-2xl sm:text-3xl font-semibold text-forest-950 mt-1">
-                Prepare Your Mission Gift
-              </h2>
-            </div>
-
-            {/* Currency Switcher */}
-            <div className="flex items-center gap-1 p-1 bg-stone-200/80 rounded-lg">
-              <button
-                type="button"
-                onClick={() => handleCurrencySwitch('NGN')}
-                className={`px-3.5 py-2 text-xs font-semibold rounded-md transition-colors cursor-pointer ${
-                  currency === 'NGN'
-                    ? 'bg-white text-forest-950 shadow-sm'
-                    : 'text-stone-700 hover:text-stone-950'
-                }`}
-              >
-                NGN (₦)
-              </button>
-              <button
-                type="button"
-                onClick={() => handleCurrencySwitch('USD')}
-                className={`px-3.5 py-2 text-xs font-semibold rounded-md transition-colors cursor-pointer ${
-                  currency === 'USD'
-                    ? 'bg-white text-forest-950 shadow-sm'
-                    : 'text-stone-700 hover:text-stone-950'
-                }`}
-              >
-                USD ($) Domiciliary
-              </button>
-            </div>
+        <section aria-labelledby="support-paths-heading" className="space-y-6">
+          <div className="max-w-2xl space-y-2">
+            <p className="text-xs font-semibold uppercase tracking-widest text-harvest-600">Three ways to participate</p>
+            <h2 id="support-paths-heading" className="font-serif text-2xl font-semibold text-forest-950 sm:text-3xl">Every part matters.</h2>
           </div>
-
-          {/* Frequency Selector */}
-          <div className="grid grid-cols-2 gap-2 p-1 bg-stone-100 rounded-lg">
-            {(['One-Time Gift', 'Monthly Support'] as const).map((freq) => (
-              <button
-                key={freq}
-                type="button"
-                onClick={() => setFrequency(freq)}
-                className={`py-2.5 text-xs sm:text-sm font-semibold rounded-md transition-colors cursor-pointer ${
-                  frequency === freq
-                    ? 'bg-forest-900 text-white'
-                    : 'text-stone-700 hover:text-forest-950'
-                }`}
-              >
-                {freq}
-              </button>
+          <div className="grid gap-5 md:grid-cols-3">
+            {SUPPORT_PATHS.map(({ title, description, action, icon: Icon, page }) => (
+              <article key={title} className="flex h-full flex-col rounded-2xl border border-stone-200 bg-white p-6 sm:p-7">
+                <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-full bg-forest-50 text-forest-900"><Icon className="h-5 w-5" aria-hidden="true" /></div>
+                <h3 className="font-serif text-xl font-semibold text-forest-950">{title}</h3>
+                <p className="mt-3 flex-1 text-sm leading-relaxed text-stone-600">{description}</p>
+                <button type="button" onClick={() => onNavigate(page)} className="mt-6 inline-flex min-h-11 items-center justify-center self-start rounded-lg border border-forest-900 px-4 py-2.5 text-sm font-semibold text-forest-900 transition-colors hover:bg-forest-50">{action}</button>
+              </article>
             ))}
           </div>
-          <p className="text-xs text-stone-500 leading-relaxed">
-            This page prepares bank-transfer details but does not process payments. Monthly support is arranged through repeat transfers; no automatic payment is scheduled.
-          </p>
+        </section>
 
-          {/* Preset Amounts */}
-          <div className="space-y-2.5">
-            <label htmlFor="custom-amount" className="block text-xs font-semibold text-stone-700">
-              Select or Enter Amount ({currency})
-            </label>
-            <div className="grid grid-cols-3 sm:grid-cols-5 gap-2">
-              {presets.map((val) => {
-                const active = numericAmount === val;
-                return (
-                  <button
-                    key={val}
-                    type="button"
-                    onClick={() => {
-                      setAmountInput(String(val));
-                      setPledgeRef(null);
-                    }}
-                    className={`py-2.5 px-3 text-xs sm:text-sm font-mono font-semibold rounded-lg border transition-colors tabular-nums cursor-pointer ${
-                      active
-                        ? 'bg-forest-900 text-white border-forest-900'
-                        : 'bg-[#faf8f4] text-stone-800 border-stone-200 hover:border-forest-800'
-                    }`}
-                  >
-                    {currency === 'NGN' ? `₦${val.toLocaleString()}` : `$${val}`}
-                  </button>
-                );
-              })}
-            </div>
-            <input
-              id="custom-amount"
-              type="text"
-              inputMode="decimal"
-              value={amountInput}
-              onChange={(e) => {
-                setAmountInput(e.target.value);
-                setPledgeRef(null);
-              }}
-              placeholder={currency === 'NGN' ? 'Enter custom Naira amount' : 'Enter custom USD amount'}
-              className="w-full px-4 py-3 text-base font-mono font-semibold tabular-nums bg-[#faf8f4] border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-forest-800"
-            />
+        <section className="grid items-start gap-8 lg:grid-cols-12">
+          <div className="space-y-5 lg:col-span-5">
+            <p className="text-xs font-semibold uppercase tracking-widest text-harvest-600">Where support can go</p>
+            <h2 className="font-serif text-2xl font-semibold text-forest-950 sm:text-3xl">Support the work that matters to you.</h2>
+            <p className="text-sm leading-relaxed text-stone-600">The mission includes evangelism, rural and cross-border outreach, school and youth engagement, discipleship and Harvest Field Academy. Choose an area below as a guide for a conversation with the team. Please confirm current priorities with the mission before making a restricted gift.</p>
+            <ul className="space-y-3 text-sm text-stone-700">
+              <li className="flex items-start gap-3"><MapPin className="mt-0.5 h-4 w-4 shrink-0 text-harvest-600" />Rural and foreign mission outreach</li>
+              <li className="flex items-start gap-3"><Users className="mt-0.5 h-4 w-4 shrink-0 text-harvest-600" />School, youth and community engagement</li>
+              <li className="flex items-start gap-3"><BookOpen className="mt-0.5 h-4 w-4 shrink-0 text-harvest-600" />Discipleship and Harvest Field Academy</li>
+            </ul>
           </div>
-
-          {/* Mission Allocation Selector */}
-          <div className="space-y-2.5">
-            <p className="text-xs font-semibold text-stone-700">Designate Mission Focus</p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-              {MISSION_FUNDS.map((fund) => (
-                <button
-                  key={fund.id}
-                  type="button"
-                  onClick={() => setSelectedFund(fund.id)}
-                  className={`text-left p-3.5 rounded-xl border transition-colors cursor-pointer ${
-                    selectedFund === fund.id
-                      ? 'bg-limestone border-forest-800'
-                      : 'bg-[#faf8f4] border-stone-200 hover:border-stone-300'
-                  }`}
-                >
-                  <p className="text-sm font-semibold text-forest-950">{fund.label}</p>
-                  <p className="text-xs text-stone-600 mt-1 leading-relaxed">{fund.impact}</p>
-                </button>
-              ))}
+          <div className="rounded-2xl bg-forest-950 p-6 text-white sm:p-8 lg:col-span-7">
+            <p className="text-xs font-semibold uppercase tracking-widest text-harvest-400">Giving guide</p>
+            <h3 className="mt-2 font-serif text-2xl font-semibold">Prepare your transfer details</h3>
+            <p className="mt-2 text-sm leading-relaxed text-stone-300">This is an information guide only. The website does not collect payments, verify transfers, issue receipts or schedule recurring payments.</p>
+            <div className="mt-6 flex flex-wrap gap-2" aria-label="Currency">
+              <button type="button" aria-pressed={currency === 'NGN'} onClick={() => { setCurrency('NGN'); setAmount('25000'); setCopied(false); setCopyFailed(false); }} className={`min-h-10 rounded-lg px-4 text-sm font-semibold ${currency === 'NGN' ? 'bg-white text-forest-950' : 'border border-forest-700 text-white'}`}>Naira (NGN)</button>
+              <button type="button" aria-pressed={currency === 'USD'} onClick={() => { setCurrency('USD'); setAmount('100'); setCopied(false); setCopyFailed(false); }} className={`min-h-10 rounded-lg px-4 text-sm font-semibold ${currency === 'USD' ? 'bg-white text-forest-950' : 'border border-forest-700 text-white'}`}>US Dollar (USD)</button>
             </div>
-          </div>
-        </div>
-
-        {/* Right Side: Live Transfer Instructions + Reference Generator */}
-        <div className="lg:col-span-5 bg-forest-950 text-white rounded-2xl p-6 sm:p-8 space-y-6">
-          <div className="space-y-1.5 border-b border-forest-800 pb-5">
-            <p className="text-xs font-semibold uppercase tracking-widest text-harvest-400">
-              Transfer Summary
-            </p>
-            <p className="font-serif text-3xl font-semibold text-white tabular-nums">
-              {formattedAmount}{' '}
-              <span className="text-sm font-sans font-normal text-stone-300">
-                · {frequency}
-              </span>
-            </p>
-            <p className="text-xs text-stone-300">Allocation: {activeFund.label}</p>
-          </div>
-
-          <div className="space-y-3">
-            <p className="text-xs font-medium text-stone-300">
-              Recommended Account for {currency}:
-            </p>
-            <div className="bg-forest-900/90 border border-forest-800 rounded-xl p-4 space-y-2">
-              <p className="text-xs text-harvest-400 font-medium">{recommendedAccount.type}</p>
-              <p className="font-serif text-lg font-semibold text-white">
-                {recommendedAccount.bank}
-              </p>
-              <p className="text-xs text-stone-200">{recommendedAccount.accountName}</p>
-              <div className="flex items-center justify-between gap-3 pt-2">
-                <span className="font-mono text-xl font-semibold text-white tabular-nums tracking-tight">
-                  {recommendedAccount.accountNumber}
-                </span>
-                <button
-                  type="button"
-                  onClick={handleCopyQuick}
-                  className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-semibold bg-white text-forest-950 hover:bg-stone-100 transition-colors cursor-pointer"
-                >
-                  {copiedQuickAcct ? (
-                    <>
-                      <Check className="w-3.5 h-3.5" />
-                      <span>Copied</span>
-                    </>
-                  ) : (
-                    <>
-                      <Copy className="w-3.5 h-3.5" />
-                      <span>Copy Number</span>
-                    </>
-                  )}
-                </button>
-              </div>
+            <div className="mt-5 grid gap-4 sm:grid-cols-2">
+              <div><label htmlFor="gift-amount" className="mb-1.5 block text-xs font-semibold text-stone-200">Amount (optional guide)</label><input id="gift-amount" type="number" min="1" step="any" inputMode="decimal" value={amount} onChange={event => setAmount(event.target.value)} className="w-full rounded-lg border border-forest-700 bg-forest-900 px-3.5 py-3 text-sm text-white" /></div>
+              <div><label htmlFor="gift-frequency" className="mb-1.5 block text-xs font-semibold text-stone-200">Giving intention</label><select id="gift-frequency" value={frequency} onChange={event => setFrequency(event.target.value as 'One-time' | 'Regular support')} className="w-full rounded-lg border border-forest-700 bg-forest-900 px-3.5 py-3 text-sm text-white"><option>One-time</option><option>Regular support</option></select></div>
             </div>
-          </div>
-
-          {pledgeRef ? (
-            <div className="bg-forest-900 border border-harvest-500/60 rounded-xl p-4 space-y-2">
-              <div className="flex items-center gap-2 text-harvest-400 text-xs font-semibold">
-                <CheckCircle2 className="w-4 h-4" />
-                <span>Transfer Reference Prepared — Not a Payment Receipt</span>
-              </div>
-              <p className="font-mono text-base font-semibold text-white tabular-nums">
-                {pledgeRef}
-              </p>
-              <p className="text-xs text-stone-300 leading-relaxed">
-                This reference is for your own transfer note only. It does not confirm that a payment was made or received. After making a transfer, notify the mission office using the details on our Contact page.
-              </p>
-              <button
-                type="button"
-                onClick={() => onNavigate('contact')}
-                className="text-xs font-semibold text-harvest-400 hover:text-white transition-colors"
-              >
-                Contact the mission office
-              </button>
-            </div>
-          ) : (
-            <form onSubmit={handleConfirmGivingIntent} className="space-y-3">
-              <input
-                type="text"
-                value={donorName}
-                onChange={(e) => setDonorName(e.target.value)}
-                placeholder="Your Name (optional)"
-                aria-label="Donor Name"
-                className="w-full px-3.5 py-2.5 text-sm bg-forest-900/70 border border-forest-700 rounded-lg text-white placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-harvest-400"
-              />
-              <input
-                type="text"
-                value={donorContact}
-                onChange={(e) => setDonorContact(e.target.value)}
-                placeholder="Phone or Email for receipt note (optional)"
-                aria-label="Donor Phone or Email"
-                className="w-full px-3.5 py-2.5 text-sm bg-forest-900/70 border border-forest-700 rounded-lg text-white placeholder:text-stone-400 focus:outline-none focus:ring-2 focus:ring-harvest-400"
-              />
-              <button
-                type="submit"
-                className="w-full py-3 px-4 text-sm font-semibold text-forest-950 bg-harvest-400 hover:bg-harvest-500 rounded-lg transition-colors cursor-pointer"
-              >
-                Prepare Bank Transfer Reference
-              </button>
-            </form>
-          )}
-        </div>
-      </section>
-
-      {/* All Verified Banking Accounts */}
-      <section className="space-y-6">
-        <div>
-          <h2 className="font-serif text-2xl sm:text-3xl font-semibold text-forest-950">
-            All Official Mission Bank Accounts
-          </h2>
-          <p className="text-sm text-stone-600 mt-1">
-            Tap &ldquo;Copy&rdquo; on any account number to copy directly to your clipboard.
-          </p>
-        </div>
-        <BankAccountsGrid highlightCurrency={currency} />
-      </section>
-
-      {/* Partnership Form + Office Directory */}
-      <section className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start pt-6 border-t border-stone-200">
-        {/* Form */}
-        <div className="lg:col-span-7 bg-white border border-stone-200 rounded-2xl p-6 sm:p-8 space-y-6">
-          <div className="space-y-1.5">
-            <h2 className="font-serif text-2xl font-semibold text-forest-950">
-              Mission Team, Counseling &amp; Prayer Desk
-            </h2>
-            <p className="text-sm text-stone-600">
-              Let us know if you feel called to go on outreach, partner regularly, or request
-              prayer and counseling.
-            </p>
-          </div>
-
-          {submittedSuccess ? (
-            <div className="bg-[#faf8f4] border border-stone-200 rounded-xl p-8 text-center space-y-4">
-              <CheckCircle2 className="w-10 h-10 text-forest-900 mx-auto" />
-              <h3 className="font-serif text-2xl font-semibold text-forest-950">
-                Thank you for reaching out.
-              </h3>
-              <p className="text-sm text-stone-600 max-w-md mx-auto leading-relaxed">
-                Your email draft is ready to send to the mission office. Please press Send in your email app to complete your request. For immediate follow-up, use the contact details on our Contact page.
-              </p>
-              <button
-                type="button"
-                onClick={() => onNavigate('contact')}
-                className="px-4 py-2 text-xs font-semibold text-forest-900 hover:text-harvest-600 cursor-pointer"
-              >
-                Contact the Mission Office
-              </button>
-              <button
-                type="button"
-                onClick={() => setSubmittedSuccess(false)}
-                className="px-4 py-2 text-xs font-semibold text-white bg-forest-900 hover:bg-forest-800 rounded-lg cursor-pointer"
-              >
-                Submit Another Note
-              </button>
-            </div>
-          ) : (
-            <form onSubmit={handleSubmit} className="space-y-5">
-              <div className="flex flex-wrap gap-2">
-                {(
-                  ['Go on Mission', 'Prayer & Counseling', 'Regular Support Partner'] as const
-                ).map((type) => (
-                  <button
-                    key={type}
-                    type="button"
-                    onClick={() => setRequestType(type)}
-                    className={`px-3.5 py-2 text-xs font-medium rounded-lg transition-colors cursor-pointer ${
-                      requestType === type
-                        ? 'bg-forest-900 text-white'
-                        : 'bg-stone-100 text-stone-700 hover:bg-stone-200'
-                    }`}
-                  >
-                    {type}
-                  </button>
-                ))}
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label htmlFor="p-name" className="block text-xs font-semibold text-stone-700 mb-1.5">
-                    Full Name
-                  </label>
-                  <input
-                    id="p-name"
-                    type="text"
-                    required
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    placeholder="Your name"
-                    className="w-full px-3.5 py-2.5 text-sm bg-[#faf8f4] border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-forest-800"
-                  />
+            <div className="mt-4"><label htmlFor="gift-focus" className="mb-1.5 block text-xs font-semibold text-stone-200">Area you would like to discuss</label><select id="gift-focus" value={fund} onChange={event => setFund(event.target.value)} className="w-full rounded-lg border border-forest-700 bg-forest-900 px-3.5 py-3 text-sm text-white">{FUND_OPTIONS.map(option => <option key={option}>{option}</option>)}</select></div>
+            <div className="mt-6 rounded-xl border border-forest-700 bg-forest-900 p-4">
+              <p className="text-xs font-semibold uppercase tracking-wider text-harvest-400">Your guide</p>
+              <p className="mt-2 font-serif text-2xl font-semibold tabular-nums">{displayAmount} <span className="font-sans text-sm font-normal text-stone-300">· {frequency}</span></p>
+              <p className="mt-1 text-sm text-stone-300">Intended focus: {fund}</p>
+              <div className="mt-5 border-t border-forest-700 pt-4">
+                <p className="text-xs text-stone-300">{account.type}</p>
+                <p className="mt-1 font-semibold">{account.bank}</p>
+                <p className="mt-1 break-words text-sm text-stone-200">{account.accountName}</p>
+                <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
+                  <span className="font-mono text-xl font-semibold tracking-wide">{account.accountNumber}</span>
+                  <button type="button" onClick={copyAccount} className="inline-flex min-h-10 items-center gap-2 rounded-lg bg-white px-3.5 py-2 text-xs font-semibold text-forest-950 hover:bg-stone-100"><Copy className="h-4 w-4" aria-hidden="true" />Copy account number</button>
                 </div>
-                <div>
-                  <label htmlFor="p-contact" className="block text-xs font-semibold text-stone-700 mb-1.5">
-                    Phone or Email
-                  </label>
-                  <input
-                    id="p-contact"
-                    type="text"
-                    required
-                    value={phoneOrEmail}
-                    onChange={(e) => setPhoneOrEmail(e.target.value)}
-                    placeholder="+234 ... or email"
-                    className="w-full px-3.5 py-2.5 text-sm bg-[#faf8f4] border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-forest-800"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label htmlFor="p-city" className="block text-xs font-semibold text-stone-700 mb-1.5">
-                  City / Country (Optional)
-                </label>
-                <input
-                  id="p-city"
-                  type="text"
-                  value={city}
-                  onChange={(e) => setCity(e.target.value)}
-                  placeholder="e.g., Omoku, Port Harcourt, Yaoundé"
-                  className="w-full px-3.5 py-2.5 text-sm bg-[#faf8f4] border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-forest-800"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="p-msg" className="block text-xs font-semibold text-stone-700 mb-1.5">
-                  Message, Support Pledge, or Prayer Need
-                </label>
-                <textarea
-                  id="p-msg"
-                  rows={4}
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
-                  placeholder="Share how you would like to support, join a field team, or receive counseling..."
-                  className="w-full px-3.5 py-2.5 text-sm bg-[#faf8f4] border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-forest-800"
-                />
-              </div>
-
-              <button
-                type="submit"
-                className="w-full sm:w-auto px-6 py-3 text-sm font-semibold text-white bg-forest-900 hover:bg-forest-800 rounded-lg transition-colors cursor-pointer"
-              >
-                Send Partnership &amp; Prayer Note
-              </button>
-            </form>
-          )}
-
-          {history.length > 0 && (
-            <div className="pt-6 border-t border-stone-200 space-y-3">
-              <div className="flex items-center justify-between">
-                <p className="text-xs font-semibold uppercase tracking-widest text-stone-500">
-                  This Browser’s Recent Giving &amp; Partnership Log
-                </p>
-                <button
-                  type="button"
-                  onClick={() => setHistory([])}
-                  className="text-xs text-stone-500 hover:text-stone-900 cursor-pointer"
-                >
-                  Clear Log
-                </button>
-              </div>
-              <div className="space-y-2">
-                {history.map((item) => (
-                  <div
-                    key={item.id}
-                    className="p-3.5 rounded-lg bg-[#faf8f4] border border-stone-200 text-xs space-y-1"
-                  >
-                    <p className="font-semibold text-forest-950">
-                      <span className="font-mono text-harvest-600">{item.reference}</span>{' '}
-                      <span aria-hidden="true">·</span> {item.type}{' '}
-                      {item.amountSummary && (
-                        <>
-                          <span aria-hidden="true">·</span>{' '}
-                          <span className="font-mono tabular-nums">{item.amountSummary}</span>
-                        </>
-                      )}{' '}
-                      <span className="font-normal text-stone-500">({item.createdAt})</span>
-                    </p>
-                    <p className="text-stone-600">{item.message}</p>
-                  </div>
-                ))}
+                {copied && <p role="status" className="mt-2 text-xs text-harvest-400">Account number copied.</p>}
+                {copyFailed && <p role="status" className="mt-2 text-xs text-amber-200">Copy is unavailable in this browser. You can select the account number above.</p>}
               </div>
             </div>
-          )}
-        </div>
-
-        {/* Contact information lives on the dedicated Contact page. */}
-        <aside className="lg:col-span-5 space-y-6">
-          <div className="bg-limestone/70 border border-stone-200 rounded-2xl p-6 sm:p-8 space-y-5">
-            <h2 className="font-serif text-2xl font-semibold text-forest-950">
-              Need help with your gift?
-            </h2>
-            <p className="text-sm leading-relaxed text-stone-700">
-              For transfer questions, prayer requests, or counselling, contact the mission office
-              through our Contact page.
-            </p>
-            <button
-              type="button"
-              onClick={() => onNavigate('contact')}
-              className="inline-flex min-h-11 items-center rounded-lg bg-forest-900 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-forest-800"
-            >
-              View Contact Details
-            </button>
+            <p className="mt-4 text-xs leading-relaxed text-stone-300">Please verify the account name and details with the mission through its official contact channels before transferring. Regular support means you arrange repeat transfers yourself; no automatic debit is set up.</p>
           </div>
-        </aside>
-      </section>
-    </div>
+        </section>
+
+        <section className="space-y-6">
+          <div className="max-w-2xl">
+            <p className="text-xs font-semibold uppercase tracking-widest text-harvest-600">Published bank details</p>
+            <h2 className="mt-2 font-serif text-2xl font-semibold text-forest-950 sm:text-3xl">Mission bank accounts</h2>
+            <p className="mt-2 text-sm leading-relaxed text-stone-600">These are the bank details currently listed by the ministry. Please confirm them directly with the mission before sending funds.</p>
+          </div>
+          <BankAccountsGrid highlightCurrency={currency} />
+        </section>
+
+        <section className="grid gap-8 border-t border-stone-200 pt-10 lg:grid-cols-12">
+          <div className="space-y-3 lg:col-span-5">
+            <p className="text-xs font-semibold uppercase tracking-widest text-harvest-600">Let's talk</p>
+            <h2 className="font-serif text-2xl font-semibold text-forest-950 sm:text-3xl">Questions before you partner?</h2>
+            <p className="text-sm leading-relaxed text-stone-600">Tell us whether you would like to serve, pray, support an area of work or ask a question. A form submission is not a financial transaction or a confirmed volunteer placement.</p>
+          </div>
+          <form name="mission-partnership" method="POST" action="/thank-you.html" data-netlify="true" netlify-honeypot="bot-field" className="space-y-5 rounded-2xl border border-stone-200 bg-white p-6 sm:p-8 lg:col-span-7">
+            <input type="hidden" name="form-name" value="mission-partnership" />
+            <p className="hidden"><label>Do not fill this out: <input name="bot-field" /></label></p>
+            <div className="grid gap-5 sm:grid-cols-2">
+              <div><label htmlFor="partner-name" className="mb-1.5 block text-sm font-medium">Your name *</label><input id="partner-name" name="name" required autoComplete="name" className="min-h-12 w-full rounded-lg border border-stone-300 bg-[#faf8f4] px-3.5 py-3 text-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-harvest-500 sm:text-sm" /></div>
+              <div><label htmlFor="partner-contact" className="mb-1.5 block text-sm font-medium">Email or phone *</label><input id="partner-contact" name="reply_contact" required className="w-full rounded-lg border border-stone-300 bg-[#faf8f4] px-3.5 py-3 text-sm" /></div>
+            </div>
+            <div className="grid gap-5 sm:grid-cols-2">
+              <div><label htmlFor="partner-interest" className="mb-1.5 block text-sm font-medium">I am interested in *</label><select id="partner-interest" name="interest" required className="min-h-12 w-full rounded-lg border border-stone-300 bg-[#faf8f4] px-3.5 py-3 text-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-harvest-500 sm:text-sm"><option value="">Choose one</option><option>Prayer</option><option>Serving / mission outreach</option><option>Financial partnership</option><option>Discussing a project area</option><option>General enquiry</option></select></div>
+              <div><label htmlFor="partner-location" className="mb-1.5 block text-sm font-medium">City / Country (optional)</label><input id="partner-location" name="location" autoComplete="country-name" className="w-full rounded-lg border border-stone-300 bg-[#faf8f4] px-3.5 py-3 text-sm" /></div>
+            </div>
+            <div><label htmlFor="partner-message" className="mb-1.5 block text-sm font-medium">Message (optional)</label><textarea id="partner-message" name="message" rows={5} maxLength={4000} className="min-h-36 w-full resize-y rounded-lg border border-stone-300 bg-[#faf8f4] px-3.5 py-3 text-base focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-harvest-500 sm:text-sm" placeholder="Tell us what you would like to discuss..." /></div>
+            <button type="submit" className="inline-flex min-h-12 w-full items-center justify-center rounded-lg bg-forest-900 px-5 py-3 text-sm font-semibold text-white hover:bg-forest-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-harvest-500 focus-visible:ring-offset-2 sm:w-auto">Send partnership enquiry</button>
+            <p className="text-xs leading-relaxed text-stone-500">Please do not include bank passwords, card details or other highly sensitive information.</p>
+          </form>
+        </section>
+      </div>
     </LocalizedContent>
   );
 };
