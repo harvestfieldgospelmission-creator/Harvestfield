@@ -112,6 +112,41 @@ function parseLocation(): { page: PageId; subId: string | null } {
 }
 
 export default function App() {
+  useEffect(() => {
+    const loader = document.getElementById('hf-initial-loader');
+    if (!loader) return;
+
+    let hideTimer: number | undefined;
+    let safetyTimer: number | undefined;
+    let cancelled = false;
+
+    const revealPage = () => {
+      if (cancelled) return;
+      loader.classList.add('hf-loader--hidden');
+      hideTimer = window.setTimeout(() => loader.remove(), 300);
+    };
+
+    const waitForFontsAndReveal = () => {
+      void document.fonts.ready.then(revealPage, revealPage);
+    };
+
+    if (document.readyState === 'complete') {
+      waitForFontsAndReveal();
+    } else {
+      window.addEventListener('load', waitForFontsAndReveal, { once: true });
+    }
+
+    // Keep the page usable if a slow resource prevents the load event.
+    safetyTimer = window.setTimeout(revealPage, 4000);
+
+    return () => {
+      cancelled = true;
+      window.removeEventListener('load', waitForFontsAndReveal);
+      if (hideTimer !== undefined) window.clearTimeout(hideTimer);
+      if (safetyTimer !== undefined) window.clearTimeout(safetyTimer);
+    };
+  }, []);
+
   const initial = parseLocation();
   const [currentPage, setCurrentPage] = useState<PageId>(initial.page);
   const [selectedArticleSlug, setSelectedArticleSlug] = useState<string | null>(
