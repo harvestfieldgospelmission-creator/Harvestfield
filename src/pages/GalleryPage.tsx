@@ -10,14 +10,14 @@ interface GalleryPageProps {
   onClearInitialPhoto?: () => void;
 }
 
-const REGIONS: ('All' | GalleryPhoto['region'])[] = [
-  'All',
-  'Kenya',
-  'Cameroon',
-  'Tchad Republic',
-  "Côte d'Ivoire",
-  'Nigeria & Schools',
-  'Official Flyers',
+const REGIONS: { label: string; value: 'All' | GalleryPhoto['region'] }[] = [
+  { label: 'All', value: 'All' },
+  { label: 'Nigeria', value: 'Nigeria & Schools' },
+  { label: 'Cameroon', value: 'Cameroon' },
+  { label: 'Tchad', value: 'Tchad Republic' },
+  { label: "Côte d’Ivoire", value: "Côte d'Ivoire" },
+  { label: 'Kenya', value: 'Kenya' },
+  { label: 'Flyers', value: 'Official Flyers' },
 ];
 
 export const GalleryPage: React.FC<GalleryPageProps> = ({
@@ -95,27 +95,27 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({
         </div>
 
         <div
-          className="flex flex-wrap items-center gap-1.5 p-1 bg-stone-200/75 rounded-lg self-start"
+          className="flex max-w-full items-center gap-1.5 overflow-x-auto p-1 pb-2 bg-stone-100 rounded-lg self-start"
           role="tablist"
           aria-label="Filter gallery by mission field"
         >
           {REGIONS.map((region) => (
             <button
-              key={region}
+              key={region.value}
               type="button"
               role="tab"
-              aria-selected={selectedRegion === region}
+              aria-selected={selectedRegion === region.value}
               onClick={() => {
-                setSelectedRegion(region);
+                setSelectedRegion(region.value);
                 closeLightbox();
               }}
-              className={`px-3.5 py-2 text-xs font-medium rounded-md transition-colors whitespace-nowrap cursor-pointer ${
-                selectedRegion === region
+              className={`shrink-0 px-3.5 py-2 text-xs font-medium rounded-md transition-colors whitespace-nowrap cursor-pointer ${
+                selectedRegion === region.value
                   ? 'bg-white text-forest-950 shadow-sm'
                   : 'text-stone-700 hover:text-stone-950'
               }`}
             >
-              {region}
+              {region.label}
             </button>
           ))}
         </div>
@@ -129,43 +129,23 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({
               key={photo.id}
               type="button"
               onClick={() => setLightboxIndex(idx)}
-              className="gallery-card group flex flex-col overflow-hidden rounded-2xl border border-stone-200 bg-white text-left transition-shadow duration-200 hover:shadow-md cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-800"
+              aria-label={`View ${photo.title} — ${photo.location}`}
+              className="gallery-card group relative block aspect-[4/3] overflow-hidden rounded-xl bg-stone-200 text-left cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-800"
             >
-              <div
-                className={`relative w-full bg-stone-200 overflow-hidden ${
+              <SafeImage
+                src={photo.src}
+                alt={photo.title}
+                className={`h-full w-full transition-transform duration-500 ease-out group-hover:scale-105 ${
                   photo.region === 'Official Flyers'
-                    ? 'aspect-[3/4]'
-                    : photo.aspect === 'wide'
-                    ? 'aspect-[16/9]'
-                    : photo.aspect === 'portrait'
-                    ? 'aspect-[3/4]'
-                    : 'aspect-[4/3]'
+                    ? 'object-contain bg-stone-100'
+                    : 'object-cover'
                 }`}
-              >
-                <SafeImage
-                  src={photo.src}
-                  alt={photo.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-between p-4">
-                  <span className="text-xs font-medium text-white">
-                    {photo.location}
-                  </span>
-                  <span className="w-8 h-8 rounded-lg bg-black/60 text-white inline-flex items-center justify-center">
-                    <Expand className="w-4 h-4" />
-                  </span>
-                </div>
-              </div>
-              <div className="p-5 space-y-1.5">
-                <p className="text-xs text-stone-500">
-                  {photo.location} <span aria-hidden="true">·</span> {photo.program}
-                </p>
-                <h2 className="font-serif text-lg font-semibold text-forest-950 group-hover:text-forest-800 transition-colors leading-snug">
-                  {photo.title}
-                </h2>
-                <p className="text-xs text-stone-600 leading-relaxed line-clamp-2">
-                  {photo.caption}
-                </p>
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent opacity-0 group-hover:opacity-100 focus-within:opacity-100 transition-opacity duration-300 flex items-end justify-between p-3">
+                <span className="text-xs font-medium text-white">{photo.location}</span>
+                <span className="w-8 h-8 rounded-lg bg-black/60 text-white inline-flex items-center justify-center">
+                  <Expand className="w-4 h-4" />
+                </span>
               </div>
             </button>
           );
