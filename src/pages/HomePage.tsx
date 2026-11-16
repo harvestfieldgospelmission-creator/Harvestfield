@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { ArrowRight, CheckCircle2, ChevronRight, Expand, Pause, Play } from 'lucide-react';
 import {
   FOUNDER_PROFILE,
@@ -100,6 +101,7 @@ export const HomePage: React.FC<HomePageProps> = ({
     return () => window.clearInterval(intervalId);
   }, [heroHovered, heroIndex, heroPaused, prefersReducedMotion]);
 
+  const { t } = useTranslation();
   const { language } = useLanguage();
   const heroSpot = HERO_SPOTS[heroIndex];
   const localizedJournalPosts = JOURNAL_POSTS.map((post) => localizeJournalPost(post, language));
@@ -199,7 +201,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                     key={spot.id}
                     type="button"
                     onClick={() => setHeroIndex(index)}
-                    aria-label={`Show ${spot.label} image`}
+                    aria-label={t('Show {{label}} image', { label: spot.label })}
                     aria-pressed={heroIndex === index}
                     className="inline-flex h-8 items-center justify-center rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
                   >
@@ -261,7 +263,7 @@ export const HomePage: React.FC<HomePageProps> = ({
               type="button"
               onClick={() => onOpenPhoto(heroSpot.photoId)}
               className="group relative block aspect-[4/3] min-h-[280px] w-full overflow-hidden rounded-2xl border border-stone-200 bg-stone-200 text-left cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-800 sm:min-h-[340px] lg:max-h-[480px] lg:min-h-0"
-              aria-label={`Open ${heroSpot.location} photograph in gallery`}
+              aria-label={t('Open {{location}} photograph in gallery', { location: heroSpot.location })}
             >
               <SafeImage
                 src={heroSpot.image}
@@ -337,7 +339,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                       type="button"
                       onClick={() => setExpandedMandate(isExpanded ? '' : item.id)}
                       className="block w-full aspect-[16/9] bg-stone-200 overflow-hidden cursor-pointer focus-visible:outline-none"
-                      aria-label={`Toggle details for ${item.title}`}
+                      aria-label={t('Toggle details for {{title}}', { title: item.title })}
                     >
                       <SafeImage
                         src={item.image}
@@ -647,11 +649,11 @@ export const HomePage: React.FC<HomePageProps> = ({
                         </div>
                         <div>
                           <label htmlFor="home-prayer-contact" className="block text-xs font-semibold text-stone-700 mb-1.5">Phone or Email (Optional)</label>
-                          <input id="home-prayer-contact" type="text" value={prayerContact} onChange={(e) => setPrayerContact(e.target.value)} placeholder="+234 ... or email@example.com" className="w-full px-3.5 py-2.5 text-sm bg-white border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-forest-800" />
+                          <input id="home-prayer-contact" type="text" value={prayerContact} onChange={(e) => setPrayerContact(e.target.value)} placeholder={t('+234 ... or email@example.com')} className="w-full px-3.5 py-2.5 text-sm bg-white border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-forest-800" />
                         </div>
                         <div>
                           <label htmlFor="home-prayer-msg" className="block text-xs font-semibold text-stone-700 mb-1.5">{prayerType === 'Mission Inquiry' ? 'How would you like to get involved?' : prayerType === 'Salvation Decision' ? 'Your Note or Prayer' : 'Your Prayer Request'}</label>
-                          <textarea id="home-prayer-msg" rows={3} required value={prayerMessage} onChange={(e) => setPrayerMessage(e.target.value)} placeholder={prayerType === 'Mission Inquiry' ? 'Ask about going, praying, giving, or serving with a mission team...' : 'Share how we can pray with you or how you would like to connect...'} className="w-full px-3.5 py-2.5 text-sm bg-white border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-forest-800" />
+                          <textarea id="home-prayer-msg" rows={3} required value={prayerMessage} onChange={(e) => setPrayerMessage(e.target.value)} placeholder={prayerType === 'Mission Inquiry' ? t('Ask about going, praying, giving, or serving with a mission team...') : t('Share how we can pray with you or how you would like to connect...')} className="w-full px-3.5 py-2.5 text-sm bg-white border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-forest-800" />
                         </div>
                         <button type="submit" className="w-full py-3 px-4 text-sm font-semibold text-white bg-forest-900 hover:bg-forest-800 rounded-lg transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-forest-800">Submit {prayerType}</button>
                       </>
