@@ -249,7 +249,6 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
         <div className="fixed bottom-3 right-3 z-[70] w-28 sm:hidden">
           {languageSelector('block')}
         </div>
-        </nav>
       </header>
     </LocalizedContent>
   );
