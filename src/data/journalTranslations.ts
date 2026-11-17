@@ -14,7 +14,7 @@ const journalCopy: Record<'fr' | 'es', Record<string, JournalCopy>> = {
       subtitle: 'Un aperçu des champs missionnaires déclarés par le ministère dans le nord du Cameroun',
       authorRole: 'Fondateur',
       readTime: '5 min de lecture',
-      coverCaption: 'Fig. 1 — L’évangéliste David Abrebor lors d’une action missionnaire rurale à Linde-Massa, dans le nord du Cameroun.',
+      coverCaption: 'Fig. 1 — Un rassemblement communautaire dans le champ missionnaire du nord du Cameroun.',
       excerpt: 'Une présentation de la présence missionnaire du ministère et des photographies prises à Linde-Massa et Maroua, dans le nord du Cameroun.',
       body: [
         'Harvest Field Gospel Mission International est basée à Omoku, dans l’État de Rivers, au Nigeria. Les documents de terrain du ministère mentionnent également Linde-Massa et Maroua, dans le nord du Cameroun, parmi ses lieux de mission.',
@@ -92,7 +92,7 @@ const journalCopy: Record<'fr' | 'es', Record<string, JournalCopy>> = {
       subtitle: 'Una mirada a los campos misioneros que el ministerio identifica en el norte de Camerún',
       authorRole: 'Fundador',
       readTime: '5 min de lectura',
-      coverCaption: 'Fig. 1 — El evangelista David Abrebor durante una labor misionera rural en Linde-Massa, norte de Camerún.',
+      coverCaption: 'Fig. 1 — Una reunión comunitaria en el campo misionero del norte de Camerún.',
       excerpt: 'Una introducción a la presencia misionera del ministerio y a las fotografías de campo de Linde-Massa y Maroua, en el norte de Camerún.',
       body: [
         'Harvest Field Gospel Mission International tiene su sede en Omoku, estado de Rivers, Nigeria. Los materiales de campo del ministerio también identifican Linde-Massa y Maroua, en el norte de Camerún, entre sus lugares de misión.',

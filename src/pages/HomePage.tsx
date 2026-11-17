@@ -24,28 +24,28 @@ interface HomePageProps {
 
 const HERO_SPOTS = [
   {
-    id: 'founder-preaching',
-    photoId: 'g18',
-    label: 'Founder Preaching',
-    image: '/assets/field/founder-speaking.jpg',
-    location: 'Harvest Field Gospel Mission',
-    caption: 'Evang. David Abrebor preaching at a ministry gathering.',
+    id: 'school-outreach-auditorium',
+    photoId: 'g31',
+    label: 'Students at School Outreach',
+    image: '/assets/replacement-photos/WhatsApp Image 2026-11-16 at 5.46.53 PM.jpeg',
+    location: 'Harvest Field School Outreach',
+    caption: 'Students gather in an auditorium for a school outreach programme.',
   },
   {
-    id: 'student-conference',
-    photoId: 'g19',
-    label: 'Student Conference',
-    image: '/assets/field/student-conference-preaching.jpg',
-    location: 'Harvest Field Student Conference',
-    caption: 'Preaching to students gathered for a Harvest Field conference.',
+    id: 'community-support',
+    photoId: 'g32',
+    label: 'Community Support',
+    image: '/assets/replacement-photos/WhatsApp Image 2026-11-16 at 5.01.52 PM.jpeg',
+    location: 'Harvest Field Community Outreach',
+    caption: 'Mission representatives present food items and drinking water for community support.',
   },
   {
-    id: 'students-praying',
-    photoId: 'g17',
-    label: 'Students in Prayer',
-    image: '/assets/field/student-conference.jpg',
-    location: 'Harvest Field Student Conference',
-    caption: 'Students raising their hands in prayer during a conference.',
+    id: 'students-school-visit',
+    photoId: 'g33',
+    label: 'Students at School',
+    image: '/assets/replacement-photos/WhatsApp Image 2026-11-16 at 5.46.14 PM.jpeg',
+    location: 'Harvest Field School Outreach',
+    caption: 'Students gather outside during a school outreach visit.',
   },
 ];
 
@@ -173,7 +173,7 @@ export const HomePage: React.FC<HomePageProps> = ({
               src={spot.image}
               alt=""
               fetchPriority={index === 0 ? 'high' : 'auto'}
-              className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ${
+              className={`absolute inset-0 h-full w-full object-cover object-[center_28%] transition-opacity duration-1000 ${
                 index === heroIndex ? 'opacity-100' : 'opacity-0'
               }`}
             />
@@ -291,7 +291,7 @@ export const HomePage: React.FC<HomePageProps> = ({
               <SafeImage
                 src={heroSpot.image}
                 alt={heroSpot.caption}
-                className="w-full h-full lg:h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                className="w-full h-full lg:h-full object-cover object-[center_28%] group-hover:scale-105 transition-transform duration-500 ease-out"
                 fallbackTitle={heroSpot.location}
               />
               <div className="absolute top-4 right-4 w-9 h-9 rounded-lg bg-black/50 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
@@ -367,7 +367,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                       <SafeImage
                         src={item.image}
                         alt={item.imageAlt}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                        className="w-full h-full object-cover object-[center_28%] group-hover:scale-105 transition-transform duration-500 ease-out"
                         fallbackTitle={item.title}
                       />
                     </button>
