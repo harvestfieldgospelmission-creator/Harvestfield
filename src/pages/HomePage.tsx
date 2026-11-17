@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ArrowRight, CheckCircle2, ChevronRight, Expand, Pause, Play } from 'lucide-react';
+import { ArrowRight, Award, CheckCircle2, ChevronRight, Expand, Pause, Play } from 'lucide-react';
 import {
   FOUNDER_PROFILE,
   GALLERY_PHOTOS,
@@ -64,6 +64,7 @@ export const HomePage: React.FC<HomePageProps> = ({
   };
 
   const [heroIndex, setHeroIndex] = useState(0);
+  const [showPartnerMedal, setShowPartnerMedal] = useState(true);
   const [heroPaused, setHeroPaused] = useState(false);
   const [heroHovered, setHeroHovered] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(
@@ -80,6 +81,11 @@ export const HomePage: React.FC<HomePageProps> = ({
     'Salvation Decision' | 'Prayer Request' | 'Mission Inquiry' | null
   >(null);
   const [prayerSent, setPrayerSent] = useState(false);
+
+  useEffect(() => {
+    const dismissTimer = window.setTimeout(() => setShowPartnerMedal(false), 6800);
+    return () => window.clearTimeout(dismissTimer);
+  }, []);
 
   useEffect(() => {
     const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -134,6 +140,20 @@ export const HomePage: React.FC<HomePageProps> = ({
   return (
     <LocalizedContent>
     <div>
+      {showPartnerMedal && (
+        <div className="hf-partner-medal fixed inset-0 z-40 flex items-center justify-center px-5 py-8 pointer-events-none" role="status" aria-live="polite">
+          <div className="w-full max-w-[min(21rem,calc(100vw-2.5rem))] rounded-2xl border border-harvest-400/70 bg-[#fffdf8] px-5 py-5 text-center shadow-[0_18px_60px_rgba(10,34,22,0.24)] sm:px-7 sm:py-6">
+            <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full border border-harvest-400/60 bg-[#f7edda] text-harvest-600 shadow-inner">
+              <Award className="h-6 w-6" strokeWidth={1.8} aria-hidden="true" />
+            </div>
+            <p className="mb-1 text-[9px] font-bold uppercase tracking-[0.22em] text-harvest-600">A call to faithful partnership</p>
+            <p className="font-serif text-lg font-semibold leading-snug text-forest-950 sm:text-xl">
+              The Field is ready,
+              <span className="block text-harvest-600">God needs faithful partners.</span>
+            </p>
+          </div>
+        </div>
+      )}
       {/* Cinematic mission welcome — uses the ministry's own field photographs */}
       <section
         className="relative isolate min-h-[440px] overflow-hidden bg-forest-950 sm:min-h-[590px] lg:min-h-[650px]"
@@ -167,14 +187,14 @@ export const HomePage: React.FC<HomePageProps> = ({
             <h1 className="max-w-3xl font-serif text-4xl font-semibold leading-[1.08] tracking-tight sm:text-5xl lg:text-7xl">
               Taking the Gospel to the nations. Bringing hope to every generation.
             </h1>
-            <p className="max-w-2xl text-sm leading-relaxed text-stone-200 sm:text-base lg:text-xl">
+            <p className="hidden max-w-2xl text-sm leading-relaxed text-stone-200 sm:block sm:text-base lg:text-xl">
               From rural communities to cross-border mission fields, Harvest Field Gospel Mission Int’l equips believers to share Christ, serve people and strengthen local communities.
             </p>
-            <div className="flex w-full max-w-xl flex-col gap-2 pt-2 min-[420px]:flex-row min-[420px]:flex-nowrap sm:gap-3">
+            <div className="flex w-full max-w-xl flex-row flex-nowrap gap-2 pt-2 sm:gap-3">
               <button
                 type="button"
                 onClick={() => onNavigate('join')}
-                className="inline-flex min-h-12 w-full min-w-0 items-center justify-center gap-2 rounded-lg bg-harvest-500 px-4 py-3 text-sm font-semibold text-forest-950 shadow-lg shadow-black/15 transition-colors hover:bg-harvest-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white min-[420px]:w-auto min-[420px]:flex-1 sm:px-6"
+                className="hf-hero-cta inline-flex min-h-12 w-1/2 min-w-0 flex-1 items-center justify-center gap-1.5 rounded-lg bg-harvest-500 px-2.5 py-3 text-xs font-semibold text-forest-950 shadow-lg shadow-black/15 transition-colors hover:bg-harvest-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white sm:w-auto sm:gap-2 sm:px-6 sm:text-sm"
               >
                 <span>Join Us</span>
                 <ArrowRight className="h-4 w-4 shrink-0" />
@@ -182,7 +202,7 @@ export const HomePage: React.FC<HomePageProps> = ({
               <button
                 type="button"
                 onClick={() => onNavigate('mission')}
-                className="inline-flex min-h-12 w-full min-w-0 items-center justify-center rounded-lg border border-white/55 bg-white/10 px-4 py-3 text-sm font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white/20 min-[420px]:w-auto min-[420px]:flex-1 sm:px-6"
+                className="inline-flex min-h-12 w-1/2 min-w-0 flex-1 items-center justify-center rounded-lg border border-white/55 bg-white/10 px-2.5 py-3 text-xs font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white/20 sm:w-auto sm:px-6 sm:text-sm"
               >
                 <span className="sm:hidden">Explore</span>
                 <span className="hidden sm:inline">Discover Our Mission</span>
