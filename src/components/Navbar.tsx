@@ -166,7 +166,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
                   <div
                     className={`absolute left-0 top-full z-50 mt-2 w-60 rounded-xl border border-stone-200 bg-white p-2 shadow-xl transition-all duration-150 ${isOpen ? 'visible translate-y-0 opacity-100' : 'invisible -translate-y-1 opacity-0'}`}
                   >
-                    {group.items.map((item) => pageLink(
+                    {group.items.filter((item) => item.id !== 'join' && item.id !== 'partner').map((item) => pageLink(
                       item.id,
                       t(item.label),
                       `${DESKTOP_LINK_CLASS} ${currentPage === item.id ? 'bg-forest-50 font-semibold text-forest-900' : ''}`,
@@ -216,19 +216,9 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
           inert={!mobileOpen}
           className={`fixed right-0 top-[4.1rem] z-[60] flex h-[calc(100dvh-4.1rem)] w-[clamp(300px,40vw,420px)] max-w-[calc(100vw-0.75rem)] flex-col overflow-hidden border-l border-stone-200 bg-[#faf8f4] shadow-2xl transition-transform duration-300 ease-out motion-reduce:transition-none lg:hidden ${mobileOpen ? 'translate-x-0' : 'translate-x-full'}`}
         >
-          <div className="flex items-center justify-between border-b border-stone-200 px-5 py-4">
-            <div>
-              <p className="font-serif text-lg font-semibold text-forest-950">{t('nav.explore')}</p>
-              <p className="mt-0.5 text-xs text-stone-500">{t('nav.exploreHint')}</p>
-            </div>
-            <button
-              type="button"
-              onClick={() => setMobileOpen(false)}
-              className="inline-flex h-10 w-10 items-center justify-center rounded-lg text-stone-600 hover:bg-stone-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-800"
-              aria-label={t('nav.close')}
-            >
-              <X className="h-5 w-5" />
-            </button>
+          <div className="border-b border-stone-200 px-5 py-3">
+            <p className="font-serif text-lg font-semibold text-forest-950">{t('nav.explore')}</p>
+            <p className="mt-0.5 text-xs text-stone-500">{t('nav.exploreHint')}</p>
           </div>
 
           <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 py-2">
