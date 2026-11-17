@@ -36,6 +36,7 @@ const NAV_GROUPS: { label: string; items: { id: PageId; label: string }[] }[] = 
     label: 'nav.groups.connect',
     items: [
       { id: 'prayer', label: 'nav.prayer' },
+      { id: 'partner', label: 'nav.support' },
       { id: 'join', label: 'nav.join' },
       { id: 'contact', label: 'nav.contact' },
     ],
@@ -166,7 +167,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
                   <div
                     className={`absolute left-0 top-full z-50 mt-2 w-60 rounded-xl border border-stone-200 bg-white p-2 shadow-xl transition-all duration-150 ${isOpen ? 'visible translate-y-0 opacity-100' : 'invisible -translate-y-1 opacity-0'}`}
                   >
-                    {group.items.filter((item) => item.id !== 'join' && item.id !== 'partner').map((item) => pageLink(
+                    {group.items.filter((item) => item.id !== 'join').map((item) => pageLink(
                       item.id,
                       t(item.label),
                       `${DESKTOP_LINK_CLASS} ${currentPage === item.id ? 'bg-forest-50 font-semibold text-forest-900' : ''}`,
@@ -180,11 +181,6 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
           <div className="relative z-[80] flex shrink-0 items-center gap-2 lg:justify-self-end">
             {languageSelector('block w-12 sm:hidden', true)}
             {languageSelector('hidden sm:block')}
-            {pageLink(
-              'partner',
-              t('nav.support'),
-              `hidden rounded-lg px-3 py-2.5 text-xs font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-forest-800 xl:inline-flex ${currentPage === 'partner' ? 'bg-harvest-600 text-white' : 'bg-forest-900 text-white hover:bg-forest-800'}`,
-            )}
             <button
               type="button"
               ref={menuToggleRef}
