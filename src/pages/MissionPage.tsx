@@ -300,7 +300,7 @@ export const MissionPage: React.FC<MissionPageProps> = ({ onNavigate }) => {
                   <SafeImage
                     src={item.image}
                     alt={item.imageAlt}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                    className={item.id === 'christian-counseling' ? 'w-full h-full object-contain bg-stone-100 p-2' : 'w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out'}
                   />
                 </div>
                 <div className="p-6 space-y-3">

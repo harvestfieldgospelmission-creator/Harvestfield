@@ -198,8 +198,8 @@ export const MANDATES: MandateItem[] = [
       'Foundational discipleship and Scripture study tracks',
       'Pastoral care for missionaries and field families',
     ],
-    image: '/assets/field/counseling-ministry.jpg',
-    imageAlt: 'A couple celebrates 50 years of marriage at a community gathering',
+    image: '/assets/field/school-outreach-counseling.jpeg',
+    imageAlt: 'A student receives personal guidance during a Harvest Field school outreach',
   },
   {
     id: 'mission-mobilisation',
