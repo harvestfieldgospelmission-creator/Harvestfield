@@ -166,7 +166,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
                   <div
                     className={`absolute left-0 top-full z-50 mt-2 w-60 rounded-xl border border-stone-200 bg-white p-2 shadow-xl transition-all duration-150 ${isOpen ? 'visible translate-y-0 opacity-100' : 'invisible -translate-y-1 opacity-0'}`}
                   >
-                    {group.items.map((item) => pageLink(
+                    {group.items.filter((item) => item.id !== 'join' && item.id !== 'partner').map((item) => pageLink(
                       item.id,
                       t(item.label),
                       `${DESKTOP_LINK_CLASS} ${currentPage === item.id ? 'bg-forest-50 font-semibold text-forest-900' : ''}`,
@@ -216,35 +216,27 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
           inert={!mobileOpen}
           className={`fixed right-0 top-[4.1rem] z-[60] flex h-[calc(100dvh-4.1rem)] w-[clamp(300px,40vw,420px)] max-w-[calc(100vw-0.75rem)] flex-col overflow-hidden border-l border-stone-200 bg-[#faf8f4] shadow-2xl transition-transform duration-300 ease-out motion-reduce:transition-none lg:hidden ${mobileOpen ? 'translate-x-0' : 'translate-x-full'}`}
         >
-          <div className="flex items-center justify-between border-b border-stone-200 px-5 py-4">
-            <div>
-              <p className="font-serif text-lg font-semibold text-forest-950">{t('nav.explore')}</p>
-              <p className="mt-0.5 text-xs text-stone-500">{t('nav.exploreHint')}</p>
-            </div>
-            <button
-              type="button"
-              onClick={() => setMobileOpen(false)}
-              className="inline-flex h-10 w-10 items-center justify-center rounded-lg text-stone-600 hover:bg-stone-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-800"
-              aria-label={t('nav.close')}
-            >
-              <X className="h-5 w-5" />
-            </button>
+          <div className="border-b border-stone-200 px-5 py-3">
+            <p className="font-serif text-lg font-semibold text-forest-950">{t('nav.explore')}</p>
+            <p className="mt-0.5 text-xs text-stone-500">{t('nav.exploreHint')}</p>
           </div>
 
-          <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 py-3">
-            {pageLink('home', t('nav.home'), `${MOBILE_LINK_CLASS} mb-2 ${currentPage === 'home' ? 'bg-forest-900 text-white hover:bg-forest-800 hover:text-white' : ''}`)}
-            {NAV_GROUPS.map((group) => (
-              <section key={group.label} className="border-t border-stone-200 py-2.5">
-                <h2 className="px-3 pb-1 text-[10px] font-bold uppercase tracking-[0.14em] text-harvest-600">{t(group.label)}</h2>
-                <div className="space-y-0.5">
-                  {group.items.filter((item) => item.id !== 'join' && item.id !== 'partner').map((item) => pageLink(
-                    item.id,
-                    t(item.label),
-                    `${MOBILE_LINK_CLASS} ${currentPage === item.id ? 'bg-forest-900 text-white hover:bg-forest-800 hover:text-white' : ''}`,
-                  ))}
-                </div>
-              </section>
-            ))}
+          <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 py-2">
+            <div className="space-y-1">
+              {pageLink('home', t('nav.home'), `${MOBILE_LINK_CLASS} ${currentPage === 'home' ? 'bg-forest-900 text-white hover:bg-forest-800 hover:text-white' : ''}`)}
+              {NAV_GROUPS.map((group) => (
+                <section key={group.label} className="border-t border-stone-200 py-1.5">
+                  <h2 className="px-3 pb-0.5 text-[10px] font-bold uppercase tracking-[0.12em] text-harvest-600">{t(group.label)}</h2>
+                  <div className="space-y-0">
+                    {group.items.map((item) => pageLink(
+                      item.id,
+                      t(item.label),
+                      `flex min-h-9 w-full items-center rounded-lg px-3 py-1.5 text-[13px] font-medium text-stone-700 transition-colors hover:bg-stone-100 hover:text-forest-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-800 ${currentPage === item.id ? 'bg-forest-900 text-white hover:bg-forest-800 hover:text-white' : ''}`,
+                    ))}
+                  </div>
+                </section>
+              ))}
+            </div>
           </div>
 
         </nav>
