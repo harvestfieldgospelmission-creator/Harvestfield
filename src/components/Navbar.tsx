@@ -248,9 +248,8 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
                   </div>
                 </section>
               ))}
-              <div className="col-span-2 grid grid-cols-2 gap-2 border-t border-stone-200 pt-2">
-                {pageLink('join', t('nav.join'), "flex min-h-10 items-center justify-center rounded-lg border border-forest-800 px-3 py-2 text-center text-xs font-semibold text-forest-900 transition-colors hover:bg-forest-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-800")}
-                {pageLink('partner', t('nav.support'), "flex min-h-10 items-center justify-center rounded-lg bg-forest-900 px-3 py-2 text-center text-xs font-semibold text-white transition-colors hover:bg-forest-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-800")}
+              <div className="col-span-2 border-t border-stone-200 pt-2">
+                {pageLink('partner', t('nav.support'), "flex min-h-10 w-full items-center justify-center rounded-lg bg-forest-900 px-3 py-2 text-center text-xs font-semibold text-white transition-colors hover:bg-forest-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-800")}
               </div>
             </div>
           </div>
