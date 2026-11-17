@@ -231,20 +231,28 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
             </button>
           </div>
 
-          <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 py-3">
-            {pageLink('home', t('nav.home'), `${MOBILE_LINK_CLASS} mb-2 ${currentPage === 'home' ? 'bg-forest-900 text-white hover:bg-forest-800 hover:text-white' : ''}`)}
-            {NAV_GROUPS.map((group) => (
-              <section key={group.label} className="border-t border-stone-200 py-2.5">
-                <h2 className="px-3 pb-1 text-[10px] font-bold uppercase tracking-[0.14em] text-harvest-600">{t(group.label)}</h2>
-                <div className="space-y-0.5">
-                  {group.items.filter((item) => item.id !== 'join' && item.id !== 'partner').map((item) => pageLink(
-                    item.id,
-                    t(item.label),
-                    `${MOBILE_LINK_CLASS} ${currentPage === item.id ? 'bg-forest-900 text-white hover:bg-forest-800 hover:text-white' : ''}`,
-                  ))}
-                </div>
-              </section>
-            ))}
+          <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 py-2">
+            <div className="grid grid-cols-2 items-start gap-x-3 gap-y-1">
+              <div className="col-span-2">
+                {pageLink('home', t('nav.home'), `${MOBILE_LINK_CLASS} mb-1 ${currentPage === 'home' ? 'bg-forest-900 text-white hover:bg-forest-800 hover:text-white' : ''}`)}
+              </div>
+              {NAV_GROUPS.map((group) => (
+                <section key={group.label} className="border-t border-stone-200 py-1.5">
+                  <h2 className="px-3 pb-0.5 text-[9px] font-bold uppercase tracking-[0.12em] text-harvest-600">{t(group.label)}</h2>
+                  <div className="space-y-0">
+                    {group.items.map((item) => pageLink(
+                      item.id,
+                      t(item.label),
+                      `flex min-h-9 w-full items-center rounded-lg px-3 py-1.5 text-[13px] font-medium text-stone-700 transition-colors hover:bg-stone-100 hover:text-forest-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-800 ${currentPage === item.id ? 'bg-forest-900 text-white hover:bg-forest-800 hover:text-white' : ''}`,
+                    ))}
+                  </div>
+                </section>
+              ))}
+              <div className="col-span-2 grid grid-cols-2 gap-2 border-t border-stone-200 pt-2">
+                {pageLink('join', t('nav.join'), "flex min-h-10 items-center justify-center rounded-lg border border-forest-800 px-3 py-2 text-center text-xs font-semibold text-forest-900 transition-colors hover:bg-forest-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-800")}
+                {pageLink('partner', t('nav.support'), "flex min-h-10 items-center justify-center rounded-lg bg-forest-900 px-3 py-2 text-center text-xs font-semibold text-white transition-colors hover:bg-forest-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-800")}
+              </div>
+            </div>
           </div>
 
         </nav>
