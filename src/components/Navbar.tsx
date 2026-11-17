@@ -222,13 +222,11 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
           </div>
 
           <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 py-2">
-            <div className="grid grid-cols-2 items-start gap-x-3 gap-y-1">
-              <div className="col-span-2">
-                {pageLink('home', t('nav.home'), `${MOBILE_LINK_CLASS} mb-1 ${currentPage === 'home' ? 'bg-forest-900 text-white hover:bg-forest-800 hover:text-white' : ''}`)}
-              </div>
+            <div className="space-y-1">
+              {pageLink('home', t('nav.home'), `${MOBILE_LINK_CLASS} ${currentPage === 'home' ? 'bg-forest-900 text-white hover:bg-forest-800 hover:text-white' : ''}`)}
               {NAV_GROUPS.map((group) => (
                 <section key={group.label} className="border-t border-stone-200 py-1.5">
-                  <h2 className="px-3 pb-0.5 text-[9px] font-bold uppercase tracking-[0.12em] text-harvest-600">{t(group.label)}</h2>
+                  <h2 className="px-3 pb-0.5 text-[10px] font-bold uppercase tracking-[0.12em] text-harvest-600">{t(group.label)}</h2>
                   <div className="space-y-0">
                     {group.items.map((item) => pageLink(
                       item.id,
