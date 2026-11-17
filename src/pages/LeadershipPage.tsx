@@ -49,7 +49,7 @@ export const LeadershipPage: React.FC<LeadershipPageProps> = ({ onNavigate }) =>
         <div aria-hidden="true" className="absolute inset-y-0 right-0 hidden w-[42%] bg-[linear-gradient(145deg,#e8dfca_0%,#f7f3e9_60%,#e7dcc3_100%)] lg:block" />
         <div aria-hidden="true" className="absolute -left-24 -top-24 h-72 w-72 rounded-full border border-harvest-500/15" />
         <div className="relative grid items-stretch lg:grid-cols-12">
-          <div className="flex flex-col justify-center px-6 py-10 sm:px-10 sm:py-14 lg:col-span-7 lg:px-14 lg:py-16">
+          <div className="relative z-10 flex flex-col justify-center px-6 pb-10 pt-12 sm:px-10 sm:pb-14 sm:pt-16 lg:col-span-7 lg:order-1 lg:justify-end lg:px-14 lg:pb-20 lg:pt-36">
             <p className="mb-5 inline-flex items-center gap-3 text-[0.68rem] font-bold uppercase tracking-[0.25em] text-harvest-700">
               <span className="h-px w-9 bg-harvest-500" />
               The vision and the calling
@@ -75,9 +75,9 @@ export const LeadershipPage: React.FC<LeadershipPageProps> = ({ onNavigate }) =>
               </div>
             </div>
           </div>
-          <div className="relative min-h-[28rem] px-6 pb-7 sm:px-10 lg:col-span-5 lg:min-h-[43rem] lg:px-8 lg:py-8">
-            <div className="absolute inset-x-6 bottom-7 top-0 border border-harvest-500/50 sm:inset-x-10 lg:inset-x-8 lg:bottom-8 lg:top-8" />
-            <div className="absolute inset-x-9 bottom-10 top-3 overflow-hidden bg-forest-900 shadow-2xl sm:inset-x-12 lg:inset-x-11 lg:bottom-11 lg:top-11">
+          <div className="relative min-h-[31rem] px-3 pb-5 pt-2 sm:min-h-[36rem] sm:px-6 lg:col-span-5 lg:order-2 lg:min-h-[49rem] lg:px-5 lg:py-5">
+            <div className="absolute inset-x-4 bottom-5 top-0 border border-harvest-500/50 sm:inset-x-8 lg:inset-x-5 lg:bottom-5 lg:top-5" />
+            <div className="absolute inset-x-7 bottom-8 top-2 overflow-hidden bg-forest-900 shadow-2xl sm:inset-x-11 sm:bottom-10 lg:inset-x-8 lg:bottom-8 lg:top-8">
               <SafeImage
                 src={FOUNDER_PROFILE.portrait}
                 alt="Evang. David Abrebor, Founder and President of Harvest Field Gospel Mission Int'l"
@@ -89,7 +89,7 @@ export const LeadershipPage: React.FC<LeadershipPageProps> = ({ onNavigate }) =>
                 <p className="mt-2 font-serif text-2xl font-semibold text-white sm:text-3xl">{FOUNDER_PROFILE.name}</p>
               </div>
             </div>
-            <div className="absolute right-7 top-6 flex h-16 w-16 items-center justify-center rounded-full border border-harvest-300 bg-[#f7edda] text-center shadow-lg sm:right-12 lg:right-10 lg:top-10">
+            <div className="absolute right-5 top-5 z-10 flex h-16 w-16 items-center justify-center rounded-full border border-harvest-300 bg-[#f7edda] text-center shadow-lg sm:right-10 lg:right-8 lg:top-8">
               <span className="font-serif text-[0.58rem] font-bold uppercase leading-tight tracking-wider text-forest-950">Faith<br />&amp; Service</span>
             </div>
           </div>
