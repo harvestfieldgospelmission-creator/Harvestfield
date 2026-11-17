@@ -254,6 +254,15 @@ const translations: Record<Exclude<Language, 'en'>, Record<string, string>> = {
     'Demo links only. Replace these with the ministry’s official social accounts.':
       'Liens de démonstration uniquement. Remplacez-les par les comptes officiels du ministère.',
     'Founder & President': 'Fondateur et président',
+    'Founder & Leadership': 'Fondateur et direction',
+    'Mission Director': 'Directeur de mission',
+    'Pst Wobo Praise serves as the Mission Director of Harvest Field Gospel Mission.':
+      'Le pasteur Wobo Praise est directeur de mission de Harvest Field Gospel Mission.',
+    'Humanitarian Care': 'Aide humanitaire',
+    'Spiritual Leadership': 'Direction spirituelle',
+    'Mission Strategy': 'Stratégie missionnaire',
+    'Global Outreach': 'Actions missionnaires mondiales',
+    'Additional Mission Leaders': 'Autres responsables de la mission',
     'Support Our Foreign Missions': 'Soutenir nos missions à l’étranger',
     'See Field Photographs': 'Voir les photos de mission',
     'A Life Poured Out for Rural & Foreign Harvests':
@@ -879,6 +888,15 @@ const translations: Record<Exclude<Language, 'en'>, Record<string, string>> = {
     'Demo links only. Replace these with the ministry’s official social accounts.':
       'Enlaces de demostración únicamente. Sustitúyelos por las cuentas oficiales del ministerio.',
     'Founder & President': 'Fundador y presidente',
+    'Founder & Leadership': 'Fundador y liderazgo',
+    'Mission Director': 'Director de misión',
+    'Pst Wobo Praise serves as the Mission Director of Harvest Field Gospel Mission.':
+      'El pastor Wobo Praise es director de misión de Harvest Field Gospel Mission.',
+    'Humanitarian Care': 'Atención humanitaria',
+    'Spiritual Leadership': 'Liderazgo espiritual',
+    'Mission Strategy': 'Estrategia misionera',
+    'Global Outreach': 'Alcance global',
+    'Additional Mission Leaders': 'Otros líderes de la misión',
     'Support Our Foreign Missions': 'Apoya nuestras misiones internacionales',
     'See Field Photographs': 'Ver fotografías de las misiones',
     'A Life Poured Out for Rural & Foreign Harvests':
