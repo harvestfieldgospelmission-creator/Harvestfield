@@ -238,9 +238,6 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
                   </div>
                 </section>
               ))}
-              <div className="col-span-2 border-t border-stone-200 pt-2">
-                {pageLink('partner', t('nav.support'), "flex min-h-10 w-full items-center justify-center rounded-lg bg-forest-900 px-3 py-2 text-center text-xs font-semibold text-white transition-colors hover:bg-forest-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-800")}
-              </div>
             </div>
           </div>
 
