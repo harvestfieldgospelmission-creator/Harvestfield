@@ -214,8 +214,8 @@ export const MANDATES: MandateItem[] = [
       'Intercessory prayer networks for unreached nations',
       'Church partnership mobilization for foreign fields',
     ],
-    image: '/assets/field/discipleship-training.jpg',
-    imageAlt: 'Harvest Field ministry members gather for a mission training meeting',
+    image: '/assets/replacement-photos/WhatsApp Image 2026-11-16 at 5.30.41 PM.jpeg',
+    imageAlt: 'Believers worship and pray together with raised hands during a ministry gathering',
   },
   {
     id: 'community-crusades',
@@ -230,8 +230,8 @@ export const MANDATES: MandateItem[] = [
       'Missions and Evangelistic Conferences',
       'Corporate worship, impartation, and healing ministry',
     ],
-    image: '/assets/field/revival-impartation.jpg',
-    imageAlt: 'Students gather in prayer during a school outreach',
+    image: '/assets/replacement-photos/WhatsApp Image 2026-11-16 at 6.06.32 PM.jpeg',
+    imageAlt: 'Church members gather in prayer around the front of the church during a ministry service',
   },
   {
     id: 'harvest-field-academy',
@@ -246,12 +246,42 @@ export const MANDATES: MandateItem[] = [
       'Mission outreach in Cameroon, Tchad and Côte d’Ivoire',
       'Sharing the Gospel across language and cultural contexts',
     ],
-    image: '/assets/field/tchad-republic-mission.jpg',
-    imageAlt: 'Harvest Field mission team prepares for cross-border outreach travel',
+    image: '/assets/replacement-photos/WhatsApp Image 2026-11-16 at 6.06.31 PM.jpeg',
+    imageAlt: 'Harvest Field Academy graduates and ministry leaders stand together in graduation attire',
   },
 ];
 
 export const GALLERY_PHOTOS: GalleryPhoto[] = [
+  {
+    id: 'g35',
+    src: '/assets/replacement-photos/WhatsApp Image 2026-11-16 at 5.30.41 PM.jpeg',
+    title: 'Believers Gather in Worship and Prayer',
+    region: 'Nigeria & Schools',
+    location: 'Church Gathering',
+    program: 'Mission Mobilisation',
+    caption: 'Believers worship and pray together during a ministry gathering.',
+    aspect: 'wide',
+  },
+  {
+    id: 'g36',
+    src: '/assets/replacement-photos/WhatsApp Image 2026-11-16 at 6.06.32 PM.jpeg',
+    title: 'Church Members Gather for Prayer',
+    region: 'Nigeria & Schools',
+    location: 'Church Prayer Gathering',
+    program: 'Revival Meetings',
+    caption: 'Church members gather in prayer at the front of the church during a ministry service.',
+    aspect: 'wide',
+  },
+  {
+    id: 'g37',
+    src: '/assets/replacement-photos/WhatsApp Image 2026-11-16 at 6.06.31 PM.jpeg',
+    title: 'Harvest Field Academy Graduation Gathering',
+    region: 'Nigeria & Schools',
+    location: 'Academy Graduation',
+    program: 'Harvest Field Academy (HFA)',
+    caption: 'Graduates and ministry leaders stand together in graduation attire.',
+    aspect: 'wide',
+  },
   {
     id: 'g31',
     src: '/assets/replacement-photos/WhatsApp Image 2026-11-16 at 5.46.53 PM.jpeg',
@@ -607,8 +637,8 @@ export const JOURNAL_POSTS: JournalPost[] = [
     readTime: '5 min read',
     region: 'Northern Cameroon',
     featured: true,
-    coverImage: '/assets/field/founder-linde-massa.jpg',
-    coverCaption: 'Fig. 1 — Harvest Field ministry members gather in Nigeria for a team meeting.',
+    coverImage: '/assets/field/cameroon-village-gathering.jpeg',
+    coverCaption: 'Fig. 1 — A community gathering in the Northern Cameroon mission field.',
     excerpt:
       'An introduction to the ministry’s outreach presence and field photographs from Linde-Massa and Maroua in Northern Cameroon.',
     body: [
