@@ -44,103 +44,75 @@ const LEADERSHIP_TEAM = [
 export const LeadershipPage: React.FC<LeadershipPageProps> = ({ onNavigate }) => {
   return (
     <LocalizedContent>
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12 lg:py-16 space-y-16 lg:space-y-20">
-      <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
-        <div className="lg:col-span-5">
-          <div className="group relative mx-auto aspect-[4/5] w-full max-w-md overflow-hidden rounded-3xl border border-stone-200 bg-stone-200 shadow-xl shadow-forest-950/10 lg:max-w-none">
-            <SafeImage
-              src={FOUNDER_PROFILE.portrait}
-              alt="Evang. David Abrebor, President and Founder of Harvest Field Gospel Mission Int'l"
-              className="h-full w-full object-cover object-[center_20%] transition-transform duration-500 ease-out group-hover:scale-[1.03]"
-              fallbackTitle="Evang. David Abrebor"
-            />
-            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-forest-950/90 via-forest-950/35 to-transparent px-6 pb-6 pt-20 text-white">
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-harvest-400">
-                Founder &amp; President
-              </p>
-              <p className="mt-1 font-serif text-2xl font-semibold">
-                {FOUNDER_PROFILE.name}
-              </p>
+    <div className="mx-auto max-w-7xl space-y-16 px-4 py-8 sm:space-y-20 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
+      <section className="relative isolate overflow-hidden rounded-[2rem] bg-forest-950 px-5 py-8 text-white shadow-2xl shadow-forest-950/15 sm:px-9 sm:py-12 lg:px-12 lg:py-14">
+        <div aria-hidden="true" className="pointer-events-none absolute -right-20 -top-24 h-80 w-80 rounded-full border border-harvest-400/20" />
+        <div aria-hidden="true" className="pointer-events-none absolute -right-8 -top-12 h-56 w-56 rounded-full border border-harvest-400/20" />
+        <div className="relative grid grid-cols-1 items-center gap-8 lg:grid-cols-12 lg:gap-12">
+          <div className="lg:col-span-5">
+            <div className="mx-auto max-w-sm rounded-[1.7rem] border border-harvest-400/50 bg-gradient-to-br from-harvest-300/30 via-white/10 to-forest-900 p-2 shadow-xl shadow-black/20">
+              <div className="relative aspect-[4/5] overflow-hidden rounded-[1.25rem] bg-forest-900">
+                <SafeImage
+                  src={FOUNDER_PROFILE.portrait}
+                  alt="Evang. David Abrebor, President and Founder of Harvest Field Gospel Mission Int'l"
+                  className="h-full w-full object-cover object-[center_20%]"
+                  fallbackTitle="Evang. David Abrebor"
+                />
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-forest-950/95 via-forest-950/45 to-transparent px-5 pb-5 pt-16">
+                  <p className="text-[0.68rem] font-bold uppercase tracking-[0.2em] text-harvest-300">Founder &amp; President</p>
+                  <p className="mt-1 font-serif text-2xl font-semibold text-white">{FOUNDER_PROFILE.name}</p>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-
-        <div className="lg:col-span-7 flex flex-col justify-center gap-8">
-          <div className="space-y-5">
-            <p className="text-xs font-semibold uppercase tracking-widest text-harvest-600">
-              Leadership · Harvest Field Gospel Mission
-            </p>
-            <h1 className="font-serif text-4xl sm:text-5xl font-semibold text-forest-950 leading-tight">
-              {FOUNDER_PROFILE.name}
-            </h1>
-            <p className="text-base sm:text-lg font-medium text-forest-900">
-              {FOUNDER_PROFILE.role}
-            </p>
-            <p className="text-base text-stone-700 leading-relaxed max-w-2xl">
-              {FOUNDER_PROFILE.summary}
-            </p>
-            <div className="pt-1 flex flex-wrap gap-3">
-              <button
-                type="button"
-                onClick={() => onNavigate('partner')}
-                className="inline-flex min-h-11 items-center gap-2 px-5 py-2.5 text-xs sm:text-sm font-semibold text-white bg-forest-900 hover:bg-forest-800 rounded-lg transition-colors cursor-pointer"
-              >
-                <span>Support Our Foreign Missions</span>
-                <ArrowRight className="w-4 h-4" />
+          <div className="space-y-6 lg:col-span-7">
+            <div className="space-y-4">
+              <p className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.22em] text-harvest-300">
+                <span className="h-px w-8 bg-harvest-400" />
+                Harvest Field Gospel Mission
+              </p>
+              <h1 className="max-w-2xl font-serif text-4xl font-semibold leading-tight text-white sm:text-5xl lg:text-6xl">
+                Called to serve. <span className="text-harvest-300">Committed to the harvest.</span>
+              </h1>
+              <p className="text-lg font-semibold text-harvest-200">{FOUNDER_PROFILE.name} <span className="font-normal text-white/70">· {FOUNDER_PROFILE.role}</span></p>
+              <p className="max-w-2xl text-base leading-8 text-white/75 sm:text-lg">{FOUNDER_PROFILE.summary}</p>
+            </div>
+            <div className="flex flex-wrap gap-3">
+              <button type="button" onClick={() => onNavigate('partner')} className="inline-flex min-h-11 items-center gap-2 rounded-full bg-harvest-400 px-5 py-3 text-sm font-bold text-forest-950 shadow-lg shadow-black/10 transition hover:bg-harvest-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white">
+                Support Our Missions <ArrowRight className="h-4 w-4" />
               </button>
-              <button
-                type="button"
-                onClick={() => onNavigate('gallery')}
-                className="inline-flex min-h-11 items-center gap-2 px-5 py-2.5 text-xs sm:text-sm font-semibold text-forest-950 bg-limestone hover:bg-stone-200/80 border border-stone-300/70 rounded-lg transition-colors cursor-pointer"
-              >
-                <span>See Field Photographs</span>
+              <button type="button" onClick={() => onNavigate('gallery')} className="inline-flex min-h-11 items-center rounded-full border border-white/25 px-5 py-3 text-sm font-semibold text-white transition hover:border-harvest-300 hover:bg-white/10">
+                Explore Field Photographs
               </button>
-              <button
-                type="button"
-                onClick={() => onNavigate('contact')}
-                className="inline-flex items-center gap-2 px-5 py-2.5 text-xs sm:text-sm font-semibold text-forest-900 hover:text-harvest-600 transition-colors cursor-pointer"
-              >
-                Contact the Mission
-                <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              <button type="button" onClick={() => onNavigate('contact')} className="inline-flex min-h-11 items-center gap-2 px-2 py-3 text-sm font-semibold text-white/80 transition hover:text-harvest-300">
+                Contact the Mission <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </button>
             </div>
           </div>
         </div>
       </section>
 
-      <section aria-labelledby="team-heading" className="space-y-7 border-t border-stone-200 pt-10">
-        <div className="space-y-2">
-          <p className="text-xs font-semibold uppercase tracking-widest text-harvest-600">
-            Meet Our Team
-          </p>
-          <h2
-            id="team-heading"
-            className="font-serif text-3xl font-semibold text-forest-950 sm:text-4xl"
-          >
-            Mission Leadership Team
-          </h2>
+      <section aria-labelledby="team-heading" className="space-y-8">
+        <div className="mx-auto max-w-2xl space-y-3 text-center">
+          <p className="text-xs font-bold uppercase tracking-[0.22em] text-harvest-700">The people behind the mission</p>
+          <h2 id="team-heading" className="font-serif text-3xl font-semibold text-forest-950 sm:text-4xl lg:text-5xl">Our Founders &amp; Leaders</h2>
+          <div className="mx-auto h-1 w-16 rounded-full bg-harvest-400" />
+          <p className="text-sm leading-7 text-stone-600 sm:text-base">A dedicated team serving communities and strengthening the work of the Gospel.</p>
         </div>
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {LEADERSHIP_TEAM.map((leader) => (
-            <article
-              key={leader.name}
-              className="overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-sm"
-            >
-              <div className="aspect-[4/3] overflow-hidden bg-stone-200">
-                <SafeImage
-                  src={leader.image}
-                  alt={leader.alt}
-                  className="h-full w-full object-cover object-center"
-                  fallbackTitle={leader.name}
-                />
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
+          {LEADERSHIP_TEAM.map((leader, index) => (
+            <article key={leader.name} className="group overflow-hidden rounded-2xl border border-stone-200/90 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:border-harvest-300 hover:shadow-xl hover:shadow-forest-950/10">
+              <div className="relative m-3 mb-0 overflow-hidden rounded-xl bg-limestone">
+                <div className="aspect-[4/3] sm:aspect-[5/4]">
+                  <SafeImage src={leader.image} alt={leader.alt} className="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-[1.04]" fallbackTitle={leader.name} />
+                </div>
+                <div className="absolute left-3 top-3 rounded-full border border-white/70 bg-forest-950/85 px-3 py-1 text-[0.65rem] font-bold uppercase tracking-[0.16em] text-harvest-200 backdrop-blur-sm">
+                  Mission Leadership
+                </div>
               </div>
-              <div className="space-y-1 p-5">
-                <h3 className="font-serif text-xl font-semibold text-forest-950">
-                  {leader.name}
-                </h3>
-                {leader.role && (
-                  <p className="text-sm font-medium text-harvest-700">{leader.role}</p>
-                )}
+              <div className="flex min-h-28 flex-col justify-center px-5 pb-5 pt-4">
+                <h3 className="font-serif text-xl font-semibold leading-snug text-forest-950">{leader.name}</h3>
+                {leader.role && <p className="mt-2 inline-flex w-fit items-center gap-2 text-sm font-semibold text-harvest-700"><span className="h-1.5 w-1.5 rounded-full bg-harvest-400" />{leader.role}</p>}
               </div>
             </article>
           ))}
