@@ -79,7 +79,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
     };
   }, [mobileOpen, openDropdown]);
 
-  const languageSelector = (className: string) => (
+  const languageSelector = (className: string, compact = false) => (
     <label className={className}>
       <span className="sr-only">{t('nav.selectLanguage')}</span>
       <select
@@ -89,7 +89,9 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
           if (value === 'en' || value === 'fr' || value === 'es') setLanguage(value);
         }}
         aria-label={t('nav.selectLanguage')}
-        className="h-10 w-full rounded-lg border border-stone-300 bg-white px-2.5 text-xs font-semibold text-forest-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-800"
+        className={compact
+          ? "h-9 w-full rounded-full border border-stone-300 bg-white px-2 text-[10px] font-bold uppercase tracking-wide text-forest-950 shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-800"
+          : "h-10 w-full rounded-lg border border-stone-300 bg-white px-2.5 text-xs font-semibold text-forest-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-800"}
       >
         <option value="en">English</option>
         <option value="fr">Français</option>
@@ -175,7 +177,8 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
             })}
           </nav>
 
-          <div className="flex shrink-0 items-center gap-2 lg:justify-self-end">
+          <div className="relative z-[80] flex shrink-0 items-center gap-2 lg:justify-self-end">
+            {languageSelector('block w-12 sm:hidden', true)}
             {languageSelector('hidden sm:block')}
             {pageLink(
               'partner',
@@ -186,7 +189,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
               type="button"
               ref={menuToggleRef}
               onClick={() => setMobileOpen((previous) => !previous)}
-              className="inline-flex h-11 w-11 items-center justify-center rounded-lg text-stone-800 transition-colors hover:bg-stone-200/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-800 lg:hidden"
+              className="relative z-[80] inline-flex h-11 w-11 touch-manipulation items-center justify-center rounded-lg text-stone-800 transition-colors hover:bg-stone-200/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-800 lg:hidden"
               aria-label={mobileOpen ? t('nav.close') : t('nav.open')}
               aria-expanded={mobileOpen}
               aria-controls="hf-mobile-navigation"
@@ -201,7 +204,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
             type="button"
             aria-label={t('nav.close')}
             onClick={() => setMobileOpen(false)}
-            className="fixed inset-x-0 bottom-0 top-[4.1rem] bg-forest-950/35 lg:hidden"
+            className="fixed inset-x-0 bottom-0 top-[4.1rem] z-[55] bg-forest-950/35 lg:hidden"
           />
         )}
 
@@ -246,9 +249,6 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
 
         </nav>
 
-        <div className="fixed bottom-3 right-3 z-[70] w-28 sm:hidden">
-          {languageSelector('block')}
-        </div>
       </header>
     </LocalizedContent>
   );
