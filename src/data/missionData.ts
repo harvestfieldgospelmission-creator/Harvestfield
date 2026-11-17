@@ -182,8 +182,8 @@ export const MANDATES: MandateItem[] = [
       'Youths and Students Conferences across Rivers State',
       'Personal prayer and mentorship for students',
     ],
-    image: '/assets/field/student-conference.jpg',
-    imageAlt: 'Students raising their hands in prayer at a Harvest Field student conference',
+    image: '/assets/replacement-photos/WhatsApp Image 2026-11-16 at 5.46.53 PM.jpeg',
+    imageAlt: 'Students gathered in an auditorium during a Harvest Field school outreach',
   },
   {
     id: 'christian-counseling',
@@ -252,6 +252,46 @@ export const MANDATES: MandateItem[] = [
 ];
 
 export const GALLERY_PHOTOS: GalleryPhoto[] = [
+  {
+    id: 'g31',
+    src: '/assets/replacement-photos/WhatsApp Image 2026-11-16 at 5.46.53 PM.jpeg',
+    title: 'Students Gather for a School Outreach',
+    region: 'Nigeria & Schools',
+    location: 'School Outreach',
+    program: 'School & Student Outreach',
+    caption: 'Students listen during a Harvest Field school outreach in an auditorium.',
+    aspect: 'wide',
+  },
+  {
+    id: 'g32',
+    src: '/assets/replacement-photos/WhatsApp Image 2026-11-16 at 5.01.52 PM.jpeg',
+    title: 'Community Support and Relief Presentation',
+    region: 'Nigeria & Schools',
+    location: 'Harvest Field Community Outreach',
+    program: 'Community Support',
+    caption: 'Mission representatives present food items and bottled water prepared for community support.',
+    aspect: 'wide',
+  },
+  {
+    id: 'g33',
+    src: '/assets/replacement-photos/WhatsApp Image 2026-11-16 at 5.46.14 PM.jpeg',
+    title: 'Students Gather Outside the School',
+    region: 'Nigeria & Schools',
+    location: 'School Outreach',
+    program: 'School & Student Outreach',
+    caption: 'Students gather outside during a Harvest Field school outreach visit.',
+    aspect: 'wide',
+  },
+  {
+    id: 'g34',
+    src: '/assets/replacement-photos/WhatsApp Image 2026-11-16 at 5.01.54 PM.jpeg',
+    title: 'Food and Water Prepared for Distribution',
+    region: 'Nigeria & Schools',
+    location: 'Harvest Field Community Outreach',
+    program: 'Community Support',
+    caption: 'Food supplies and drinking water are displayed during a community support presentation.',
+    aspect: 'wide',
+  },
   {
     id: 'g20',
     src: '/assets/field/school-outreach-bus.jpeg',
