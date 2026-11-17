@@ -39,6 +39,18 @@ const LEADERSHIP_TEAM = [
     image: '/assets/field/ernest-elems-peter-olowu.jpeg',
     alt: 'Teacher Ernest Elems-Peter Olowu, Public Relations Officer',
   },
+  {
+    name: 'EVANG. GOODLUCK PAUL AFFANGODEH',
+    role: 'Mission Team Member',
+    image: '/assets/field/evang-goodluck-paul-affangodeh.webp',
+    alt: 'Evang. Goodluck Paul Affangodeh',
+  },
+  {
+    name: 'Enotoabasi Goodluck Paul',
+    role: 'Mission Team Member',
+    image: '/assets/field/enotoabasi-goodluck-paul.webp',
+    alt: 'Enotoabasi Goodluck Paul',
+  },
 ];
 
 export const LeadershipPage: React.FC<LeadershipPageProps> = ({ onNavigate }) => {
