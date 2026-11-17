@@ -12,7 +12,7 @@ export type PageId =
   | 'prayer'
   | 'admin';
 
-export const SITE_ORIGIN = 'https://harvestfieldgospelmission.netlify.app';
+export const SITE_ORIGIN = 'https://harvestfieldgospelmisson.pages.dev';
 
 export interface MandateItem {
   id: string;
