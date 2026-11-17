@@ -49,7 +49,7 @@ export const LeadershipPage: React.FC<LeadershipPageProps> = ({ onNavigate }) =>
         <div aria-hidden="true" className="absolute inset-y-0 right-0 hidden w-[42%] bg-[linear-gradient(145deg,#e8dfca_0%,#f7f3e9_60%,#e7dcc3_100%)] lg:block" />
         <div aria-hidden="true" className="absolute -left-24 -top-24 h-72 w-72 rounded-full border border-harvest-500/15" />
         <div className="relative grid items-stretch lg:grid-cols-12">
-          <div className="relative z-10 flex flex-col justify-center px-6 pb-10 pt-12 sm:px-10 sm:pb-14 sm:pt-16 lg:col-span-7 lg:order-1 lg:justify-end lg:px-14 lg:pb-20 lg:pt-36">
+          <div className="relative z-10 order-2 flex flex-col justify-center px-6 pb-10 pt-12 sm:px-10 sm:pb-14 sm:pt-16 lg:order-1 lg:col-span-7 lg:justify-end lg:px-14 lg:pb-20 lg:pt-36">
             <p className="mb-5 inline-flex items-center gap-3 text-[0.68rem] font-bold uppercase tracking-[0.25em] text-harvest-700">
               <span className="h-px w-9 bg-harvest-500" />
               The vision and the calling
@@ -75,7 +75,7 @@ export const LeadershipPage: React.FC<LeadershipPageProps> = ({ onNavigate }) =>
               </div>
             </div>
           </div>
-          <div className="relative min-h-[31rem] px-3 pb-5 pt-2 sm:min-h-[36rem] sm:px-6 lg:col-span-5 lg:order-2 lg:min-h-[49rem] lg:px-5 lg:py-5">
+          <div className="relative order-1 min-h-[31rem] px-3 pb-5 pt-2 sm:min-h-[36rem] sm:px-6 lg:order-2 lg:col-span-5 lg:min-h-[49rem] lg:px-5 lg:py-5">
             <div className="absolute inset-x-4 bottom-5 top-0 border border-harvest-500/50 sm:inset-x-8 lg:inset-x-5 lg:bottom-5 lg:top-5" />
             <div className="absolute inset-x-7 bottom-8 top-2 overflow-hidden bg-forest-900 shadow-2xl sm:inset-x-11 sm:bottom-10 lg:inset-x-8 lg:bottom-8 lg:top-8">
               <SafeImage
