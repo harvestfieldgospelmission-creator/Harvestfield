@@ -173,7 +173,7 @@ export const HomePage: React.FC<HomePageProps> = ({
               src={spot.image}
               alt=""
               fetchPriority={index === 0 ? 'high' : 'auto'}
-              className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ${
+              className={`absolute inset-0 h-full w-full object-cover object-[center_28%] transition-opacity duration-1000 ${
                 index === heroIndex ? 'opacity-100' : 'opacity-0'
               }`}
             />
@@ -291,7 +291,7 @@ export const HomePage: React.FC<HomePageProps> = ({
               <SafeImage
                 src={heroSpot.image}
                 alt={heroSpot.caption}
-                className="w-full h-full lg:h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                className="w-full h-full lg:h-full object-cover object-[center_28%] group-hover:scale-105 transition-transform duration-500 ease-out"
                 fallbackTitle={heroSpot.location}
               />
               <div className="absolute top-4 right-4 w-9 h-9 rounded-lg bg-black/50 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
@@ -367,7 +367,7 @@ export const HomePage: React.FC<HomePageProps> = ({
                       <SafeImage
                         src={item.image}
                         alt={item.imageAlt}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                        className="w-full h-full object-cover object-[center_28%] group-hover:scale-105 transition-transform duration-500 ease-out"
                         fallbackTitle={item.title}
                       />
                     </button>
