@@ -142,15 +142,18 @@ export const HomePage: React.FC<HomePageProps> = ({
     <div>
       {showPartnerMedal && (
         <div className="hf-partner-medal fixed inset-0 z-40 flex items-center justify-center px-5 py-8 pointer-events-none" role="status" aria-live="polite">
-          <div className="w-full max-w-[min(21rem,calc(100vw-2.5rem))] rounded-2xl border border-harvest-400/70 bg-[#fffdf8] px-5 py-5 text-center shadow-[0_18px_60px_rgba(10,34,22,0.24)] sm:px-7 sm:py-6">
-            <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full border border-harvest-400/60 bg-[#f7edda] text-harvest-600 shadow-inner">
-              <Award className="h-6 w-6" strokeWidth={1.8} aria-hidden="true" />
+          <div className="relative flex min-h-[17rem] w-full max-w-[min(22rem,calc(100vw-2.5rem))] flex-col items-center justify-center overflow-hidden rounded-[1.75rem] border border-harvest-400/80 bg-[radial-gradient(ellipse_at_top,_rgba(217,159,43,0.24),_transparent_58%),linear-gradient(145deg,#173f2b_0%,#0a2216_58%,#071a10_100%)] px-6 py-10 text-center shadow-[0_24px_75px_rgba(10,34,22,0.42)] sm:min-h-[19rem] sm:max-w-md sm:px-9 sm:py-12">
+            <div className="pointer-events-none absolute -right-12 -top-14 h-40 w-40 rounded-full border border-harvest-400/20" />
+            <div className="pointer-events-none absolute -bottom-16 -left-12 h-44 w-44 rounded-full border border-harvest-400/15" />
+            <div className="relative mb-5 flex h-16 w-16 items-center justify-center rounded-full border-2 border-harvest-400/80 bg-gradient-to-br from-[#f8e7bd] via-[#d9a441] to-[#9f6b12] text-forest-950 shadow-[0_0_0_7px_rgba(217,159,43,0.12),0_8px_25px_rgba(0,0,0,0.3)]">
+              <Award className="h-8 w-8" strokeWidth={1.7} aria-hidden="true" />
             </div>
-            <p className="mb-1 text-[9px] font-bold uppercase tracking-[0.22em] text-harvest-600">A call to faithful partnership</p>
-            <p className="font-serif text-lg font-semibold leading-snug text-forest-950 sm:text-xl">
+            <p className="relative mb-3 text-[10px] font-bold uppercase tracking-[0.24em] text-harvest-300">A call to faithful partnership</p>
+            <p className="relative max-w-xs font-serif text-xl font-semibold leading-snug text-white sm:text-2xl">
               The Field is ready,
-              <span className="block text-harvest-600">God needs faithful partners.</span>
+              <span className="mt-2 block text-harvest-300">God needs faithful partners.</span>
             </p>
+            <span className="relative mt-5 h-px w-16 bg-gradient-to-r from-transparent via-harvest-400 to-transparent" />
           </div>
         </div>
       )}
