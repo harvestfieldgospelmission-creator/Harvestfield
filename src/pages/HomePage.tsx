@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ArrowRight, Award, CheckCircle2, ChevronRight, Expand, Pause, Play } from 'lucide-react';
+import { ArrowRight, CheckCircle2, ChevronRight, Expand, Pause, Play } from 'lucide-react';
 import {
   FOUNDER_PROFILE,
   GALLERY_PHOTOS,
@@ -64,7 +64,6 @@ export const HomePage: React.FC<HomePageProps> = ({
   };
 
   const [heroIndex, setHeroIndex] = useState(0);
-  const [showPartnerMedal, setShowPartnerMedal] = useState(true);
   const [heroPaused, setHeroPaused] = useState(false);
   const [heroHovered, setHeroHovered] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(
@@ -81,11 +80,6 @@ export const HomePage: React.FC<HomePageProps> = ({
     'Salvation Decision' | 'Prayer Request' | 'Mission Inquiry' | null
   >(null);
   const [prayerSent, setPrayerSent] = useState(false);
-
-  useEffect(() => {
-    const dismissTimer = window.setTimeout(() => setShowPartnerMedal(false), 6800);
-    return () => window.clearTimeout(dismissTimer);
-  }, []);
 
   useEffect(() => {
     const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -140,23 +134,6 @@ export const HomePage: React.FC<HomePageProps> = ({
   return (
     <LocalizedContent>
     <div>
-      {showPartnerMedal && (
-        <div className="hf-partner-medal fixed inset-0 z-40 flex items-center justify-center px-5 py-8 pointer-events-none" role="status" aria-live="polite">
-          <div className="relative flex min-h-[17rem] w-full max-w-[min(22rem,calc(100vw-2.5rem))] flex-col items-center justify-center overflow-hidden rounded-[1.75rem] border border-harvest-400/80 bg-[radial-gradient(ellipse_at_top,_rgba(217,159,43,0.24),_transparent_58%),linear-gradient(145deg,#173f2b_0%,#0a2216_58%,#071a10_100%)] px-6 py-10 text-center shadow-[0_24px_75px_rgba(10,34,22,0.42)] sm:min-h-[19rem] sm:max-w-md sm:px-9 sm:py-12">
-            <div className="pointer-events-none absolute -right-12 -top-14 h-40 w-40 rounded-full border border-harvest-400/20" />
-            <div className="pointer-events-none absolute -bottom-16 -left-12 h-44 w-44 rounded-full border border-harvest-400/15" />
-            <div className="relative mb-5 flex h-16 w-16 items-center justify-center rounded-full border-2 border-harvest-400/80 bg-gradient-to-br from-[#f8e7bd] via-[#d9a441] to-[#9f6b12] text-forest-950 shadow-[0_0_0_7px_rgba(217,159,43,0.12),0_8px_25px_rgba(0,0,0,0.3)]">
-              <Award className="h-8 w-8" strokeWidth={1.7} aria-hidden="true" />
-            </div>
-            <p className="relative mb-3 text-[10px] font-bold uppercase tracking-[0.24em] text-harvest-300">A call to faithful partnership</p>
-            <p className="relative max-w-xs font-serif text-xl font-semibold leading-snug text-white sm:text-2xl">
-              The Field is ready,
-              <span className="mt-2 block text-harvest-300">God needs faithful partners.</span>
-            </p>
-            <span className="relative mt-5 h-px w-16 bg-gradient-to-r from-transparent via-harvest-400 to-transparent" />
-          </div>
-        </div>
-      )}
       {/* Cinematic mission welcome — uses the ministry's own field photographs */}
       <section
         className="relative isolate min-h-[440px] overflow-hidden bg-forest-950 sm:min-h-[590px] lg:min-h-[650px]"

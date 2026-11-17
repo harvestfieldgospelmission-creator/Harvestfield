@@ -216,7 +216,7 @@
 }
 
 
-/* Gentle hero invitation motion and the temporary partner medal. */
+/* Gentle hero invitation motion. */
 @keyframes hf-hero-gentle-nudge {
   0%, 88%, 100% { transform: translateX(0); }
   90% { transform: translateX(-1.5px); }
@@ -230,23 +230,8 @@
   animation: hf-hero-gentle-nudge 6.5s ease-in-out infinite;
 }
 
-@keyframes hf-partner-medal-arrive {
-  0% { opacity: 0; transform: translateY(12px) scale(.97); }
-  9% { opacity: 1; transform: translateY(0) scale(1); }
-  82% { opacity: 1; transform: translateY(0) scale(1); }
-  100% { opacity: 0; transform: translateY(-8px) scale(.985); }
-}
-
-.hf-partner-medal {
-  animation: hf-partner-medal-arrive 6.8s ease-in-out both;
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .hf-hero-cta,
-  .hf-partner-medal {
+  .hf-hero-cta {
     animation: none !important;
-  }
-  .hf-partner-medal {
-    opacity: 1;
   }
 }
