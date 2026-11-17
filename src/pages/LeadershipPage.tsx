@@ -68,6 +68,18 @@ const LEADERSHIP_TEAM = [
     image: '/assets/field/ernest-elems-peter-olowu.jpeg',
     alt: 'Teacher Ernest Elems-Peter Olowu, Public Relations Officer',
   },
+  {
+    name: 'EVANG. GOODLUCK PAUL AFFANGODEH',
+    role: 'Mission Team Member',
+    image: '/assets/field/evang-goodluck-paul-affangodeh.webp',
+    alt: 'Evang. Goodluck Paul Affangodeh',
+  },
+  {
+    name: 'Enotoabasi Goodluck Paul',
+    role: 'Mission Team Member',
+    image: '/assets/field/enotoabasi-goodluck-paul.webp',
+    alt: 'Enotoabasi Goodluck Paul',
+  },
 ];
 
 export const LeadershipPage: React.FC<LeadershipPageProps> = ({ onNavigate }) => {
@@ -78,7 +90,7 @@ export const LeadershipPage: React.FC<LeadershipPageProps> = ({ onNavigate }) =>
         aria-labelledby="featured-leadership-heading"
         className="rounded-3xl border border-[#eadfc5] bg-[#fffaf1] px-4 py-8 shadow-sm sm:px-8 sm:py-10"
       >
-        <div className="mx-auto max-w-3xl space-y-2 text-center">
+        <div className="mx-auto hidden max-w-3xl space-y-2 text-center sm:block">
           <p className="text-xs font-semibold uppercase tracking-[0.22em] text-harvest-700">
             Meet Our Team
           </p>
