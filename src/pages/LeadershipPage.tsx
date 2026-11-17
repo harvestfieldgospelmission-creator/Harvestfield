@@ -77,7 +77,7 @@ export const LeadershipPage: React.FC<LeadershipPageProps> = ({ onNavigate }) =>
           </div>
           <div className="relative min-h-[28rem] px-6 pb-7 sm:px-10 lg:col-span-5 lg:min-h-[43rem] lg:px-8 lg:py-8">
             <div className="absolute inset-x-6 bottom-7 top-0 border border-harvest-500/50 sm:inset-x-10 lg:inset-x-8 lg:bottom-8 lg:top-8" />
-            <div className="absolute inset-x-9 bottom-10 top-3 overflow-hidden bg-forest-900 shadow-2xl sm:inset-x-13 lg:inset-x-11 lg:bottom-11 lg:top-11">
+            <div className="absolute inset-x-9 bottom-10 top-3 overflow-hidden bg-forest-900 shadow-2xl sm:inset-x-12 lg:inset-x-11 lg:bottom-11 lg:top-11">
               <SafeImage
                 src={FOUNDER_PROFILE.portrait}
                 alt="Evang. David Abrebor, Founder and President of Harvest Field Gospel Mission Int'l"
