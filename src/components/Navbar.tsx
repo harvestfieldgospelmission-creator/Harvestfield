@@ -93,9 +93,9 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
           ? "h-9 w-full rounded-full border border-stone-300 bg-white px-2 text-[10px] font-bold uppercase tracking-wide text-forest-950 shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-800"
           : "h-10 w-full rounded-lg border border-stone-300 bg-white px-2.5 text-xs font-semibold text-forest-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-800"}
       >
-        <option value="en">English</option>
-        <option value="fr">Français</option>
-        <option value="es">Español</option>
+        <option value="en">{compact ? 'EN' : 'English'}</option>
+        <option value="fr">{compact ? 'FR' : 'Français'}</option>
+        <option value="es">{compact ? 'ES' : 'Español'}</option>
       </select>
     </label>
   );
