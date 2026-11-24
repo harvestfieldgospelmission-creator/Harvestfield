@@ -336,11 +336,6 @@ export const JournalPage: React.FC<JournalPageProps> = ({
     return matchesCategory && matchesQuery;
   });
 
-  const leadPost = filteredPosts.find((post) => post.featured) || filteredPosts[0];
-  const remainingPosts = filteredPosts.filter((post) => post.id !== leadPost?.id);
-  const secondaryPosts = remainingPosts.slice(0, 2);
-  const archivePosts = remainingPosts.slice(2);
-
   return (
     <LocalizedContent>
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16 space-y-12">
@@ -427,205 +422,86 @@ export const JournalPage: React.FC<JournalPageProps> = ({
           </button>
         </div>
       ) : (
-        <div className="space-y-12">
-          {/* Tier 1: Lead Story */}
-          {leadPost && (
-            <article className="group grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch bg-white border border-stone-200 rounded-2xl overflow-hidden transition-shadow duration-200 hover:shadow-md">
+        <div className="grid grid-cols-1 items-stretch gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {filteredPosts.map((post) => (
+            <article
+              key={post.id}
+              className="group flex h-full flex-col overflow-hidden rounded-3xl border border-[#d6e0ea] bg-white shadow-sm transition-shadow duration-200 hover:shadow-lg"
+            >
               <a
-                href={getPagePath('journal', leadPost.slug)}
-                onClick={(event) => handleArticleLink(event, leadPost.slug)}
-                className="block lg:col-span-6 aspect-[16/10] lg:aspect-auto min-h-[280px] bg-stone-200 overflow-hidden cursor-pointer"
-                aria-label={t('Read {{title}}', { title: leadPost.title })}
+                href={getPagePath('journal', post.slug)}
+                onClick={(event) => handleArticleLink(event, post.slug)}
+                className="block aspect-[16/9] w-full overflow-hidden bg-stone-200"
+                aria-label={t('Read {{title}}', { title: post.title })}
               >
                 <SafeImage
-                  src={leadPost.coverImage}
-                  alt={leadPost.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                  src={post.coverImage}
+                  alt={post.title}
+                  className="h-full w-full object-cover object-center transition-transform duration-500 ease-out group-hover:scale-105"
                 />
               </a>
-              <div className="lg:col-span-6 p-6 sm:p-10 flex flex-col justify-between space-y-6">
-                <div className="space-y-4">
-                  <div className="space-y-3">
-                  {leadPost.featured && <span className="inline-flex rounded-full bg-harvest-50 px-3 py-1 text-[10px] font-bold uppercase tracking-[.18em] text-harvest-800">Featured story</span>}
-                  <div className="flex flex-wrap items-center gap-2 text-xs text-stone-500">
-                    <span className="font-semibold text-harvest-600">{leadPost.category}</span>
-                    <span aria-hidden="true">·</span>
-                    <span>{leadPost.region}</span>
-                    <span aria-hidden="true">·</span>
-                    <span>{leadPost.date}</span>
-                    <span aria-hidden="true">·</span>
-                    <span>{leadPost.readTime}</span>
-                  </div>
-                  <h2 className="font-serif text-2xl sm:text-3xl font-semibold text-forest-950 leading-tight">
-                    <a
-                      href={getPagePath('journal', leadPost.slug)}
-                      onClick={(event) => handleArticleLink(event, leadPost.slug)}
-                      className="text-left hover:text-forest-800 transition-colors cursor-pointer"
-                    >
-                      {leadPost.title}
-                    </a>
-                  </h2>
-                  <p className="text-sm sm:text-base text-stone-600 leading-relaxed">
-                    {leadPost.excerpt}
-                  </p>
-                  <p className="text-xs font-medium text-stone-500">By {leadPost.author}</p>
-                  </div>
+              <div className="flex flex-1 flex-col p-5 sm:p-6">
+                {post.featured && (
+                  <span className="mb-3 inline-flex w-fit rounded-full bg-harvest-50 px-3 py-1 text-[10px] font-bold uppercase tracking-[.18em] text-harvest-800">
+                    Featured story
+                  </span>
+                )}
+                <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-stone-500">
+                  <span className="font-bold uppercase tracking-wide text-harvest-600">
+                    {post.date}
+                  </span>
+                  <span aria-hidden="true">·</span>
+                  <span>{post.category}</span>
+                  <span aria-hidden="true">·</span>
+                  <span>{post.readTime}</span>
                 </div>
-
-                <div className="flex items-center justify-between pt-4 border-t border-stone-100">
-                  <div className="flex flex-wrap items-center gap-4">
-                    <a
-                      href={getPagePath('journal', leadPost.slug)}
-                      onClick={(event) => handleArticleLink(event, leadPost.slug)}
-                      className="inline-flex items-center gap-2 text-sm font-semibold text-forest-900 hover:text-harvest-600 transition-colors cursor-pointer"
-                    >
-                      <span>Read the story</span>
-                      <ArrowRight className="w-4 h-4" />
-                    </a>
+                <h2 className="mt-4 line-clamp-2 font-serif text-xl font-semibold leading-snug text-forest-950">
+                  <a
+                    href={getPagePath('journal', post.slug)}
+                    onClick={(event) => handleArticleLink(event, post.slug)}
+                    className="transition-colors hover:text-forest-800"
+                  >
+                    {post.title}
+                  </a>
+                </h2>
+                <p className="mt-3 line-clamp-4 flex-1 text-sm leading-relaxed text-stone-600">
+                  {post.excerpt}
+                </p>
+                <p className="mt-3 text-xs font-medium text-stone-500">By {post.author}</p>
+                <div className="mt-5 flex flex-wrap items-center justify-between gap-2 border-t border-stone-100 pt-4">
+                  <a
+                    href={getPagePath('journal', post.slug)}
+                    onClick={(event) => handleArticleLink(event, post.slug)}
+                    className="inline-flex items-center gap-2 text-sm font-bold text-harvest-500 transition-colors hover:text-harvest-700"
+                  >
+                    Read more <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                  </a>
+                  <div className="flex items-center gap-1">
                     <button
                       type="button"
-                      onClick={() => void shareArticle(leadPost)}
-                      className="inline-flex items-center gap-1.5 text-sm font-semibold text-stone-600 hover:text-forest-900 transition-colors cursor-pointer"
+                      onClick={() => void shareArticle(post)}
+                      className="inline-flex h-10 w-10 items-center justify-center rounded-full text-stone-600 transition-colors hover:bg-stone-100 hover:text-forest-900"
+                      aria-label={t('Share {{title}}', { title: post.title })}
                     >
-                      <Share2 className="w-4 h-4" aria-hidden="true" />
-                      <span>Share</span>
+                      <Share2 className="h-4 w-4" aria-hidden="true" />
                     </button>
-                  </div>
-                  <button
-                    type="button"
-                    onClick={() => toggleSave(leadPost.id)}
-                    className="p-2 rounded-lg text-stone-500 hover:text-forest-900 hover:bg-stone-100 cursor-pointer"
-                    aria-label="Bookmark article"
-                  >
-                    <Bookmark
-                      className={`w-4 h-4 ${
-                        savedIds.includes(leadPost.id) ? 'fill-forest-900 text-forest-900' : ''
-                      }`}
-                    />
-                  </button>
-                </div>
-              </div>
-            </article>
-          )}
-
-          {/* Tier 2: Secondary Features */}
-          {secondaryPosts.length > 0 && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {secondaryPosts.map((post) => (
-                <article
-                  key={post.id}
-                  className="group bg-white border border-stone-200 rounded-xl overflow-hidden flex flex-col justify-between transition-shadow duration-200 hover:shadow-md"
-                >
-                  <div>
-                    <a
-                      href={getPagePath('journal', post.slug)}
-                      onClick={(event) => handleArticleLink(event, post.slug)}
-                      className="block w-full aspect-[16/9] bg-stone-200 overflow-hidden cursor-pointer"
-                      aria-label={t('Read {{title}}', { title: post.title })}
-                    >
-                      <SafeImage
-                        src={post.coverImage}
-                        alt={post.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
-                      />
-                    </a>
-                    <div className="p-6 space-y-3">
-                      <div className="flex flex-wrap items-center gap-2 text-xs text-stone-500">
-                        <span className="font-semibold text-harvest-600">{post.category}</span>
-                        <span aria-hidden="true">·</span>
-                        <span>{post.date}</span>
-                        <span aria-hidden="true">·</span>
-                        <span>{post.readTime}</span>
-                      </div>
-                      <h3 className="font-serif text-xl sm:text-2xl font-semibold text-forest-950 leading-snug">
-                        <a
-                          href={getPagePath('journal', post.slug)}
-                          onClick={(event) => handleArticleLink(event, post.slug)}
-                          className="text-left hover:text-forest-800 transition-colors cursor-pointer"
-                        >
-                          {post.title}
-                        </a>
-                      </h3>
-                      <p className="text-sm text-stone-600 leading-relaxed">{post.excerpt}</p>
-                    </div>
-                  </div>
-                  <div className="px-6 pb-6 pt-2 flex items-center justify-between">
-                    <div className="flex flex-wrap items-center gap-4">
-                      <a
-                        href={getPagePath('journal', post.slug)}
-                        onClick={(event) => handleArticleLink(event, post.slug)}
-                        className="inline-flex items-center gap-1.5 text-sm font-semibold text-forest-900 hover:text-harvest-600 cursor-pointer"
-                      >
-                        <span>Open Dispatch</span>
-                        <ArrowRight className="w-4 h-4" />
-                      </a>
-                      <button
-                        type="button"
-                        onClick={() => void shareArticle(post)}
-                        className="inline-flex items-center gap-1.5 text-sm font-semibold text-stone-600 hover:text-forest-900 cursor-pointer"
-                      >
-                        <Share2 className="w-4 h-4" aria-hidden="true" />
-                        <span>Share</span>
-                      </button>
-                    </div>
                     <button
                       type="button"
                       onClick={() => toggleSave(post.id)}
-                      className="p-2 rounded-lg text-stone-500 hover:text-forest-900 hover:bg-stone-100 cursor-pointer"
-                      aria-label="Bookmark article"
+                      className="inline-flex h-10 w-10 items-center justify-center rounded-full text-stone-600 transition-colors hover:bg-stone-100 hover:text-forest-900"
+                      aria-label={savedIds.includes(post.id) ? 'Remove bookmark' : 'Bookmark article'}
                     >
                       <Bookmark
-                        className={`w-4 h-4 ${
+                        className={`h-4 w-4 ${
                           savedIds.includes(post.id) ? 'fill-forest-900 text-forest-900' : ''
                         }`}
                       />
                     </button>
                   </div>
-                </article>
-              ))}
-            </div>
-          )}
-
-          {/* Tier 3: More stories — consistent image-led article cards */}
-          {archivePosts.length > 0 && (
-            <section className="space-y-6">
-              <div className="flex items-end justify-between gap-4 border-b border-stone-200 pb-3">
-                <div>
-                  <p className="text-[11px] font-bold uppercase tracking-[.2em] text-harvest-600">Continue exploring</p>
-                  <h2 className="mt-1 font-serif text-2xl sm:text-3xl font-semibold text-forest-950">More from the field</h2>
                 </div>
-                <span className="text-xs text-stone-500">{archivePosts.length} {archivePosts.length === 1 ? 'story' : 'stories'}</span>
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
-                {archivePosts.map((post) => (
-                  <article key={post.id} className="group flex h-full flex-col overflow-hidden rounded-2xl border border-stone-200 bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
-                    <a href={getPagePath('journal', post.slug)} onClick={(event) => handleArticleLink(event, post.slug)} className="block aspect-[16/10] overflow-hidden bg-stone-200" aria-label={`Read ${post.title}`}>
-                      <SafeImage src={post.coverImage} alt={post.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
-                    </a>
-                    <div className="flex flex-1 flex-col p-5">
-                      <div className="flex flex-wrap items-center gap-2 text-[11px] text-stone-500">
-                        <span className="font-bold uppercase tracking-wide text-harvest-700">{post.category}</span>
-                        <span aria-hidden="true">•</span><span>{post.date}</span>
-                        <span aria-hidden="true">•</span><span>{post.readTime}</span>
-                      </div>
-                      <h3 className="mt-3 font-serif text-xl font-semibold leading-snug text-forest-950">
-                        <a href={getPagePath('journal', post.slug)} onClick={(event) => handleArticleLink(event, post.slug)} className="transition-colors hover:text-harvest-700">{post.title}</a>
-                      </h3>
-                      <p className="mt-3 line-clamp-3 flex-1 text-sm leading-relaxed text-stone-600">{post.excerpt}</p>
-                      <div className="mt-5 flex items-center justify-between border-t border-stone-100 pt-4">
-                        <a href={getPagePath('journal', post.slug)} onClick={(event) => handleArticleLink(event, post.slug)} className="inline-flex items-center gap-2 text-sm font-semibold text-forest-900 hover:text-harvest-700">
-                          Read story <ArrowRight className="h-4 w-4" />
-                        </a>
-                        <button type="button" onClick={() => void shareArticle(post)} className="inline-flex items-center gap-1.5 rounded-full px-3 py-2 text-xs font-semibold text-stone-600 transition-colors hover:bg-stone-100 hover:text-forest-950" aria-label={t('Share {{title}}', { title: post.title })}>
-                          <Share2 className="h-4 w-4" /> Share
-                        </button>
-                      </div>
-                    </div>
-                  </article>
-                ))}
-              </div>
-            </section>
-          )}
+            </article>
+          ))}
         </div>
       )}
     </div>

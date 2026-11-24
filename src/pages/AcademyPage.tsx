@@ -95,7 +95,7 @@ export const AcademyPage: React.FC<AcademyPageProps> = ({ onNavigate }) => {
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <a
                   href="#give"
-                  className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-harvest-400 px-6 py-3 text-sm font-bold text-forest-950 transition-colors hover:bg-harvest-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                  className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-harvest-500 px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-harvest-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
                 >
                   Help a child go to school <ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </a>

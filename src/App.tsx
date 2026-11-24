@@ -310,7 +310,7 @@ export default function App() {
 
   return (
     <LanguageProvider>
-      <div className="min-h-screen flex flex-col bg-[#faf8f4] text-[#1c1917] overflow-x-hidden">
+      <div className="min-h-screen flex flex-col bg-paper text-ink overflow-x-hidden">
         <Navbar currentPage={currentPage} onNavigate={(page) => handleNavigate(page)} />
         <div aria-hidden="true" className="h-[4.1rem] shrink-0" />
 

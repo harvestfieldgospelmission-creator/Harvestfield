@@ -23,7 +23,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               <img
                 src="/assets/harvest-field-logo.png"
                 alt="Harvest Field Gospel Mission International"
-                className="h-20 w-auto max-w-full object-contain"
+                className="h-20 w-auto max-w-full object-contain brightness-0 invert"
               />
             </div>
             <p className="text-sm text-stone-300 leading-relaxed max-w-sm">
@@ -95,7 +95,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                   event.preventDefault();
                   onNavigate('contact');
                 }}
-                className="inline-flex min-h-10 items-center rounded-lg bg-harvest-500 px-4 text-sm font-semibold text-forest-950 transition-colors hover:bg-harvest-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-harvest-400"
+                className="inline-flex min-h-10 items-center rounded-full bg-harvest-500 px-4 text-sm font-semibold text-white transition-colors hover:bg-harvest-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-harvest-400"
               >
                 {t('footer.contact')}
               </a>

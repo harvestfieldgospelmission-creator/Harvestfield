@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, BookOpen, Compass, Globe2, HeartHandshake, Target, Users } from 'lucide-react';
+import { ArrowRight, Compass, Globe2, Target, Users } from 'lucide-react';
 import { FOUNDER_PROFILE, PageId } from '../data/missionData';
 import { SafeImage } from '../components/SafeImage';
 import { LocalizedContent } from '../i18n';
@@ -17,18 +17,6 @@ const DIRECTOR_PROFILE = {
 };
 
 const FEATURED_PROFILES = [
-  {
-    name: FOUNDER_PROFILE.name,
-    role: 'Founder & President',
-    image: FOUNDER_PROFILE.portrait,
-    alt: "Evang. David Abrebor, President and Founder of Harvest Field Gospel Mission Int'l",
-    summary: FOUNDER_PROFILE.summary,
-    focusAreas: [
-      { label: 'Evangelism', icon: BookOpen },
-      { label: 'Discipleship', icon: Users },
-      { label: 'Humanitarian Care', icon: HeartHandshake },
-    ],
-  },
   {
     name: DIRECTOR_PROFILE.name,
     role: DIRECTOR_PROFILE.role,
@@ -88,25 +76,84 @@ export const LeadershipPage: React.FC<LeadershipPageProps> = ({ onNavigate }) =>
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16 space-y-12 lg:space-y-16">
       <section
         aria-labelledby="featured-leadership-heading"
-        className="rounded-3xl border border-[#eadfc5] bg-[#fffaf1] px-4 py-8 shadow-sm sm:px-8 sm:py-10"
+        className="rounded-3xl border border-[#d6e0ea] bg-[#f1f5f9] px-4 py-8 shadow-sm sm:px-8 sm:py-10"
       >
         <div className="mx-auto hidden max-w-3xl space-y-2 text-center sm:block">
-          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-harvest-700">
+          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#008064]">
             Meet Our Team
           </p>
           <h1
             id="featured-leadership-heading"
-            className="font-serif text-3xl font-semibold text-forest-950 sm:text-4xl"
+            className="font-sans text-3xl font-bold text-[#07386b] sm:text-4xl"
           >
             Founder &amp; Leadership
           </h1>
         </div>
 
-        <div className="mt-8 grid grid-cols-1 items-stretch gap-5 min-[520px]:grid-cols-2">
+        <article className="mt-8 grid grid-cols-1 items-center gap-6 rounded-3xl border border-[#d6e0ea] bg-white p-4 shadow-sm sm:p-6 md:grid-cols-2 md:gap-8 lg:p-8">
+          <div
+            className="relative mx-auto aspect-[4/5] w-full max-w-[25rem] overflow-hidden rounded-[1.5rem] bg-[#07386b] p-3"
+            style={{
+              backgroundImage:
+                'repeating-radial-gradient(circle at 70% 22%, transparent 0, transparent 24px, rgba(255,255,255,.16) 25px, transparent 26px)',
+            }}
+          >
+            <div className="absolute inset-3 overflow-hidden rounded-[1.1rem]">
+              <SafeImage
+                src={FOUNDER_PROFILE.portrait}
+                alt="Evang. David Abrebor, President and Founder of Harvest Field Gospel Mission Int'l"
+                className="h-full w-full object-cover object-[center_16%]"
+                fallbackTitle={FOUNDER_PROFILE.name}
+              />
+            </div>
+            <div className="absolute inset-x-3 bottom-3 z-10 rounded-2xl bg-gradient-to-t from-[#041f42]/45 to-transparent p-2">
+              <div className="rounded-xl bg-white/95 px-4 py-3 shadow-lg">
+                <h2 className="font-sans text-base font-bold leading-tight text-[#07386b] sm:text-lg">
+                  {FOUNDER_PROFILE.name}
+                </h2>
+                <p className="mt-1 text-xs leading-relaxed text-slate-600 sm:text-sm">
+                  Founder &amp; President, Harvest Field Gospel Mission Int&apos;l
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex flex-col items-start py-2 sm:py-4">
+            <p className="flex items-center gap-3 text-xs font-bold uppercase tracking-[0.18em] text-[#008064]">
+              <span className="h-0.5 w-8 bg-[#008064]" aria-hidden="true" />
+              From our founder
+            </p>
+            <h2 className="mt-5 font-sans text-3xl font-bold leading-tight tracking-tight text-[#07386b] sm:text-4xl">
+              Taking the Gospel to the nations
+            </h2>
+            <p className="mt-4 text-base leading-relaxed text-slate-600">
+              {FOUNDER_PROFILE.summary}
+            </p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <button
+                type="button"
+                onClick={() => onNavigate('mission')}
+                className="inline-flex min-h-11 items-center gap-2 rounded-full bg-[#008064] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-forest-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-800 focus-visible:ring-offset-2"
+              >
+                Explore our mission <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </button>
+              <button
+                type="button"
+                onClick={() => onNavigate('partner')}
+                className="inline-flex min-h-11 items-center gap-2 rounded-full border-2 border-[#07386b] px-5 py-2.5 text-sm font-semibold text-[#07386b] transition-colors hover:bg-[#f1f5f9] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-800 focus-visible:ring-offset-2"
+              >
+                Support the mission
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <h2 className="mt-8 font-sans text-xl font-bold text-[#07386b]">Mission leadership</h2>
+        <div className="mt-4 grid max-w-3xl grid-cols-1 items-stretch gap-5">
           {FEATURED_PROFILES.map((profile) => (
             <article
               key={profile.name}
-              className="flex h-full flex-col rounded-2xl border border-[#eadfc5] bg-[#fffdf8] p-4 shadow-sm sm:p-6"
+              className="flex h-full flex-col rounded-2xl border border-[#d6e0ea] bg-white p-4 shadow-sm sm:p-6"
             >
               <div className="flex flex-col items-center text-center">
                 <div className="h-40 w-40 overflow-hidden rounded-xl border border-harvest-400 bg-white p-1 shadow-sm sm:h-44 sm:w-44">
@@ -131,7 +178,7 @@ export const LeadershipPage: React.FC<LeadershipPageProps> = ({ onNavigate }) =>
                   {profile.summary}
                 </p>
               </div>
-              <ul className="mt-auto grid grid-cols-3 divide-x divide-[#eadfc5] border-t border-[#eadfc5] pt-4">
+              <ul className="mt-auto grid grid-cols-3 divide-x divide-[#d6e0ea] border-t border-[#d6e0ea] pt-4">
                 {profile.focusAreas.map(({ label, icon: Icon }) => (
                   <li
                     key={label}
@@ -189,7 +236,7 @@ export const LeadershipPage: React.FC<LeadershipPageProps> = ({ onNavigate }) =>
           {LEADERSHIP_TEAM.map((leader) => (
             <article
               key={leader.name}
-              className="overflow-hidden rounded-2xl border border-[#eadfc5] bg-[#fffaf1] shadow-sm"
+              className="overflow-hidden rounded-2xl border border-[#d6e0ea] bg-white shadow-sm"
             >
               <div className="aspect-[4/5] overflow-hidden bg-stone-200">
                 <SafeImage

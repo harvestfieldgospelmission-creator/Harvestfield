@@ -28,7 +28,7 @@ export const ImpactPage: React.FC<ImpactPageProps> = ({
 
   return (
     <LocalizedContent>
-      <div className="bg-[#faf8f4]">
+      <div className="bg-paper">
         <section className="relative isolate overflow-hidden bg-forest-950 text-white">
           <div className="absolute inset-0" aria-hidden="true">
             <SafeImage src="/assets/field/linde-massa-village.jpg" alt="" className="h-full w-full object-cover opacity-35" />
@@ -41,7 +41,7 @@ export const ImpactPage: React.FC<ImpactPageProps> = ({
               Explore photographs and field dispatches from Harvest Field Gospel Mission’s outreach, discipleship and cross-border mission work.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <a href={getPagePath('gallery')} className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-harvest-500 px-6 py-3 text-sm font-semibold text-forest-950 transition-colors hover:bg-harvest-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white">
+              <a href={getPagePath('gallery')} className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-harvest-500 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-harvest-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white">
                 Explore the gallery <Camera className="h-4 w-4" aria-hidden="true" />
               </a>
               <a href={getPagePath('journal')} className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg border border-white/50 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white">
@@ -81,17 +81,17 @@ export const ImpactPage: React.FC<ImpactPageProps> = ({
                 All journal articles <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </a>
             </div>
-            <div className="grid gap-5 md:grid-cols-3">
+            <div className="grid items-stretch gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {otherPosts.map((post) => (
-                <article key={post.id} className="overflow-hidden rounded-2xl border border-stone-200 bg-white">
+                <article key={post.id} className="group flex h-full flex-col overflow-hidden rounded-3xl border border-[#d6e0ea] bg-white shadow-sm transition-shadow duration-200 hover:shadow-lg">
                   <button type="button" onClick={() => onSelectArticle(post.slug)} className="block w-full overflow-hidden text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-forest-800">
-                    <SafeImage src={post.coverImage} alt={post.title} className="aspect-[16/10] w-full object-cover transition-transform duration-500 hover:scale-[1.03]" />
+                    <SafeImage src={post.coverImage} alt={post.title} className="aspect-[16/9] w-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.03]" />
                   </button>
-                  <div className="space-y-3 p-5">
-                    <p className="text-xs font-semibold text-harvest-600">{post.category} <span className="px-1 text-stone-400" aria-hidden="true">·</span> {post.region} <span className="px-1 text-stone-400" aria-hidden="true">·</span> {post.date}</p>
-                    <h3 className="font-serif text-xl font-semibold leading-snug text-forest-950">{post.title}</h3>
-                    <p className="text-sm leading-relaxed text-stone-600">{post.excerpt}</p>
-                    <button type="button" onClick={() => onSelectArticle(post.slug)} className="inline-flex min-h-10 items-center gap-2 text-sm font-semibold text-forest-900 hover:text-harvest-700">
+                  <div className="flex flex-1 flex-col p-5 sm:p-6">
+                    <p className="text-xs font-semibold text-harvest-600">{post.date} <span className="px-1 text-stone-400" aria-hidden="true">·</span> {post.category}</p>
+                    <h3 className="mt-4 line-clamp-2 font-serif text-xl font-semibold leading-snug text-forest-950">{post.title}</h3>
+                    <p className="mt-3 line-clamp-4 flex-1 text-sm leading-relaxed text-stone-600">{post.excerpt}</p>
+                    <button type="button" onClick={() => onSelectArticle(post.slug)} className="mt-5 inline-flex min-h-10 items-center gap-2 pt-2 text-left text-sm font-bold text-harvest-500 hover:text-harvest-700">
                       Read story <ArrowRight className="h-4 w-4" aria-hidden="true" />
                     </button>
                   </div>
@@ -113,7 +113,7 @@ export const ImpactPage: React.FC<ImpactPageProps> = ({
             </div>
             <div className="grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-3">
               {featuredPhotos.map((photo) => (
-                <button key={photo.id} type="button" onClick={() => onOpenPhoto(photo.id)} className="group overflow-hidden rounded-xl border border-stone-200 bg-white text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-800">
+                <button key={photo.id} type="button" onClick={() => onOpenPhoto(photo.id)} className="group overflow-hidden rounded-3xl border border-[#d6e0ea] bg-white text-left shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-800">
                   <div className="overflow-hidden bg-stone-200">
                     <SafeImage src={photo.src} alt={photo.title} className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-105" />
                   </div>
@@ -135,7 +135,7 @@ export const ImpactPage: React.FC<ImpactPageProps> = ({
                 <p className="text-sm leading-relaxed text-stone-200 sm:text-base">Discover practical ways to stand with Harvest Field Gospel Mission and support its ongoing ministry.</p>
               </div>
               <div className="flex flex-col gap-3 sm:flex-row lg:flex-col">
-                <button type="button" onClick={() => onNavigate('join')} className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-harvest-500 px-5 py-3 text-sm font-semibold text-forest-950 hover:bg-harvest-400">
+                <button type="button" onClick={() => onNavigate('join')} className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-harvest-500 px-5 py-3 text-sm font-semibold text-white hover:bg-harvest-400">
                   Join the mission <HeartHandshake className="h-4 w-4" aria-hidden="true" />
                 </button>
                 <button type="button" onClick={() => onNavigate('partner')} className="inline-flex min-h-12 items-center justify-center rounded-lg border border-white/40 px-5 py-3 text-sm font-semibold text-white hover:bg-white/10">

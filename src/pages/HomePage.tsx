@@ -1,6 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ArrowRight, CheckCircle2, ChevronRight, Expand, Pause, Play } from 'lucide-react';
+import {
+  ArrowRight,
+  BookOpen,
+  CheckCircle2,
+  ChevronRight,
+  Expand,
+  HandHeart,
+  Heart,
+  Newspaper,
+  Pause,
+  Play,
+} from 'lucide-react';
 import {
   FOUNDER_PROFILE,
   GALLERY_PHOTOS,
@@ -10,7 +21,7 @@ import {
   PageId,
 } from '../data/missionData';
 import { SafeImage } from '../components/SafeImage';
-import { BankAccountsGrid } from '../components/BankAccountsGrid';
+import { SupportMissionFeature } from '../components/SupportMissionFeature';
 import { LocalizedContent, useLanguage } from '../i18n';
 import { localizeGalleryPhoto } from '../data/galleryTranslations';
 import { localizeJournalPost } from '../data/journalTranslations';
@@ -174,7 +185,7 @@ export const HomePage: React.FC<HomePageProps> = ({
               <button
                 type="button"
                 onClick={() => onNavigate('join')}
-                className="hf-hero-cta inline-flex min-h-12 w-1/2 min-w-0 flex-1 items-center justify-center gap-1.5 rounded-lg bg-harvest-500 px-2.5 py-3 text-xs font-semibold text-forest-950 shadow-lg shadow-black/15 transition-colors hover:bg-harvest-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white sm:w-auto sm:gap-2 sm:px-6 sm:text-sm"
+                className="hf-hero-cta inline-flex min-h-12 w-1/2 min-w-0 flex-1 items-center justify-center gap-1.5 rounded-full bg-harvest-500 px-2.5 py-3 text-xs font-semibold text-white shadow-lg shadow-black/15 transition-colors hover:bg-harvest-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white sm:w-auto sm:gap-2 sm:px-6 sm:text-sm"
               >
                 <span>Join Us</span>
                 <ArrowRight className="h-4 w-4 shrink-0" />
@@ -232,6 +243,78 @@ export const HomePage: React.FC<HomePageProps> = ({
               )}
             </div>
           </div>
+        </div>
+      </section>
+
+      <section aria-label="Explore Harvest Field" className="bg-[#f1f5f9] py-10 sm:py-14">
+        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-5 px-4 sm:grid-cols-2 sm:px-6 lg:grid-cols-4 lg:px-8">
+          <article className="flex min-h-[17rem] flex-col rounded-3xl border border-[#d6e0ea] bg-white p-6">
+            <span className="mb-4 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-[#07386b] text-white">
+              <BookOpen className="h-7 w-7" aria-hidden="true" />
+            </span>
+            <h2 className="text-xl font-semibold leading-tight text-[#07386b]">Explore our mission</h2>
+            <p className="mt-3 text-base leading-relaxed text-slate-600">
+              Discover how we share the Gospel, equip believers, and serve communities.
+            </p>
+            <button
+              type="button"
+              onClick={() => onNavigate('mission')}
+              className="mt-auto inline-flex min-h-11 items-center gap-2 pt-6 text-left font-semibold text-[#008064] transition-colors hover:text-forest-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-800"
+            >
+              See our mission <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </button>
+          </article>
+
+          <article className="flex min-h-[17rem] flex-col rounded-3xl border border-[#008064] bg-white p-6 shadow-[0_16px_40px_rgba(7,56,107,0.08)]">
+            <span className="mb-4 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-[#399c87] text-white">
+              <Heart className="h-7 w-7" aria-hidden="true" />
+            </span>
+            <h2 className="text-xl font-semibold leading-tight text-[#07386b]">Give to the mission</h2>
+            <p className="mt-3 text-base leading-relaxed text-slate-600">
+              Help carry the Gospel and practical care to people in our mission fields.
+            </p>
+            <button
+              type="button"
+              onClick={() => onNavigate('partner')}
+              className="mt-auto inline-flex min-h-11 items-center gap-2 pt-6 text-left font-semibold text-[#008064] transition-colors hover:text-forest-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-800"
+            >
+              Give now <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </button>
+          </article>
+
+          <article className="flex min-h-[17rem] flex-col rounded-3xl border border-[#d6e0ea] bg-white p-6">
+            <span className="mb-4 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-[#07386b] text-white">
+              <Newspaper className="h-7 w-7" aria-hidden="true" />
+            </span>
+            <h2 className="text-xl font-semibold leading-tight text-[#07386b]">Stories from the field</h2>
+            <p className="mt-3 text-base leading-relaxed text-slate-600">
+              Read reports and reflections from our outreach and discipleship work.
+            </p>
+            <button
+              type="button"
+              onClick={() => onNavigate('journal')}
+              className="mt-auto inline-flex min-h-11 items-center gap-2 pt-6 text-left font-semibold text-[#008064] transition-colors hover:text-forest-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-800"
+            >
+              Read stories <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </button>
+          </article>
+
+          <article className="flex min-h-[17rem] flex-col rounded-3xl border border-[#d6e0ea] bg-white p-6">
+            <span className="mb-4 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-[#0d4f86] text-white">
+              <HandHeart className="h-7 w-7" aria-hidden="true" />
+            </span>
+            <h2 className="text-xl font-semibold leading-tight text-[#07386b]">Pray with us</h2>
+            <p className="mt-3 text-base leading-relaxed text-slate-600">
+              Share a request or stand with our mission workers and communities in prayer.
+            </p>
+            <button
+              type="button"
+              onClick={() => onNavigate('prayer')}
+              className="mt-auto inline-flex min-h-11 items-center gap-2 pt-6 text-left font-semibold text-[#008064] transition-colors hover:text-forest-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-800"
+            >
+              Send a prayer request <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </button>
+          </article>
         </div>
       </section>
 
@@ -332,7 +415,7 @@ export const HomePage: React.FC<HomePageProps> = ({
               return (
                 <article
                   key={item.id}
-                  className="group bg-white border border-stone-200 rounded-xl overflow-hidden flex flex-col justify-between transition-shadow duration-200 hover:shadow-md"
+                  className="group flex flex-col justify-between overflow-hidden rounded-3xl border border-[#d6e0ea] bg-white shadow-sm transition-shadow duration-200 hover:shadow-lg"
                 >
                   <div>
                     <button
@@ -431,7 +514,7 @@ export const HomePage: React.FC<HomePageProps> = ({
               key={photo.id}
               type="button"
               onClick={() => onOpenPhoto(photo.id)}
-              className="group text-left bg-white border border-stone-200 rounded-xl overflow-hidden transition-shadow duration-200 hover:shadow-md cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-800"
+              className="group text-left bg-white border border-[#d6e0ea] rounded-3xl overflow-hidden shadow-sm transition-shadow duration-200 hover:shadow-lg cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-800"
             >
               <div className="relative aspect-[4/3] w-full bg-stone-200 overflow-hidden">
                 <SafeImage
@@ -459,14 +542,14 @@ export const HomePage: React.FC<HomePageProps> = ({
       </section>
 
       {/* 5. Mission Journal / Editorial Dispatches Preview */}
-      <section className="py-12 lg:py-14 border-t border-stone-200/80 bg-white">
+      <section className="border-t border-[#d6e0ea] bg-[#f1f5f9] py-12 lg:py-14">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
             <div className="space-y-2">
-              <p className="text-xs font-semibold uppercase tracking-widest text-harvest-600">
+              <p className="text-xs font-semibold uppercase tracking-widest text-[#008064]">
                 From the Blog
               </p>
-              <h2 className="font-serif text-3xl sm:text-4xl font-semibold text-forest-950">
+              <h2 className="font-serif text-3xl sm:text-4xl font-semibold text-[#07386b]">
                 Stories, testimonies &amp; teaching from the mission field.
               </h2>
             </div>
@@ -477,96 +560,64 @@ export const HomePage: React.FC<HomePageProps> = ({
                 event.preventDefault();
                 onNavigate('journal');
               }}
-              className="inline-flex items-center gap-2 text-sm font-semibold text-forest-900 hover:text-harvest-600 transition-colors whitespace-nowrap self-start sm:self-auto cursor-pointer"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-[#008064] hover:text-forest-900 transition-colors whitespace-nowrap self-start sm:self-auto cursor-pointer"
             >
               <span>Explore All Articles</span>
               <ArrowRight className="w-4 h-4" />
             </a>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            {/* Lead Story */}
-            <article className="group lg:col-span-7 bg-[#faf8f4] border border-stone-200 rounded-xl overflow-hidden transition-shadow duration-200 hover:shadow-md">
-              <a
-                href={getPagePath('journal', featuredPost.slug)}
-                onClick={(event) => handleArticleLink(event, featuredPost.slug)}
-                className="block w-full aspect-[16/9] bg-stone-200 overflow-hidden cursor-pointer"
-                aria-label={`Read ${featuredPost.title}`}
+          <div className="grid grid-cols-1 items-stretch gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {[featuredPost, ...secondaryPosts].map((post) => (
+              <article
+                key={post.id}
+                className="group flex h-full flex-col overflow-hidden rounded-3xl border border-[#d6e0ea] bg-white shadow-sm transition-shadow duration-200 hover:shadow-lg"
               >
-                <SafeImage
-                  src={featuredPost.coverImage}
-                  alt={featuredPost.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
-                />
-              </a>
-              <div className="p-6 sm:p-8 space-y-4">
-                <div className="flex flex-wrap items-center gap-2 text-xs text-stone-500">
-                  <span>{featuredPost.category}</span>
-                  <span aria-hidden="true">·</span>
-                  <span>{featuredPost.date}</span>
-                  <span aria-hidden="true">·</span>
-                  <span>{featuredPost.readTime}</span>
-                </div>
-                <h3 className="font-serif text-2xl sm:text-3xl font-semibold text-forest-950 leading-tight">
-                  <a
-                    href={getPagePath('journal', featuredPost.slug)}
-                    onClick={(event) => handleArticleLink(event, featuredPost.slug)}
-                    className="text-left hover:text-forest-800 transition-colors cursor-pointer"
-                  >
-                    {featuredPost.title}
-                  </a>
-                </h3>
-                <p className="text-sm sm:text-base text-stone-700 leading-relaxed">
-                  {featuredPost.excerpt}
-                </p>
                 <a
-                  href={getPagePath('journal', featuredPost.slug)}
-                  onClick={(event) => handleArticleLink(event, featuredPost.slug)}
-                  className="inline-flex items-center gap-2 text-sm font-semibold text-forest-900 hover:text-harvest-600 transition-colors cursor-pointer"
+                  href={getPagePath('journal', post.slug)}
+                  onClick={(event) => handleArticleLink(event, post.slug)}
+                  className="block aspect-[16/9] w-full overflow-hidden bg-slate-200"
+                  aria-label={`Read ${post.title}`}
                 >
-                  <span>Read Full Dispatch</span>
-                  <ArrowRight className="w-4 h-4" />
+                  <SafeImage
+                    src={post.coverImage}
+                    alt={post.title}
+                    className="h-full w-full object-cover object-center transition-transform duration-500 ease-out group-hover:scale-105"
+                  />
                 </a>
-              </div>
-            </article>
-
-            {/* Secondary Stories */}
-            <div className="lg:col-span-5 space-y-6">
-              {secondaryPosts.map((post) => (
-                <article
-                  key={post.id}
-                  className="bg-[#faf8f4] border border-stone-200 rounded-xl p-6 space-y-3 transition-shadow duration-200 hover:shadow-sm"
-                >
-                  <div className="flex items-center gap-2 text-xs text-stone-500">
-                    <span>{post.category}</span>
+                <div className="flex flex-1 flex-col p-5 sm:p-6">
+                  <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-slate-500">
+                    <span className="font-bold uppercase tracking-[0.12em] text-[#008064]">
+                      {post.date}
+                    </span>
                     <span aria-hidden="true">·</span>
-                    <span>{post.date}</span>
+                    <span>{post.category}</span>
                     <span aria-hidden="true">·</span>
                     <span>{post.readTime}</span>
                   </div>
-                  <h3 className="font-serif text-xl font-semibold text-forest-950 leading-snug">
+                  <h3 className="mt-4 line-clamp-2 font-serif text-xl font-semibold leading-snug text-[#07386b]">
                     <a
                       href={getPagePath('journal', post.slug)}
                       onClick={(event) => handleArticleLink(event, post.slug)}
-                      className="text-left hover:text-forest-800 transition-colors cursor-pointer"
+                      className="transition-colors hover:text-forest-800"
                     >
                       {post.title}
                     </a>
                   </h3>
-                  <p className="text-sm text-stone-600 leading-relaxed line-clamp-3">
+                  <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-slate-600">
                     {post.excerpt}
                   </p>
                   <a
                     href={getPagePath('journal', post.slug)}
                     onClick={(event) => handleArticleLink(event, post.slug)}
-                    className="inline-flex items-center gap-1.5 text-xs font-semibold text-forest-900 hover:text-harvest-600 transition-colors cursor-pointer"
+                    className="mt-auto inline-flex items-center gap-2 pt-6 text-sm font-bold text-[#c9183e] transition-colors hover:text-[#a31333]"
                   >
-                    <span>Open Article</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
+                    <span>Read more</span>
+                    <ArrowRight className="h-4 w-4" aria-hidden="true" />
                   </a>
-                </article>
-              ))}
-            </div>
+                </div>
+              </article>
+            ))}
           </div>
         </div>
       </section>
@@ -596,7 +647,7 @@ export const HomePage: React.FC<HomePageProps> = ({
             </div>
           </div>
 
-          <div className="lg:col-span-6 bg-[#faf8f4] text-stone-900 rounded-2xl p-6 sm:p-8 border border-stone-200">
+          <div className="lg:col-span-6 bg-white text-stone-900 rounded-2xl p-6 sm:p-8 border border-stone-200">
             {prayerSent ? (
               <div className="py-8 text-center space-y-4">
                 <CheckCircle2 className="w-10 h-10 text-forest-900 mx-auto" />
@@ -666,32 +717,14 @@ export const HomePage: React.FC<HomePageProps> = ({
         </div>
       </section>
 
-      {/* 7. Stewardship & Giving Channels */}
-      <section className="py-12 lg:py-14 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-10">
-          <div className="max-w-2xl space-y-2">
-            <p className="text-xs font-semibold uppercase tracking-widest text-harvest-600">
-              Support the Harvest
-            </p>
-            <h2 className="font-serif text-3xl sm:text-4xl font-semibold text-forest-950">
-              Official Mission Banking Channels
-            </h2>
-            <p className="text-sm sm:text-base text-stone-600 leading-relaxed">
-              Fulfill your mission mandate for the nations through going, prayer, or sending regular
-              financial support to rural and foreign outreach fields.
-            </p>
-          </div>
-          <button
-            type="button"
-            onClick={() => onNavigate('partner')}
-            className="inline-flex items-center gap-2 px-5 py-3 text-sm font-semibold text-white bg-forest-900 hover:bg-forest-800 rounded-lg transition-colors whitespace-nowrap self-start sm:self-auto cursor-pointer"
-          >
-            <span>Open Giving &amp; Pledge Desk</span>
-            <ArrowRight className="w-4 h-4" />
-          </button>
+      {/* Support mission feature before the site footer */}
+      <section className="border-t border-stone-200/80 bg-white py-12 lg:py-14">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <SupportMissionFeature
+            onGiveClick={() => onNavigate('partner')}
+            onContactClick={() => onNavigate('contact')}
+          />
         </div>
-
-        <BankAccountsGrid />
       </section>
     </div>
     </LocalizedContent>

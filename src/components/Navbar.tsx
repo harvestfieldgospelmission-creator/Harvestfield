@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { ChevronDown, Menu, X } from 'lucide-react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { ArrowRight, ChevronDown, Menu, X } from 'lucide-react';
 import { PageId } from '../data/missionData';
 import { getPagePath } from '../routing';
 import { useTranslation } from 'react-i18next';
@@ -44,7 +44,7 @@ const NAV_GROUPS: { label: string; items: { id: PageId; label: string }[] }[] = 
 ];
 
 const MOBILE_LINK_CLASS =
-  'flex min-h-11 w-full items-center rounded-lg px-3 py-2.5 text-sm font-medium text-stone-700 transition-colors hover:bg-stone-100 hover:text-forest-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-800';
+  'flex min-h-11 w-full items-center rounded-lg px-3 py-2.5 text-sm font-medium text-white/85 transition-colors hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white';
 const DESKTOP_LINK_CLASS =
   'block rounded-lg px-3 py-2.5 text-sm text-stone-700 transition-colors hover:bg-stone-100 hover:text-forest-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-800';
 
@@ -56,19 +56,25 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
   const mobileMenuRef = useRef<HTMLElement>(null);
   const menuToggleRef = useRef<HTMLButtonElement>(null);
 
+  const closeNavigation = useCallback((restoreFocus = false) => {
+    if (mobileOpen && (restoreFocus || mobileMenuRef.current?.contains(document.activeElement))) {
+      menuToggleRef.current?.focus();
+    }
+    setMobileOpen(false);
+    setOpenDropdown(null);
+  }, [mobileOpen]);
+
   useEffect(() => {
     if (!mobileOpen && !openDropdown) return;
 
     const handlePointerDown = (event: PointerEvent) => {
       if (!(event.target instanceof Node)) return;
       if (mobileOpen && (mobileMenuRef.current?.contains(event.target) || menuToggleRef.current?.contains(event.target))) return;
-      setMobileOpen(false);
-      setOpenDropdown(null);
+      closeNavigation();
     };
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
-        setMobileOpen(false);
-        setOpenDropdown(null);
+        closeNavigation();
       }
     };
 
@@ -78,7 +84,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
       if (mobileOpen) document.removeEventListener('pointerdown', handlePointerDown);
       document.removeEventListener('keydown', handleKeyDown);
     };
-  }, [mobileOpen, openDropdown]);
+  }, [closeNavigation, mobileOpen, openDropdown]);
 
   const languageSelector = (className: string, compact = false) => (
     <label className={className}>
@@ -102,9 +108,8 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
   );
 
   const handleNav = (page: PageId) => {
+    closeNavigation();
     onNavigate(page);
-    setMobileOpen(false);
-    setOpenDropdown(null);
   };
 
   const pageLink = (id: PageId, label: string, className: string) => (
@@ -125,22 +130,22 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
 
   return (
     <LocalizedContent>
-      <header className="fixed inset-x-0 top-0 z-50 border-b border-stone-200/80 bg-[#faf8f4]/95 shadow-[0_8px_30px_rgba(10,34,22,0.045)] backdrop-blur-xl">
+      <header className="fixed inset-x-0 top-0 z-50 border-b border-white/15 bg-[#07386b] text-white shadow-[0_8px_30px_rgba(5,45,86,0.16)] backdrop-blur-xl">
         <div className="mx-auto flex h-[4.1rem] max-w-7xl items-center justify-between gap-3 px-4 sm:px-6 lg:grid lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] lg:gap-5 lg:px-8">
           <button
             type="button"
             onClick={() => handleNav('home')}
-            className="inline-flex shrink-0 items-center rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-800 lg:justify-self-start"
+            className="inline-flex shrink-0 items-center rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white lg:justify-self-start"
           >
             <img
               src="/assets/harvest-field-logo.png"
               alt="Harvest Field Gospel Mission International"
-              className="h-[3.6rem] w-auto max-w-[40vw] object-contain sm:max-w-[11rem]"
+              className="h-[3.6rem] w-auto max-w-[40vw] object-contain brightness-0 invert sm:max-w-[11rem]"
             />
           </button>
 
           <nav className="hidden items-center gap-1 lg:flex xl:gap-2" aria-label="Primary navigation">
-            {pageLink('home', t('nav.home'), `relative rounded-lg px-3 py-2 text-sm font-semibold transition-colors hover:text-forest-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-800 ${currentPage === 'home' ? 'text-forest-950' : 'text-stone-600'}`)}
+            {pageLink('home', t('nav.home'), `relative rounded-lg px-3 py-2 text-sm font-semibold transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white ${currentPage === 'home' ? 'text-white' : 'text-white/75'}`)}
             {NAV_GROUPS.map((group) => {
               const isGroupActive = group.items.some((item) => item.id === currentPage);
               const isOpen = openDropdown === group.label;
@@ -159,7 +164,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
                     type="button"
                     aria-expanded={isOpen}
                     onClick={() => setOpenDropdown(isOpen ? null : group.label)}
-                    className={`inline-flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-semibold transition-colors hover:bg-stone-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-800 ${isGroupActive ? 'text-forest-950' : 'text-stone-600'}`}
+                    className={`inline-flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-semibold transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white ${isGroupActive ? 'text-white' : 'text-white/80'}`}
                   >
                     {t(group.label)}
                     <ChevronDown className={`h-3.5 w-3.5 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
@@ -179,13 +184,20 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
           </nav>
 
           <div className="relative z-[80] flex shrink-0 items-center gap-2 lg:justify-self-end">
+            <button
+              type="button"
+              onClick={() => handleNav('partner')}
+              className="hidden min-h-11 items-center gap-2 rounded-full bg-[#c9183e] px-5 py-2.5 text-sm font-bold text-white transition-colors hover:bg-[#a31333] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#07386b] xl:inline-flex"
+            >
+              {t('nav.give')} <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </button>
             {languageSelector('block w-12 sm:hidden', true)}
             {languageSelector('hidden sm:block')}
             <button
               type="button"
               ref={menuToggleRef}
               onClick={() => setMobileOpen((previous) => !previous)}
-              className="relative z-[80] inline-flex h-11 w-11 touch-manipulation items-center justify-center rounded-lg text-stone-800 transition-colors hover:bg-stone-200/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-800 lg:hidden"
+              className="relative z-[80] inline-flex h-11 w-11 touch-manipulation items-center justify-center rounded-lg text-white transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white lg:hidden"
               aria-label={mobileOpen ? t('nav.close') : t('nav.open')}
               aria-expanded={mobileOpen}
               aria-controls="hf-mobile-navigation"
@@ -199,8 +211,9 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
           <button
             type="button"
             aria-label={t('nav.close')}
-            onClick={() => setMobileOpen(false)}
-            className="fixed inset-x-0 bottom-0 top-[4.1rem] z-[55] bg-forest-950/35 lg:hidden"
+            onClick={() => closeNavigation(true)}
+            tabIndex={-1}
+            className="fixed inset-x-0 bottom-0 top-[4.1rem] z-[55] bg-[#001b35]/55 lg:hidden"
           />
         )}
 
@@ -210,24 +223,26 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
           aria-label="Mobile navigation"
           aria-hidden={!mobileOpen}
           inert={!mobileOpen}
-          className={`fixed right-0 top-[4.1rem] z-[60] flex h-[calc(100dvh-4.1rem)] w-[clamp(300px,40vw,420px)] max-w-[calc(100vw-0.75rem)] flex-col overflow-hidden border-l border-stone-200 bg-[#faf8f4] shadow-2xl transition-transform duration-300 ease-out motion-reduce:transition-none lg:hidden ${mobileOpen ? 'translate-x-0' : 'translate-x-full'}`}
+          className={`fixed right-0 top-[4.1rem] z-[60] flex h-[calc(100dvh-4.1rem)] w-[clamp(300px,40vw,420px)] max-w-[calc(100vw-0.75rem)] flex-col overflow-hidden border-l border-white/15 bg-[#07386b] text-white shadow-2xl transition-transform duration-300 ease-out motion-reduce:transition-none lg:hidden ${mobileOpen ? 'translate-x-0' : 'translate-x-full'}`}
         >
-          <div className="border-b border-stone-200 px-5 py-3">
-            <p className="font-serif text-lg font-semibold text-forest-950">{t('nav.explore')}</p>
-            <p className="mt-0.5 text-xs text-stone-500">{t('nav.exploreHint')}</p>
+          <div className="border-b border-white/15 px-5 py-3">
+            <p className="font-serif text-lg font-semibold text-white">{t('nav.explore')}</p>
+            <p className="mt-0.5 text-xs text-white/65">{t('nav.exploreHint')}</p>
           </div>
 
           <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 py-2">
             <div className="space-y-1">
-              {pageLink('home', t('nav.home'), `${MOBILE_LINK_CLASS} ${currentPage === 'home' ? 'bg-forest-900 text-white hover:bg-forest-800 hover:text-white' : ''}`)}
+              {pageLink('home', t('nav.home'), `${MOBILE_LINK_CLASS} ${currentPage === 'home' ? 'bg-[#008064] text-white hover:bg-[#008064] hover:text-white' : ''}`)}
               {NAV_GROUPS.map((group) => (
-                <section key={group.label} className="border-t border-stone-200 py-1.5">
-                  <h2 className="px-3 pb-0.5 text-[10px] font-bold uppercase tracking-[0.12em] text-harvest-600">{t(group.label)}</h2>
+                <section key={group.label} className="border-t border-white/15 py-1.5">
+                  <h2 className="px-3 pb-0.5 text-[10px] font-bold uppercase tracking-[0.12em] text-[#5db39f]">
+                    {t(group.label)}
+                  </h2>
                   <div className="space-y-0">
                     {group.items.map((item) => pageLink(
                       item.id,
                       t(item.label),
-                      `flex min-h-9 w-full items-center rounded-lg px-3 py-1.5 text-[13px] font-medium text-stone-700 transition-colors hover:bg-stone-100 hover:text-forest-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-800 ${currentPage === item.id ? 'bg-forest-900 text-white hover:bg-forest-800 hover:text-white' : ''}`,
+                      `flex min-h-9 w-full items-center rounded-lg px-3 py-1.5 text-[13px] font-medium text-white/85 transition-colors hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white ${currentPage === item.id ? 'bg-[#008064] text-white hover:bg-[#008064] hover:text-white' : ''}`,
                     ))}
                   </div>
                 </section>

@@ -168,7 +168,7 @@ export const MissionPage: React.FC<MissionPageProps> = ({ onNavigate }) => {
               <button
                 type="button"
                 onClick={() => onNavigate('contact')}
-                className="mt-6 inline-flex min-h-11 items-center gap-2 rounded-lg bg-harvest-400 px-4 py-2.5 text-sm font-semibold text-forest-950 transition-colors hover:bg-harvest-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                className="mt-6 inline-flex min-h-11 items-center gap-2 rounded-full bg-harvest-500 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-harvest-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
               >
                 Contact the Mission <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </button>
