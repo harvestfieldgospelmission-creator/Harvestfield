@@ -76,6 +76,13 @@ export interface BankAccount {
   accountName: string;
   accountNumber: string;
   note: string;
+  internationalDetails?: {
+    bankAddress: string;
+    branch: string;
+    sortCode: string;
+    swiftBic: string;
+    beneficiaryAddress: string;
+  };
 }
 
 export const MISSION_INFO = {
@@ -236,18 +243,19 @@ export const MANDATES: MandateItem[] = [
   {
     id: 'harvest-field-academy',
     index: '06',
-    title: 'Harvest Field Academy (HFA) & Foreign Missions',
-    category: 'Global Missions',
-    summary: 'Structured missionary preparation powering active outreach in Cameroon, Tchad, and Côte d’Ivoire.',
+    title: 'Harvest Field Academy (HFA) — School Project',
+    category: 'Youth & Schools',
+    summary:
+      'A school the mission is working to establish in Omoku, focused on accessible education, Christian character and hope for less privileged children.',
     description:
-      'Harvest Field Academy equips believers for cross-cultural ministry—preparing sent-out teams who serve in Northern Cameroon (Linde-Massa & Maroua), the Republic of Tchad, and Côte d’Ivoire.',
+      'Harvest Field Gospel Mission is working to establish Harvest Field Academy in Omoku: a school planned to provide free or subsidised quality education, Christian formation and care for children from vulnerable families.',
     highlights: [
-      'Training and equipping through Harvest Field Academy (HFA)',
-      'Mission outreach in Cameroon, Tchad and Côte d’Ivoire',
-      'Sharing the Gospel across language and cultural contexts',
+      'Nursery, primary and basic education with little or no fees based on family need',
+      'Bible learning, Christian character and daily faith practices',
+      'Learning materials, mentoring and whole-child care for vulnerable children',
     ],
-    image: '/assets/replacement-photos/WhatsApp Image 2026-11-16 at 6.06.31 PM.jpeg',
-    imageAlt: 'Harvest Field Academy graduates and ministry leaders stand together in graduation attire',
+    image: '/assets/field/school-outreach-assembly.jpeg',
+    imageAlt: 'Children gathered during a Harvest Field school outreach.',
   },
 ];
 
@@ -759,9 +767,17 @@ export const BANK_ACCOUNTS: BankAccount[] = [
     id: 'domiciliary',
     type: 'Domiciliary Account (USD / International)',
     bank: 'Zenith Bank',
-    accountName: 'HARVEST FIELD GOSPEL MISSIONS OMOKU',
+    accountName: 'Harvest Field Gospel Missions Omoku',
     accountNumber: '5076357917',
     note: 'Designated for international mission partners and foreign currency support.',
+    internationalDetails: {
+      bankAddress: 'Plot 84/87, Ajose Adeogun Street, Victoria Island, Lagos, Nigeria.',
+      branch: 'Omoku',
+      sortCode: '057210115',
+      swiftBic: 'ZEIBNGLA',
+      beneficiaryAddress:
+        'No. 17 Rev. Dr. Okoroma Street, by Frankried Hotel Road, Omoku, ONELGA, Rivers State, Nigeria.',
+    },
   },
   {
     id: 'zenith-ngn',

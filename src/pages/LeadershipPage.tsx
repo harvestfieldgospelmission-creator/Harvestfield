@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, Compass, Globe2, Target, Users } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { FOUNDER_PROFILE, PageId } from '../data/missionData';
 import { SafeImage } from '../components/SafeImage';
 import { LocalizedContent } from '../i18n';
@@ -18,31 +18,26 @@ const DIRECTOR_PROFILE = {
 
 const FEATURED_PROFILES = [
   {
-    name: DIRECTOR_PROFILE.name,
-    role: DIRECTOR_PROFILE.role,
-    image: DIRECTOR_PROFILE.image,
-    alt: DIRECTOR_PROFILE.alt,
-    summary: DIRECTOR_PROFILE.summary,
-    focusAreas: [
-      { label: 'Spiritual Leadership', icon: Compass },
-      { label: 'Mission Strategy', icon: Target },
-      { label: 'Global Outreach', icon: Globe2 },
-    ],
+    name: 'Susan David',
+    role: 'Vice President',
+    image: '/assets/field/susan-david-vice-president.jpeg',
+    alt: 'Susan David, Vice President',
+    summary: 'Susan David serves as Vice President of Harvest Field Gospel Mission.',
   },
 ];
 
 const LEADERSHIP_TEAM = [
   {
+    name: DIRECTOR_PROFILE.name,
+    role: DIRECTOR_PROFILE.role,
+    image: DIRECTOR_PROFILE.image,
+    alt: DIRECTOR_PROFILE.alt,
+  },
+  {
     name: 'Pst Jonathan Omonogun',
     role: 'Prayer Director',
     image: '/assets/field/jonathan-omonogun-prayer-director.jpeg',
     alt: 'Pastor Jonathan Omonogun, Prayer Director',
-  },
-  {
-    name: 'Susan David',
-    role: 'Vice President',
-    image: '/assets/field/susan-david-vice-president.jpeg',
-    alt: 'Susan David, Vice President',
   },
   {
     name: 'Pst Innocent Ebeku Akpotu',
@@ -178,17 +173,6 @@ export const LeadershipPage: React.FC<LeadershipPageProps> = ({ onNavigate }) =>
                   {profile.summary}
                 </p>
               </div>
-              <ul className="mt-auto grid grid-cols-3 divide-x divide-[#d6e0ea] border-t border-[#d6e0ea] pt-4">
-                {profile.focusAreas.map(({ label, icon: Icon }) => (
-                  <li
-                    key={label}
-                    className="flex flex-col items-center gap-1 px-1 text-center text-[10px] font-medium leading-tight text-stone-700 sm:text-xs"
-                  >
-                    <Icon className="h-4 w-4 text-harvest-600" aria-hidden="true" />
-                    <span>{label}</span>
-                  </li>
-                ))}
-              </ul>
             </article>
           ))}
         </div>

@@ -16,7 +16,7 @@ const PARTICIPATION_TRACKS = [
     description:
       'Explore opportunities to take part in evangelism and mission outreach in Nigeria, Northern Cameroon (Linde-Massa and Maroua), Tchad, and Côte d’Ivoire.',
     points: [
-      'Learn about believer training through Harvest Field Academy (HFA)',
+      'Volunteer to teach or mentor children as Harvest Field Academy is established.',
       'Cross-cultural evangelism, school ministry, and rural crusades',
       'Serve alongside others committed to sharing the Gospel.',
     ],
@@ -30,7 +30,7 @@ const PARTICIPATION_TRACKS = [
     points: [
       'Pray for the ministry’s evangelism, discipleship and community development work.',
       'Prayer backing for revival meetings and evangelistic conferences',
-      'Spiritual covering for new converts and Harvest Field Academy trainees',
+      'Pray for the planned Academy, children, families, teachers and provision.',
     ],
   },
   {
@@ -38,7 +38,7 @@ const PARTICIPATION_TRACKS = [
     tab: '03. Regular Support',
     title: 'Send Regular Kingdom Support',
     description:
-      'Financial gifts can support the ministry’s evangelism, believer training and community development objectives.',
+      'Financial gifts can support the ministry’s evangelism, community development and the work to establish Harvest Field Academy.',
     points: [
       'Use the published ministry bank details and confirm them with the mission before making a transfer.',
       'Direct support for rural and foreign mission expeditions',

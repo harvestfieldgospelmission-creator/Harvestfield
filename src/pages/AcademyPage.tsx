@@ -1,19 +1,16 @@
 import React from 'react';
 import {
   ArrowRight,
-  BookOpen,
   BookMarked,
   Check,
-  Copy,
   GraduationCap,
   HandHeart,
   Heart,
   HeartHandshake,
+  Mail,
   MapPin,
   Phone,
-  Shirt,
   Users,
-  Utensils,
 } from 'lucide-react';
 import { PageId } from '../data/missionData';
 import { SafeImage } from '../components/SafeImage';
@@ -23,52 +20,70 @@ interface AcademyPageProps {
   onNavigate: (page: PageId) => void;
 }
 
-const SUPPORT_AREAS = [
+const SCHOOL_COMMITMENTS = [
   {
     icon: GraduationCap,
-    title: 'A place in the classroom',
-    description: 'Free or subsidised nursery, primary and basic education for children whose families cannot afford school fees.',
-  },
-  {
-    icon: BookOpen,
-    title: 'Books and learning materials',
-    description: 'Help provide exercise books, textbooks, stationery and the resources children need to learn with confidence.',
-  },
-  {
-    icon: Shirt,
-    title: 'Uniforms and essentials',
-    description: 'Help children come to school prepared, comfortable and ready to learn alongside their classmates.',
-  },
-  {
-    icon: Utensils,
-    title: 'Care for the whole child',
-    description: 'Support school feeding where possible, basic care, encouragement and a safe environment for growth.',
+    title: 'Free / Subsidised Quality Education',
+    description:
+      'The school is being planned to welcome children from poor homes, orphans and vulnerable families.',
+    details: [
+      'Nursery, primary and basic education',
+      'Little or no school fees, depending on each family’s situation',
+    ],
   },
   {
     icon: BookMarked,
-    title: 'A foundation in Christ',
-    description: 'Bible stories, the life of Jesus, prayer, worship, daily devotion and Christian character formation.',
+    title: 'Learning Jesus Christ as Part of the Curriculum',
+    description:
+      'Jesus Christ will be at the centre of school life, with faith nurtured through lessons and daily practice.',
+    details: [
+      'Bible stories and the life of Jesus',
+      'Christian character, morals and values',
+      'Memory verses and daily devotions',
+      'Prayer, worship and godly conduct',
+      'Love for God, neighbours and service to others',
+      'Morning devotion, weekly chapel and Bible classes',
+    ],
+  },
+  {
+    icon: Heart,
+    title: 'Bringing Children Up in the Ways of God',
+    description:
+      'The Academy aims to help children grow in faith, wisdom and character, following Proverbs 22:6.',
+    details: [
+      'Discipline and respect',
+      'Honesty and integrity',
+      'Hard work and excellence',
+      'Love, kindness and forgiveness',
+      'Fear of God and obedience to His Word',
+    ],
   },
   {
     icon: HeartHandshake,
-    title: 'Mentorship and belonging',
-    description: 'Give children access to caring teachers, godly role models, counselling and opportunities to discover their gifts.',
+    title: 'Care for the Whole Child',
+    description:
+      'The planned school will care for children’s bodies, minds and spirits—not only their studies.',
+    details: [
+      'Learning materials and uniforms for children in need',
+      'School feeding where possible',
+      'Health talks and basic care',
+      'Mentorship, counselling and godly role models',
+      'Skills, music and creative activities',
+    ],
+  },
+  {
+    icon: Users,
+    title: 'Empowering Families and Communities',
+    description:
+      'The vision is to raise children who will strengthen their families and communities and serve as future pastors, teachers, doctors, leaders and missionaries.',
+    details: [
+      'A hopeful future for children and their families',
+      'A light of learning and faith in Omoku',
+    ],
   },
 ];
 
 export const AcademyPage: React.FC<AcademyPageProps> = ({ onNavigate }) => {
-  const [copied, setCopied] = React.useState(false);
-
-  const copyAccountNumber = async () => {
-    try {
-      await navigator.clipboard.writeText('1228477155');
-      setCopied(true);
-      window.setTimeout(() => setCopied(false), 2200);
-    } catch {
-      setCopied(false);
-    }
-  };
-
   return (
     <LocalizedContent>
       <main className="bg-[#fbfaf6] text-stone-800">
@@ -84,20 +99,23 @@ export const AcademyPage: React.FC<AcademyPageProps> = ({ onNavigate }) => {
           <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-5 py-16 sm:px-8 sm:py-20 lg:grid-cols-[1.15fr_0.85fr] lg:px-10 lg:py-24">
             <div className="max-w-3xl">
               <p className="inline-flex items-center gap-2 rounded-full border border-harvest-400/50 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-harvest-300">
-                <Heart className="h-4 w-4" aria-hidden="true" /> Education. Faith. Hope.
+                <Heart className="h-4 w-4" aria-hidden="true" /> A school project in development · Omoku
               </p>
               <h1 className="mt-6 font-serif text-4xl font-semibold leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl">
-                Every child deserves a chance to learn.
+                Harvest Field Academy
               </h1>
+              <p className="mt-4 font-serif text-2xl font-semibold leading-snug text-harvest-200 sm:text-3xl">
+                Raising Godly Children, Restoring Hope to the Less Privileged
+              </p>
               <p className="mt-6 max-w-2xl text-base leading-relaxed text-stone-200 sm:text-lg">
-                Poverty should never decide a child’s future. Harvest Field Academy exists to help children from disadvantaged families in Omoku and surrounding communities receive quality education, grow in the knowledge of Jesus Christ and discover the hope of a brighter tomorrow.
+                Poverty should never decide a child’s future. Harvest Field Gospel Mission is working to establish Harvest Field Academy in Omoku: a school planned to give children from less privileged families access to quality education, godly character and the knowledge of Jesus Christ.
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <a
-                  href="#give"
+                  href="#call-to-partners"
                   className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-harvest-500 px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-harvest-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
                 >
-                  Help a child go to school <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                  Partner with the school project <ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </a>
                 <a
                   href="#our-purpose"
@@ -107,7 +125,7 @@ export const AcademyPage: React.FC<AcademyPageProps> = ({ onNavigate }) => {
                 </a>
               </div>
               <p className="mt-6 text-sm font-medium text-harvest-200">
-                Raising a Christ-like generation, exceeding excellence.
+                A school the mission is working to establish for children in Omoku and surrounding communities.
               </p>
             </div>
             <div className="mx-auto w-full max-w-md">
@@ -118,9 +136,9 @@ export const AcademyPage: React.FC<AcademyPageProps> = ({ onNavigate }) => {
                   className="aspect-[4/3] w-full rounded-2xl object-cover"
                 />
                 <div className="p-5 sm:p-6">
-                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-harvest-300">A future worth investing in</p>
+                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-harvest-300">Our school vision</p>
                   <p className="mt-2 font-serif text-2xl font-semibold leading-snug text-white">
-                    One opportunity can change the direction of a child’s life.
+                    Every child learns, loves God, and shines.
                   </p>
                 </div>
               </div>
@@ -140,7 +158,7 @@ export const AcademyPage: React.FC<AcademyPageProps> = ({ onNavigate }) => {
               In Omoku and surrounding communities, some children are kept away from school because their parents or caregivers cannot afford fees, books, uniforms and other basic needs. These children have dreams, abilities and a future—but they need an opportunity.
             </p>
             <p>
-              Harvest Field Academy is being established to help remove that barrier. Our desire is to welcome children from poor homes, orphans and vulnerable families, offering free or subsidised education according to each family’s situation.
+              Harvest Field Academy is the mission’s response to this need. The school is being established to welcome children from poor homes, orphans and vulnerable families, with little or no school fees depending on each family’s situation.
             </p>
             <p className="font-semibold text-forest-900">
               We believe a child’s circumstances today should not place a limit on what God can do through that child tomorrow.
@@ -173,7 +191,7 @@ export const AcademyPage: React.FC<AcademyPageProps> = ({ onNavigate }) => {
                 </span>
                 <h3 className="mt-5 font-serif text-2xl font-semibold text-forest-950">Our Mission</h3>
                 <p className="mt-3 leading-relaxed text-stone-700">
-                  Harvest Field Academy exists to give less privileged children free and quality access to education, godly character, and the knowledge of Jesus Christ—so that no child is left behind because of poverty.
+                  Our mission is to give less privileged children free and quality access to education, godly character and the knowledge of Jesus Christ—so that no child is left behind because of poverty.
                 </p>
               </article>
             </div>
@@ -182,14 +200,14 @@ export const AcademyPage: React.FC<AcademyPageProps> = ({ onNavigate }) => {
 
         <section className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:px-10 lg:py-20">
           <div className="max-w-3xl">
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-harvest-700">A caring place to grow</p>
-            <h2 className="mt-4 font-serif text-3xl font-semibold text-forest-950 sm:text-4xl">What a child will receive</h2>
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-harvest-700">A school being established with care</p>
+            <h2 className="mt-4 font-serif text-3xl font-semibold text-forest-950 sm:text-4xl">What Harvest Field Academy plans to provide</h2>
             <p className="mt-4 text-base leading-relaxed text-stone-600">
-              Your support helps us build a school experience where children are taught, encouraged, cared for and given room to flourish.
+              The Academy is being planned to care for each child’s education, faith, character and wellbeing.
             </p>
           </div>
-          <div className="mt-9 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {SUPPORT_AREAS.map(({ icon: Icon, title, description }, index) => (
+          <div className="mt-9 grid gap-5 md:grid-cols-2">
+            {SCHOOL_COMMITMENTS.map(({ icon: Icon, title, description, details }, index) => (
               <article key={title} className="rounded-2xl border border-stone-200 bg-white p-6 shadow-sm">
                 <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-harvest-100 text-forest-900">
                   <Icon className="h-5 w-5" aria-hidden="true" />
@@ -197,6 +215,14 @@ export const AcademyPage: React.FC<AcademyPageProps> = ({ onNavigate }) => {
                 <p className="mt-5 font-mono text-xs font-bold text-harvest-700">0{index + 1}</p>
                 <h3 className="mt-2 font-serif text-xl font-semibold text-forest-950">{title}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-stone-600">{description}</p>
+                <ul className="mt-4 space-y-2">
+                  {details.map((detail) => (
+                    <li key={detail} className="flex items-start gap-2 text-sm leading-relaxed text-stone-700">
+                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-harvest-700" aria-hidden="true" />
+                      <span>{detail}</span>
+                    </li>
+                  ))}
+                </ul>
               </article>
             ))}
           </div>
@@ -235,30 +261,33 @@ export const AcademyPage: React.FC<AcademyPageProps> = ({ onNavigate }) => {
           </div>
         </section>
 
-        <section className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:px-10 lg:py-20">
+        <section id="call-to-partners" className="mx-auto max-w-7xl px-5 py-16 sm:px-8 lg:px-10 lg:py-20">
           <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
             <div>
-              <p className="text-xs font-bold uppercase tracking-[0.2em] text-harvest-700">Be part of a child’s story</p>
-              <h2 className="mt-4 font-serif text-3xl font-semibold leading-tight text-forest-950 sm:text-4xl">You can help open the classroom door.</h2>
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-harvest-700">Our Call to Partners</p>
+              <h2 className="mt-4 font-serif text-3xl font-semibold leading-tight text-forest-950 sm:text-4xl">Help bring Harvest Field Academy to life.</h2>
               <p className="mt-5 leading-relaxed text-stone-600">
-                You do not have to build a school alone to make a difference. Your prayer, time, skills or financial gift can help a child take a step towards learning and a hopeful future.
+                As the mission works to establish the school, you can be part of the harvest by going, praying or giving.
               </p>
             </div>
             <div className="grid gap-4 sm:grid-cols-3">
               <article className="rounded-2xl border border-stone-200 bg-white p-5">
-                <Heart className="h-6 w-6 text-harvest-700" aria-hidden="true" />
-                <h3 className="mt-3 font-serif text-lg font-semibold text-forest-950">Give</h3>
-                <p className="mt-2 text-sm leading-relaxed text-stone-600">Support education, books, uniforms and care for children in need.</p>
-              </article>
-              <article className="rounded-2xl border border-stone-200 bg-white p-5">
                 <Users className="h-6 w-6 text-harvest-700" aria-hidden="true" />
-                <h3 className="mt-3 font-serif text-lg font-semibold text-forest-950">Volunteer</h3>
-                <p className="mt-2 text-sm leading-relaxed text-stone-600">Offer your time to teach, mentor, encourage or serve.</p>
+                <h3 className="mt-3 font-serif text-lg font-semibold text-forest-950">GOING</h3>
+                <p className="mt-2 text-sm leading-relaxed text-stone-600">Volunteer to teach, mentor or serve the children.</p>
+                <button type="button" onClick={() => onNavigate('join')} className="mt-4 text-sm font-semibold text-forest-900 underline underline-offset-4">Explore serving</button>
               </article>
               <article className="rounded-2xl border border-stone-200 bg-white p-5">
                 <HandHeart className="h-6 w-6 text-harvest-700" aria-hidden="true" />
-                <h3 className="mt-3 font-serif text-lg font-semibold text-forest-950">Pray</h3>
+                <h3 className="mt-3 font-serif text-lg font-semibold text-forest-950">PRAYING</h3>
                 <p className="mt-2 text-sm leading-relaxed text-stone-600">Pray for the children, families, teachers and provision.</p>
+                <button type="button" onClick={() => onNavigate('prayer')} className="mt-4 text-sm font-semibold text-forest-900 underline underline-offset-4">Pray with us</button>
+              </article>
+              <article className="rounded-2xl border border-stone-200 bg-white p-5">
+                <Heart className="h-6 w-6 text-harvest-700" aria-hidden="true" />
+                <h3 className="mt-3 font-serif text-lg font-semibold text-forest-950">GIVING</h3>
+                <p className="mt-2 text-sm leading-relaxed text-stone-600">Sponsor a child, classroom, books or feeding.</p>
+                <button type="button" onClick={() => onNavigate('partner')} className="mt-4 text-sm font-semibold text-forest-900 underline underline-offset-4">View giving details</button>
               </article>
             </div>
           </div>
@@ -267,17 +296,17 @@ export const AcademyPage: React.FC<AcademyPageProps> = ({ onNavigate }) => {
         <section id="give" className="bg-[#f1eadb] px-5 py-16 sm:px-8 sm:py-20 lg:px-10">
           <div className="mx-auto grid max-w-6xl gap-8 lg:grid-cols-[1fr_0.95fr] lg:items-center">
             <div>
-              <p className="text-xs font-bold uppercase tracking-[0.2em] text-harvest-800">Your gift can make room for hope</p>
-              <h2 className="mt-4 font-serif text-3xl font-semibold leading-tight text-forest-950 sm:text-4xl">Help us make quality education possible for a child.</h2>
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-harvest-800">GIVING · Sponsorship and partnership</p>
+              <h2 className="mt-4 font-serif text-3xl font-semibold leading-tight text-forest-950 sm:text-4xl">Help make quality education possible for a child.</h2>
               <p className="mt-5 max-w-xl leading-relaxed text-stone-700">
-                Every contribution helps us work towards a school where children from families facing hardship can learn, grow in faith and build a better future. Thank you for standing with these children.
+                Gifts can help the mission work towards this school project and support children’s education and care. Contact the mission to discuss sponsoring a child, a classroom, books or feeding.
               </p>
               <div className="mt-7 flex flex-col gap-3 sm:flex-row">
                 <a href="https://wa.me/2348132886893?text=Hello%2C%20I%20would%20like%20to%20support%20Harvest%20Field%20Academy." target="_blank" rel="noreferrer" className="inline-flex min-h-12 items-center justify-center gap-2 rounded-lg bg-forest-950 px-5 py-3 text-sm font-bold text-white transition-colors hover:bg-forest-800">
-                  Ask how to sponsor a child <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                  Ask about supporting the school <ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </a>
-                <button type="button" onClick={() => onNavigate('contact')} className="inline-flex min-h-12 items-center justify-center rounded-lg border border-forest-900/30 px-5 py-3 text-sm font-semibold text-forest-950 hover:bg-white/60">
-                  Contact the Academy
+                <button type="button" onClick={() => onNavigate('partner')} className="inline-flex min-h-12 items-center justify-center rounded-lg border border-forest-900/30 px-5 py-3 text-sm font-semibold text-forest-950 hover:bg-white/60">
+                  View mission giving details
                 </button>
               </div>
             </div>
@@ -287,30 +316,20 @@ export const AcademyPage: React.FC<AcademyPageProps> = ({ onNavigate }) => {
                   <HeartHandshake className="h-6 w-6" aria-hidden="true" />
                 </span>
                 <div>
-                  <p className="text-xs font-bold uppercase tracking-[0.16em] text-harvest-700">Make a donation</p>
-                  <h3 className="font-serif text-2xl font-semibold text-forest-950">Support Harvest Field Academy</h3>
+                  <p className="text-xs font-bold uppercase tracking-[0.16em] text-harvest-700">A school project in development</p>
+                  <h3 className="font-serif text-2xl font-semibold text-forest-950">Partner with Harvest Field Academy</h3>
                 </div>
               </div>
               <div className="mt-7 rounded-2xl bg-[#fbfaf6] p-5">
-                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-stone-500">Bank</p>
-                <p className="mt-1 text-lg font-semibold text-forest-950">Zenith Bank PLC</p>
-                <div className="mt-5">
-                  <p className="text-xs font-semibold uppercase tracking-[0.16em] text-stone-500">Account name</p>
-                  <p className="mt-1 text-base font-semibold text-forest-950">Harvest Field Academy</p>
-                </div>
-                <div className="mt-5">
-                  <p className="text-xs font-semibold uppercase tracking-[0.16em] text-stone-500">Account number</p>
-                  <div className="mt-1 flex flex-wrap items-center justify-between gap-3">
-                    <p className="font-mono text-2xl font-bold tracking-[0.08em] text-forest-950 sm:text-3xl">1228477155</p>
-                    <button type="button" onClick={copyAccountNumber} className="inline-flex min-h-10 items-center justify-center gap-2 rounded-lg border border-forest-900/20 px-3 py-2 text-sm font-semibold text-forest-950 transition-colors hover:bg-harvest-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-forest-800" aria-label="Copy account number">
-                      {copied ? <Check className="h-4 w-4" aria-hidden="true" /> : <Copy className="h-4 w-4" aria-hidden="true" />}
-                      {copied ? 'Copied' : 'Copy'}
-                    </button>
-                  </div>
-                </div>
+                <h4 className="font-serif text-xl font-semibold text-forest-950">Ways to support</h4>
+                <ul className="mt-4 space-y-3 text-sm leading-relaxed text-stone-700">
+                  <li className="flex items-start gap-2"><Check className="mt-0.5 h-4 w-4 shrink-0 text-harvest-700" aria-hidden="true" />Sponsor a child’s education</li>
+                  <li className="flex items-start gap-2"><Check className="mt-0.5 h-4 w-4 shrink-0 text-harvest-700" aria-hidden="true" />Help equip a classroom or provide books</li>
+                  <li className="flex items-start gap-2"><Check className="mt-0.5 h-4 w-4 shrink-0 text-harvest-700" aria-hidden="true" />Contribute towards school feeding</li>
+                </ul>
               </div>
               <p className="mt-4 text-xs leading-relaxed text-stone-500">
-                For sponsorship enquiries or to confirm how your gift can help, please contact Harvest Field Gospel Mission.
+                Use the verified bank details on the Support the Mission page, and contact the mission to discuss a designated Academy gift.
               </p>
             </div>
           </div>
@@ -321,18 +340,19 @@ export const AcademyPage: React.FC<AcademyPageProps> = ({ onNavigate }) => {
             <div>
               <h2 className="font-serif text-2xl font-semibold text-forest-950">Let’s give every child a chance.</h2>
               <p className="mt-2 text-sm leading-relaxed text-stone-600">Harvest Field Academy · Omoku, ONELGA, Rivers State, Nigeria</p>
-              <p className="mt-2 flex items-center gap-2 text-sm text-stone-600"><MapPin className="h-4 w-4 text-harvest-700" aria-hidden="true" /> No. 17 Rev. Dr. Okoroma Street, by Frankried Hotel, Omoku</p>
+              <p className="mt-2 flex items-start gap-2 text-sm leading-relaxed text-stone-600"><MapPin className="mt-0.5 h-4 w-4 shrink-0 text-harvest-700" aria-hidden="true" /> No. 17 Rev. Dr. Okoroma Street, by Frankried Hotel, Omoku, ONELGA, Rivers State, Nigeria</p>
               <p className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-stone-600">
                 <a className="inline-flex items-center gap-1 hover:text-forest-900" href="tel:+2348132886893"><Phone className="h-4 w-4" aria-hidden="true" /> +234 813 288 6893</a>
                 <a className="inline-flex items-center gap-1 hover:text-forest-900" href="tel:+2349061481462"><Phone className="h-4 w-4" aria-hidden="true" /> +234 906 148 1462</a>
               </p>
+              <a className="mt-2 inline-flex items-center gap-2 break-all text-sm text-stone-600 hover:text-forest-900" href="mailto:harvestfield0001@gmail.com"><Mail className="h-4 w-4 shrink-0 text-harvest-700" aria-hidden="true" /> harvestfield0001@gmail.com</a>
             </div>
             <button type="button" onClick={() => onNavigate('contact')} className="inline-flex min-h-12 shrink-0 items-center justify-center gap-2 rounded-lg bg-forest-950 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-forest-800">
               Get in touch <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </button>
           </div>
           <p className="mt-8 text-center font-serif text-lg italic text-forest-900">
-            “Let the little children come to me, and do not forbid them.” — Matthew 19:14
+            “Let the little children come to me, and do not forbid them; for of such is the kingdom of heaven.” — Matthew 19:14
           </p>
           <p className="mt-3 text-center text-xs font-semibold uppercase tracking-[0.16em] text-stone-500">
             Harvest Field Gospel Mission Int’l

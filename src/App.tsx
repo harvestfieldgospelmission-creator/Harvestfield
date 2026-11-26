@@ -54,7 +54,7 @@ const PAGE_METADATA: Record<PageId, { title: string; description: string }> = {
   },
   academy: {
     title: "Harvest Field Academy | Harvest Field Gospel Mission Int'l",
-    description: 'Discover Harvest Field Academy and the mission’s vision for equipping believers for discipleship, evangelism and cross-cultural ministry.',
+    description: 'Discover the school Harvest Field Gospel Mission is working to establish in Omoku, raising godly children and restoring hope to less privileged families.',
   },
   impact: {
     title: "Impact & Stories | Harvest Field Gospel Mission Int'l",
