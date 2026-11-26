@@ -35,12 +35,12 @@ interface HomePageProps {
 
 const HERO_SPOTS = [
   {
-    id: 'school-outreach-auditorium',
+    id: 'students-conference-auditorium',
     photoId: 'g31',
-    label: 'Students at School Outreach',
+    label: 'Students Coming for Students Conference',
     image: '/assets/replacement-photos/WhatsApp Image 2026-11-16 at 5.46.53 PM.jpeg',
-    location: 'Harvest Field School Outreach',
-    caption: 'Students gather in an auditorium for a school outreach programme.',
+    location: 'Harvest Field Student Conference',
+    caption: 'Students come together for the Students Conference.',
   },
   {
     id: 'community-support',

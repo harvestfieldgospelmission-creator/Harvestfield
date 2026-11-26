@@ -191,7 +191,7 @@ export const MANDATES: MandateItem[] = [
       'Personal prayer and mentorship for students',
     ],
     image: '/assets/replacement-photos/WhatsApp Image 2026-11-16 at 5.46.53 PM.jpeg',
-    imageAlt: 'Students gathered in an auditorium during a Harvest Field school outreach',
+    imageAlt: 'Students attending the Students Conference.',
   },
   {
     id: 'christian-counseling',
@@ -294,11 +294,11 @@ export const GALLERY_PHOTOS: GalleryPhoto[] = [
   {
     id: 'g31',
     src: '/assets/replacement-photos/WhatsApp Image 2026-11-16 at 5.46.53 PM.jpeg',
-    title: 'Students Gather for a School Outreach',
+    title: 'Students Coming for Students Conference',
     region: 'Nigeria & Schools',
-    location: 'School Outreach',
-    program: 'School & Student Outreach',
-    caption: 'Students listen during a Harvest Field school outreach in an auditorium.',
+    location: 'Harvest Field Student Conference',
+    program: 'Student Conference',
+    caption: 'Students come together for the Students Conference.',
     aspect: 'wide',
   },
   {
