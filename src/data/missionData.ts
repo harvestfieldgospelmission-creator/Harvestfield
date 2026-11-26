@@ -255,7 +255,7 @@ export const MANDATES: MandateItem[] = [
       'Learning materials, mentoring and whole-child care for vulnerable children',
     ],
     image: '/assets/field/school-outreach-assembly.jpeg',
-    imageAlt: 'Children gathered during a Harvest Field school outreach.',
+    imageAlt: 'Students attending the Students Coming for Students Conference.',
   },
 ];
 
