@@ -453,8 +453,7 @@ const translations: Record<Exclude<Language, 'en'>, Record<string, string>> = {
     'Harvest Field Student Conference': 'Conférence étudiante Harvest Field',
     'Footsteps in Linde-Massa and Maroua: Advancing the Gospel in Northern Cameroon':
       'Sur les traces de Linde-Massa et Maroua : annoncer l’Évangile dans le nord du Cameroun',
-    'Reaching Classrooms Before the World Does: Inside Our Intensive School Outreaches':
-      'Toucher les élèves avant le monde : au cœur de nos actions dans les écoles',
+    '2025 General Students Conference': 'Conférence générale des étudiants 2025',
     'Les Porteurs de Gloire: Partnering Across Francophone West & Central Africa':
       'Les Porteurs de Gloire : partenaires en Afrique de l’Ouest et centrale francophone',
     'Going, Praying, or Supporting: Equipping Labourers at Harvest Field Academy':
@@ -1089,8 +1088,7 @@ const translations: Record<Exclude<Language, 'en'>, Record<string, string>> = {
     'Intensive School Outreaches': 'Actividades intensivas en escuelas',
     'Footsteps in Linde-Massa and Maroua: Advancing the Gospel in Northern Cameroon':
       'Tras los pasos de Linde-Massa y Maroua: el Evangelio avanza en el norte de Camerún',
-    'Reaching Classrooms Before the World Does: Inside Our Intensive School Outreaches':
-      'Llegar a las aulas antes que el mundo: nuestras actividades intensivas en escuelas',
+    '2025 General Students Conference': 'Conferencia General de Estudiantes 2025',
     'Les Porteurs de Gloire: Partnering Across Francophone West & Central Africa':
       'Les Porteurs de Gloire: colaboración en África occidental y central francófona',
     'Going, Praying, or Supporting: Equipping Labourers at Harvest Field Academy':

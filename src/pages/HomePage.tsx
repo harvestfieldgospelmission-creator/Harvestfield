@@ -56,7 +56,7 @@ const HERO_SPOTS = [
     label: 'Students at School',
     image: '/assets/replacement-photos/WhatsApp Image 2026-11-16 at 5.46.14 PM.jpeg',
     location: 'Harvest Field School Outreach',
-    caption: 'Students gather outside during a school outreach visit.',
+    caption: 'Students gather for a school outreach.',
   },
 ];
 
