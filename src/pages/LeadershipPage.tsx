@@ -63,6 +63,12 @@ const LEADERSHIP_TEAM = [
     image: '/assets/field/enotoabasi-goodluck-paul.webp',
     alt: 'Enotoabasi Goodluck Paul',
   },
+  {
+    name: 'Barr. Grace Emuaye',
+    role: 'Mission Team Member',
+    image: '/assets/field/barr-grace-emuaye.jpeg',
+    alt: 'Barr. Grace Emuaye, Mission Team Member',
+  },
 ];
 
 export const LeadershipPage: React.FC<LeadershipPageProps> = ({ onNavigate }) => {
