@@ -51,12 +51,12 @@ const HERO_SPOTS = [
     caption: 'Mission representatives present food items and drinking water for community support.',
   },
   {
-    id: 'students-school-visit',
+    id: 'students-conference',
     photoId: 'g33',
-    label: 'Students at School',
+    label: 'Students Coming for Students Conference',
     image: '/assets/replacement-photos/WhatsApp Image 2026-11-16 at 5.46.14 PM.jpeg',
-    location: 'Harvest Field School Outreach',
-    caption: 'Students gather for a school outreach.',
+    location: 'Harvest Field Student Conference',
+    caption: 'Students come together for the Students Conference.',
   },
 ];
 

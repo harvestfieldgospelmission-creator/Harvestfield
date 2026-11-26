@@ -5,6 +5,7 @@ type GalleryCopy = Partial<Pick<GalleryPhoto, 'title' | 'program' | 'caption'>>;
 
 const galleryCopy: Record<'fr' | 'es', Record<string, GalleryCopy>> = {
   fr: {
+    g33: { title: 'Les étudiants se rendent à la conférence des étudiants', program: 'Conférence des étudiants', caption: 'Les étudiants se rassemblent pour la conférence des étudiants.' },
     g20: { title: 'Les étudiants arrivent pour la conférence', program: 'Évangélisation scolaire et auprès des étudiants', caption: 'Le bus de la mission arrive avec les étudiants pour une conférence scolaire de Harvest Field.' },
     g21: { title: 'Les étudiants se réunissent pour la conférence', program: 'Évangélisation scolaire et auprès des étudiants', caption: 'Des étudiants de plusieurs écoles se réunissent pour l’enseignement et la communion fraternelle.' },
     g22: { title: 'Enseignement lors de la conférence des étudiants', program: 'Évangélisation scolaire et auprès des étudiants', caption: 'Un orateur s’adresse aux étudiants lors d’une activité scolaire de Harvest Field.' },
@@ -37,6 +38,7 @@ const galleryCopy: Record<'fr' | 'es', Record<string, GalleryCopy>> = {
     g16: { title: 'Fiche d’information du fondateur et du ministère', program: 'Bureau du fondateur', caption: 'Fiche d’information présentant le fondateur, l’évangéliste David Abrebor, et les activités du ministère.' },
   },
   es: {
+    g33: { title: 'Los estudiantes acuden a la Conferencia de Estudiantes', program: 'Conferencia de Estudiantes', caption: 'Los estudiantes se reúnen para la Conferencia de Estudiantes.' },
     g20: { title: 'Los estudiantes llegan a la conferencia', program: 'Alcance escolar y estudiantil', caption: 'El autobús de la misión llega con los estudiantes para una conferencia escolar de Harvest Field.' },
     g21: { title: 'Los estudiantes se reúnen para la conferencia', program: 'Alcance escolar y estudiantil', caption: 'Estudiantes de varias escuelas se reúnen para recibir enseñanza y compartir.' },
     g22: { title: 'Enseñanza en la conferencia estudiantil', program: 'Alcance escolar y estudiantil', caption: 'Un orador comparte un mensaje con los estudiantes durante una actividad escolar de Harvest Field.' },
