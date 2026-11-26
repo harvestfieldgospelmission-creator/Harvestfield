@@ -40,7 +40,7 @@ const HERO_SPOTS = [
     label: 'Students Coming for Students Conference',
     image: '/assets/replacement-photos/WhatsApp Image 2026-11-16 at 5.46.53 PM.jpeg',
     location: 'Harvest Field Student Conference',
-    caption: 'Students come together for the Students Conference.',
+    caption: 'Students arriving for the Students’ Conference.',
   },
   {
     id: 'community-support',
